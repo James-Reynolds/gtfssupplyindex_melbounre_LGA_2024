@@ -70,13 +70,58 @@ lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Melbou
 
 # Introduction
 
-Transit service levels are often motivated by social policy, to provide at least some mobility for those who cannot otherwise drive themselves [@Currie:2016aa]. Transit is a State Government responsibility, although Local Government Authorities (LGAs) may have some influence^[including through planning processes for infrastructure improvements (e.g. tram stop upgrades, bus lanes etc.)], but not much is known about gaps between social needs and transit supply in the City of Melbourne. This note reports findings using the needs-gap approach[@currie2010identifying] and the *gtfssupplyindex* R package  [@gtfssupplyindex_github]. It is part of a series examining each LGA in Greater Melbourne^[See https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024]. 
+Transit provision is often motivated by social needs, to provide at least some independent motorised mobility to those who cannot drive themselves [@Currie:2016aa]. In Victoria the State Government manages transit, although Local Government Authorities (LGAs) may have some influence^[including through planning processes for infrastructure improvements (e.g. tram stop upgrades, bus lanes etc.)]. However, not much is known about gaps between social needs and transit supply across each LGA. This note reports needs-gaps in the City of Melbourne, as per[@currie2010identifying] and is part of a series examining each LGA in Greater Melbourne^[See https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024]. 
 
 # Methods and results
-This note adopts a similar methodology to Reynolds, Currie and Qu (in drafting)@gtfssupplyindex_main_paper, mapping the Transit Supply Index (SI) and a composite needs indicator^[Based in part on the ABS' IRSAD across categories of Zero, Very Low, Low, Below average, Above average, High and Very High.]. Results are reported for the Australian Bureau of Statistics' (ABS') Statistical Area 1s (SA1s) that are part of the City of Melbourne in 2021 and 2024, with comparisons made to the rest of the Inner SA4 and the rest of Greater Melbourne. Changes in service levels and SA1s with Very High needs, but Very Low or Zero supply are also mapped. 
+This note adopts a similar methodology to Reynolds, Currie and Qu (in drafting)[@gtfssupplyindex_main_paper], mapping transit Supply Index (SI) scores (using the *gtfssupplyindex* R package  [@gtfssupplyindex_github]) and a composite needs indicator across seven categories^[Zero, Very Low, Low, Below average, Above average, High and Very High.]. SI are based on the frequency of service and how much of an area is within walking distance of stops/stations^[400m for tram and bus, 800m for train.]. Results are reported for the Australian Bureau of Statistics' (ABS') Statistical Area 1s (SA1s) that are part of the City of Melbourne in 2021 and 2024, with comparisons made to the rest of the Inner SA4 (covering Yarra, Port Phillip and parts of Moonee Valley, Merri-Bek, Darebin and Stonnington) and the rest of Greater Melbourne.
 
 
 
+```{r fix_ptv_data_Victoria_240613, eval = FALSE, echo = FALSE}
+
+ptv_240613 <- gtfstools::merge_gtfs(
+  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/1/google_transit.zip"),
+  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/2/google_transit.zip"),
+  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/3/google_transit.zip"),
+  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/4/google_transit.zip"),
+  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/5/google_transit.zip"),
+  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/6/google_transit.zip"),
+#  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/7/google_transit.zip"),
+#  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/8/google_transit.zip"),
+  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/10/google_transit.zip"),
+  gtfstools::read_gtfs("~/gtfssupplyindex_melbounre_LGA_2024/data/ptv_240613/gtfs/11/google_transit.zip")
+)
+
+
+gtfstools::remove_duplicates(ptv_240613)
+
+gtfstools::write_gtfs(ptv_240613,"data/ptv_240613/gtfs_merged.zip")
+
+#Delete multiple enteries in agency txt file
+ptv_240613 <- gtfstools::read_gtfs("data/ptv_240613/gtfs_merged_edited.zip")
+gtfstools::remove_duplicates(ptv_240613)
+#gtfstools::write_gtfs(ptv_240613,"data/ptv_240613/gtfs_merged_edited_duplcates_removed.zip")
+
+ptv_240613_tidygtfs <- ptv_240613 %>% as_tidygtfs()
+
+# Warning message:
+#In gtfs_to_tidygtfs(x) :
+#  Duplicated ids found in: agency, calendar, calendar_dates, stops
+#The returned object is not a tidygtfs object, you can use as_tidygtfs() after fixing the issue.
+
+ptv_240613_tidygtfs$agency <- ptv_240613_tidygtfs$agency[1,]
+ptv_240613_tidygtfs$calendar <- ptv_240613_tidygtfs$calendar %>% distinct(service_id, .keep_all = TRUE)
+ptv_240613_tidygtfs$calendar_dates <- ptv_240613_tidygtfs$calendar_dates %>% distinct(service_id, .keep_all = TRUE)
+ptv_240613_tidygtfs$stops <- ptv_240613_tidygtfs$stops %>% distinct(stop_id, .keep_all = TRUE)
+ptv_240613_tidygtfs <- ptv_240613_tidygtfs %>% as_tidygtfs()
+
+tidytransit::write_gtfs(ptv_240613_tidygtfs, "data/ptv_240613/tidygtfs.zip")
+
+ptv_240613_list_gtfs <- gtfssupplyindex::gtfs_by_route_type("data/ptv_240613/tidygtfs.zip")
+                                                        
+
+
+```
 
 
 ```{r fix_ptv_data_Victoria_210805, eval = FALSE, echo = FALSE}
@@ -219,6 +264,48 @@ write.csv(si_CCD2006_21_census_week_aggregated, "results/Greater_Melbourne/si_CC
 ## remove water area around French Island (Western Port) this is CCD 2341923. 
 
 ```
+
+
+```{r run_for_all_modes_Greater_Melbourne_240810_SA1, eval = FALSE, echo = FALSE}
+list_gtfs = ptv_240613_list_gtfs
+
+areas_of_interest <- load_areas_of_interest(
+  absmapsdata::sa12021 %>% 
+    filter(gcc_name_2021 == "Greater Melbourne") %>%
+    select(sa1_code_2021),  
+  area_id_field = "sa1_code_2021")
+
+buffer_distance <- gtfssupplyindex:::load_buffer_zones()
+
+stops_in_or_near_areas <- gtfssupplyindex:::stops_in_walk_dist(
+  list_gtfs = list_gtfs, 
+  areas_of_interest = areas_of_interest,
+  EPSG_for_transform = 28355,
+  verbose = FALSE
+)
+
+
+si_SA12021_24_census_week <- SI_by_day_hour_and_route_type(
+     list_gtfs = list_gtfs, 
+stops_in_or_near_areas = stops_in_or_near_areas,
+ start_date_ymd = "2021-08-06", 
+ end_date_ymd = "2021-08-12",
+verbose = TRUE)
+
+write.csv(si_SA12021_24_census_week, "results/Greater_Melbourne/si_SA12021_24_census_week.csv")
+
+si_SA12021_24_census_week <- read_csv("results/Greater_Melbourne/si_SA12021_24_census_week.csv")
+
+si_SA12021_24_census_week_aggregated <- si_SA12021_24_census_week %>% 
+           group_by(area_id) %>%    
+           summarize(SI = sum(SI))
+
+write.csv(si_SA12021_24_census_week_aggregated, "results/si_SA12021_24_census_week_aggregated.csv")
+
+
+```
+
+
 
 ```{r run_for_all_modes_Greater_Melbourne_210810_SA1, eval = FALSE, echo = FALSE}
 list_gtfs = ptv_210805_list_gtfs
@@ -3264,8 +3351,6 @@ melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
 #All over 20. Assumptions met. 
 
 
-
-
 si_by_area_2016_2021_wider_holding <- si_by_area_2016_2021_wider_holding %>%
 left_join(sa1s_in_sa4_of_interest, 
             by =(join_by(sa1_code_2021 == sa1_code_2021)))
@@ -3273,12 +3358,17 @@ si_by_area_2016_2021_wider_holding <- si_by_area_2016_2021_wider_holding %>%
   replace_na(list(group = "Rest of Greater Melbourne"))
 
 
+combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>% left_join(sa1s_in_sa4_of_interest, 
+            by =(join_by(sa1_code_2021 == sa1_code_2021)))
+combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>% 
+  replace_na(list(group = "Rest of Greater Melbourne"))
+
+combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
+  left_join(population_sa1_greater_melbourne_2021 %>% select(sa1_code_2021, population))
+
 
 ```
 
-
-
-Figure 1 shows that most of the City of Melbourne population lives in SA1s with Very High transit supply, more so than for the rest of the Inner SA4^[Covering Yarra, Port Phillip and parts of Moonee Valley, Merri-Bek, Darebin and Stonnington] or the rest of Greater Melbourne^[There is a statistically significant difference in the share of SA1s in each Transport Supply category in 2021 between those SA1s within or intersecting the City of Melbourne and the rest of the Inner SA4 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and between the Inner SA4 and the rest of the Greater Melbourne Greater Capital City Statistical Areas (GCCSA)(`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`.]. 
 
 
 
@@ -3288,8 +3378,6 @@ Figure 1 shows that most of the City of Melbourne population lives in SA1s with 
 
 #Set boundings box
 bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
-
-
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
 lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.45*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
@@ -3434,12 +3522,18 @@ ggplot()+
 
 ```
 
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Change in Supply Index score between 2021 and 2024 by SA1 and population"}
+
+
+Figure 1 shows that most of the City of Melbourne population lives in SA1s^[There is a statistically significant difference in the share of SA1s in each Transport Supply category in 2021 between those SA1s within or intersecting the City of Melbourne and the rest of the Inner SA4 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and between the Inner SA4 and the rest of the Greater Melbourne Greater Capital City Statistical Areas (GCCSA)(`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`.] with Very High transit supply, more so than for the rest of the Inner SA4 or the rest of Greater Melbourne. Figure 2 shows how service levels have changed between 2021 and 2024.
+
+
+
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, fig.cap="Change in SI score between 2021 and 2024 by SA1 and population"}
 
 
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.8*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -3459,15 +3553,15 @@ pcol <- si_by_area_2016_2021_wider_holding %>%
   aggregate(population ~ ratio_binned, FUN = sum) %>%
   right_join(tibble(ratio_binned = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
   replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(ratio_binned, levels = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
   arrange(ratio_binned) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
    geom_col(aes(ratio_binned, population, fill = ratio_binned), colour="black") +
   scale_x_discrete(drop=FALSE) +
-  scale_y_continuous(limits = c(0,55000)) +
+  scale_y_continuous(limits = c(0,74000)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned, 50000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
+  geom_text(aes(ratio_binned, 60000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
    coord_flip() +
   scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "magenta", "black")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -3481,7 +3575,7 @@ pcol <- si_by_area_2016_2021_wider_holding %>%
   theme(
     panel.grid = element_blank(),
     plot.title = element_text(size = 4),
-    axis.text.y = element_text(size = 2, hjust = 1),
+    axis.text.y = element_text(size = 3, hjust = 1),
     axis.text.x = element_blank())
  
 
@@ -3492,14 +3586,14 @@ pcol_rest_SA4 <- si_by_area_2016_2021_wider_holding %>%
   aggregate(population ~ ratio_binned, FUN = sum) %>%
   right_join(tibble(ratio_binned = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
   replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(ratio_binned, levels = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
   arrange(ratio_binned) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
    geom_col(aes(ratio_binned, population, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,140000)) +
+  scale_y_continuous(limits = c(0,170000)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  130000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
+  geom_text(aes(ratio_binned,  150000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
    coord_flip() +
   scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "magenta", "black")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -3524,15 +3618,15 @@ pcol_rest_melbourne <- si_by_area_2016_2021_wider_holding %>%
   aggregate(population ~ ratio_binned, FUN = sum) %>%
   right_join(tibble(ratio_binned = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
   replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(ratio_binned, levels = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2016_2021_wider_holding$ratio_binned %>% levels())) %>%
   arrange(ratio_binned) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
    geom_col(aes(ratio_binned, population, fill = ratio_binned), colour="black") +
-  geom_col(aes(transit_supply, population, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1500000)) +
+  geom_col(aes(ratio_binned, population, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1700000)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1350000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
+  geom_text(aes(ratio_binned,  1500000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
    coord_flip() +
   scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "magenta", "black")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -3579,13 +3673,196 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
  # ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol_rest_SA4, left = 0.63, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.63, bottom = 0.0, right = 1.0, top =0.33) +
-inset_element(pcol, left = 0.4, bottom = 0.66, right = 1.0, top =1.0) 
+inset_element(pcol, left = 0.45, bottom = 0.66, right = 1.0, top =1.0) +
+inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.33, right = 1.0, top =0.66) +
+inset_element(pcol_rest_melbourne, left = 0.6, bottom = 0.0, right = 1.0, top =0.33) 
+
+
+
+melbourne_2021_SA1_comparison <- si_by_area_2016_2021_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group) %>% 
+  chisq.test()
+
+#melbourne_2021_SA1_comparison$expected
+#Only 2 in 18 is less than 5, therefore test assumptions are met
+
+si_by_area_2016_2021_wider_holding$sa4_group <- 
+  if_else(si_by_area_2016_2021_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "Inner")
+
+melbourne_2021_SA4_comparison <-
+si_by_area_2016_2021_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(gcc_name_2021 == "Greater Melbourne") %>%
+  tabyl(ratio_binned, sa4_group) %>% 
+  chisq.test()
+
+#melbourne_2021_SA4_comparison$expected
+#1 in 24 lover than 5. Assumptions met. 
+
 
 ```
 
 
+
+```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.cap="Transport by SA1 and population in 2021 (left) and change in SI by 2024 for those SA1s with Very High Needs but Very Low or Zero Supply in 2021 (2021 populations)(right)"}
+
+
+
+
+
+#Set boundings box
+bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
+
+lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.45*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+
+Poly_Coord_df = data.frame(lon, lat)
+
+poly <- Poly_Coord_df %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>% 
+  st_bbox() %>% 
+  st_as_sfc()
+
+pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
+  filter(group == "City of Melbourne") %>% 
+  st_drop_geometry() %>%
+  na.omit() %>%
+  aggregate(population ~ composite_needs, sum) %>%
+  right_join(tibble(composite_needs = combined_needs_index_2021_sa1_greater_melbourne$composite_needs %>% levels() %>% fct_drop())) %>%
+  na.omit %>%
+  mutate(composite_needs=factor(composite_needs, levels = combined_needs_index_2021_sa1_greater_melbourne$composite_needs %>% levels() %>% fct_drop())) %>%
+  arrange(composite_needs) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(composite_needs, population, fill = composite_needs), colour="black") +
+  scale_y_continuous(limits = c(0,300000)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(composite_needs,  250000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+   coord_flip() + 
+  scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "City of Melbourne",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_text(size = 6, hjust = 1),
+    axis.text.x = element_blank()
+  ) 
+
+
+pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
+  filter(group == "Rest of Inner SA4") %>% 
+ st_drop_geometry() %>%
+  na.omit() %>%
+  aggregate(population ~ composite_needs, sum) %>%
+  right_join(tibble(composite_needs = combined_needs_index_2021_sa1_greater_melbourne$composite_needs %>% levels() %>% fct_drop())) %>%
+  na.omit %>%
+  mutate(composite_needs=factor(composite_needs, levels = combined_needs_index_2021_sa1_greater_melbourne$composite_needs %>% levels() %>% fct_drop())) %>%
+  arrange(composite_needs) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(composite_needs, population, fill = composite_needs), colour="black") +
+  scale_y_continuous(limits = c(0,905000)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(composite_needs,  600000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+   coord_flip() + 
+  scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest of Inner SA4",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+
+
+pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
+  filter(group == "Rest of Greater Melbourne") %>% 
+ st_drop_geometry() %>%
+  na.omit() %>%
+  aggregate(population ~ composite_needs, sum) %>%
+  right_join(tibble(composite_needs = combined_needs_index_2021_sa1_greater_melbourne$composite_needs %>% levels() %>% fct_drop())) %>%
+  na.omit %>%
+  mutate(composite_needs=factor(composite_needs, levels = combined_needs_index_2021_sa1_greater_melbourne$composite_needs %>% levels() %>% fct_drop())) %>%
+  arrange(composite_needs) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(composite_needs, population, fill = composite_needs), colour="black") +
+  scale_y_continuous(limits = c(0,8000000)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(composite_needs,  5400000, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+   coord_flip() + 
+  scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest of GCCSA",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+
+ggplot()+ 
+  geom_sf(data=combined_needs_index_2021_sa1_greater_melbourne %>%
+  filter(group == "City of Melbourne") %>% na.omit(),
+          aes(fill = composite_needs), colour=NA) +
+  theme(axis.text.x=element_blank(), #remove x axis labels
+        axis.ticks.x=element_blank(), #remove x axis ticks
+        axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), #remove y axis ticks
+        legend.position="none",
+#        legend.text = element_text(size = 4), 
+#        legend.title = element_text(size = 5), 
+#        legend.key.size = unit(0.08, 'cm')
+        ) + 
+   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
+#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
+#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
+#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner") %>% select(geometry), fill=NA, colour = "grey") +
+#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
+  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
+  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+    coord_sf(xlim = c(lon[1],lon[2]), 
+           ylim = c(lat[1], lat[2])) +
+ # ggspatial::annotation_scale(location = 'bl') +
+  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
+ inset_element(pcol, left = 0.55, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.73, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.0, right = 1.0, top =0.33) 
+
+
+
+```
+
+Results suggest show that SA1s^[There is a statistically significant difference in the share of SA1s in each Transport Supply category in 2021 between those SA1s within or intersecting the City of Melbourne and the rest of the Inner SA4 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and between the Inner SA4 and the rest of the Greater Melbourne Greater Capital City Statistical Areas (GCCSA)(`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`.] accommodating ....
 
 
 
