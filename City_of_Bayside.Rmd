@@ -1,6 +1,6 @@
 ---
-title: "City of Melbourne: social needs, gaps in transit"
-runningheader: "City of Melbourne:needs-gaps" # only for pdf output
+title: "City of Bayside: social needs, gaps in transit"
+runningheader: "City of Bayside:needs-gaps" # only for pdf output
 author: "Dr James Reynolds"
 date: "`r Sys.Date()`"
 bibliography: References.bib
@@ -60,17 +60,17 @@ library(absmapsdata)
 library(tidytransit)
 library(patchwork)
 
-lga_of_interest_2016 <- absmapsdata::lga2016 %>% filter(lga_name_2016 == "Melbourne (C)")
+lga_of_interest_2016 <- absmapsdata::lga2016 %>% filter(lga_name_2016 == "Bayside (C)")
 
-lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Melbourne")
+lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Bayside (Vic.)")
 
 
 ```
 
-In Victoria, public transport is managed by the state government, although Local Government Authorities (LGAs) may have some influence on service levels through planning processes, advocacy etc. However, not much is known about how much transit is supplied or whether social needs for transport are being met within each LGA's boundaries. This note explores social needs-gaps in the City of Melbourne, using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying]. It is part of a series examining each LGA in Greater Melbourne^[See https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024 but lookout, I misspelled "Melbourne" ]. 
+In Victoria, public transport is managed by the state government, although Local Government Authorities (LGAs) may have some influence on service levels through planning processes, advocacy etc. However, not much is known about how much transit is supplied or whether social needs for transport are being met within each LGA's boundaries. This note explores social needs-gaps in the City of Bayside, using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying]. It is part of a series examining each LGA in Greater Melbourne^[See https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024 but lookout, I misspelled "Melbourne" ]. 
 
 # Methods 
-This note maps transport supply and a composite needs indicator based on Australian Bureau of Statistics (ABS) data. The methodology is as per Reynolds, Currie and Qu (in drafting)^[Forthcoming hopefully, but using the *gtfssupplyindex* R package (see https://github.com/James-Reynolds/gtfssupplyindex) to process the Victoria GTFS feed. Note that results represent what is in the GTFS feed for August 2021 and October 2024, which may not match services provided.]. The Transit Supply Indication (SI) scores are based on the frequency of service and how much of an area is within walking distance of stops/stations^[400m for tram and bus, 800m for train.], are reported for the ABS' Statistical Area 1s (SA1s), and are categorized into seven groups based on the average scores for SA1s across the Melbourne Greater Capital City Statistical Area (GCCSA).
+This note maps public transport supply and a composite needs indicator based on Australian Bureau of Statistics (ABS) data. The methodology is as per Reynolds, Currie and Qu (in drafting)^[Forthcoming hopefully, but using the *gtfssupplyindex* R package (see https://github.com/James-Reynolds/gtfssupplyindex) to process the Victoria GTFS feed. Note that results represent what is in the GTFS feed for August 2021 and October 2024, which may not match services provided.]. The Transit Supply Indication (SI) scores are based on the frequency of service and how much of an area is within walking distance of stops/stations^[400m for tram and bus, 800m for train.], are reported for the ABS' Statistical Area 1s (SA1s), and are categorized into seven groups based on the average scores for SA1s across the Melbourne Greater Capital City Statistical Area (GCCSA).
 
 
 ```{r fix_ptv_data_Victoria_240613, eval = FALSE, echo = FALSE}
@@ -928,7 +928,7 @@ melbourne_railway_trips_shape_2016 <- st_read("results/melbourne_railway_trips_s
 melbourne_railway_trips_shape_2021 <- st_read("results/melbourne_railway_trips_shape.shp", quiet = TRUE)
 
 
-# plot with inner, middle and outer boundaries
+# plot with Inner South, middle and outer boundaries
 si_CCD2006_16_plot <- si_CCD2006_16_census_week_aggregated$output_plot + 
   geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
   geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.25, colour = "blue") +
@@ -4630,17 +4630,17 @@ ptv_160804_gtfs <- tidytransit::get_route_geometry(ptv_160804_gtfs)
 #sort SA1s into LGA of interest, Rest of SA4, Rest of Melbourne
 sa1s_in_lga_of_interest <- sa12021 %>% select(sa1_code_2021) %>%
   st_filter(lga_of_interest_2021, .predicate =  st_intersects)
-sa1s_in_lga_of_interest$group <- "City of Melbourne"
+sa1s_in_lga_of_interest$group <- "City of Bayside"
 
 sa1s_in_sa4_of_interest <- sa12021 %>% 
   st_drop_geometry()  %>%
-  filter(sa4_name_2021 == "Melbourne - Inner") %>%
+  filter(sa4_name_2021 == "Melbourne - Inner South") %>%
   select(sa1_code_2021)
 sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
   left_join(sa1s_in_lga_of_interest %>% 
               st_drop_geometry())
 sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
-  replace_na(list(group = "Rest of Inner SA4"))
+  replace_na(list(group = "Rest of Inner South SA4"))
 
 melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>% 
   left_join(sa1s_in_sa4_of_interest, 
@@ -4650,14 +4650,14 @@ melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2021_SA1_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions1 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4666,14 +4666,14 @@ assumptions2 <- melbourne_2021_SA1_comparison$expected
 
 melbourne_2021_SA4_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions3 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4689,14 +4689,14 @@ melbourne_si_SA12021_24_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2024_SA1_comparison <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions5 <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) 
 
@@ -4706,14 +4706,14 @@ assumptions6 <- melbourne_2024_SA1_comparison$expected
 
 melbourne_2024_SA4_comparison <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions7 <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4758,7 +4758,7 @@ poly <- Poly_Coord_df %>%
   st_as_sfc()
 
 pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Melbourne") %>% 
+  filter(group == "City of Bayside") %>% 
   st_drop_geometry() %>%
   aggregate(population ~ transit_supply, sum) %>%
   right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -4776,7 +4776,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "City of Melbourne",
+    title = "City of Bayside",
     x = NULL,
     y = NULL
   ) +
@@ -4790,7 +4790,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 
 pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest of Inner SA4") %>% 
+  filter(group == "Rest of Inner South SA4") %>% 
   st_drop_geometry() %>%
   aggregate(population ~ transit_supply, sum) %>%
   right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -4808,7 +4808,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest of Inner SA4",
+    title = "Rest of Inner South SA4",
     x = NULL,
     y = NULL
   ) +
@@ -4859,7 +4859,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 ggplot()+ 
   geom_sf(data=melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Melbourne"),
+  filter(group == "City of Bayside"),
           aes(fill = transit_supply), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -4874,7 +4874,7 @@ ggplot()+
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner") %>% select(geometry), fill=NA, colour = "grey") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
 #  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
   geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
@@ -4882,14 +4882,14 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
  # ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol, left = 0.55, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol, left = 0.55, bottom = 0.0, right = 1.0, top =0.33) +
  inset_element(pcol_rest_SA4, left = 0.73, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.0, right = 1.0, top =0.33) 
+ inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.66, right = 1.0, top =1.0) 
 
 
 
 pcol <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Melbourne") %>% 
+  filter(group == "City of Bayside") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
   mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -4905,7 +4905,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "City of Melbourne",
+    title = "City of Bayside",
     x = NULL,
     y = NULL
   ) +
@@ -4919,7 +4919,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 
 pcol_rest_SA4 <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest of Inner SA4") %>% 
+  filter(group == "Rest of Inner South SA4") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
   mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -4935,7 +4935,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest of Inner",
+    title = "Rest of Inner South",
     x = NULL,
     y = NULL
   ) +
@@ -4980,7 +4980,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 ggplot()+ 
   geom_sf(data=melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Melbourne"),
+  filter(group == "City of Bayside"),
           aes(fill = transit_supply), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -4995,7 +4995,7 @@ ggplot()+
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner") %>% select(geometry), fill=NA, colour = "grey") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
 #  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
   geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
@@ -5003,9 +5003,9 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol, left = 0.55, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol, left = 0.55, bottom = 0.0, right = 1.0, top =0.33) +
  inset_element(pcol_rest_SA4, left = 0.73, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.0, right = 1.0, top =0.33) 
+ inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.66, right = 1.0, top =1.0) 
 
 
 
@@ -5037,7 +5037,7 @@ si_by_area_2021_2024_wider_holding$ratio_binned <- si_by_area_2021_2024_wider_ho
 )
 
 pcol <- si_by_area_2021_2024_wider_holding %>%
-  filter(group == "City of Melbourne") %>% 
+  filter(group == "City of Bayside") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
@@ -5057,7 +5057,7 @@ pcol <- si_by_area_2021_2024_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "City of Melbourne",
+ title = "City of Bayside",
     x = NULL,
     y = NULL
   ) +
@@ -5070,7 +5070,7 @@ pcol <- si_by_area_2021_2024_wider_holding %>%
  
 
 pcol_rest_SA4 <- si_by_area_2021_2024_wider_holding %>%
-  filter(group == "Rest of Inner SA4") %>% 
+  filter(group == "Rest of Inner South SA4") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
@@ -5089,7 +5089,7 @@ pcol_rest_SA4 <- si_by_area_2021_2024_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "Rest of Inner SA4",
+ title = "Rest of Inner South SA4",
     x = NULL,
     y = NULL
   ) +
@@ -5139,7 +5139,7 @@ si_by_area_2021_2024_wider_holding <- left_join(
 
 ggplot()+ 
   geom_sf(data=si_by_area_2021_2024_wider_holding %>% 
-            filter(group == "City of Melbourne"),
+            filter(group == "City of Bayside"),
           aes(fill = ratio_binned), colour=NA) +  
   scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
   theme(axis.text.x=element_blank(), #remove x axis labels
@@ -5154,7 +5154,7 @@ ggplot()+
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner") %>% select(geometry), fill=NA, colour = "grey") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
 #  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
   geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 1) + 
@@ -5170,32 +5170,32 @@ inset_element(pcol_rest_melbourne, left = 0.70, bottom = 0.0, right = 1.00, top 
 
 melbourne_2024_SA1_comparison <- si_by_area_2021_2024_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
 assumptions9 <- si_by_area_2021_2024_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group)
 
 assumptions10 <- melbourne_2024_SA1_comparison$expected
 
 si_by_area_2021_2024_wider_holding$sa4_group <- 
-  if_else(si_by_area_2021_2024_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "Inner")
+  if_else(si_by_area_2021_2024_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "Inner South")
 
 melbourne_2024_SA4_comparison <- si_by_area_2021_2024_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
 assumptions11 <- si_by_area_2021_2024_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) 
 
@@ -5204,7 +5204,7 @@ assumptions12 <- melbourne_2024_SA4_comparison$expected
 
 ```
 
-In 2021 most of the City of Melbourne's population lived in SA1s with Very High levels of transit (Figure 1, left)^[Differences between the City of Melbourne and the Rest of the Inner SA4, by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2024 (`r prmisc::print_chi2(melbourne_2024_SA1_comparison)`). Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2024:`r prmisc::print_chi2(melbourne_2024_SA4_comparison)`).]. However, as shown in Figure 2^[Differences are statistically significant (rest of the Inner SA4: `r prmisc::print_chi2(melbourne_2024_SA1_comparison)`, & rest of GCCSA: `r prmisc::print_chi2(melbourne_2024_SA4_comparison)`)], the coverage and frequency of transit service appears to have reduced by 2024 more for those in the City of Melbourne.
+In 2021 most of the City of Bayside's population lived in SA1s with Very High levels of transit (Figure 1, left)^[Differences between the City of Bayside and the Rest of the Inner South SA4, by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2024 (`r prmisc::print_chi2(melbourne_2024_SA1_comparison)`). Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2024:`r prmisc::print_chi2(melbourne_2024_SA4_comparison)`).]. However, as shown in Figure 2^[Differences are statistically significant (rest of the Inner South SA4: `r prmisc::print_chi2(melbourne_2024_SA1_comparison)`, & rest of GCCSA: `r prmisc::print_chi2(melbourne_2024_SA4_comparison)`)], the coverage and frequency of transit service appears to have reduced by 2024 more for those in the City of Bayside.
 
 ```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="2021 needs (left) and change in SI to 2024 for those SA1s with needs above average, but below average supply (by 2021 populations, right)"}
 
@@ -5227,7 +5227,7 @@ poly <- Poly_Coord_df %>%
   st_as_sfc()
 
 pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "City of Melbourne") %>% 
+  filter(group == "City of Bayside") %>% 
   st_drop_geometry() %>%
   na.omit() %>%
   aggregate(population ~ composite_needs, sum) %>%
@@ -5246,7 +5246,7 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "City of Melbourne",
+    title = "City of Bayside",
     x = NULL,
     y = NULL
   ) +
@@ -5260,7 +5260,7 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
 
 
 pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "Rest of Inner SA4") %>% 
+  filter(group == "Rest of Inner South SA4") %>% 
  st_drop_geometry() %>%
   na.omit() %>%
   aggregate(population ~ composite_needs, sum) %>%
@@ -5280,7 +5280,7 @@ pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest of Inner SA4",
+    title = "Rest of Inner South SA4",
     x = NULL,
     y = NULL
   ) +
@@ -5331,7 +5331,7 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
 
 ggplot()+ 
   geom_sf(data=combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "City of Melbourne") %>% na.omit(),
+  filter(group == "City of Bayside") %>% na.omit(),
           aes(fill = composite_needs), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -5346,7 +5346,7 @@ ggplot()+
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner") %>% select(geometry), fill=NA, colour = "grey") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
 #  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
   geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
@@ -5354,9 +5354,9 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
 #  ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol, left = 0.55, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol, left = 0.55, bottom = 0.0, right = 1.0, top =0.33) +
  inset_element(pcol_rest_SA4, left = 0.73, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.0, right = 1.0, top =0.33) 
+ inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.66, right = 1.0, top =1.0) 
 
 
 
@@ -5371,7 +5371,7 @@ ggplot()+
 
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -5380,7 +5380,7 @@ melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[2:3] 
 
 assumptions13 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -5389,7 +5389,7 @@ assumptions14 <- melbourne_2021_SA1_comparison_needs$expected
 
 melbourne_2021_SA4_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -5398,7 +5398,7 @@ melbourne_2021_SA4_comparison_needs <- melbourne_2021_SA4_comparison_needs[2:3] 
 
 assumptions15 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -5449,7 +5449,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2024_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   tabyl(ratio_binned, group) %>%
   chisq.test()
 
@@ -5457,7 +5457,7 @@ assumptions17 <- si_by_area_2021_2024_wider_holding %>%
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   tabyl(ratio_binned, group) 
 
 assumptions18 <- melbourne_2021_SA1_comparison_very_high_needs$expected
@@ -5467,19 +5467,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2024_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
-  tabyl(ratio_binned, group) %>%
-fisher.test()
-
-
-
-
-
-melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2024_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Inner South SA4") %>%
   tabyl(ratio_binned, group) %>%
 chisq.test()
 
@@ -5487,24 +5475,24 @@ assumptions19 <- si_by_area_2021_2024_wider_holding %>%
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
   tabyl(ratio_binned, group)
 
-assumptions20 <- melbourne_2021_SA1_comparison_very_high_needs$expected 
-
-
 melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2024_wider_holding %>% 
-  filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
-  tabyl(ratio_binned, group) %>% 
-  fisher.test()
+  filter(group == "City of Bayside" | group == "Rest of Greater Melbourne") %>%
+  tabyl(ratio_binned, group) %>%
+  chisq.test()
+
+assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
+
 
 
 
 pcol <- si_by_area_2021_2024_wider_holding %>%
-  filter(group == "City of Melbourne") %>% 
+  filter(group == "City of Bayside") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
@@ -5524,7 +5512,7 @@ pcol <- si_by_area_2021_2024_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "City of Melbourne",
+    title = "City of Bayside",
     x = NULL,
     y = NULL
   ) +
@@ -5539,7 +5527,7 @@ pcol <- si_by_area_2021_2024_wider_holding %>%
 
 
 pcol_rest_melbourne <- si_by_area_2021_2024_wider_holding %>%
-  filter(group == "Rest of Inner SA4" | group == "Rest of Greater Melbourne") %>% 
+  filter(group == "Rest of Inner South SA4" | group == "Rest of Greater Melbourne") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
@@ -5576,7 +5564,7 @@ ggplot() +
   geom_sf(data=si_by_area_2021_2024_wider_holding %>% 
   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  filter(group == "City of Melbourne") %>% na.omit(),
+  filter(group == "City of Bayside") %>% na.omit(),
           aes(fill = ratio_binned), colour=NA) +  
  scale_fill_manual(values = c("#3A65A3", "#A6CFE1","#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
   theme(axis.text.x=element_blank(), #remove x axis labels
@@ -5598,18 +5586,21 @@ ggplot() +
 
 
 
-Social needs for transport in the City of Melbourne in 2021 were High or Very High for more than half the population (Figure 3, left), more than for other parts of Melbourne^[Statistically significant for City of Melbourne vs rest of Inner:`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`, and vs rest of GCCSA `r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3 (right) shows how transit service levels changed between 2021 and 2024 for those who were living in SA1s with needs above, but supply below the GCCSA average^[Fisher's tests show no significant differences between the City of Melbourne and the rest of the Inner SA4 (p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`) or the Rest of the GCCSA (p = `r melbourne_2021_SA4_comparison_very_high_needs$p.value %>% format(digits = 3)`).]. Those SA1s with the largest gaps in the City of Melbourne in 2021 mostly have similar levels of, or more, transit in 2024. 
+Social needs for transport in the City of Bayside in 2021 were High or Very High for more than half the population (Figure 3, left), more than for other parts of Melbourne^[Statistically significant for City of Bayside vs rest of Inner South:`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`, and vs rest of GCCSA `r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3 (right) shows how transit service levels changed between 2021 and 2024 for those who were living in SA1s with needs above, but supply below the GCCSA average^[Fisher's tests show no significant differences between the City of Bayside and the rest of the Inner South SA4 (p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`) or the Rest of the GCCSA (p = `r melbourne_2021_SA4_comparison_very_high_needs$p.value %>% format(digits = 3)`).]. Those SA1s with the largest gaps in the City of Bayside in 2021 mostly have similar levels of, or more, transit in 2024. 
 
-Overall, the City of Melbourne appears well supplied with transit and, compared to other parts of Greater Melbourne, has lower gaps between social needs and transit supply^[Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "City of Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "City of Melbourne") %>% st_drop_geometry() %>% select(population) %>% sum())` of City of Melbourne residents had above average social needs for transport but below average transit supply, compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Inner SA4") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Inner SA4") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the Inner SA4 and `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne.]. Those with the largest needs-gaps in 2021 appear to have similar or more transit in 2024. 
+Overall, the City of Bayside appears well supplied with transit and, compared to other parts of Greater Melbourne, has lower gaps between social needs and transit supply^[Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "City of Bayside") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "City of Bayside") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents in SA1s in the City of Bayside had above average social needs for transport but below average transit supply, compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Inner South SA4") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Inner South SA4") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the Inner South SA4 and `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne.]. Those with the largest needs-gaps in 2021 appear to have similar or more transit in 2024. 
 
 ```{r Check_assumptions, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 
 assumptions1
 assumptions2
+#1 of 10, assumption met. 
 assumptions3
 assumptions4
+#none, assumption met.
 assumptions5
 assumptions6
+#1 of 6, 
 assumptions7
 assumptions8
 assumptions9

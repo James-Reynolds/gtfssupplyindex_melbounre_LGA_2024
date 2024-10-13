@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  12 OCT 2024 17:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  12 OCT 2024 20:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**City_of_Melbourne.tex
-(./City_of_Melbourne.tex
+**City_of_Yarra.tex
+(./City_of_Yarra.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2022/texmf-dist/tex/latex
 /tufte-latex/tufte-handout.cls
@@ -294,7 +294,7 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/natbib/bibentry.sty
 Package: bibentry 2007/10/30 1.5 (PWD)
 )
-No file City_of_Melbourne.bbl.
+No file City_of_Yarra.bbl.
 \c@@tufte@num@bibkeys=\count281
 (/usr/local/texlive/2022/texmf-dist/tex/latex/sauerj/optparams.sty
 Package: optparams 2004/08/14 v0.9 multiple optional parameters in macros
@@ -650,8 +650,8 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count325
 \l__pdf_internal_box=\box120
-) (./City_of_Melbourne.aux)
-\openout1 = `City_of_Melbourne.aux'.
+) (./City_of_Yarra.aux)
+\openout1 = `City_of_Yarra.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
@@ -686,9 +686,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 86.
 LaTeX Info: Redefining \pageref on input line 86.
 LaTeX Info: Redefining \nameref on input line 86.
-(./City_of_Melbourne.out) (./City_of_Melbourne.out)
+(./City_of_Yarra.out) (./City_of_Yarra.out)
 \@outlinefile=\write3
-\openout3 = `City_of_Melbourne.out'.
+\openout3 = `City_of_Yarra.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -825,24 +825,22 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Melbourne_files/figure-latex/SI_map-1.pdf, id=14, 224.84pt x 157.58875
-pt>
-File: City_of_Melbourne_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
+<City_of_Yarra_files/figure-latex/SI_map-1.pdf, id=14, 253.94875pt x 157.58875p
+t>
+File: City_of_Yarra_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
+<use City_of_Yarra_files/figure-latex/SI_map-1.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/SI_map-1.pdf  used on
+ input line 128.
+(pdftex.def)             Requested size: 240.00995pt x 148.93896pt.
+<City_of_Yarra_files/figure-latex/SI_map-2.pdf, id=15, 253.94875pt x 157.58875p
+t>
+File: City_of_Yarra_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
+<use City_of_Yarra_files/figure-latex/SI_map-2.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/SI_map-2.pdf  used on
+ input line 128.
+(pdftex.def)             Requested size: 240.00995pt x 148.93896pt.
 
-<use City_of_Melbourne_files/figure-latex/SI_map-1.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/SI_map-1.pdf  use
-d on input line 128.
-(pdftex.def)             Requested size: 240.01035pt x 168.22151pt.
-<City_of_Melbourne_files/figure-latex/SI_map-2.pdf, id=15, 224.84pt x 157.58875
-pt>
-File: City_of_Melbourne_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
-
-<use City_of_Melbourne_files/figure-latex/SI_map-2.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/SI_map-2.pdf  use
-d on input line 128.
-(pdftex.def)             Requested size: 240.01035pt x 168.22151pt.
-
-Overfull \hbox (2.9307pt too wide) in paragraph at lines 128--129
+Overfull \hbox (2.9299pt too wide) in paragraph at lines 128--129
 [][] []
  []
 
@@ -851,14 +849,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--129
 
  []
 
-<City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf, id=16, 276.03125pt x
- 98.3675pt>
-File: City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf Graphic file (ty
-pe pdf)
-<use City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/SI_change_map-1.p
-df  used on input line 132.
-(pdftex.def)             Requested size: 480.0504pt x 171.07246pt.
+<City_of_Yarra_files/figure-latex/SI_change_map-1.pdf, id=16, 265.99374pt x 87.
+32625pt>
+File: City_of_Yarra_files/figure-latex/SI_change_map-1.pdf Graphic file (type p
+df)
+<use City_of_Yarra_files/figure-latex/SI_change_map-1.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/SI_change_map-1.pdf  
+used on input line 132.
+(pdftex.def)             Requested size: 480.04251pt x 157.59886pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
@@ -867,32 +865,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-[1
 
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./City_
-of_Melbourne_files/figure-latex/SI_map-1.pdf> <./City_of_Melbourne_files/figure
--latex/SI_map-2.pdf>]
+LaTeX Warning: Marginpar on page 1 moved.
 
-LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Melbourne_files/figure-latex/Needs_and_change_map-1.pdf, id=48, 224.84
-pt x 157.58875pt>
-File: City_of_Melbourne_files/figure-latex/Needs_and_change_map-1.pdf Graphic f
-ile (type pdf)
-<use City_of_Melbourne_files/figure-latex/Needs_and_change_map-1.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/Needs_and_change_
-map-1.pdf  used on input line 150.
-(pdftex.def)             Requested size: 240.01035pt x 168.22151pt.
-<City_of_Melbourne_files/figure-latex/Needs_and_change_map-2.pdf, id=49, 224.84
-pt x 157.58875pt>
-File: City_of_Melbourne_files/figure-latex/Needs_and_change_map-2.pdf Graphic f
-ile (type pdf)
-<use City_of_Melbourne_files/figure-latex/Needs_and_change_map-2.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/Needs_and_change_
-map-2.pdf  used on input line 150.
-(pdftex.def)             Requested size: 240.01035pt x 168.22151pt.
+LaTeX Warning: Marginpar on page 1 moved.
 
-Overfull \hbox (2.9307pt too wide) in paragraph at lines 150--151
+<City_of_Yarra_files/figure-latex/Needs_and_change_map-1.pdf, id=17, 253.94875p
+t x 157.58875pt>
+File: City_of_Yarra_files/figure-latex/Needs_and_change_map-1.pdf Graphic file 
+(type pdf)
+<use City_of_Yarra_files/figure-latex/Needs_and_change_map-1.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/Needs_and_change_map-
+1.pdf  used on input line 150.
+(pdftex.def)             Requested size: 240.00995pt x 148.93896pt.
+<City_of_Yarra_files/figure-latex/Needs_and_change_map-2.pdf, id=18, 253.94875p
+t x 157.58875pt>
+File: City_of_Yarra_files/figure-latex/Needs_and_change_map-2.pdf Graphic file 
+(type pdf)
+<use City_of_Yarra_files/figure-latex/Needs_and_change_map-2.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/Needs_and_change_map-
+2.pdf  used on input line 150.
+(pdftex.def)             Requested size: 240.00995pt x 148.93896pt.
+
+Overfull \hbox (2.9299pt too wide) in paragraph at lines 150--151
 [][] []
  []
 
@@ -901,6 +897,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
 
+[1
+
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./City_
+of_Yarra_files/figure-latex/SI_map-1.pdf> <./City_of_Yarra_files/figure-latex/S
+I_map-2.pdf>]
 
 LaTeX Warning: Marginpar on page 2 moved.
 
@@ -913,25 +914,172 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
+LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
+(Font)              scaled to size 8.50006pt on input line 174.
+[2 <./City_of_Yarra_files/figure-latex/SI_change_map-1.pdf> <./City_of_Yarra_fi
+les/figure-latex/Needs_and_change_map-1.pdf> <./City_of_Yarra_files/figure-late
+x/Needs_and_change_map-2.pdf>] [3]
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##           ratio_binned City of Yarra Rest of Greater Melbou
+rne[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##            New service             0                       
+ 66[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##  Increased 30% or more            45                      7
+759[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##    Increased 10 to 30%            63                       
+846[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##     Increased 5 to 10%            23                       
+155[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##      Increased 3 to 5%             3                       
+ 61[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##      Increased 1 to 3%             9                       
+ 65[] 
+ []
+
+[4]
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##              Within 1%             9                       
+139[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##        Reduced 1 to 3%             6                       
+ 29[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##       Reduced 3 to 10%            37                       
+125[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##    Reduced 10% or more            48                       
+325[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 297--297
+[]\T1/fvm/m/n/10 ##     Not served in 2024             0                       
+481[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##           ratio_binned City of Yarra Rest of Greater Melbou
+rne[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##            New service     1.5579949                  64.44
+201[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##  Increased 30% or more   184.2210997                7619.77
+890[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##    Increased 10 to 30%    21.4578395                 887.54
+216[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##     Increased 5 to 10%     4.2018652                 173.79
+813[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##      Increased 3 to 5%     1.5107830                  62.48
+922[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##      Increased 1 to 3%     1.7468428                  72.25
+316[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##              Within 1%     3.4936856                 144.50
+631[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##        Reduced 1 to 3%     0.8262094                  34.17
+379[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##       Reduced 3 to 10%     3.8241694                 158.17
+583[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##    Reduced 10% or more     8.8050321                 364.19
+497[] 
+ []
+
+
+Overfull \hbox (20.60727pt too wide) in paragraph at lines 312--312
+[]\T1/fvm/m/n/10 ##     Not served in 2024    11.3544783                 469.64
+552[] 
+ []
+
+[5] [6]
 
 Package bibentry Warning: You have used \nobibliography* 
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
 
-[2 <./City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf> <./City_of_Melb
-ourne_files/figure-latex/Needs_and_change_map-1.pdf> <./City_of_Melbourne_files
-/figure-latex/Needs_and_change_map-2.pdf>] (./City_of_Melbourne.aux)
-Package rerunfilecheck Info: File `City_of_Melbourne.out' has not changed.
+[7] (./City_of_Yarra.aux)
+Package rerunfilecheck Info: File `City_of_Yarra.out' has not changed.
 (rerunfilecheck)             Checksum: 96BB2600FE1A7DF4FB4BE76697DDA6A1;158.
  ) 
 Here is how much of TeX's memory you used:
- 15583 strings out of 478268
- 250900 string characters out of 5846347
- 572448 words of memory out of 5000000
- 33410 multiletter control sequences out of 15000+600000
- 516561 words of font info for 101 fonts, out of 8000000 for 9000
+ 15590 strings out of 478268
+ 250709 string characters out of 5846347
+ 580384 words of memory out of 5000000
+ 33411 multiletter control sequences out of 15000+600000
+ 517181 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,11n,94p,619b,423s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,11n,94p,603b,491s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
@@ -941,10 +1089,10 @@ mf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/texlive/2022/texmf-dist
 /fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/ur
 w/palatino/uplri8a.pfb>
-Output written on City_of_Melbourne.pdf (2 pages, 397987 bytes).
+Output written on City_of_Yarra.pdf (7 pages, 382449 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
+ 140 PDF objects out of 1000 (max. 8388607)
+ 99 compressed objects within 1 object stream
+ 13 named destinations out of 1000 (max. 500000)
  1066 words of extra memory for PDF output out of 10000 (max. 10000000)
 
