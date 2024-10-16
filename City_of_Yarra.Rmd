@@ -70,7 +70,7 @@ lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Yarra"
 In Victoria, public transport is managed by the state government, although Local Government Authorities (LGAs) may have some influence on service levels through planning processes, advocacy etc. However, not much is known about how much transit is supplied or whether social needs for transport are being met within each LGA's boundaries. This note explores social needs-gaps in the City of Yarra, using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying]. It is part of a series examining each LGA in Greater Melbourne^[See https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024 but lookout, I misspelled "Melbourne" ]. 
 
 # Methods 
-This note maps public transport supply and a composite needs indicator based on Australian Bureau of Statistics (ABS) data. The methodology is as per Reynolds, Currie and Qu (in drafting)^[Forthcoming hopefully, but using the *gtfssupplyindex* R package (see https://github.com/James-Reynolds/gtfssupplyindex) to process the Victoria GTFS feed. Note that results represent what is in the GTFS feed for August 2021 and October 2024, which may not match services provided.]. The Transit Supply Indication (SI) scores are based on the frequency of service and how much of an area is within walking distance of stops/stations^[400m for tram and bus, 800m for train.], are reported for the ABS' Statistical Area 1s (SA1s), and are categorized into seven groups based on the average scores for SA1s across the Melbourne Greater Capital City Statistical Area (GCCSA).
+This note maps transport supply and a composite needs indicator based on Australian Bureau of Statistics (ABS) data. The methodology is as per Reynolds, Currie and Qu (in drafting)^[Forthcoming hopefully, but using the *gtfssupplyindex* R package (see https://github.com/James-Reynolds/gtfssupplyindex) to process the Victoria GTFS feed. Note that results represent what is in the GTFS feed for August 2021 and 2023, which may not match services provided.], and involves Transit Supply Indication (SI) scores, which are based on service frequency and how much of an area is within walking distance of stops/stations^[400m for tram and bus, 800m for train.]. Results are shown for ABS' Statistical Area 1s (SA1s), categorized into seven groups based on the average scores for SA1s across the Melbourne Greater Capital City Statistical Area (GCCSA).
 
 
 ```{r fix_ptv_data_Victoria_240613, eval = FALSE, echo = FALSE}
@@ -1079,8 +1079,8 @@ melbourne_si_SA12021_21_plot <- melbourne_si_SA12021_21_census_week_aggregated$o
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1) 
 
 
-## 2024 SA12021 Greater Melbourne
-si_by_area <-  read.csv( "results/Greater_Melbourne/si_SA12021_24_census_week_aggregated.csv") %>% 
+## 2023 SA12021 Greater Melbourne
+si_by_area <-  read.csv( "results/Greater_Melbourne/si_SA12021_23_census_week_aggregated.csv") %>% 
   as_tibble()
 si_by_area <- si_by_area[,2:3]
 
@@ -1088,10 +1088,10 @@ areas_of_interest <-  absmapsdata::sa12021 %>%
     filter(gcc_name_2021 == "Greater Melbourne") %>% 
     select(sa1_code_2021)
 
-melbourne_si_SA12021_24_census_week_aggregated <- si_thresholds_and_plot_function(si_by_area, areas_of_interest)
+melbourne_si_SA12021_23_census_week_aggregated <- si_thresholds_and_plot_function(si_by_area, areas_of_interest)
 
 
-melbourne_si_SA12021_24_plot <- melbourne_si_SA12021_24_census_week_aggregated$output_plot + 
+melbourne_si_SA12021_23_plot <- melbourne_si_SA12021_23_census_week_aggregated$output_plot + 
   geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
   #geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
   geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
@@ -1109,25 +1109,25 @@ melbourne_si_SA12021_16_census_week_aggregated$si_by_area$Year <- 2016
 melbourne_si_SA12021_21_census_week_aggregated$si_by_area$Year <- 2021
 
 
-melbourne_si_SA12021_24_census_week_aggregated$si_by_area$Year <- 2024
+melbourne_si_SA12021_23_census_week_aggregated$si_by_area$Year <- 2023
 
 
 
-si_by_area_2021_2024 <- add_row(
+si_by_area_2021_2023 <- add_row(
   melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>% 
     st_drop_geometry(), 
-  melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>% 
+  melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>% 
     st_drop_geometry())
-names(si_by_area_2021_2024) <- c("sa1_code_2021", "SI", "transit_supply", "Year")
+names(si_by_area_2021_2023) <- c("sa1_code_2021", "SI", "transit_supply", "Year")
 
-si_by_area_2021_2024  <- left_join(
+si_by_area_2021_2023  <- left_join(
   absmapsdata::sa12021 %>% 
     filter(gcc_name_2021 == "Greater Melbourne") %>% 
     select(sa1_code_2021),
-  si_by_area_2021_2024)
+  si_by_area_2021_2023)
 
 plot_2016_2021_comparison <- ggplot()+ 
-  geom_sf(data=si_by_area_2021_2024 %>% na.omit(),
+  geom_sf(data=si_by_area_2021_2023 %>% na.omit(),
           aes(fill = transit_supply), colour=NA) +
   facet_wrap(vars(Year), nrow = 1) +
   theme(axis.text.x=element_blank(), #remove x axis labels
@@ -1177,7 +1177,7 @@ melbourne_comparison_2006_2021$population_2006 <- c(
   793046,
   865330, 
   774521,
-  324546,
+  323546,
   260411,
   263832)
   
@@ -2226,7 +2226,7 @@ si_CCD2006_21_census_week_aggregated_outer_and_middle_suburbs <- si_CCD2006_21_c
 
 ```{r Greater_Melbourne_2016_2021_scatterplot_SA12021, fig.show="hold", echo = FALSE, warning=FALSE, message=FALSE, cache=TRUE, include = TRUE, fig.fullwidth = TRUE, fig.height = 8, fig.cap="Greater Melbourne: SI scores in 2016 and 2021 by SA1 (2021 boundaries), adjusted to set those <1 equal to 1 (for visual clarity)"}
 
-si_by_area_2021_2024_wider <- si_by_area_2021_2024 %>% 
+si_by_area_2021_2023_wider <- si_by_area_2021_2023 %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   select(sa1_code_2021, Year, SI) %>%
@@ -2235,62 +2235,62 @@ si_by_area_2021_2024_wider <- si_by_area_2021_2024 %>%
   clean_names()
 
 # Join back to get 2021 Transport Supply categories in tibble
-si_by_area_2021_2024_wider <- left_join(
-  si_by_area_2021_2024_wider, 
-  si_by_area_2021_2024 %>% 
+si_by_area_2021_2023_wider <- left_join(
+  si_by_area_2021_2023_wider, 
+  si_by_area_2021_2023 %>% 
     st_drop_geometry() %>%
     na.omit() %>% 
     filter (Year == 2021) %>%  
     select(sa1_code_2021, transit_supply)
 )
 
-names(si_by_area_2021_2024_wider) <- c(
+names(si_by_area_2021_2023_wider) <- c(
   "sa1_code_2021", 
   "x2021", 
-  "x2024", 
+  "x2023", 
   "transit_supply_2021"
 )
 
 # Convert SI scores <1 to =1 to clean up graph
-si_by_area_2021_2024_wider$x2021_one_plus <- 
-  if_else(si_by_area_2021_2024_wider$x2021 < 1, 
+si_by_area_2021_2023_wider$x2021_one_plus <- 
+  if_else(si_by_area_2021_2023_wider$x2021 < 1, 
           1, 
-          si_by_area_2021_2024_wider$x2021)
-si_by_area_2021_2024_wider$x2024_one_plus <- 
-  if_else(si_by_area_2021_2024_wider$x2024 < 1, 
+          si_by_area_2021_2023_wider$x2021)
+si_by_area_2021_2023_wider$x2023_one_plus <- 
+  if_else(si_by_area_2021_2023_wider$x2023 < 1, 
           1, 
-          si_by_area_2021_2024_wider$x2024)
+          si_by_area_2021_2023_wider$x2023)
 
 
-si_by_area_2021_2024_wider$ratio <- si_by_area_2021_2024_wider$x2024_one_plus / 
-  si_by_area_2021_2024_wider$x2021_one_plus
+si_by_area_2021_2023_wider$ratio <- si_by_area_2021_2023_wider$x2023_one_plus / 
+  si_by_area_2021_2023_wider$x2021_one_plus
 
 
-si_by_area_2021_2024_wider$ratio_binned <- if_else(
-  si_by_area_2021_2024_wider$x2024 == 0, 
+si_by_area_2021_2023_wider$ratio_binned <- if_else(
+  si_by_area_2021_2023_wider$x2023 == 0, 
   if_else(
-    si_by_area_2021_2024_wider$x2021 == 0,
+    si_by_area_2021_2023_wider$x2021 == 0,
     "Never served (black)", 
     "Service withdrawn (magenta)"),
   if_else(
-    si_by_area_2021_2024_wider$x2021 == 0, 
+    si_by_area_2021_2023_wider$x2021 == 0, 
     "New service", 
     if_else(
-      si_by_area_2021_2024_wider$ratio < 0.90, 
+      si_by_area_2021_2023_wider$ratio < 0.90, 
       "Reduced 10% or more", 
-      if_else(si_by_area_2021_2024_wider$ratio < 0.97, 
+      if_else(si_by_area_2021_2023_wider$ratio < 0.97, 
               "Reduced 3 to 10%", 
-              if_else(si_by_area_2021_2024_wider$ratio < 0.99, 
+              if_else(si_by_area_2021_2023_wider$ratio < 0.99, 
                       "Reduced 1 to 3%", 
-                      if_else(si_by_area_2021_2024_wider$ratio <1.01, 
+                      if_else(si_by_area_2021_2023_wider$ratio <1.01, 
                               "Within 1%", 
-                              if_else(si_by_area_2021_2024_wider$ratio < 1.03, 
+                              if_else(si_by_area_2021_2023_wider$ratio < 1.03, 
                                       "Increased 1 to 3%", 
-                                      if_else(si_by_area_2021_2024_wider$ratio < 1.05, 
+                                      if_else(si_by_area_2021_2023_wider$ratio < 1.05, 
                                               "Increased 3 to 5%", 
-                                              if_else(si_by_area_2021_2024_wider$ratio < 1.10, 
+                                              if_else(si_by_area_2021_2023_wider$ratio < 1.10, 
                                                       "Increased 5 to 10%", 
-                                                  if_else(si_by_area_2021_2024_wider$ratio < 1.30, 
+                                                  if_else(si_by_area_2021_2023_wider$ratio < 1.30, 
                                                       "Increased 10 to 30%", 
                                                       "Increased 30% or more")
                                               )
@@ -2303,8 +2303,8 @@ si_by_area_2021_2024_wider$ratio_binned <- if_else(
   )
 )
 
-si_by_area_2021_2024_wider$ratio_binned <- factor(
-  si_by_area_2021_2024_wider$ratio_binned, 
+si_by_area_2021_2023_wider$ratio_binned <- factor(
+  si_by_area_2021_2023_wider$ratio_binned, 
    levels = c("New service",
               "Increased 30% or more",
               "Increased 10 to 30%",
@@ -2321,12 +2321,12 @@ si_by_area_2021_2024_wider$ratio_binned <- factor(
   )
                                                      
   
-scatterplot_si_sa12021_2016_2021 <- si_by_area_2021_2024_wider %>% 
+scatterplot_si_sa12021_2016_2021 <- si_by_area_2021_2023_wider %>% 
   st_drop_geometry() %>% 
   filter(ratio_binned != "Never served (black)") %>%
   ggscatterstats( 
   x = x2021_one_plus, 
-  y = x2024_one_plus,
+  y = x2023_one_plus,
   type = "non-parametric",
   point.args = list(aes(colour = ratio_binned))
   ) +   
@@ -2339,10 +2339,10 @@ scatterplot_si_sa12021_2016_2021 <- si_by_area_2021_2024_wider %>%
 
 #scatterplot_si_sa12021_2016_2021
 
-#si_by_area_2021_2024_wider$Total <- 1
-#si_by_area_2021_2024_wider$ratio_binned <- si_by_area_2021_2024_wider$ratio_binned %>% fct_rev()
-#si_by_area_2021_2024_wider$ratio_binned <- si_by_area_2021_2024_wider$ratio_binned  %>% fct_shift(-1)
-#si_by_area_2021_2024_wider %>% 
+#si_by_area_2021_2023_wider$Total <- 1
+#si_by_area_2021_2023_wider$ratio_binned <- si_by_area_2021_2023_wider$ratio_binned %>% fct_rev()
+#si_by_area_2021_2023_wider$ratio_binned <- si_by_area_2021_2023_wider$ratio_binned  %>% fct_shift(-1)
+#si_by_area_2021_2023_wider %>% 
 #  st_drop_geometry() %>% 
 #  na.omit() %>%
 #    ggbarstats(
@@ -2351,23 +2351,23 @@ scatterplot_si_sa12021_2016_2021 <- si_by_area_2021_2024_wider %>%
 #  ) + 
 #  theme(legend.position="bottom") +
 #  scale_fill_manual(values = c("#5C66A0", "#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "#FFFFFF"))
-#si_by_area_2021_2024_wider$ratio_binned <- si_by_area_2021_2024_wider$ratio_binned  %>% fct_shift(1)
-#si_by_area_2021_2024_wider$ratio_binned <- si_by_area_2021_2024_wider$ratio_binned %>% fct_rev()
+#si_by_area_2021_2023_wider$ratio_binned <- si_by_area_2021_2023_wider$ratio_binned  %>% fct_shift(1)
+#si_by_area_2021_2023_wider$ratio_binned <- si_by_area_2021_2023_wider$ratio_binned %>% fct_rev()
 
 ```
 
 ```{r Greater_Melbourne_2016_2021_ratio_population_table, fig.show="hold", out.width = "90%", echo = FALSE, warning=FALSE, message=FALSE, cache = FALSE, include = TRUE, fig.height = 8, fig.cap="Greater Melbourne: changes in SI between 2016 and 2021, Population by SA4"}
 
 # Join to 2021 population
-si_by_area_2021_2024_wider <- left_join(
-  si_by_area_2021_2024_wider,
+si_by_area_2021_2023_wider <- left_join(
+  si_by_area_2021_2023_wider,
   population_sa1_greater_melbourne_2021 %>% 
     select(sa1_code_2021, population))
 
 
 # Join to SA4 names
-si_by_area_2021_2024_wider <- left_join(
-  si_by_area_2021_2024_wider,
+si_by_area_2021_2023_wider <- left_join(
+  si_by_area_2021_2023_wider,
   absmapsdata::sa12021 %>% 
     st_drop_geometry() %>%
     select(sa1_code_2021, sa4_name_2021))
@@ -2375,7 +2375,7 @@ si_by_area_2021_2024_wider <- left_join(
 
 
 greater_melbourne_ratio_population <- 
-  si_by_area_2021_2024_wider %>% 
+  si_by_area_2021_2023_wider %>% 
   aggregate(population ~ sa4_name_2021  + ratio_binned, sum) 
 
 
@@ -2463,19 +2463,19 @@ greater_melbourne_ratio_population_wider[is.na(greater_melbourne_ratio_populatio
 #  fct_shift(1)
 
 # shift factor back
-si_by_area_2021_2024_wider$ratio_binned <- si_by_area_2021_2024_wider$ratio_binned %>% fct_shift(-1)
+si_by_area_2021_2023_wider$ratio_binned <- si_by_area_2021_2023_wider$ratio_binned %>% fct_shift(-1)
 
 # Check expected values in chi-square
-#janitor::chisq.test(si_by_area_2021_2024_wider %>% 
+#janitor::chisq.test(si_by_area_2021_2023_wider %>% 
 #  st_drop_geometry() %>% 
 # tabyl(ratio_binned, sa4_name_2021))$expected
 # <20% are less than 5, but "Service withdrawn (magenta)" is all less than 5. So check without sevice withdrawn 
 
 # drop Service withdrawn (magenta)
-#si_by_area_2021_2024_wider_no_withdrawn <- si_by_area_2021_2024_wider %>% filter(ratio_binned != "Service withdrawn (magenta)")
-#si_by_area_2021_2024_wider_no_withdrawn$ratio_binned <- #si_by_area_2021_2024_wider_no_withdrawn$ratio_binned %>% fct_drop()
+#si_by_area_2021_2023_wider_no_withdrawn <- si_by_area_2021_2023_wider %>% filter(ratio_binned != "Service withdrawn (magenta)")
+#si_by_area_2021_2023_wider_no_withdrawn$ratio_binned <- #si_by_area_2021_2023_wider_no_withdrawn$ratio_binned %>% fct_drop()
 
-#janitor::chisq.test(si_by_area_2021_2024_wider_no_withdrawn %>% 
+#janitor::chisq.test(si_by_area_2021_2023_wider_no_withdrawn %>% 
 #  st_drop_geometry() %>% 
 #  tabyl(ratio_binned, sa4_name_2021))
 # obtain effectively the same result, so all good
@@ -2487,9 +2487,9 @@ si_by_area_2021_2024_wider$ratio_binned <- si_by_area_2021_2024_wider$ratio_binn
 ```{r Greater_Melbourne_2016_2021_ratio_SA1_table, fig.show="hold", fig.dim = c(7.5,7.5),  echo = FALSE, warning=FALSE, message=FALSE, cache = TRUE, include = TRUE, fig.cap="Greater Melbourne: changes in SI between 2016 and 2021, by 2021 SA1, overlayed with 2006 Greater Melbourne boundary (black); 2021 SA4 boundaries (blue); and suburban railway lines (black)"}
 
 
-si_by_area_2021_2024_wider_holding <- si_by_area_2021_2024_wider  
+si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider  
 
-greater_melbourne_ratio_SA1 <- si_by_area_2021_2024_wider
+greater_melbourne_ratio_SA1 <- si_by_area_2021_2023_wider
 
 greater_melbourne_ratio_SA1$ratio_binned <- factor(
   greater_melbourne_ratio_SA1$ratio_binned, 
@@ -2605,18 +2605,18 @@ greater_melbourne_ratio_SA1_table <- greater_melbourne_ratio_SA1 %>%
 #  kableExtra::column_spec(10, width = "1cm") %>%
 #  kableExtra::column_spec(11, width = "1.25cm")
   
-si_by_area_2021_2024_wider <- left_join(
+si_by_area_2021_2023_wider <- left_join(
   absmapsdata::sa12021 %>%
     select(sa1_code_2021),
-   si_by_area_2021_2024_wider, 
+   si_by_area_2021_2023_wider, 
 )
 
-si_by_area_2021_2024_wider$ratio_binned <- si_by_area_2021_2024_wider$ratio_binned %>% fct_shift(+1)
+si_by_area_2021_2023_wider$ratio_binned <- si_by_area_2021_2023_wider$ratio_binned %>% fct_shift(+1)
 
 
 
 
-pcol <- si_by_area_2021_2024_wider %>%
+pcol <- si_by_area_2021_2023_wider %>%
   st_drop_geometry() %>%
   aggregate(population ~ ratio_binned, sum) %>%
   mutate(perc=population/sum(population)) %>% 
@@ -2644,8 +2644,8 @@ pcol <- si_by_area_2021_2024_wider %>%
   )
 
 
-pcol_mornington <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_mornington <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "Mornington Peninsula") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
@@ -2690,22 +2690,22 @@ pcol_mornington <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024
 
 
 
-si_by_area_2021_2024_wider$sa4_name_2021 <- if_else(
-  si_by_area_2021_2024_wider$sa4_name_2021 == "Melbourne - Inner", "Inner", 
+si_by_area_2021_2023_wider$sa4_name_2021 <- if_else(
+  si_by_area_2021_2023_wider$sa4_name_2021 == "Melbourne - Inner", "Inner", 
   if_else(
-    si_by_area_2021_2024_wider$sa4_name_2021 == "Melbourne - Inner East", "Inner East",
-    if_else(si_by_area_2021_2024_wider$sa4_name_2021 == "Melbourne - Inner South", "Inner South", 
-            if_else(si_by_area_2021_2024_wider$sa4_name_2021 == "Melbourne - North East", 
+    si_by_area_2021_2023_wider$sa4_name_2021 == "Melbourne - Inner East", "Inner East",
+    if_else(si_by_area_2021_2023_wider$sa4_name_2021 == "Melbourne - Inner South", "Inner South", 
+            if_else(si_by_area_2021_2023_wider$sa4_name_2021 == "Melbourne - North East", 
                     "North East", 
-                    if_else(si_by_area_2021_2024_wider$sa4_name_2021 == "Melbourne - North West", "North West",
-                            if_else(si_by_area_2021_2024_wider$sa4_name_2021 == "Melbourne - Outer East", "Outer East", 
-                                            if_else(si_by_area_2021_2024_wider$sa4_name_2021 == "Melbourne - South East", "South East", 
-                                                    if_else(si_by_area_2021_2024_wider$sa4_name_2021 == "Melbourne - West", "West", 
-                                                            si_by_area_2021_2024_wider$sa4_name_2021))))))))
+                    if_else(si_by_area_2021_2023_wider$sa4_name_2021 == "Melbourne - North West", "North West",
+                            if_else(si_by_area_2021_2023_wider$sa4_name_2021 == "Melbourne - Outer East", "Outer East", 
+                                            if_else(si_by_area_2021_2023_wider$sa4_name_2021 == "Melbourne - South East", "South East", 
+                                                    if_else(si_by_area_2021_2023_wider$sa4_name_2021 == "Melbourne - West", "West", 
+                                                            si_by_area_2021_2023_wider$sa4_name_2021))))))))
 
 
-si_by_area_2021_2024_wider$sa4_name_2021 <- factor(
-  si_by_area_2021_2024_wider$sa4_name_2021,
+si_by_area_2021_2023_wider$sa4_name_2021 <- factor(
+  si_by_area_2021_2023_wider$sa4_name_2021,
   levels = c("Mornington Peninsula",
              "West",
              "South East", 
@@ -2720,8 +2720,8 @@ si_by_area_2021_2024_wider$sa4_name_2021 <- factor(
 
 
 
-pcol_inner_east <-left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_inner_east <-left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "Inner East") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
@@ -2751,8 +2751,8 @@ pcol_inner_east <-left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_
 
 
 
-pcol_inner_south <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_inner_south <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "Inner South") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
@@ -2781,8 +2781,8 @@ pcol_inner_south <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_202
   )
 
 
-pcol_north_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_north_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "North East") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
@@ -2811,8 +2811,8 @@ pcol_north_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024
   )
 
 
-pcol_north_west <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_north_west <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "North West") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
@@ -2841,8 +2841,8 @@ pcol_north_west <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024
   )
 
 
-pcol_outer_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_outer_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "Outer East") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
@@ -2871,8 +2871,8 @@ pcol_outer_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024
   )
 
 
-pcol_south_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_south_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "South East") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
@@ -2901,8 +2901,8 @@ pcol_south_east <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024
   )
 
 
-pcol_west <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_west <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "West") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
@@ -2931,8 +2931,8 @@ pcol_west <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider
   )
 
 
-pcol_inner <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wider$ratio_binned)),
-  si_by_area_2021_2024_wider %>%   st_drop_geometry() %>% 
+pcol_inner <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
+  si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
   filter(sa4_name_2021 == "Inner") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
@@ -2966,7 +2966,7 @@ pcol_inner <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2024_wide
 
 
  #ggplot()+ 
-#  geom_sf(data=si_by_area_2021_2024_wider %>% 
+#  geom_sf(data=si_by_area_2021_2023_wider %>% 
 #            na.omit() %>%
 ##            filter(ratio_binned != "Never served (black)"),
 #          aes(fill = ratio_binned), colour=NA) +  scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", #"#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "magenta", "black")) +
@@ -3616,7 +3616,7 @@ combined_needs_index_2016_2021_comparison <- add_row(
 )
 # set 2021 as year
 combined_needs_index_2016_2021_comparison <- combined_needs_index_2016_2021_comparison %>%
-  mutate(Year=replace_na(Year, "x2024"))
+  mutate(Year=replace_na(Year, "x2023"))
 
 # filter to only compare those with good quality
 combined_needs_index_2016_2021_comparison_wider <- pivot_wider( data = combined_needs_index_2016_2021_comparison %>% 
@@ -3646,7 +3646,7 @@ combined_needs_index_2016_2021_comparison_wider <- left_join(
 combined_needs_index_2016_2021_scatterstats <- combined_needs_index_2016_2021_comparison_wider %>% 
   ggscatterstats(
   x = "x2021", 
-  y = "x2024",
+  y = "x2023",
   point.args = list(aes(colour = sa4_name_2016, shape = composite_needs))
 ) + 
   theme(legend.position="bottom", 
@@ -4679,50 +4679,48 @@ assumptions3 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
 
 assumptions4 <- melbourne_2021_SA4_comparison$expected
 
-
-
-melbourne_si_SA12021_24_census_week_aggregated$si_by_area <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>% 
+melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>% 
   left_join(sa1s_in_sa4_of_interest, 
             by =(join_by(area_id == sa1_code_2021)))
-melbourne_si_SA12021_24_census_week_aggregated$si_by_area <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>% 
+melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
-melbourne_2024_SA1_comparison <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
+melbourne_2023_SA1_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
-assumptions5 <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
+assumptions5 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) 
 
-assumptions6 <- melbourne_2024_SA1_comparison$expected
+assumptions6 <- melbourne_2023_SA1_comparison$expected
 
 
 
-melbourne_2024_SA4_comparison <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
+melbourne_2023_SA4_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
-assumptions7 <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
+assumptions7 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
-assumptions8 <- melbourne_2024_SA4_comparison$expected
+assumptions8 <- melbourne_2023_SA4_comparison$expected
 
-si_by_area_2021_2024_wider_holding <- si_by_area_2021_2024_wider_holding %>%
+si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 left_join(sa1s_in_sa4_of_interest, 
             by =(join_by(sa1_code_2021 == sa1_code_2021)))
-si_by_area_2021_2024_wider_holding <- si_by_area_2021_2024_wider_holding %>% 
+si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
 
@@ -4740,7 +4738,7 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 # Results
 
 
-```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2024 (right, by SA1)"}
+```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
 
 
 #Set boundings box
@@ -4882,13 +4880,13 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
  # ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol, left = 0.55, bottom = 0.0, right = 1.0, top =0.33) +
+ inset_element(pcol, left = 0.56, bottom = 0.0, right = 1.0, top =0.33) +
  inset_element(pcol_rest_SA4, left = 0.73, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.66, right = 1.0, top =1.0) 
+ inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.66, right = 1.0, top =1.00) 
 
 
 
-pcol <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
+pcol <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   filter(group == "City of Yarra") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
@@ -4918,7 +4916,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   ) 
 
 
-pcol_rest_SA4 <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
+pcol_rest_SA4 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   filter(group == "Rest of Inner SA4") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
@@ -4935,7 +4933,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest of Inner",
+    title = "Rest of Inner SA4",
     x = NULL,
     y = NULL
   ) +
@@ -4947,7 +4945,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
     axis.text.x = element_blank()
   ) 
 
-pcol_rest_melbourne <- melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
+pcol_rest_melbourne <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   filter(group == "Rest of Greater Melbourne") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
@@ -4979,7 +4977,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 
 ggplot()+ 
-  geom_sf(data=melbourne_si_SA12021_24_census_week_aggregated$si_by_area %>%
+  geom_sf(data=melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   filter(group == "City of Yarra"),
           aes(fill = transit_supply), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
@@ -5003,7 +5001,7 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol, left = 0.55, bottom = 0.0, right = 1.0, top =0.33) +
+ inset_element(pcol, left = 0.56, bottom = 0.0, right = 1.0, top =0.33) +
  inset_element(pcol_rest_SA4, left = 0.73, bottom = 0.33, right = 1.0, top =0.66) +
  inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.66, right = 1.0, top =1.0) 
 
@@ -5014,7 +5012,7 @@ ggplot()+
 
 
 
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.height = 2.5, fig.cap="Change in SI score between 2021 and 2024 by SA1 and population"}
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.height = 2.5, fig.cap="Change in SI score between 2021 and 2023 by SA1 and population"}
 
 
 
@@ -5029,29 +5027,29 @@ poly <- Poly_Coord_df %>%
   st_bbox() %>% 
   st_as_sfc()
 
-si_by_area_2021_2024_wider_holding <- left_join(si_by_area_2021_2024_wider_holding, population_sa1_greater_melbourne_2021)
+si_by_area_2021_2023_wider_holding <- left_join(si_by_area_2021_2023_wider_holding, population_sa1_greater_melbourne_2021)
 
-si_by_area_2021_2024_wider_holding$ratio_binned <- si_by_area_2021_2024_wider_holding$ratio_binned %>% fct_shift(1)
+si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_shift(1)
 
-si_by_area_2021_2024_wider_holding$ratio_binned <- si_by_area_2021_2024_wider_holding$ratio_binned %>% fct_collapse("Not served in 2024" = c("Never served (black)", "Service withdrawn (magenta)")
+si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)")
 )
 
-pcol <- si_by_area_2021_2024_wider_holding %>%
+pcol <- si_by_area_2021_2023_wider_holding %>%
   filter(group == "City of Yarra") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2024_wider_holding$ratio_binned %>% levels())) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
   replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2024_wider_holding$ratio_binned %>% levels())) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
   arrange(ratio_binned) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
    geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
   scale_x_discrete(drop=FALSE) +
-  scale_y_continuous(limits = c(0,1.1)) +
+  scale_y_continuous(limits = c(0,1.0)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
+  geom_text(aes(ratio_binned, 0.8, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
    coord_flip() +
   scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5069,21 +5067,21 @@ pcol <- si_by_area_2021_2024_wider_holding %>%
     axis.text.x = element_blank())
  
 
-pcol_rest_SA4 <- si_by_area_2021_2024_wider_holding %>%
+pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
   filter(group == "Rest of Inner SA4") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2024_wider_holding$ratio_binned %>% levels())) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
   replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2024_wider_holding$ratio_binned %>% levels())) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
   arrange(ratio_binned) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
    geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1.1)) +
+  scale_y_continuous(limits = c(0,1.0)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned,  0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
+  geom_text(aes(ratio_binned,  0.8, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
    coord_flip() +
   scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5101,21 +5099,21 @@ pcol_rest_SA4 <- si_by_area_2021_2024_wider_holding %>%
     axis.text.x = element_blank())
  
 
-pcol_rest_melbourne <- si_by_area_2021_2024_wider_holding %>%
+pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
   filter(group == "Rest of Greater Melbourne") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2024_wider_holding$ratio_binned %>% levels())) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
   replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2024_wider_holding$ratio_binned %>% levels())) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
   arrange(ratio_binned) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
    geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1.1)) +
+  scale_y_continuous(limits = c(0,1.0)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned,  .9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
+  geom_text(aes(ratio_binned,  .8, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
    coord_flip() +
   scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5133,12 +5131,12 @@ pcol_rest_melbourne <- si_by_area_2021_2024_wider_holding %>%
     axis.text.x = element_blank())
  
 
-si_by_area_2021_2024_wider_holding <- left_join(
-  absmapsdata::sa12021, si_by_area_2021_2024_wider_holding
+si_by_area_2021_2023_wider_holding <- left_join(
+  absmapsdata::sa12021, si_by_area_2021_2023_wider_holding
 )
 
 ggplot()+ 
-  geom_sf(data=si_by_area_2021_2024_wider_holding %>% 
+  geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
             filter(group == "City of Yarra"),
           aes(fill = ratio_binned), colour=NA) +  
   scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
@@ -5162,51 +5160,51 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl', height = unit(0.0625, "cm")) +
 #  ggspatial::annotation_north_arrow(location = 'tl') + 
-inset_element(pcol, left = 0.50, bottom = 0.50, right = 1.0, top =1.05) +
+inset_element(pcol, left = 0.54, bottom = 0.50, right = 1.0, top =1.05) +
 inset_element(pcol_rest_SA4, left = 0.4, bottom = 0.0, right = 0.7, top =0.52) +
 inset_element(pcol_rest_melbourne, left = 0.70, bottom = 0.0, right = 1.00, top =0.52) 
 
 
 
-melbourne_2024_SA1_comparison <- si_by_area_2021_2024_wider_holding %>%
+melbourne_2023_SA1_comparison <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
-assumptions9 <- si_by_area_2021_2024_wider_holding %>%
+assumptions9 <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group)
 
-assumptions10 <- melbourne_2024_SA1_comparison$expected
+assumptions10 <- melbourne_2023_SA1_comparison$expected
 
-si_by_area_2021_2024_wider_holding$sa4_group <- 
-  if_else(si_by_area_2021_2024_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "Inner")
+si_by_area_2021_2023_wider_holding$sa4_group <- 
+  if_else(si_by_area_2021_2023_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "Inner")
 
-melbourne_2024_SA4_comparison <- si_by_area_2021_2024_wider_holding %>%
+melbourne_2023_SA4_comparison <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
-assumptions11 <- si_by_area_2021_2024_wider_holding %>%
+assumptions11 <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) 
 
-assumptions12 <- melbourne_2024_SA4_comparison$expected
+assumptions12 <- melbourne_2023_SA4_comparison$expected
 
 
 ```
 
-In 2021 most of the City of Yarra's population lived in SA1s with Very High levels of transit (Figure 1, left)^[Differences between the City of Yarra and the Rest of the Inner SA4, by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2024 (`r prmisc::print_chi2(melbourne_2024_SA1_comparison)`). Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2024:`r prmisc::print_chi2(melbourne_2024_SA4_comparison)`).]. However, as shown in Figure 2^[Differences are statistically significant (rest of the Inner SA4: `r prmisc::print_chi2(melbourne_2024_SA1_comparison)`, & rest of GCCSA: `r prmisc::print_chi2(melbourne_2024_SA4_comparison)`)], the coverage and frequency of transit service appears to have reduced by 2024 more for those in the City of Yarra.
+In 2021 most of the City of Yarra's population lived in SA1s with Very High levels of transit (Figure 1, left)^[Differences with the Rest of the Inner SA4 (covering Yarra, Port Phillip and parts of Moonee Valley, Merri-Bek, Darebin and Stonnington), by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2023 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).  Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2023:`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).]. However, as shown in Figure 2, coverage and frequency of transit appears to have increased by 2023 for more of those in the City of Yarra than in other parts of the Inner SA4 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`or the rest of Melbourne (201`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).
 
-```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="2021 needs (left) and change in SI to 2024 for those SA1s with needs above average, but below average supply (by 2021 populations, right)"}
+```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="2021 needs (left) and change in SI to 2023 for those SA1s with needs above average, but below average supply (by 2021 populations, right)"}
 
 
 
@@ -5354,9 +5352,9 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
 #  ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol, left = 0.55, bottom = 0.0, right = 1.0, top =0.33) +
- inset_element(pcol_rest_SA4, left = 0.73, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.66, right = 1.0, top =1.0) 
+ inset_element(pcol, left = 0.55, bottom = 0.00, right = 1.0, top =0.33) +
+ inset_element(pcol_rest_SA4, left = 0.72, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.72, bottom = 0.66, right = 1.0, top =1.0) 
 
 
 
@@ -5376,7 +5374,9 @@ melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_mel
   tabyl(composite_needs, group) %>% 
   untabyl()
 melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[1:6,]
-melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[2:3] %>% chisq.test()
+melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[2:3] %>% 
+  na.omit() %>% 
+  chisq.test()
 
 assumptions13 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
@@ -5394,7 +5394,9 @@ melbourne_2021_SA4_comparison_needs <- combined_needs_index_2021_sa1_greater_mel
   tabyl(composite_needs, group) %>% 
   untabyl()
 melbourne_2021_SA4_comparison_needs <- melbourne_2021_SA4_comparison_needs[1:6,]
-melbourne_2021_SA4_comparison_needs <- melbourne_2021_SA4_comparison_needs[2:3] %>% chisq.test()
+melbourne_2021_SA4_comparison_needs <- melbourne_2021_SA4_comparison_needs[2:3] %>% 
+  na.omit() %>% 
+  chisq.test()
 
 assumptions15 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
@@ -5407,120 +5409,126 @@ assumptions16 <- melbourne_2021_SA4_comparison_needs$expected
 
 ### Above average Needs, below average supply only
 
-si_by_area_2021_2024_wider_holding$ratio_binned_less <- if_else(
-  si_by_area_2021_2024_wider_holding$x2024 == 0, 
-  "No 2024 service",
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- if_else(
+  si_by_area_2021_2023_wider_holding$x2023 == 0, 
+  "Decreased more than 1% or no service",
   if_else(
-      si_by_area_2021_2024_wider_holding$ratio < 0.99, 
-      "-1% or lower", 
-      if_else(si_by_area_2021_2024_wider_holding$ratio < 1.01, 
+      si_by_area_2021_2023_wider_holding$ratio < 0.99, 
+      "Decreased more than 1% or no service", 
+      if_else(si_by_area_2021_2023_wider_holding$ratio < 1.01, 
               "Within 1%", 
-                      "+1% or more")))
+                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.05, 
+                "Increased 1 to 5%", 
+                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.10, 
+                "Increased 5 to 10%", 
+                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.15, 
+                "Increased 10 to 15%",
+                "Increased more than 15%"))))))
+                  
                                               
                       
-si_by_area_2021_2024_wider_holding$ratio_binned_less <- factor(
-  si_by_area_2021_2024_wider_holding$ratio_binned_less, 
-   levels = c("+1% or more",
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- factor(
+  si_by_area_2021_2023_wider_holding$ratio_binned_less, 
+   levels = c("Increased more than 15%", 
+              "Increased 10 to 15%",
+              "Increased 5 to 10%",
+              "Increased 1 to 5%",
               "Within 1%",
-              "-1% or lower",
-              "No 2024 service"
+              "Decreased more than 1% or no service"
               )
   )
      
 
-si_by_area_2021_2024_wider_holding <- si_by_area_2021_2024_wider_holding %>%
+si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
   left_join(combined_needs_index_2021_sa1_greater_melbourne %>% 
               st_drop_geometry() %>% 
               select(sa1_code_2021, composite_needs))
 
 
-si_by_area_2021_2024_wider_holding <- si_by_area_2021_2024_wider_holding %>% 
+si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>% 
   left_join(sa1s_in_sa4_of_interest)
-si_by_area_2021_2024_wider_holding <- si_by_area_2021_2024_wider_holding %>% 
+si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
 
 
-#si_by_area_2021_2024_wider_holding$ratio_binned_less <- 
-#  si_by_area_2021_2024_wider_holding$ratio_binned_less %>% fct_collapse("Within 10%" = c("Increased 5 to 10%", "Within 5%", "Reduced 5 to 10%"))
-
-
-melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2024_wider_holding %>% 
+melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>%
-  tabyl(ratio_binned, group) %>%
+  filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>% 
+  tabyl(ratio_binned_less, group) %>%
+  na.omit() %>% 
   chisq.test()
 
-assumptions17 <- si_by_area_2021_2024_wider_holding %>% 
+assumptions17 <- si_by_area_2021_2023_wider_holding %>% 
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>%
-  tabyl(ratio_binned, group) 
+  tabyl(ratio_binned_less, group) 
 
 assumptions18 <- melbourne_2021_SA1_comparison_very_high_needs$expected
 
 
-melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2024_wider_holding %>% 
+melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
   filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>%
-  tabyl(ratio_binned, group) %>%
-fisher.test()
-
-
-
-
-
-melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2024_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Inner SA4") %>%
-  tabyl(ratio_binned, group) %>%
-chisq.test()
-
-assumptions19 <- si_by_area_2021_2024_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
-  tabyl(ratio_binned, group)
-
-assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
-
-
-melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2024_wider_holding %>% 
-  filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
-  tabyl(ratio_binned, group) %>% 
+  tabyl(ratio_binned_less, group) %>% 
+  na.omit() %>% 
   fisher.test()
 
 
 
-pcol <- si_by_area_2021_2024_wider_holding %>%
+melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  tabyl(ratio_binned_less, group) %>%
+  na.omit() %>% 
+chisq.test()
+
+assumptions19 <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  tabyl(ratio_binned_less, group)
+
+assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
+
+
+melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
+  filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  tabyl(ratio_binned_less, group) %>% 
+  na.omit() %>% 
+  fisher.test()
+
+
+pcol <- si_by_area_2021_2023_wider_holding %>%
   filter(group == "City of Yarra") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
  na.omit() %>%
-  aggregate(population ~ ratio_binned, sum) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2024_wider_holding$ratio_binned %>% levels() %>% fct_drop())) %>%
-  arrange(ratio_binned) %>%
+  aggregate(population ~ ratio_binned_less, sum) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
+  arrange(ratio_binned_less) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
-  geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1)) +
+  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.5)) +
   scale_x_discrete(drop=FALSE) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(ratio_binned_less, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-   scale_fill_manual(values = c("#6D9DC4", "#A6CFE1","#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
+   scale_fill_manual(values = c("#A6CFE1", "#FFFBB5", "#F9D785", "#EFA15C")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5538,27 +5546,62 @@ pcol <- si_by_area_2021_2024_wider_holding %>%
 
 
 
-pcol_rest_melbourne <- si_by_area_2021_2024_wider_holding %>%
-  filter(group == "Rest of Inner SA4" | group == "Rest of Greater Melbourne") %>% 
+
+pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest of Inner SA4") %>% 
+  st_drop_geometry() %>%
+   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+ na.omit() %>%
+  aggregate(population ~ ratio_binned_less, sum) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
+  arrange(ratio_binned_less) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.5)) +
+  scale_x_discrete(drop=FALSE) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned_less, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+   coord_flip() + 
+   scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#FFFBB5", "#F9D785", "#EFA15C", "#852128")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest of Inner SA4",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_text(size = 6, hjust = 1),
+    axis.text.x = element_blank()
+  ) 
+
+
+pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest of Greater Melbourne") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   na.omit() %>%
-  aggregate(population ~ ratio_binned, sum) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2024_wider_holding$ratio_binned %>% levels() %>% fct_drop())) %>%
-  arrange(ratio_binned) %>%
+  aggregate(population ~ ratio_binned_less, sum) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
+  arrange(ratio_binned_less) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
-  geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1)) +
+  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.5)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(ratio_binned_less, 1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
+scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#FFFBB5", "#F9D785", "#EFA15C", "#852128")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest",
+    title = "Rest of GCCSA",
     x = NULL,
     y = NULL
   ) +
@@ -5573,12 +5616,12 @@ scale_fill_manual(values = c("#3A65A3", "#6D9DC4", "#A6CFE1", "#DDEFF5", "#FFFBB
 
 
 ggplot() + 
-  geom_sf(data=si_by_area_2021_2024_wider_holding %>% 
+  geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   filter(group == "City of Yarra") %>% na.omit(),
-          aes(fill = ratio_binned), colour=NA) +  
- scale_fill_manual(values = c("#3A65A3", "#A6CFE1","#DDEFF5", "#FFFBB5", "#F9D785", "#EFA15C", "#DC6446", "#BA3832", "#852128", "black")) +
+          aes(fill = ratio_binned_less), colour=NA) +  
+ scale_fill_manual(values = c("#A6CFE1", "#FFFBB5", "#F9D785", "#EFA15C")) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
         axis.text.y=element_blank(),  #remove y axis labels
@@ -5591,42 +5634,51 @@ ggplot() +
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol, left = 0.7, bottom = 0.5, right = 1.0, top =1.0) +
- inset_element(pcol_rest_melbourne, left = 0.70, bottom = 0.0, right = 1.0, top =0.5) 
+  inset_element(pcol, left = 0.70, bottom = 0.0, right = 1.0, top =0.33) +
+ inset_element(pcol_rest_SA4, left = 0.29, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.70, bottom = 0.66, right = 1.0, top =1.0) 
+
 
 ```
 
 
 
-Social needs for transport in the City of Yarra in 2021 were High or Very High for more than half the population (Figure 3, left), more than for other parts of Melbourne^[Statistically significant for City of Yarra vs rest of Inner:`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`, and vs rest of GCCSA `r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3 (right) shows how transit service levels changed between 2021 and 2024 for those who were living in SA1s with needs above, but supply below the GCCSA average^[Fisher's tests show no significant differences between the City of Yarra and the rest of the Inner SA4 (p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`) or the Rest of the GCCSA (p = `r melbourne_2021_SA4_comparison_very_high_needs$p.value %>% format(digits = 3)`).]. Those SA1s with the largest gaps in the City of Yarra in 2021 mostly have similar levels of, or more, transit in 2024. 
+Social needs for transport in the City of Yarra in 2021 were High or Very High for half the population (Figure 3, left), similar to other parts of the Inner SA4 but more than for other parts of Melbourne^[City of Yarra vs rest of Inner differences were not statistically significant,`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`, but differences with the rest of GCCSA were `r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3 (right) shows how transit service levels changed between 2021 and 2023 for those who were living in SA1s with needs above, but supply below, the GCCSA average^[Fisher's tests show significant differences between the City of Yarra and the rest of the Inner SA4 (p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`) or the Rest of the GCCSA (p = `r melbourne_2021_SA4_comparison_very_high_needs$p.value %>% format(digits = 3)`).]. Those SA1s with the largest gaps in the City of Yarra in 2021 mostly have similar levels of, or more, transit in 2023. 
 
-Overall, the City of Yarra appears well supplied with transit and, compared to other parts of Greater Melbourne, has lower gaps between social needs and transit supply^[Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents in SA1s in the City of Yarra had above average social needs for transport but below average transit supply, compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Inner SA4") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Inner SA4") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the Inner SA4 and `r label_percent(accuracy = 0.1)(si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2024_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne.]. Those with the largest needs-gaps in 2021 appear to have similar or more transit in 2024. 
+Overall, the City of Yarra appears well supplied with transit and, compared to other parts of Greater Melbourne, has lower gaps between social needs and transit supply^[Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% select(population) %>% sum())` of City of Yarra residents had above average social needs for transport but below average transit supply, compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Inner SA4") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Inner SA4") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the Inner SA4 and `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne.]. Those with the largest needs-gaps in 2021 appear to have similar or more transit in 2023. 
 
-```{r Check_assumptions, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 
 assumptions1
 assumptions2
-#1 of 10, assumption met. 
+#1 of 12 <5, assumption met.
 assumptions3
 assumptions4
-#none, assumption met.
+#all over 5, assumption met. 
 assumptions5
 assumptions6
-#1 of 6, 
+#1 of 12 <5, assumption met.
 assumptions7
 assumptions8
+#all over 5, assumption met. 
 assumptions9
 assumptions10
+#1 of 18 <5, assumption met.
 assumptions11
 assumptions12
+#1 of 22 <5, assumption met.
 assumptions13
 assumptions14
+#All over 5, assumption met.
 assumptions15
 assumptions16
+#All over 5, assumption met.
 assumptions17
 assumptions18
+#Not met
 assumptions19
 assumptions20
+#Not met
 
 ```
 

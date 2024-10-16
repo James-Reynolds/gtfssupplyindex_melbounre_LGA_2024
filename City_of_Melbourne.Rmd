@@ -70,7 +70,7 @@ lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Melbou
 In Victoria, public transport is managed by the state government, although Local Government Authorities (LGAs) may have some influence on service levels through planning processes, advocacy etc. However, not much is known about how much transit is supplied or whether social needs for transport are being met within each LGA's boundaries. This note explores social needs-gaps in the City of Melbourne, using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying]. It is part of a series examining each LGA in Greater Melbourne^[See https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024 but lookout, I misspelled "Melbourne" ]. 
 
 # Methods 
-This note maps transport supply and a composite needs indicator based on Australian Bureau of Statistics (ABS) data. The methodology is as per Reynolds, Currie and Qu (in drafting)^[Forthcoming hopefully, but using the *gtfssupplyindex* R package (see https://github.com/James-Reynolds/gtfssupplyindex) to process the Victoria GTFS feed. Note that results represent what is in the GTFS feed for August 2021 and 2023, which may not match services provided.]. The Transit Supply Indication (SI) scores are based on the frequency of service and how much of an area is within walking distance of stops/stations^[400m for tram and bus, 800m for train.], are reported for the ABS' Statistical Area 1s (SA1s), and are categorized into seven groups based on the average scores for SA1s across the Melbourne Greater Capital City Statistical Area (GCCSA).
+This note maps transport supply and a composite needs indicator based on Australian Bureau of Statistics (ABS) data. The methodology is as per Reynolds, Currie and Qu (in drafting)^[Forthcoming hopefully, but using the *gtfssupplyindex* R package (see https://github.com/James-Reynolds/gtfssupplyindex) to process the Victoria GTFS feed. Note that results represent what is in the GTFS feed for August 2021 and 2023, which may not match services provided.], and involves Transit Supply Indication (SI) scores, which are based on service frequency and how much of an area is within walking distance of stops/stations^[400m for tram and bus, 800m for train.]. Results are shown for ABS' Statistical Area 1s (SA1s), categorized into seven groups based on the average scores for SA1s across the Melbourne Greater Capital City Statistical Area (GCCSA).
 
 
 ```{r fix_ptv_data_Victoria_240613, eval = FALSE, echo = FALSE}
@@ -4933,7 +4933,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest of Inner",
+    title = "Rest of Inner SA4",
     x = NULL,
     y = NULL
   ) +
@@ -5202,7 +5202,7 @@ assumptions12 <- melbourne_2023_SA4_comparison$expected
 
 ```
 
-In 2021 most of the City of Melbourne's population lived in SA1s with Very High levels of transit (Figure 1, left)^[Differences between the City of Melbourne and the Rest of the Inner SA4, by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2023 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`). Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2023:`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).]. However, as shown in Figure 2^[Differences are statistically significant (rest of the Inner SA4: `r prmisc::print_chi2(melbourne_2023_SA1_comparison)`, & rest of GCCSA: `r prmisc::print_chi2(melbourne_2023_SA4_comparison)`)], the coverage and frequency of transit service appears to have reduced by 2023 more for those in the City of Melbourne.
+In 2021 most of the City of Melbourne's population lived in SA1s with Very High levels of transit (Figure 1, left)^[Differences with the Rest of the Inner SA4 (covering Yarra, Port Phillip and parts of Moonee Valley, Merri-Bek, Darebin and Stonnington), by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2023 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).  Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2023:`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).]. However, as shown in Figure 2^[Differences are statistically significant (rest of the Inner SA4: `r prmisc::print_chi2(melbourne_2023_SA1_comparison)`, & rest of GCCSA: `r prmisc::print_chi2(melbourne_2023_SA4_comparison)`)], the coverage and frequency of transit service appears to have reduced by 2023 more for those in the City of Melbourne.
 
 ```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="2021 needs (left) and change in SI to 2023 for those SA1s with needs above average, but below average supply (by 2021 populations, right)"}
 
@@ -5469,7 +5469,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
   st_drop_geometry() %>% 
   filter(group == "City of Melbourne" | group == "Rest of Inner SA4") %>%
   tabyl(ratio_binned_less, group) %>%
-chisq.test()
+fisher.test()
 
 
 
@@ -5502,6 +5502,16 @@ melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
   chisq.test()
 
 
+melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Melbourne" | group == "Rest of Greater Melbourne") %>%
+  tabyl(ratio_binned_less, group) %>%
+fisher.test()
+
+
+
 
 pcol <- si_by_area_2021_2023_wider_holding %>%
   filter(group == "City of Melbourne") %>% 
@@ -5518,13 +5528,49 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
   scale_y_continuous(limits = c(0,1.5)) +
   scale_x_discrete(drop=FALSE) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned_less, 1.2, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(ratio_binned_less, 1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-   scale_fill_manual(values = c("#A6CFE1","#DDEFF5", "#F9D785", "#EFA15C", "#852128")) +
+   scale_fill_manual(values = c("#A6CFE1","#DDEFF5",  "#EFA15C")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
     title = "City of Melbourne",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_text(size = 6),
+    axis.text.x = element_blank()
+  ) 
+
+
+
+
+pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest of Inner SA4") %>% 
+  st_drop_geometry() %>%
+   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+ na.omit() %>%
+  aggregate(population ~ ratio_binned_less, sum) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
+  arrange(ratio_binned_less) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.5)) +
+  scale_x_discrete(drop=FALSE) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned_less, 1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+   coord_flip() + 
+   scale_fill_manual(values = c("#DDEFF5", "#F9D785", "#EFA15C","#852128")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest of Inner SA4",
     x = NULL,
     y = NULL
   ) +
@@ -5537,9 +5583,8 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
   ) 
 
 
-
 pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest of Inner SA4" | group == "Rest of Greater Melbourne") %>% 
+  filter(group == "Rest of Greater Melbourne") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
@@ -5552,7 +5597,7 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
   geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
   scale_y_continuous(limits = c(0,1.5)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned_less, 1.2, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(ratio_binned_less, 1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
 scale_fill_manual(values = c("#A6CFE1","#DDEFF5", "#F9D785", "#EFA15C", "#852128")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5578,7 +5623,7 @@ ggplot() +
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   filter(group == "City of Melbourne") %>% na.omit(),
           aes(fill = ratio_binned_less), colour=NA) +  
- scale_fill_manual(values = c("#A6CFE1","#DDEFF5", "#F9D785", "#EFA15C", "#852128")) +
+ scale_fill_manual(values = c("#A6CFE1","#DDEFF5", "#EFA15C")) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
         axis.text.y=element_blank(),  #remove y axis labels
@@ -5591,18 +5636,20 @@ ggplot() +
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol, left = 0.7, bottom = 0.5, right = 1.0, top =1.0) +
- inset_element(pcol_rest_melbourne, left = 0.70, bottom = 0.0, right = 1.0, top =0.5) 
+  inset_element(pcol, left = 0.35, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.73, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.73, bottom = 0.0, right = 1.0, top =0.33) 
+
 
 ```
 
 
 
-Social needs for transport in the City of Melbourne in 2021 were High or Very High for more than half the population (Figure 3, left), more than for other parts of Melbourne^[Statistically significant for City of Melbourne vs rest of Inner:`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`, and vs rest of GCCSA `r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3 (right) shows how transit service levels changed between 2021 and 2023 for those who were living in SA1s with needs above, but supply below the GCCSA average^[Fisher's tests show no significant differences between the City of Melbourne and the rest of the Inner SA4 (p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`) or the Rest of the GCCSA (p = `r melbourne_2021_SA4_comparison_very_high_needs$p.value %>% format(digits = 3)`).]. Those SA1s with the largest gaps in the City of Melbourne in 2021 mostly have similar levels of, or more, transit in 2023. 
+Social needs for transport in the City of Melbourne in 2021 were High or Very High for more than half the population (Figure 3, left), more than for other parts of Melbourne^[Statistically significant for City of Melbourne vs rest of Inner:`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`, and vs rest of GCCSA `r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3 (right) shows how transit service levels changed between 2021 and 2023 for those who were living in SA1s with needs above, but supply below, the GCCSA average^[Fisher's tests show significant differences between the City of Melbourne and the rest of the Inner SA4 (p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`) or the Rest of the GCCSA (p = `r melbourne_2021_SA4_comparison_very_high_needs$p.value %>% format(digits = 3)`).]. Those SA1s with the largest gaps in the City of Melbourne in 2021 mostly have similar levels of, or more, transit in 2023. 
 
 Overall, the City of Melbourne appears well supplied with transit and, compared to other parts of Greater Melbourne, has lower gaps between social needs and transit supply^[Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Melbourne") %>% st_drop_geometry() %>% select(population) %>% sum())` of City of Melbourne residents had above average social needs for transport but below average transit supply, compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Inner SA4") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Inner SA4") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the Inner SA4 and `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne.]. Those with the largest needs-gaps in 2021 appear to have similar or more transit in 2023. 
 
-```{r Check_assumptions, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 
 assumptions1
 assumptions2
@@ -5630,9 +5677,10 @@ assumptions16
 # all > 5, assumptions met.
 assumptions17
 assumptions18
+#No way to meet assumptions with such a small sample
 assumptions19
 assumptions20
-
+#No way to meet assumptions with such a small sample
 ```
 
 
