@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.2)  16 OCT 2024 14:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.2)  17 OCT 2024 12:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -775,18 +775,18 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Bayside_files/figure-latex/SI_map-1.pdf, id=14, 159.59625pt x 157.58875pt>
+<City_of_Bayside_files/figure-latex/SI_map-1.pdf, id=14, 195.73125pt x 157.58875pt>
 File: City_of_Bayside_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/SI_map-1.pdf>
 Package pdftex.def Info: City_of_Bayside_files/figure-latex/SI_map-1.pdf  used on input line 128.
-(pdftex.def)             Requested size: 240.00256pt x 236.98367pt.
-<City_of_Bayside_files/figure-latex/SI_map-2.pdf, id=15, 159.59625pt x 157.58875pt>
+(pdftex.def)             Requested size: 240.01328pt x 193.24146pt.
+<City_of_Bayside_files/figure-latex/SI_map-2.pdf, id=15, 195.73125pt x 157.58875pt>
 File: City_of_Bayside_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/SI_map-2.pdf>
 Package pdftex.def Info: City_of_Bayside_files/figure-latex/SI_map-2.pdf  used on input line 128.
-(pdftex.def)             Requested size: 240.00256pt x 236.98367pt.
+(pdftex.def)             Requested size: 240.01328pt x 193.24146pt.
 
-Overfull \hbox (2.91513pt too wide) in paragraph at lines 128--129
+Overfull \hbox (2.93655pt too wide) in paragraph at lines 128--129
 [][] []
  []
 
@@ -795,31 +795,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--129
 
  []
 
-<City_of_Bayside_files/figure-latex/SI_change_map-1.pdf, id=16, 215.80624pt x 159.59625pt>
+<City_of_Bayside_files/figure-latex/SI_change_map-1.pdf, id=16, 265.99374pt x 119.44624pt>
 File: City_of_Bayside_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/SI_change_map-1.pdf>
 Package pdftex.def Info: City_of_Bayside_files/figure-latex/SI_change_map-1.pdf  used on input line 132.
-(pdftex.def)             Requested size: 480.05376pt x 355.01648pt.
+(pdftex.def)             Requested size: 480.04251pt x 215.56622pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
 
-LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf, id=17, 158.5925pt x 157.58875pt>
+[1
+
+{/Users/jreynold/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/jreynold/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./City_of_Bayside_files/figure-latex/SI_map-1.pdf> <./City_of_Bayside_files/figure-latex/SI_map-2.pdf>]
+
+LaTeX Warning: Marginpar on page 2 moved.
+
+<City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf, id=46, 195.73125pt x 157.58875pt>
 File: City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf>
 Package pdftex.def Info: City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf  used on input line 150.
-(pdftex.def)             Requested size: 240.02008pt x 238.50098pt.
-<City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf, id=18, 200.75pt x 157.58875pt>
+(pdftex.def)             Requested size: 240.01328pt x 193.24146pt.
+<City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf, id=47, 195.73125pt x 157.58875pt>
 File: City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf>
 Package pdftex.def Info: City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf  used on input line 150.
-(pdftex.def)             Requested size: 240.01657pt x 188.41301pt.
+(pdftex.def)             Requested size: 240.01328pt x 193.24146pt.
 
-Overfull \hbox (2.94666pt too wide) in paragraph at lines 150--151
+Overfull \hbox (2.93655pt too wide) in paragraph at lines 150--151
 [][] []
  []
 
@@ -829,603 +834,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 150--151
  []
 
 
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-
-[1
-
-{/Users/jreynold/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/jreynold/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 208--208
-[]\T1/cmtt/m/n/10 ##  transit_supply City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 208--208
-[]\T1/cmtt/m/n/10 ##     Zero Supply               0                       484[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 208--208
-[]\T1/cmtt/m/n/10 ##        Very Low              15                      2629[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 208--208
-[]\T1/cmtt/m/n/10 ##             Low              45                      2544[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 208--208
-[]\T1/cmtt/m/n/10 ##   Below average             106                      2358[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 208--208
-[]\T1/cmtt/m/n/10 ##   Above average              55                       765[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 208--208
-[]\T1/cmtt/m/n/10 ##            High              26                       813[] 
- []
-
-
 
 
 Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 208.
+This message occurred on input line 169.
 
-[2 <./City_of_Bayside_files/figure-latex/SI_map-1.pdf> <./City_of_Bayside_files/figure-latex/SI_map-2.pdf>]
+[2 <./City_of_Bayside_files/figure-latex/SI_change_map-1.pdf> <./City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf> <./City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf>]
 
+LaTeX Warning: Marginpar on page 3 moved.
 
-Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 208.
 
-[3 <./City_of_Bayside_files/figure-latex/SI_change_map-1.pdf>]
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 208--208
-[]\T1/cmtt/m/n/10 ##       Very High               3                       918[] 
- []
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 219--219
-[]\T1/cmtt/m/n/10 ##  transit_supply City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 219--219
-[]\T1/cmtt/m/n/10 ##     Zero Supply        11.24431                  472.7557[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 219--219
-[]\T1/cmtt/m/n/10 ##        Very Low        61.42552                 2582.5745[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 219--219
-[]\T1/cmtt/m/n/10 ##             Low        60.14776                 2528.8522[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 219--219
-[]\T1/cmtt/m/n/10 ##   Below average        57.24375                 2406.7562[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 219--219
-[]\T1/cmtt/m/n/10 ##   Above average        19.05027                  800.9497[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 219--219
-[]\T1/cmtt/m/n/10 ##            High        19.49168                  819.5083[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 219--219
-[]\T1/cmtt/m/n/10 ##       Very High        21.39671                  899.6033[] 
- []
-
-
-
-
-Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 241.
-
-[4 <./City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf> <./City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf>]
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 252--252
-[]\T1/cmtt/m/n/10 ##  transit_supply City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 252--252
-[]\T1/cmtt/m/n/10 ##     Zero Supply               0                       471[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 252--252
-[]\T1/cmtt/m/n/10 ##        Very Low              16                      2617[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 252--252
-[]\T1/cmtt/m/n/10 ##             Low              45                      2530[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 252--252
-[]\T1/cmtt/m/n/10 ##   Below average             101                      2358[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 252--252
-[]\T1/cmtt/m/n/10 ##   Above average              58                       776[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 252--252
-[]\T1/cmtt/m/n/10 ##            High              27                       830[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 252--252
-[]\T1/cmtt/m/n/10 ##       Very High               3                       929[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 263--263
-[]\T1/cmtt/m/n/10 ##  transit_supply City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 263--263
-[]\T1/cmtt/m/n/10 ##     Zero Supply        10.94229                  460.0577[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 263--263
-[]\T1/cmtt/m/n/10 ##        Very Low        61.16997                 2571.8300[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 263--263
-[]\T1/cmtt/m/n/10 ##             Low        59.82251                 2515.1775[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 263--263
-[]\T1/cmtt/m/n/10 ##   Below average        57.12759                 2401.8724[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 263--263
-[]\T1/cmtt/m/n/10 ##   Above average        19.37552                  814.6245[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 263--263
-[]\T1/cmtt/m/n/10 ##            High        19.90986                  837.0901[] 
- []
-
-
-Overfull \hbox (2.9231pt too wide) in paragraph at lines 263--263
-[]\T1/cmtt/m/n/10 ##       Very High        21.65226                  910.3477[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##           ratio_binned City of Bayside Rest of Inner South SA4[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##  Increased 10% or more               0                      24[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%              15                      74[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%              22                      60[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%              22                     113[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##              Within 1%             166                     306[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%              12                      52[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%              13                      38[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##    Reduced 10% or more               0                      54[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 276--276
-[]\T1/cmtt/m/n/10 ##     Not served in 2023               0                       5[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##           ratio_binned City of Bayside Rest of Inner South SA4[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##  Increased 10% or more        6.147541               17.852459[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%       22.797131               66.202869[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%       21.004098               60.995902[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%       34.579918              100.420082[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##              Within 1%      120.901639              351.098361[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%       16.393443               47.606557[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%       13.063525               37.936475[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##    Reduced 10% or more       13.831967               40.168033[] 
- []
-
-
-Overfull \hbox (29.16669pt too wide) in paragraph at lines 289--289
-[]\T1/cmtt/m/n/10 ##     Not served in 2023        1.280738                3.719262[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##           ratio_binned City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##            New service               0                        59[] 
- []
-
-
-
-
-Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 303.
-
-[5]
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##  Increased 10% or more               0                       864[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%              15                       449[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%              22                       559[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%              22                      1524[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##              Within 1%             166                      4820[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%              12                       610[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%              13                       759[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##    Reduced 10% or more               0                       396[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 303--303
-[]\T1/cmtt/m/n/10 ##     Not served in 2023               0                       471[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##           ratio_binned City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##            New service        1.370690                  57.62931[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##  Increased 10% or more       20.072484                 843.92752[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%       10.779667                 453.22033[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%       13.497816                 567.50218[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%       35.916736                1510.08326[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##              Within 1%      115.834960                4870.16504[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%       14.450330                 607.54967[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%       17.935136                 754.06486[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##    Reduced 10% or more        9.199888                 386.80011[] 
- []
-
-
-Overfull \hbox (39.66412pt too wide) in paragraph at lines 317--317
-[]\T1/cmtt/m/n/10 ##     Not served in 2023       10.942292                 460.05771[] 
- []
-
-
-Overfull \hbox (8.17181pt too wide) in paragraph at lines 349--349
-[]\T1/cmtt/m/n/10 ##  composite_needs City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (8.17181pt too wide) in paragraph at lines 349--349
-[]\T1/cmtt/m/n/10 ##         Very Low              18                      1929[] 
- []
-
-
-Overfull \hbox (8.17181pt too wide) in paragraph at lines 349--349
-[]\T1/cmtt/m/n/10 ##              Low              34                      1872[] 
- []
-
-
-Overfull \hbox (8.17181pt too wide) in paragraph at lines 349--349
-[]\T1/cmtt/m/n/10 ##    Below average              41                      1854[] 
- []
-
-
-Overfull \hbox (8.17181pt too wide) in paragraph at lines 349--349
-[]\T1/cmtt/m/n/10 ##    Above average              55                      1508[] 
- []
-
-
-Overfull \hbox (8.17181pt too wide) in paragraph at lines 349--349
-[]\T1/cmtt/m/n/10 ##             High              47                      1512[] 
- []
-
-
-
-
-Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 349.
-
-[6]
-Overfull \hbox (8.17181pt too wide) in paragraph at lines 349--349
-[]\T1/cmtt/m/n/10 ##        Very High              54                      1500[] 
- []
-
-
-Overfull \hbox (8.17181pt too wide) in paragraph at lines 349--349
-[]\T1/cmtt/m/n/10 ##               NA               1                       336[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 369--369
-[]\T1/cmtt/m/n/10 ##                     ratio_binned_less City of Bayside Rest of Inner South SA4[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 369--369
-[]\T1/cmtt/m/n/10 ##               Increased more than 15%               0                       6[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 369--369
-[]\T1/cmtt/m/n/10 ##                   Increased 10 to 15%               0                       2[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 369--369
-[]\T1/cmtt/m/n/10 ##                    Increased 5 to 10%               3                      16[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 369--369
-[]\T1/cmtt/m/n/10 ##                     Increased 1 to 5%              18                      45[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 369--369
-[]\T1/cmtt/m/n/10 ##                             Within 1%              86                      85[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 369--369
-[]\T1/cmtt/m/n/10 ##  Decreased more than 1% or no service               5                      36[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 379--379
-[]\T1/cmtt/m/n/10 ##                     ratio_binned_less City of Bayside Rest of Inner South SA4[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 379--379
-[]\T1/cmtt/m/n/10 ##               Increased more than 15%       2.2251656                3.774834[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 379--379
-[]\T1/cmtt/m/n/10 ##                   Increased 10 to 15%       0.7417219                1.258278[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 379--379
-[]\T1/cmtt/m/n/10 ##                    Increased 5 to 10%       7.0463576               11.953642[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 379--379
-[]\T1/cmtt/m/n/10 ##                     Increased 1 to 5%      23.3642384               39.635762[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 379--379
-[]\T1/cmtt/m/n/10 ##                             Within 1%      63.4172185              107.582781[] 
- []
-
-
-Overfull \hbox (107.89746pt too wide) in paragraph at lines 379--379
-[]\T1/cmtt/m/n/10 ##  Decreased more than 1% or no service      15.2052980               25.794702[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 389--389
-[]\T1/cmtt/m/n/10 ##                     ratio_binned_less City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 389--389
-[]\T1/cmtt/m/n/10 ##               Increased more than 15%               0                       313[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 389--389
-[]\T1/cmtt/m/n/10 ##                   Increased 10 to 15%               0                        72[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 389--389
-[]\T1/cmtt/m/n/10 ##                    Increased 5 to 10%               3                       150[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 389--389
-[]\T1/cmtt/m/n/10 ##                     Increased 1 to 5%              18                       624[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 389--389
-[]\T1/cmtt/m/n/10 ##                             Within 1%              86                      1472[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 389--389
-[]\T1/cmtt/m/n/10 ##  Decreased more than 1% or no service               5                       673[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 399--399
-[]\T1/cmtt/m/n/10 ##                     ratio_binned_less City of Bayside Rest of Greater Melbourne[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 399--399
-[]\T1/cmtt/m/n/10 ##               Increased more than 15%       10.262295                 302.73770[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 399--399
-[]\T1/cmtt/m/n/10 ##                   Increased 10 to 15%        2.360656                  69.63934[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 399--399
-[]\T1/cmtt/m/n/10 ##                    Increased 5 to 10%        5.016393                 147.98361[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 399--399
-[]\T1/cmtt/m/n/10 ##                     Increased 1 to 5%       21.049180                 620.95082[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 399--399
-[]\T1/cmtt/m/n/10 ##                             Within 1%       51.081967                1506.91803[] 
- []
-
-
-Overfull \hbox (118.3949pt too wide) in paragraph at lines 399--399
-[]\T1/cmtt/m/n/10 ##  Decreased more than 1% or no service       22.229508                 655.77049[] 
- []
+LaTeX Warning: Marginpar on page 3 moved.
 
 
 Package bibentry Warning: You have used \nobibliography* 
@@ -1436,9 +858,9 @@ Package bibentry Warning: You have used \nobibliography*
 
 
 Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 403.
+This message occurred on input line 182.
 
-[7] (./City_of_Bayside.aux)
+[3] (./City_of_Bayside.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
@@ -1447,18 +869,18 @@ Package rerunfilecheck Info: File `City_of_Bayside.out' has not changed.
 (rerunfilecheck)             Checksum: 96BB2600FE1A7DF4FB4BE76697DDA6A1;158.
  ) 
 Here is how much of TeX's memory you used:
- 15394 strings out of 475539
- 244523 string characters out of 5776493
- 688754 words of memory out of 5000000
- 37678 multiletter control sequences out of 15000+600000
- 600462 words of font info for 112 fonts, out of 8000000 for 9000
+ 15386 strings out of 475539
+ 244417 string characters out of 5776493
+ 672754 words of memory out of 5000000
+ 37675 multiletter control sequences out of 15000+600000
+ 600149 words of font info for 111 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 96i,11n,97p,611b,603s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on City_of_Bayside.pdf (7 pages, 389128 bytes).
+ 96i,11n,97p,611b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on City_of_Bayside.pdf (3 pages, 368262 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
- 13 named destinations out of 1000 (max. 500000)
+ 154 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
+ 9 named destinations out of 1000 (max. 500000)
  42 words of extra memory for PDF output out of 10000 (max. 10000000)
 
