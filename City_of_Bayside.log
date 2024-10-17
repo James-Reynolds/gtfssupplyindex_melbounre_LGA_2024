@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.2)  17 OCT 2024 12:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.2)  17 OCT 2024 16:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -779,14 +779,14 @@ LaTeX Warning: Marginpar on page 1 moved.
 File: City_of_Bayside_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/SI_map-1.pdf>
 Package pdftex.def Info: City_of_Bayside_files/figure-latex/SI_map-1.pdf  used on input line 128.
-(pdftex.def)             Requested size: 240.01328pt x 193.24146pt.
+(pdftex.def)             Requested size: 156.00877pt x 125.60706pt.
 <City_of_Bayside_files/figure-latex/SI_map-2.pdf, id=15, 195.73125pt x 157.58875pt>
 File: City_of_Bayside_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/SI_map-2.pdf>
 Package pdftex.def Info: City_of_Bayside_files/figure-latex/SI_map-2.pdf  used on input line 128.
-(pdftex.def)             Requested size: 240.01328pt x 193.24146pt.
+(pdftex.def)             Requested size: 156.00877pt x 125.60706pt.
 
-Overfull \hbox (2.93655pt too wide) in paragraph at lines 128--129
+Overfull \hbox (2.92755pt too wide) in paragraph at lines 128--129
 [][] []
  []
 
@@ -795,13 +795,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 128--129
 
  []
 
+
+LaTeX Warning: Marginpar on page 1 moved.
+
 <City_of_Bayside_files/figure-latex/SI_change_map-1.pdf, id=16, 265.99374pt x 119.44624pt>
 File: City_of_Bayside_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: City_of_Bayside_files/figure-latex/SI_change_map-1.pdf  used on input line 132.
-(pdftex.def)             Requested size: 480.04251pt x 215.56622pt.
+Package pdftex.def Info: City_of_Bayside_files/figure-latex/SI_change_map-1.pdf  used on input line 142.
+(pdftex.def)             Requested size: 312.02722pt x 140.11786pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
 
  []
 
@@ -813,41 +816,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf, id=46, 195.73125pt x 157.58875pt>
+
+LaTeX Warning: Marginpar on page 2 moved.
+
+<City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf, id=49, 195.73125pt x 157.58875pt>
 File: City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf>
-Package pdftex.def Info: City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf  used on input line 150.
-(pdftex.def)             Requested size: 240.01328pt x 193.24146pt.
-<City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf, id=47, 195.73125pt x 157.58875pt>
+Package pdftex.def Info: City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf  used on input line 152.
+(pdftex.def)             Requested size: 156.00877pt x 125.60706pt.
+<City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf, id=50, 195.73125pt x 157.58875pt>
 File: City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf Graphic file (type pdf)
 <use City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf>
-Package pdftex.def Info: City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf  used on input line 150.
-(pdftex.def)             Requested size: 240.01328pt x 193.24146pt.
+Package pdftex.def Info: City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf  used on input line 152.
+(pdftex.def)             Requested size: 156.00877pt x 125.60706pt.
 
-Overfull \hbox (2.93655pt too wide) in paragraph at lines 150--151
+Overfull \hbox (2.92755pt too wide) in paragraph at lines 152--153
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
 
  []
 
 
+LaTeX Warning: Marginpar on page 2 moved.
 
 
-Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 169.
-
-[2 <./City_of_Bayside_files/figure-latex/SI_change_map-1.pdf> <./City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf> <./City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf>]
-
-LaTeX Warning: Marginpar on page 3 moved.
+LaTeX Warning: Marginpar on page 2 moved.
 
 
-LaTeX Warning: Marginpar on page 3 moved.
+LaTeX Warning: Marginpar on page 2 moved.
 
 
-LaTeX Warning: Marginpar on page 3 moved.
+LaTeX Warning: Marginpar on page 2 moved.
 
 
 Package bibentry Warning: You have used \nobibliography* 
@@ -858,9 +860,9 @@ Package bibentry Warning: You have used \nobibliography*
 
 
 Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 182.
+This message occurred on input line 185.
 
-[3] (./City_of_Bayside.aux)
+[2 <./City_of_Bayside_files/figure-latex/SI_change_map-1.pdf> <./City_of_Bayside_files/figure-latex/Needs_and_change_map-1.pdf> <./City_of_Bayside_files/figure-latex/Needs_and_change_map-2.pdf>] (./City_of_Bayside.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
@@ -869,18 +871,18 @@ Package rerunfilecheck Info: File `City_of_Bayside.out' has not changed.
 (rerunfilecheck)             Checksum: 96BB2600FE1A7DF4FB4BE76697DDA6A1;158.
  ) 
 Here is how much of TeX's memory you used:
- 15386 strings out of 475539
- 244417 string characters out of 5776493
- 672754 words of memory out of 5000000
+ 15379 strings out of 475539
+ 244374 string characters out of 5776493
+ 676754 words of memory out of 5000000
  37675 multiletter control sequences out of 15000+600000
- 600149 words of font info for 111 fonts, out of 8000000 for 9000
+ 597648 words of font info for 105 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  96i,11n,97p,611b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on City_of_Bayside.pdf (3 pages, 368262 bytes).
+Output written on City_of_Bayside.pdf (2 pages, 367586 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 500000)
+ 150 PDF objects out of 1000 (max. 8388607)
+ 83 compressed objects within 1 object stream
+ 8 named destinations out of 1000 (max. 500000)
  42 words of extra memory for PDF output out of 10000 (max. 10000000)
 

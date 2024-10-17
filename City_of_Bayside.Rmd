@@ -4738,7 +4738,7 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 # Results
 
 
-```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
+```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
 
 
 #Set boundings box
@@ -5010,9 +5010,9 @@ ggplot()+
 
 ```
 
+In 2021 most of the City of Bayside's population lived in SA1s with transit service levels lower than the average for Greater Melbourne (Figure 1, left)^[Differences with the Rest of the Inner South SA4 (covering Glen Eira and parts of Stonnington, Kingston and Monash), by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2023 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).  Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2023:`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).]. 
 
-
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.height = 2.5, fig.cap="Change in SI score between 2021 and 2023 by SA1 and population"}
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, fig.height = 2.5, fig.cap="Change in SI score between 2021 and 2023 by SA1 and population"}
 
 
 
@@ -5054,7 +5054,7 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
   scale_x_discrete(drop=FALSE) +
   scale_y_continuous(limits = c(0,1.0)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned, 0.8, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
+  geom_text(aes(ratio_binned, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
    coord_flip() +
  scale_fill_manual(values = c("New service" = "#3A65A3", "Increased 10% or more" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE)) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5086,7 +5086,7 @@ pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
    geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
   scale_y_continuous(limits = c(0,1.0)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned,  0.8, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
+  geom_text(aes(ratio_binned,  0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
    coord_flip() +
    scale_fill_manual(values = c("New service" = "#3A65A3", "Increased 10% or more" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE)) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5118,7 +5118,7 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
    geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
   scale_y_continuous(limits = c(0,1.0)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned,  .8, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
+  geom_text(aes(ratio_binned,  .9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
    coord_flip() +
  scale_fill_manual(values = c("New service" = "#3A65A3", "Increased 10% or more" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE)) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5209,11 +5209,11 @@ assumptions12 <- melbourne_2023_SA4_comparison$expected
 
 ```
 
-In 2021 most of the City of Bayside's population lived in SA1s with transit service levels that were below average (Figure 1, left)^[Differences with the Rest of the Inner South SA4 (covering Glen Eira and parts of Stonnington, Kingston and Monash), by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2023 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).  Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2023:`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).]. However, as shown in Figure 2, coverage and frequency of transit appears to have increased by 2023 for more of those in the City of Bayside than in other parts of the Inner South SA4 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)` or the rest of Melbourne (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).
+However, as shown in Figure 2, coverage and frequency of transit appears to have increased by 2023 for more of those in the City of Bayside than in other parts of the Inner South SA4^[`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`] or the rest of Melbourne ^[`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`].
 
 
 
-```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="2021 needs (left) and change in SI to 2023 for those SA1s with needs above average, but below average supply (by 2021 populations, right)"}
+```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="2021 needs (left) and change in SI to 2023 for those SA1s with needs above average, but below average supply (by 2021 populations, right)"}
 
 
 
@@ -5618,18 +5618,18 @@ ggplot() +
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-  inset_element(pcol, left = 0.05, bottom = 0.66, right = 1.0, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.5, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.5, bottom = 0.0, right = 1.0, top =0.33) 
+  inset_element(pcol, left = 0.25, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.6, bottom = 0.0, right = 1.0, top =0.33) 
 
 
 ```
 
 
 
-Social needs for transport in the City of Bayside in 2021 were High or Very High for more than half the population (Figure 3, left), which is more than for other parts of the Inner South SA$ or the rest of Melbourne^[Differences were statistically significant for the Inner South SA4 `r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)` and the rest of GCCSA were `r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3 (right) shows how transit service levels changed between 2021 and 2023 for those who were living in SA1s with needs above, but supply below, the GCCSA average^[There are significant differences between the City of Bayside and the rest of the Inner South SA4 (p = `r prmisc::print_chi2(melbourne_2021_SA1_comparison_very_high_needs)`) and the Rest of the GCCSA (p = `r prmisc::print_chi2(melbourne_2021_SA4_comparison_very_high_needs)`).]. Those SA1s with the largest gaps in the City of Bayside in 2021 mostly have similar levels of, or more, transit in 2023, with a lower proportion having had service reductions than elsewhere in the Inner South SA4 or the rest of Melbourne.. 
+Social needs for transport in the City of Bayside in 2021 were High or Very High for 51% of the population (Figure 3, left), being a greater share than in other parts of the Inner South SA4 (44%) or the rest of Melbourne (41%)^[Differences were statistically significant for the Inner South SA4 `r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)` and the rest of GCCSA were `r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3 (right) shows how transit service levels changed between 2021 and 2023 for those who were living in SA1s with needs above, but supply below, the Greater Melbourne average^[There are significant differences between the City of Bayside and the rest of the Inner South SA4 (p = `r prmisc::print_chi2(melbourne_2021_SA1_comparison_very_high_needs)`) and the Rest of the GCCSA (p = `r prmisc::print_chi2(melbourne_2021_SA4_comparison_very_high_needs)`).]. Those SA1s with the largest gaps in the City of Bayside in 2021 mostly had similar levels of, or more, transit in 2023, with a lower proportion (4%) having had service reductions than elsewhere in the Inner South SA4 (19%) or the rest of Melbourne (16%). 
 
-Overall, a greater share of residents have transit supply that is below average in the City of Bayside than in the rest of the Inner South SA4, but less than for other parts of Greater Melbourne. `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Bayside") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Bayside") %>% st_drop_geometry() %>% select(population) %>% sum())` of City of Bayside residents had above average social needs for transport but below average transit supply, compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Inner South SA4") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Inner South SA4") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the Inner South SA4 and `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne. However, a greater proportion of those with the largest needs-gaps in 2021 in the City of Bayside had similar or more transit in 2023 than for the rest of the Inner South SA4 and Melbourne.. 
+Overall, residents of the City of Bayside appear to be more likely to have needs above average, but supply below average, than those in the rest of the Inner South SA4 or other parts of Greater Melbourne^[`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Bayside") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Bayside") %>% st_drop_geometry() %>% select(population) %>% sum())` of City of Bayside residents had above average social needs for transport but below average transit supply, compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Inner South SA4") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Inner South SA4") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the Inner South SA4 and `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne.]. However, transit supply appears to have been less likely to fall between 2021 and 2023 for those with needs above average but supply below the average in the City of Bayside than elsewhere in Melbourne. 
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 1
