@@ -59,6 +59,7 @@ library(png)
 library(absmapsdata)
 library(tidytransit)
 library(patchwork)
+library(ggpattern)
 
 lga_of_interest_2016 <- absmapsdata::lga2016 %>% filter(lga_name_2016 == "Monash (C)")
 
@@ -67,10 +68,47 @@ lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Monash
 
 ```
 
-This note explores gaps between social needs for transport and the amount of transit  using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying]. In Victoria, public transport is managed by the state government, although Local Government Authorities (LGAs) may have some influence on service levels through planning processes, advocacy etc. However, not much is known about how much transit is supplied or whether social needs for transport are met within each LGA. This note examines the City of Monash in 2021 and 2023, and is part of a series examining each LGA in Greater Melbourne^[See https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024 but lookout, I misspelled "Melbourne" ]. 
+This note explores social needs for transport
+and the amount of transit provided
+in the City of Monash,
+using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
+In Victoria,
+public transport is managed
+by the state government,
+although Local Government Authorities (LGAs)
+may have influence
+through planning processes,
+advocacy
+etc.
+However, it is unclear
+how much transit is supplied
+or how well social needs
+are met each LGA.
+This note examines
+the City of Monash
+in 2021 and 2023,
+and is part of a series
+examining LGAs in Greater Melbourne^[See
+https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024
+but lookout, I misspelled "Melbourne" ]. 
 
 
-\newthought{Methods:} A Transit Supply Index (SI) and a composite social needs indicator were calculated for the Australian Bureau of Statistics (ABS) Statistical Area 1 (SA1s), as per Reynolds, Currie and Qu (in drafting)[@Reynolds0000gtfsmainpaper], using the *gtfssupplyindex* R package^[See https://github.com/James-Reynolds/gtfssupplyindex] to process the Victorian GTFS feed^[Note that results represent what is in the GTFS feed for August 2021 and 2023, which may not match services provided.]. SI scores depend on service frequency and how much of a SA1 is within walking distance of stops and stations^[400m for tram and bus, 800m for train.]. Results are categorized into seven groups based on the average scores for SA1s across the Melbourne Greater Capital City Statistical Area (GCCSA).
+\newthought{Methods:}
+Scores for transit supply
+and transport needs
+were calculated
+based on Australian Bureau of Statistics (ABS) data
+using the *gtfssupplyindex* R package^[See
+https://github.com/James-Reynolds/gtfssupplyindex]
+to process the Victorian GTFS feed^[Note
+that results are based on the GTFS feeds
+for August 2021 and 2023,
+so may not match services run.]
+as per Reynolds, Currie and Qu (in drafting)[@Reynolds0000gtfsmainpaper].
+Results are shown for the ABS' Statistical Area 1s (SA1s),
+categorized into groups
+based on averages
+across the Melbourne Greater Capital City Statistical Area (GCCSA).
 
 
 ```{r fix_ptv_data_Victoria_240613, eval = FALSE, echo = FALSE}
@@ -4640,7 +4678,7 @@ sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
   left_join(sa1s_in_lga_of_interest %>% 
               st_drop_geometry())
 sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
-  replace_na(list(group = "Rest Inner S, SE SA4s"))
+  replace_na(list(group = "Rest Inner S and SE"))
 
 melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>% 
   left_join(sa1s_in_sa4_of_interest, 
@@ -4650,14 +4688,14 @@ melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2021_SA1_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions1 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4687,14 +4725,14 @@ melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2023_SA1_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions5 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) 
 
@@ -4735,496 +4773,30 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 ```
 
-\newthought{Results:} In 2021 almost three-quarters (73%) of Monash residents lived in SA1s with service levels below average (Figure 1, left).
+\newthought{Results:} Social needs for transport
+in Monash in 2021
+and comparison
+with the Rest of the Inner South
+and South East SA4s^[LGAs:
+Glen Eira,
+Bayside,
+Dandenong,
+Monash,
+Kingston,
+Casey,
+(almost all of) Cardinia,
+part of Stonnington.]
+and the rest of Greater Melbourne
+by population are shown in Figure 1.
 
 
-```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
-
+```{r Needs_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 1, out.width = "100%", fig.cap="Needs in 2021 by population"}
 
 #Set boundings box
 bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.35*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
-
-Poly_Coord_df = data.frame(lon, lat)
-
-poly <- Poly_Coord_df %>% 
-  st_as_sf(coords = c("lon", "lat"), 
-           crs = 4326) %>% 
-  st_bbox() %>% 
-  st_as_sfc()
-
-pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Monash") %>% 
-  st_drop_geometry() %>%
-  aggregate(population ~ transit_supply, sum) %>%
-  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  arrange(transit_supply) %>%
-  mutate(perc=population/sum(population)) %>% 
-  na.omit() %>%
-  ggplot() + 
-  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "City of Monash",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_text(size = 6, hjust = 1),
-    axis.text.x = element_blank()
-  ) 
-
-
-pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest Inner S, SE SA4s") %>% 
-  st_drop_geometry() %>%
-  aggregate(population ~ transit_supply, sum) %>%
-  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  arrange(transit_supply) %>%
-  mutate(perc=population/sum(population)) %>% 
-  na.omit() %>%
-  ggplot() + 
-  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "Rest Inner S, SE SA4s",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank()
-  ) 
-
-
-
-
-pcol_rest_melbourne <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest of Greater Melbourne") %>% 
-  st_drop_geometry() %>%
-  st_drop_geometry() %>%
-  aggregate(population ~ transit_supply, sum) %>%
-  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  arrange(transit_supply) %>%
-  mutate(perc=population/sum(population)) %>% 
-  na.omit() %>%
-  ggplot() + 
-  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "Rest of GCCSA",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank()
-  ) 
-
-
-
-ggplot()+ 
-  geom_sf(data=melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Monash") %>% na.omit(),
-          aes(fill = transit_supply), colour=NA) +
-  theme(axis.text.x=element_blank(), #remove x axis labels
-        axis.ticks.x=element_blank(), #remove x axis ticks
-        axis.text.y=element_blank(),  #remove y axis labels
-        axis.ticks.y=element_blank(), #remove y axis ticks
-        legend.position="none",
-#        legend.text = element_text(size = 4), 
-#        legend.title = element_text(size = 5), 
-#        legend.key.size = unit(0.08, 'cm')
-        ) + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
-#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
-#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
-#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
-  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
-    coord_sf(xlim = c(lon[1],lon[2]), 
-           ylim = c(lat[1], lat[2])) +
- # ggspatial::annotation_scale(location = 'bl') +
-  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.50, bottom = 0.66, right = 1.0, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.0, right = 1.0, top = 0.33) 
-
-
-
-
-pcol <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Monash") %>% 
-  st_drop_geometry() %>%
-  tabyl(transit_supply) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  untabyl() %>% 
-  as_tibble () %>% 
-  ggplot() + 
-  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "City of Monash",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_text(size = 6, hjust = 1),
-    axis.text.x = element_blank()
-  ) 
-
-
-pcol_rest_SA4 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest Inner S, SE SA4s") %>% 
-  st_drop_geometry() %>%
-  tabyl(transit_supply) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  untabyl() %>% 
-  as_tibble () %>% 
-  na.omit() %>%
-  ggplot() + 
-  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "Rest Inner S, SE SA4s",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank()
-  ) 
-
-pcol_rest_melbourne <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest of Greater Melbourne") %>% 
-  st_drop_geometry() %>%
-  tabyl(transit_supply) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  untabyl() %>% 
-  as_tibble () %>% 
-  na.omit() %>%
-  ggplot() + 
-  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "Rest of GCCSA",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank()
-  ) 
-
-
-
-ggplot()+ 
-  geom_sf(data=melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Monash") %>% na.omit(),
-          aes(fill = transit_supply), colour=NA) +
-  theme(axis.text.x=element_blank(), #remove x axis labels
-        axis.ticks.x=element_blank(), #remove x axis ticks
-        axis.text.y=element_blank(),  #remove y axis labels
-        axis.ticks.y=element_blank(), #remove y axis ticks
-        legend.position="none",
-#        legend.text = element_text(size = 4), 
-#        legend.title = element_text(size = 5), 
-#        legend.key.size = unit(0.08, 'cm')
-        ) + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
-#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
-#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
-#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
-  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
-    coord_sf(xlim = c(lon[1],lon[2]), 
-           ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'bl') +
- # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.50, bottom = 0.66, right = 1.0, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.0, right = 1.0, top = 0.33) 
-
-
-
-```
-
-Differences with the Rest of the Inner South and South East SA4s were statistically significant^[Covering the City of Glen Eira, Bayside, Greater Dandenong, City of Monash, Kingston, Casey, (almost all of) Cardinia and parts of Stonnington. 2021: `r prmisc::print_chi2(melbourne_2021_SA1_comparison)`), 2023: `r prmisc::print_chi2(melbourne_2023_SA1_comparison)`] as were differences with the rest of Melbourne^[2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2023:`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`.]. More SA1s had transit service above the Melbourne average in Monash than across the rest of the Inner South and South East SA4s or across the rest of the GCSSA.
-
-
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Change in SI score between 2021 and 2023 by SA1 and population"}
-
-
-
-lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.2*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
-
-Poly_Coord_df = data.frame(lon, lat)
-
-poly <- Poly_Coord_df %>% 
-  st_as_sf(coords = c("lon", "lat"), 
-           crs = 4326) %>% 
-  st_bbox() %>% 
-  st_as_sfc()
-
-si_by_area_2021_2023_wider_holding <- left_join(si_by_area_2021_2023_wider_holding, population_sa1_greater_melbourne_2021)
-
-si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_shift(1)
-
-#si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)")
-#)
-
-
-#si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Increased 10% or more" = c("Increased 30% or more", "Increased 10 to 30%")
-#)
-
-
-pcol <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "City of Monash") %>% 
-  st_drop_geometry() %>%
-  na.omit() %>% 
-  aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  arrange(ratio_binned) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_x_discrete(drop=FALSE) +
-  scale_y_continuous(limits = c(0,0.9)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
-   coord_flip() +
-    scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
- title = "City of Monash",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-      plot.title = element_text(size = 4),
-    axis.text.y = element_text(size = 4, hjust = 1),
-    axis.text.x = element_blank())
- 
-
-pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest Inner S, SE SA4s") %>% 
-  st_drop_geometry() %>%
-  na.omit() %>% 
-  aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  arrange(ratio_binned) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,0.9)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned,  0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
-   coord_flip() +
-     scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
- title = "Rest Inner S, SE SA4s",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 4),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank())
- 
-
-pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest of Greater Melbourne") %>% 
-  st_drop_geometry() %>%
-  na.omit() %>% 
-  aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  arrange(ratio_binned) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,0.9)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned,  .6, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
-   coord_flip() +
-   scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
- title = "Rest of GCCSA",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-        plot.title = element_text(size = 4),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank())
- 
-
-si_by_area_2021_2023_wider_holding <- left_join(
-  absmapsdata::sa12021, si_by_area_2021_2023_wider_holding
-)
-
-
-             
-ggplot()+ 
-  geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
-            filter(group == "City of Monash"),
-          aes(fill = ratio_binned), colour=NA) +  
-    scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
-  theme(axis.text.x=element_blank(), #remove x axis labels
-        axis.ticks.x=element_blank(), #remove x axis ticks
-        axis.text.y=element_blank(),  #remove y axis labels
-        axis.ticks.y=element_blank(), #remove y axis ticks
-        legend.position="none",
-#        legend.text = element_text(size = 4), 
-#        legend.title = element_text(size = 5), 
-#        legend.key.size = unit(0.08, 'cm')
-        ) +
-#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
-#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
-#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
-#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
-  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 1) + 
-    coord_sf(xlim = c(lon[1],lon[2]), 
-           ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'tl', height = unit(0.0625, "cm")) +
- # ggspatial::annotation_north_arrow(location = 'bl') + 
- inset_element(pcol, left = 0.55, bottom = 0.5, right = 1.0, top =1.00) +
- inset_element(pcol_rest_melbourne, left = 0.5, bottom = 0.0, right = 0.75, top =0.5) +
- inset_element(pcol_rest_SA4, left = 0.75, bottom = 0.0, right = 1.0, top = 0.5) 
-
-
-
-melbourne_2023_SA1_comparison <- si_by_area_2021_2023_wider_holding %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
-  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
-  tabyl(ratio_binned, group) %>% 
-  chisq.test()
-
-assumptions9 <- si_by_area_2021_2023_wider_holding %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
-  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
-  tabyl(ratio_binned, group)
-
-assumptions10 <- melbourne_2023_SA1_comparison$expected
-
-si_by_area_2021_2023_wider_holding$sa4_group <- 
-  if_else(si_by_area_2021_2023_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "South East")
-
-melbourne_2023_SA4_comparison <- si_by_area_2021_2023_wider_holding %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest of Greater Melbourne") %>%
-  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
-  tabyl(ratio_binned, group) %>% 
-  chisq.test()
-
-assumptions11 <- si_by_area_2021_2023_wider_holding %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest of Greater Melbourne") %>%
-  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
-  tabyl(ratio_binned, group) 
-
-assumptions12 <- melbourne_2023_SA4_comparison$expected
-
-
-```
-
-However, coverage and frequency of transit appears to have decreased by 2023 for more of those in the City of Monash^[Differences are statistically significant with the South East SA4 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`) and the rest of Melbourne (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`)] than in other parts of Melbourne, as shown in Figure 2.
-
-
-```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width = "50%", fig.cap="Needs by 2021 population (left) and change in SI to 2023 for those SA1s with needs above average, but below average supply (by 2021 populations right)"}
-
-#Set boundings box
-bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
-
-lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.1*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.75*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5248,7 +4820,7 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
   scale_y_continuous(limits = c(0,1.1)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5261,14 +4833,14 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_text(size = 6, hjust = 1),
+    plot.title = element_text(size = 6),
+    axis.text.y = element_text(size = 5, hjust = 1),
     axis.text.x = element_blank()
   ) 
 
 
 pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "Rest Inner S, SE SA4s") %>% 
+  filter(group == "Rest Inner S and SE") %>% 
  st_drop_geometry() %>%
   na.omit() %>%
   aggregate(population ~ composite_needs, sum) %>%
@@ -5283,20 +4855,20 @@ pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   scale_y_continuous(limits = c(0,1.1)) +
   geom_hline(yintercept = 0)  + 
   scale_x_discrete(drop=FALSE) +
-  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner S, SE SA4s",
+    title = "Rest Inner S and SE",
     x = NULL,
     y = NULL
   ) +
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
+    plot.title = element_text(size = 6),
     axis.text.y = element_blank(),
     axis.text.x = element_blank()
   ) 
@@ -5318,7 +4890,7 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
   scale_y_continuous(limits = c(0,1.1)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5331,7 +4903,7 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
+    plot.title = element_text(size = 6),
     axis.text.y = element_blank(),
     axis.text.x = element_blank()
   ) 
@@ -5362,14 +4934,15 @@ ggplot()+
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
-#  ggspatial::annotation_north_arrow(location = 'br', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.50, bottom = 0.66, right = 1.0, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.0, right = 1.0, top = 0.33) 
+  ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
+inset_element(pcol, left = 0.51, bottom = 0.66, right = 1.05, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.05, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.0, right = 1.05, top = 0.33) 
+
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -5380,7 +4953,7 @@ melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[2:3] 
 
 assumptions13 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -5459,7 +5032,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>% 
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>% 
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
   chisq.test()
@@ -5468,7 +5041,7 @@ assumptions17 <- si_by_area_2021_2023_wider_holding %>%
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Monash" | group == "Rest Inner S, SE SA4s") %>%
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) 
 
 assumptions18 <- melbourne_2021_SA1_comparison_very_high_needs$expected
@@ -5492,24 +5065,65 @@ assumptions19 <- si_by_area_2021_2023_wider_holding %>%
 assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
 
 
-pcol <- si_by_area_2021_2023_wider_holding %>%
+```
+
+Social needs for transport
+in Monash in 2021
+were Very High or High
+for 44% of the population.
+This is similar
+to the rest of the Inner South and South East SA4s,
+but higher than elsewhere^[Differences
+with the rest of the South East SA4 were not statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).
+Differences with the rest of Greater Melbourne
+were statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
+
+Figure 2, left,
+shows how
+almost three-quarters (73%)
+of Monash's residents
+lived in SA1s
+with transit service levels
+below Greater Melbourne's average
+in 2021. 
+
+
+```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
+
+
+#Set boundings box
+bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
+
+lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+
+Poly_Coord_df = data.frame(lon, lat)
+
+poly <- Poly_Coord_df %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>% 
+  st_bbox() %>% 
+  st_as_sfc()
+
+pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   filter(group == "City of Monash") %>% 
   st_drop_geometry() %>%
-   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
- na.omit() %>%
-  aggregate(population ~ ratio_binned_less, sum) %>%
-  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
-  arrange(ratio_binned_less) %>%
+  aggregate(population ~ transit_supply, sum) %>%
+  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  arrange(transit_supply) %>%
   mutate(perc=population/sum(population)) %>% 
+  na.omit() %>%
   ggplot() + 
-  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1.5)) +
-  scale_x_discrete(drop=FALSE) +
+  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned_less, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-    scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5520,7 +5134,459 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_text(size = 6, hjust = 1),
+    axis.text.x = element_blank()
+  ) 
+
+
+pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
+  filter(group == "Rest Inner S and SE") %>% 
+  st_drop_geometry() %>%
+  aggregate(population ~ transit_supply, sum) %>%
+  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  arrange(transit_supply) %>%
+  mutate(perc=population/sum(population)) %>% 
+  na.omit() %>%
+  ggplot() + 
+  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+   coord_flip() + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest Inner S and SE",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+
+
+pcol_rest_melbourne <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
+  filter(group == "Rest of Greater Melbourne") %>% 
+  st_drop_geometry() %>%
+  st_drop_geometry() %>%
+  aggregate(population ~ transit_supply, sum) %>%
+  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  arrange(transit_supply) %>%
+  mutate(perc=population/sum(population)) %>% 
+  na.omit() %>%
+  ggplot() + 
+  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+   coord_flip() + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest of GCCSA",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+
+ggplot()+ 
+  geom_sf(data=melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
+  filter(group == "City of Monash") %>% na.omit(),
+          aes(fill = transit_supply), colour=NA) +
+  theme(axis.text.x=element_blank(), #remove x axis labels
+        axis.ticks.x=element_blank(), #remove x axis ticks
+        axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), #remove y axis ticks
+        legend.position="none",
+#        legend.text = element_text(size = 4), 
+#        legend.title = element_text(size = 5), 
+#        legend.key.size = unit(0.08, 'cm')
+        ) + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
+#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
+#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
+#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
+  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
+  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+    coord_sf(xlim = c(lon[1],lon[2]), 
+           ylim = c(lat[1], lat[2])) +
+ # ggspatial::annotation_scale(location = 'bl') +
+  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm")) + 
+  inset_element(pcol, left = 0.6, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.75, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.75, bottom = 0.0, right = 1.0, top = 0.33) 
+
+
+
+
+
+pcol <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+  filter(group == "City of Monash") %>% 
+  st_drop_geometry() %>%
+  tabyl(transit_supply) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  untabyl() %>% 
+  as_tibble () %>% 
+  ggplot() + 
+  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(transit_supply, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+   coord_flip() + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "City of Monash",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_text(size = 6, hjust = 1),
+    axis.text.x = element_blank()
+  ) 
+
+
+pcol_rest_SA4 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+  filter(group == "Rest Inner S and SE") %>% 
+  st_drop_geometry() %>%
+  tabyl(transit_supply) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  untabyl() %>% 
+  as_tibble () %>% 
+  na.omit() %>%
+  ggplot() + 
+  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+   coord_flip() + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest Inner S and SE",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+pcol_rest_melbourne <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+  filter(group == "Rest of Greater Melbourne") %>% 
+  st_drop_geometry() %>%
+  tabyl(transit_supply) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  untabyl() %>% 
+  as_tibble () %>% 
+  na.omit() %>%
+  ggplot() + 
+  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+   coord_flip() + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest of GCCSA",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+
+ggplot()+ 
+  geom_sf(data=melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+  filter(group == "City of Monash") %>% na.omit(),
+          aes(fill = transit_supply), colour=NA) +
+  theme(axis.text.x=element_blank(), #remove x axis labels
+        axis.ticks.x=element_blank(), #remove x axis ticks
+        axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), #remove y axis ticks
+        legend.position="none",
+#        legend.text = element_text(size = 4), 
+#        legend.title = element_text(size = 5), 
+#        legend.key.size = unit(0.08, 'cm')
+        ) + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
+#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
+#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
+#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
+  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
+  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+    coord_sf(xlim = c(lon[1],lon[2]), 
+           ylim = c(lat[1], lat[2])) +
+  ggspatial::annotation_scale(location = 'bl') +
+ # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
+inset_element(pcol, left = 0.6, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.75, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.75, bottom = 0.0, right = 1.0, top = 0.33) 
+
+
+
+```
+
+Monash's SA1s
+generally had higher service levels
+than elsewhere^[Differences
+were statistically significant
+between Monash and the Rest of the Inner South and South East SA4s
+in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`)
+and 2023
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`),
+and with the rest of Melbourne (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`; 2023: `r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
+Service distribution
+relative to the Melbourne average
+appears to be generally similar in 2023
+(Figure 2, right)
+as in 2021,
+but comparing actual (raw numerical)
+service level scores
+between 2021 and 2023
+(Figure 3)
+suggests that most Monash residents saw transit improve.    
+
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
+
+
+
+lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.95*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+
+Poly_Coord_df = data.frame(lon, lat)
+
+poly <- Poly_Coord_df %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>% 
+  st_bbox() %>% 
+  st_as_sfc()
+
+
+si_by_area_2021_2023_wider_holding <- left_join(si_by_area_2021_2023_wider_holding, population_sa1_greater_melbourne_2021)
+
+si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_shift(1)
+
+si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)")
+)
+
+
+#si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Increased 10% or more" = c("Increased 30% or more", "Increased 10 to 30%")
+#)
+
+
+pcol_1 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "City of Monash") %>% 
+  st_drop_geometry() %>%
+  na.omit() %>% 
+  aggregate(population ~ ratio_binned, FUN = sum) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  arrange(ratio_binned) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(limits = c(0,0.9)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned, 0.6, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
+   coord_flip() +
+    scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+ title = "All Monash SA1s",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+      plot.title = element_text(size = 3.0),
+    axis.text.y = element_text(size = 3, hjust = 1),
+    axis.text.x = element_blank())
+ 
+
+pcol_rest_SA4_2 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest Inner S and SE") %>% 
+  st_drop_geometry() %>%
+  na.omit() %>% 
+  aggregate(population ~ ratio_binned, FUN = sum) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  arrange(ratio_binned) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,0.9)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned,  0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
+   coord_flip() +
+     scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+ title = "Rest Inner S and SE",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 3.0),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank())
+ 
+
+pcol_rest_melbourne_3 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest of Greater Melbourne") %>% 
+  st_drop_geometry() %>%
+  na.omit() %>% 
+  aggregate(population ~ ratio_binned, FUN = sum) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  arrange(ratio_binned) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,0.9)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned,  .7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
+   coord_flip() +
+   scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+ title = "Rest of GCCSA",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+        plot.title = element_text(size = 3.0),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank())
+ 
+
+si_by_area_2021_2023_wider_holding <- left_join(
+  absmapsdata::sa12021, si_by_area_2021_2023_wider_holding
+)
+
+
+    
+
+melbourne_2023_SA1_comparison <- si_by_area_2021_2023_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group) %>% 
+  chisq.test()
+
+assumptions9 <- si_by_area_2021_2023_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Monash" | group == "Rest Inner S and SE") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group)
+
+assumptions10 <- melbourne_2023_SA1_comparison$expected
+
+si_by_area_2021_2023_wider_holding$sa4_group <- 
+  if_else(si_by_area_2021_2023_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "South East")
+
+melbourne_2023_SA4_comparison <- si_by_area_2021_2023_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Monash" | group == "Rest of Greater Melbourne") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group) %>% 
+  chisq.test()
+
+assumptions11 <- si_by_area_2021_2023_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Monash" | group == "Rest of Greater Melbourne") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group) 
+
+assumptions12 <- melbourne_2023_SA4_comparison$expected
+
+
+
+
+pcol <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "City of Monash") %>% 
+  st_drop_geometry() %>%
+   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+ na.omit() %>%
+  aggregate(population ~ ratio_binned_less, sum) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels()  
+                             # %>% fct_drop()
+                             )) %>%
+  arrange(ratio_binned_less) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,0.9)) +
+  scale_x_discrete(drop=FALSE) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned_less, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
+   coord_flip() + 
+    scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "High need, low supply SA1s",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 3.0),
     axis.text.y = element_blank(),
     axis.text.x = element_blank()
   ) 
@@ -5529,34 +5595,36 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
 
 
 pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest Inner S, SE SA4s") %>% 
+  filter(group == "Rest Inner S and SE") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
  na.omit() %>%
   aggregate(population ~ ratio_binned_less, sum) %>%
-  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() 
+                            # %>%   fct_drop()
+                             )) %>%
   arrange(ratio_binned_less) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
   geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1.5)) +
+  scale_y_continuous(limits = c(0,0.9)) +
   scale_x_discrete(drop=FALSE) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned_less, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(ratio_binned_less, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
    coord_flip() + 
    scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner S, SE SA4s",
+    title = " ",
     x = NULL,
     y = NULL
   ) +
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_blank(),
+     plot.title = element_text(size = 3.0),
     axis.text.y = element_blank(),
     axis.text.x = element_blank()
   ) 
@@ -5569,27 +5637,29 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   na.omit() %>%
   aggregate(population ~ ratio_binned_less, sum) %>%
-  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() 
+                            # %>% fct_drop()
+                            )) %>%
   arrange(ratio_binned_less) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
   geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1.5)) +
+  scale_y_continuous(limits = c(0,0.9)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned_less, 1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(ratio_binned_less, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1) +
    coord_flip() + 
     scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest of GCCSA",
+    title = " ",
     x = NULL,
     y = NULL
   ) +
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_blank(),
+    plot.title = element_text(size = 3.0),
     axis.text.y = element_blank(),
     axis.text.x = element_blank()
   ) 
@@ -5597,35 +5667,82 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
 
 
 ggplot() + 
-  geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
+geom_sf(data=si_by_area_2021_2023_wider_holding %>%
+            filter(group == "City of Monash"),
+          aes(fill = ratio_binned), colour=NA) +  
+    scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
+  theme(axis.text.x=element_blank(), #remove x axis labels
+        axis.ticks.x=element_blank(), #remove x axis ticks
+        axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), #remove y axis ticks
+        legend.position="none",
+#        legend.text = element_text(size = 4), 
+#        legend.title = element_text(size = 5), 
+#        legend.key.size = unit(0.08, 'cm')
+        ) +
+  geom_sf_pattern(data=si_by_area_2021_2023_wider_holding %>% 
   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   filter(group == "City of Monash") %>% na.omit(),
-          aes(fill = ratio_binned_less), colour=NA) +  
-   scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
+  aes(fill = ratio_binned), colour=NA) +  
+    scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Service withdrawn" = "magenta", "Not served" = "black", drop=FALSE))  +
+  theme_minimal(base_size = 20, base_family = 'IBM Plex Mono')  +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
         axis.text.y=element_blank(),  #remove y axis labels
         axis.ticks.y=element_blank(), #remove y axis ticks
         plot.title = element_blank(),
         legend.position="none") +
+  geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
+  filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+            filter(group == "City of Monash"),
+          fill = NA, colour="black", linewidth = 0.25) + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = .5) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
-  #ggspatial::annotation_scale(location = 'tl') +
-  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.6, bottom = 0.66, right = 1.0, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.33, right = 1.0, top =0.65) +
- inset_element(pcol_rest_melbourne, left = 0.6, bottom = 0.0, right = 1.0, top = 0.32) 
+  ggspatial::annotation_scale(location = 'bl', height = unit(0.1, "cm")) +
+  ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.5, "cm"), width = unit(0.5, "cm")) + 
+  inset_element(pcol_1, left = 0.425, bottom = 0.66, right = 0.775, top =1.05) +
+ inset_element(pcol_rest_SA4_2, left = 0.55, bottom = 0.33, right = 0.775, top =0.71) +
+ inset_element(pcol_rest_melbourne_3, left = 0.55, bottom = 0.0, right = 0.775, top = 0.38) +
+inset_element(pcol, left = 0.775, bottom = 0.66, right = 1.0, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.775, bottom = 0.33, right = 1.0, top =0.71) +
+ inset_element(pcol_rest_melbourne, left = 0.775, bottom = 0.0, right = 1.0, top = 0.38) 
 
 
 ```
 
+Monash residents
+appear more likely
+than those elsewhere in Greater Melbourne
+to have had services increase
+1% or more between 2021 and 2023^[Differences
+with the South East SA4
+are statistically significant
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`)
+as are difference with the rest of Melbourne
+(`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`)].
+This also applies to those
+(`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Monash") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Monash") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Monash population)
+with *needs above, but supply below*
+average in 2021^[Differences
+with the rest of
+the Inner South and South East SA4s
+were significant
+(`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner S and SE") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner S and SE") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents,
+`r prmisc::print_chi2(melbourne_2021_SA1_comparison_very_high_needs)`)
+and also with
+the rest of Greater Melbourne
+(`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())`, `r prmisc::print_chi2(melbourne_2021_SA4_comparison_very_high_needs)`)].
 
-Social needs for transport in the City of Monash in 2021 (Figure 3, left) were similar to those of the rest of the Inner South and South East SA4s^[Differences with the rest of the South East SA4 were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).] but greater than those elsewhere in Greater Melbourne^[Differences with the rest of GCCSA were statistically significant  (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Monash") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Monash") %>% st_drop_geometry() %>% select(population) %>% sum())` of City of Monash residents had above average social needs for transport but below average transit supply^[compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner S, SE SA4s") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner S, SE SA4s") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the South East SA4 and `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne.]. Figure 3, right, shows how transit service levels changed between 2021 and 2023 for those residents. It appears a greater proportion of those with larger needs-gaps in Monash saw increases than elsewhere^[Rest of Inner South and South East SA4s: `r prmisc::print_chi2(melbourne_2021_SA1_comparison_very_high_needs)`, Rest of the GCCSA: `r prmisc::print_chi2(melbourne_2021_SA4_comparison_very_high_needs)`] 
-
-\newthought{Overall,} 
+Overall, Monash residents appear
+less likely
+to have transit service levels
+below Melbourne's average,
+and^[Including those with larger needs-gaps.]
+more likely to have seen increases between 2021 and 2023.
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 1
