@@ -83,12 +83,12 @@ etc.
 However, it is unclear
 how much transit is supplied
 or how well social needs
-are met each LGA.
+are met for each LGA.
 This note examines
 the City of Monash
 in 2021 and 2023,
 and is part of a series
-examining LGAs in Greater Melbourne^[See
+on LGAs in Greater Melbourne^[See
 https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024
 but lookout, I misspelled "Melbourne" ]. 
 
@@ -106,7 +106,7 @@ for August 2021 and 2023,
 so may not match services run.]
 as per Reynolds, Currie and Qu (in drafting)[@Reynolds0000gtfsmainpaper].
 Results are shown for the ABS' Statistical Area 1s (SA1s),
-categorized into groups
+categorized 
 based on averages
 across the Melbourne Greater Capital City Statistical Area (GCCSA).
 
@@ -4781,7 +4781,6 @@ and South East SA4s^[LGAs:
 Glen Eira,
 Bayside,
 Dandenong,
-Monash,
 Kingston,
 Casey,
 (almost all of) Cardinia,
@@ -5069,25 +5068,14 @@ assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected
 
 Social needs for transport
 in Monash in 2021
-were Very High or High
-for 44% of the population.
-This is similar
-to the rest of the Inner South and South East SA4s,
-but higher than elsewhere^[Differences
-with the rest of the South East SA4 were not statistically significant
-(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).
-Differences with the rest of Greater Melbourne
-were statistically significant
-(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
+were higher than the Melbourne average 
+for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())` of the population.
+Differences to the rest of the Inner South and South East SA4s were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`),
+but were to elsewhere in Melbourne(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`
+), with `r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`
+of the population having above average needs.
 
-Figure 2, left,
-shows how
-almost three-quarters (73%)
-of Monash's residents
-lived in SA1s
-with transit service levels
-below Greater Melbourne's average
-in 2021. 
+Figure 2 shows the distribution of transit service in 2021 and 2023
 
 
 ```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
@@ -5243,7 +5231,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 
 
-pcol <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+pcol_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   filter(group == "City of Monash") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
@@ -5273,7 +5261,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   ) 
 
 
-pcol_rest_SA4 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+pcol_rest_SA4_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   filter(group == "Rest Inner S and SE") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
@@ -5303,7 +5291,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
     axis.text.x = element_blank()
   ) 
 
-pcol_rest_melbourne <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+pcol_rest_melbourne_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   filter(group == "Rest of Greater Melbourne") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
@@ -5360,29 +5348,25 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.6, bottom = 0.66, right = 1.0, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.75, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.75, bottom = 0.0, right = 1.0, top = 0.33) 
+inset_element(pcol_2, left = 0.6, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol_rest_SA4_2, left = 0.75, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne_2, left = 0.75, bottom = 0.0, right = 1.0, top = 0.33) 
 
 
 
 ```
 
-Monash's SA1s
-generally had higher service levels
-than elsewhere^[Differences
+Transit service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())` of Monash residents in .
+This is similar
+to the rest of the Inner South and South East SA4s
+(`r `label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
-between Monash and the Rest of the Inner South and South East SA4s
-in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`)
-and 2023
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`),
-and with the rest of Melbourne (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`; 2023: `r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-Service distribution
-relative to the Melbourne average
-appears to be generally similar in 2023
-(Figure 2, right)
-as in 2021,
-but comparing actual (raw numerical)
+(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).],
+but higher than elsewhere
+(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+were statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]
+Comparing actual (raw numerical)
 service level scores
 between 2021 and 2023
 (Figure 3)
@@ -5714,28 +5698,30 @@ inset_element(pcol, left = 0.775, bottom = 0.66, right = 1.0, top =1.05) +
 
 ```
 
-Monash residents
-appear more likely
-than those elsewhere in Greater Melbourne
-to have had services increase
-1% or more between 2021 and 2023^[Differences
-with the South East SA4
-are statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`)
-as are difference with the rest of Melbourne
-(`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`)].
-This also applies to those
-(`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Monash") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Monash") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Monash population)
-with *needs above, but supply below*
-average in 2021^[Differences
-with the rest of
-the Inner South and South East SA4s
-were significant
-(`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner S and SE") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner S and SE") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents,
+Transit service levels increased by 1% or more for `r label_percent(accuracy=0.1)(pcol_1$data[1:7,3] %>% sum())` of Monash residents
+between 2021 and 2023 .
+Differences with the rest of the Inner South and South East SA4s
+(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:7,3] %>% sum())`)
+were statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`), 
+as were those with elsewhere in Melbourne
+(`r label_percent(accuracy=0.1)(pcol_rest_melbourne_2$data[1:4,3] %>% sum())`)
+(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).
+
+`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Monash") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Monash") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Monash population had
+*needs above, but supply below*
+the Melbourne average in 2021^[Compared to 
+(`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner S and SE") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner S and SE") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner South and South East SA4 residents and 
+(`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+elsewhere in Melbourne.]
+Transit service levels increased by 1% or more for `r label_percent(accuracy=0.1)(pcol$data[1:6,4] %>% sum())` of this cohort
+between 2021 and 2023, which is higher than
+for the similar cohorts across the rest of the Inner South and South East SA4s
+(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:7,4] %>% sum())`)(statistically significant
 `r prmisc::print_chi2(melbourne_2021_SA1_comparison_very_high_needs)`)
-and also with
-the rest of Greater Melbourne
-(`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())`, `r prmisc::print_chi2(melbourne_2021_SA4_comparison_very_high_needs)`)].
+and elsewhere
+(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:7,4] %>% sum())`)(statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).
 
 Overall, Monash residents appear
 less likely
