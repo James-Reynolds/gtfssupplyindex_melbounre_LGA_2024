@@ -59,6 +59,7 @@ library(png)
 library(absmapsdata)
 library(tidytransit)
 library(patchwork)
+library(ggpattern)
 
 lga_of_interest_2016 <- absmapsdata::lga2016 %>% filter(lga_name_2016 == "Stonnington (C)")
 
@@ -67,10 +68,46 @@ lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Stonni
 
 ```
 
-In Victoria, public transport is managed by the state government, although Local Government Authorities (LGAs) may have some influence on service levels through planning processes, advocacy etc. However, not much is known about how much transit is supplied or whether social needs for transport are being met within each LGA's boundaries. This note explores social needs-gaps in the City of Stonnington, using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying]. It is part of a series examining each LGA in Greater Melbourne^[See https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024 but lookout, I misspelled "Melbourne" ]. 
+This note explores social needs for transport,
+and transit provision
+in the City of Stonnington,
+using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
+In Victoria,
+public transport is managed
+by the state government,
+although Local Government Authorities (LGAs)
+may have influence
+through planning processes,
+advocacy
+etc.
+However, it is unclear
+how much transit is supplied
+or how well social needs
+are met for each LGA.
+This note examines
+the City of Stonnington
+in 2021 and 2023,
+and is part of a series
+on LGAs in Greater Melbourne^[See
+https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024
+but lookout, I misspelled "Melbourne" ]. 
 
-# Methods 
-This note maps transport supply and a composite needs indicator based on Australian Bureau of Statistics (ABS) data. The methodology is as per Reynolds, Currie and Qu (in drafting)^[Forthcoming hopefully, but using the *gtfssupplyindex* R package (see https://github.com/James-Reynolds/gtfssupplyindex) to process the Victoria GTFS feed. Note that results represent what is in the GTFS feed for August 2021 and 2023, which may not match services provided.], and involves Transit Supply Indication (SI) scores, which are based on service frequency and how much of an area is within walking distance of stops/stations^[400m for tram and bus, 800m for train.]. Results are shown for ABS' Statistical Area 1s (SA1s), categorized into seven groups based on the average scores for SA1s across the Melbourne Greater Capital City Statistical Area (GCCSA).
+
+\newthought{Methods:}
+Scores for transit supply
+and transport needs
+were calculated
+based on Australian Bureau of Statistics (ABS) data and
+the Victorian GTFS feed^[Results are based on GTFS feeds
+for August 2021 and 2023,
+so may not match services run.]
+using the *gtfssupplyindex* R package^[See
+https://github.com/James-Reynolds/gtfssupplyindex]
+as per Reynolds, Currie and Qu (in drafting)[@Reynolds0000gtfsmainpaper].
+Results are shown for the ABS' Statistical Area 1s (SA1s),
+categorized 
+based on averages
+across the Melbourne Greater Capital City Statistical Area (GCCSA).
 
 
 ```{r fix_ptv_data_Victoria_240613, eval = FALSE, echo = FALSE}
@@ -890,10 +927,10 @@ vic_lga07aust_region <- st_read("data/1259030001lga07 aust/", quiet = TRUE) %>%
 # Set boundaries between around middle suburbs       
 middle_lga07aust_region <- vic_lga07aust_region[
   vic_lga07aust_region$LGANAME07 %in% 
-    c("Banyule (C)", "Bayside (C)", "Boroondara (C)", "Brimbank (C)", 
+    c("Banyule (C)", "Stonnington (C)", "Boroondara (C)", "Brimbank (C)", 
       "Darebin (C)", "Glen Eira (C)", "Greater Dandenong (C)", 
       "Hobsons Bay (C)", "Kingston (C)", "Manningham (C)", 
-      "Maribyrnong (C)", "Monash (C)", "Moonee Valley (C)", 
+      "Maribyrnong (C)", "Stonnington (C)", "Moonee Valley (C)", 
       "Moreland (C)", "Stonnington (C)","Whitehorse (C)"), ] 
 middle_lga07aust_region <- st_union(middle_lga07aust_region)
 
@@ -4634,13 +4671,13 @@ sa1s_in_lga_of_interest$group <- "City of Stonnington"
 
 sa1s_in_sa4_of_interest <- sa12021 %>% 
   st_drop_geometry()  %>%
-  filter(sa4_name_2021 == "Melbourne - Inner South" | sa4_name_2021 == "Melbourne - Inner") %>%
+  filter(sa4_name_2021 == "Melbourne - Inner" | sa4_name_2021 == "Melbourne - Inner South") %>%
   select(sa1_code_2021)
 sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
   left_join(sa1s_in_lga_of_interest %>% 
               st_drop_geometry())
 sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
-  replace_na(list(group = "Rest Inner, Inner Sth SA4s"))
+  replace_na(list(group = "Rest Inner and Inner South"))
 
 melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>% 
   left_join(sa1s_in_sa4_of_interest, 
@@ -4650,14 +4687,14 @@ melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2021_SA1_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions1 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4687,14 +4724,14 @@ melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2023_SA1_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions5 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) 
 
@@ -4735,489 +4772,29 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 ```
 
-# Results
+\newthought{Results:} Social needs for transport
+in Stonnington in 2021
+and comparison
+with the Rest of the Inner South
+and South East SA4s^[LGAs:
+Glen Eira,
+Stonnington,
+Dandenong,
+Kingston,
+Casey,
+(almost all of) Cardinia,
+part of Stonnington.]
+and the rest of Greater Melbourne
+by population are shown in Figure 1.
 
 
-```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
-
+```{r Needs_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 1, out.width = "100%", fig.cap="Needs in 2021 by population"}
 
 #Set boundings box
 bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
-
-Poly_Coord_df = data.frame(lon, lat)
-
-poly <- Poly_Coord_df %>% 
-  st_as_sf(coords = c("lon", "lat"), 
-           crs = 4326) %>% 
-  st_bbox() %>% 
-  st_as_sfc()
-
-pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Stonnington") %>% 
-  st_drop_geometry() %>%
-  aggregate(population ~ transit_supply, sum) %>%
-  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  arrange(transit_supply) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "City of Stonnington",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_text(size = 6, hjust = 1),
-    axis.text.x = element_blank()
-  ) 
-
-
-pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest Inner, Inner Sth SA4s") %>% 
-  st_drop_geometry() %>%
-  aggregate(population ~ transit_supply, sum) %>%
-  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  arrange(transit_supply) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "Rest Inner, Inner Sth SA4s",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank()
-  ) 
-
-
-
-
-pcol_rest_melbourne <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest of Greater Melbourne") %>% 
-  st_drop_geometry() %>%
-  st_drop_geometry() %>%
-  aggregate(population ~ transit_supply, sum) %>%
-  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  arrange(transit_supply) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "Rest of GCCSA",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank()
-  ) 
-
-
-
-ggplot()+ 
-  geom_sf(data=melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Stonnington"),
-          aes(fill = transit_supply), colour=NA) +
-  theme(axis.text.x=element_blank(), #remove x axis labels
-        axis.ticks.x=element_blank(), #remove x axis ticks
-        axis.text.y=element_blank(),  #remove y axis labels
-        axis.ticks.y=element_blank(), #remove y axis ticks
-        legend.position="none",
-#        legend.text = element_text(size = 4), 
-#        legend.title = element_text(size = 5), 
-#        legend.key.size = unit(0.08, 'cm')
-        ) + 
- scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
-#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
-#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
-#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
-  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
-    coord_sf(xlim = c(lon[1],lon[2]), 
-           ylim = c(lat[1], lat[2])) +
- # ggspatial::annotation_scale(location = 'bl') +
-  ggspatial::annotation_north_arrow(location = 'br', height = unit(0.75, "cm")) + inset_element(pcol, left = 0.45, bottom = 0.63, right = 1.0, top =1.0) +
- inset_element(pcol_rest_melbourne, left = 0.6, bottom = 0.30, right = 1.0, top =0.66) +
- inset_element(pcol_rest_SA4, left = 0.0, bottom = 0.0, right = 0.4, top = 0.36) 
-
-
-
-
-
-pcol <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Stonnington") %>% 
-  st_drop_geometry() %>%
-  tabyl(transit_supply) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  untabyl() %>% 
-  as_tibble () %>% 
-  ggplot() + 
-  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "City of Stonnington",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_text(size = 6, hjust = 1),
-    axis.text.x = element_blank()
-  ) 
-
-
-pcol_rest_SA4 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest Inner, Inner Sth SA4s") %>% 
-  st_drop_geometry() %>%
-  tabyl(transit_supply) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  untabyl() %>% 
-  as_tibble () %>% 
-  ggplot() + 
-  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "Rest Inner, Inner Sth SA4s",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank()
-  ) 
-
-pcol_rest_melbourne <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest of Greater Melbourne") %>% 
-  st_drop_geometry() %>%
-  tabyl(transit_supply) %>%
-  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
-  untabyl() %>% 
-  as_tibble () %>% 
-  ggplot() + 
-  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
-   coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
-    title = "Rest of GCCSA",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank()
-  ) 
-
-
-
-ggplot()+ 
-  geom_sf(data=melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Stonnington"),
-          aes(fill = transit_supply), colour=NA) +
-  theme(axis.text.x=element_blank(), #remove x axis labels
-        axis.ticks.x=element_blank(), #remove x axis ticks
-        axis.text.y=element_blank(),  #remove y axis labels
-        axis.ticks.y=element_blank(), #remove y axis ticks
-        legend.position="none",
-#        legend.text = element_text(size = 4), 
-#        legend.title = element_text(size = 5), 
-#        legend.key.size = unit(0.08, 'cm')
-        ) + 
- scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
-#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
-#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
-#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
-#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
-  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
-    coord_sf(xlim = c(lon[1],lon[2]), 
-           ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'br') +
- # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.45, bottom = 0.63, right = 1.0, top =1.0) +
- inset_element(pcol_rest_melbourne, left = 0.6, bottom = 0.30, right = 1.0, top =0.66) +
- inset_element(pcol_rest_SA4, left = 0.0, bottom = 0.0, right = 0.4, top = 0.36) 
-
-
-
-```
-
-In 2021 almost half of City of Stonnington's population lived in SA1s with Very High transit service levels (Figure 1, left), ^[Differences with the Rest of the Inner and Inner South SA4s (covering the City of Melbourne, Yarra, Port Phillip, Glen Eira and parts of Moonee Valley, Merri-Bek, Darebin, Kingston and Monash), by SA1, are statistically significant in 2021 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`) and 2023 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).  Differences with the rest of Melbourne are also statistically significant (2021: `r prmisc::print_chi2(melbourne_2021_SA4_comparison)`, 2023:`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).]. However, as shown in Figure 2, coverage and frequency of transit appears to have decreased by 2023 for more of those in the City of Stonnington^[Differences are statistically significant with the Inner and Inner South SA4s (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`) and the rest of Melbourne (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`)]. than in other parts of Melbourne
-
-
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, fig.cap="Change in SI score between 2021 and 2023 by SA1 and population"}
-
-
-
-lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.7*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
-
-Poly_Coord_df = data.frame(lon, lat)
-
-poly <- Poly_Coord_df %>% 
-  st_as_sf(coords = c("lon", "lat"), 
-           crs = 4326) %>% 
-  st_bbox() %>% 
-  st_as_sfc()
-
-si_by_area_2021_2023_wider_holding <- left_join(si_by_area_2021_2023_wider_holding, population_sa1_greater_melbourne_2021)
-
-si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_shift(1)
-
-si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)")
-)
-
-
-si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Increased 10% or more" = c("Increased 30% or more", "Increased 10 to 30%")
-)
-
-
-pcol <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "City of Stonnington") %>% 
-  st_drop_geometry() %>%
-  na.omit() %>% 
-  aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  arrange(ratio_binned) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_x_discrete(drop=FALSE) +
-  scale_y_continuous(limits = c(0,0.9)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
-   coord_flip() +
- scale_fill_manual(values = c("New service" = "#3A65A3", "Increased 10% or more" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE)) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
- title = "City of Stonnington",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-      plot.title = element_text(size = 5),
-    axis.text.y = element_text(size = 4, hjust = 1),
-    axis.text.x = element_blank())
- 
-
-pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest Inner, Inner Sth SA4s") %>% 
-  st_drop_geometry() %>%
-  na.omit() %>% 
-  aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  arrange(ratio_binned) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,0.9)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned,  0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
-   coord_flip() +
-   scale_fill_manual(values = c("New service" = "#3A65A3", "Increased 10% or more" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE)) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
- title = "Rest Inner, Inner Sth SA4s",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-    plot.title = element_text(size = 5),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank())
- 
-
-pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest of Greater Melbourne") %>% 
-  st_drop_geometry() %>%
-  na.omit() %>% 
-  aggregate(population ~ ratio_binned, FUN = sum) %>%
-  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  replace_na(list(population = 0)) %>%
-  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
-  arrange(ratio_binned) %>%
-  mutate(perc=population/sum(population)) %>% 
-  ggplot() + 
-   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,0.9)) +
-  geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned,  .6, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.3) +
-   coord_flip() +
- scale_fill_manual(values = c("New service" = "#3A65A3", "Increased 10% or more" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE)) +
-  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
-  guides(fill = "none", color = "none") +
-  labs(
- title = "Rest of GCCSA",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_void() +
-  theme(
-    panel.grid = element_blank(),
-        plot.title = element_text(size = 5),
-    axis.text.y = element_blank(),
-    axis.text.x = element_blank())
- 
-
-si_by_area_2021_2023_wider_holding <- left_join(
-  absmapsdata::sa12021, si_by_area_2021_2023_wider_holding
-)
-
-
-             
-ggplot()+ 
-  geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
-            filter(group == "City of Stonnington"),
-          aes(fill = ratio_binned), colour=NA) +  
-  scale_fill_manual(values = c("New service" = "#3A65A3", "Increased 10% or more" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE)) +
-  theme(axis.text.x=element_blank(), #remove x axis labels
-        axis.ticks.x=element_blank(), #remove x axis ticks
-        axis.text.y=element_blank(),  #remove y axis labels
-        axis.ticks.y=element_blank(), #remove y axis ticks
-        legend.position="none",
-#        legend.text = element_text(size = 4), 
-#        legend.title = element_text(size = 5), 
-#        legend.key.size = unit(0.08, 'cm')
-        ) +
-#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
-#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
-#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
-#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
-  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 1) + 
-    coord_sf(xlim = c(lon[1],lon[2]), 
-           ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'bl', height = unit(0.0625, "cm")) +
- # ggspatial::annotation_north_arrow(location = 'bl') + 
- inset_element(pcol, left = 0.49, bottom = 0.5, right = 1.0, top =1.05) +
- inset_element(pcol_rest_melbourne, left = 0.0, bottom = 0.05, right = 0.35, top =0.6) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.0, right = 1.0, top = 0.55) 
-
-
-
-melbourne_2023_SA1_comparison <- si_by_area_2021_2023_wider_holding %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
-  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
-  tabyl(ratio_binned, group) %>% 
-  chisq.test()
-
-assumptions9 <- si_by_area_2021_2023_wider_holding %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
-  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
-  tabyl(ratio_binned, group)
-
-assumptions10 <- melbourne_2023_SA1_comparison$expected
-
-si_by_area_2021_2023_wider_holding$sa4_group <- 
-  if_else(si_by_area_2021_2023_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "Inner South")
-
-melbourne_2023_SA4_comparison <- si_by_area_2021_2023_wider_holding %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
-  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
-  tabyl(ratio_binned, group) %>% 
-  chisq.test()
-
-assumptions11 <- si_by_area_2021_2023_wider_holding %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
-  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
-  tabyl(ratio_binned, group) 
-
-assumptions12 <- melbourne_2023_SA4_comparison$expected
-
-
-```
-
-
-```{r Needs_and_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width = "50%", fig.cap="Needs by 2021 population (left) and change in SI to 2023 for those SA1s with needs above average, but below average supply (by 2021 populations right)"}
-
-#Set boundings box
-bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
-
-lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5239,9 +4816,9 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
-  scale_y_continuous(limits = c(0,1.1)) +
+  scale_y_continuous(limits = c(0,0.6)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(composite_needs,  0.4, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5254,14 +4831,14 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
-    axis.text.y = element_text(size = 6, hjust = 1),
+    plot.title = element_text(size = 6),
+    axis.text.y = element_text(size = 5, hjust = 1),
     axis.text.x = element_blank()
   ) 
 
 
 pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "Rest Inner, Inner Sth SA4s") %>% 
+  filter(group == "Rest Inner and Inner South") %>% 
  st_drop_geometry() %>%
   na.omit() %>%
   aggregate(population ~ composite_needs, sum) %>%
@@ -5273,23 +4850,22 @@ pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
-  scale_y_continuous(limits = c(0,1.1)) +
-  geom_hline(yintercept = 0)  + 
-  scale_x_discrete(drop=FALSE) +
-  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  scale_y_continuous(limits = c(0,0.6)) +
+  geom_hline(yintercept = 0)  +
+  geom_text(aes(composite_needs,  0.4, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner, Inner Sth SA4s",
+    title = "Rest Inner and Inner South",
     x = NULL,
     y = NULL
   ) +
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
+    plot.title = element_text(size = 6),
     axis.text.y = element_blank(),
     axis.text.x = element_blank()
   ) 
@@ -5309,9 +4885,9 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
-  scale_y_continuous(limits = c(0,1.1)) +
+  scale_y_continuous(limits = c(0,0.6)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(composite_needs,  0.75, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(composite_needs,  0.4, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5324,7 +4900,7 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
   theme_void() +
   theme(
     panel.grid = element_blank(),
-    plot.title = element_text(size = 7),
+    plot.title = element_text(size = 6),
     axis.text.y = element_blank(),
     axis.text.x = element_blank()
   ) 
@@ -5354,15 +4930,16 @@ ggplot()+
   geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'bl') +
-#  ggspatial::annotation_north_arrow(location = 'br', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.45, bottom = 0.66, right = 1.0, top =1.01) +
- inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.0, bottom = 0.1, right = 0.4, top = 0.43) 
+  ggspatial::annotation_scale(location = 'tr') +
+  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
+inset_element(pcol, left = 0.40, bottom = 0.64, right = 1.05, top =0.98) +
+ inset_element(pcol_rest_SA4, left = 0.5, bottom = 0.32, right = 1.05, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.5, bottom = 0.0, right = 1.05, top = 0.34) 
+
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -5373,7 +4950,7 @@ melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[2:3] 
 
 assumptions13 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -5402,34 +4979,36 @@ assumptions16 <- melbourne_2021_SA4_comparison_needs$expected
 
 ### Above average Needs, below average supply only
 
-si_by_area_2021_2023_wider_holding$ratio_binned_less <- if_else(
-  si_by_area_2021_2023_wider_holding$x2023 == 0, 
-  NA,
-  if_else(
-      si_by_area_2021_2023_wider_holding$ratio < 0.99, 
-      "Decreased 1%+", 
-      if_else(si_by_area_2021_2023_wider_holding$ratio < 1.01, 
-              "Within 1%", 
-                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.05, 
-                "Increased 1 to 5%", 
-                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.10, 
-                "Increased 5 to 10%", 
-                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.15, 
-                "Increased 10 to 15%",
-                "Increased more than 15%"))))))
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned
+  
+#  if_else(
+#  si_by_area_2021_2023_wider_holding$x2023 == 0, 
+#  NA,
+#  if_else(
+#      si_by_area_2021_2023_wider_holding$ratio < 0.99, 
+#      "Decreased 1%+", 
+#      if_else(si_by_area_2021_2023_wider_holding$ratio < 1.01, 
+#              "Within 1%", 
+#                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.05, 
+#                "Increased 1 to 5%", 
+#                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.10, 
+#                "Increased 5 to 10%", 
+#                if_else(si_by_area_2021_2023_wider_holding$ratio < 1.15, 
+ #               "Increased 10 to 15%",
+ #               "Increased more than 15%"))))))
                   
                                               
                       
-si_by_area_2021_2023_wider_holding$ratio_binned_less <- factor(
-  si_by_area_2021_2023_wider_holding$ratio_binned_less, 
-   levels = c("Increased more than 15%", 
-              "Increased 10 to 15%",
-              "Increased 5 to 10%",
-              "Increased 1 to 5%",
-              "Within 1%",
-              "Decreased 1%+"
-              )
-  )
+#si_by_area_2021_2023_wider_holding$ratio_binned_less <- factor(
+#  si_by_area_2021_2023_wider_holding$ratio_binned_less, 
+#   levels = c("Increased more than 15%", 
+##              "Increased 10 to 15%",
+#              "Increased 5 to 10%",
+#              "Increased 1 to 5%",
+#              "Within 1%",
+#              "Decreased 1%+"
+#              )
+#  )
      
 
 si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
@@ -5443,83 +5022,54 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
-si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>%
-  fct_collapse("Increased more than 10%" = c("Increased more than 15%", "Increased 10 to 15%"))
+```
 
-melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>% 
-  tabyl(ratio_binned_less, group) %>%
-  na.omit() %>% 
-  chisq.test()
-
-assumptions17 <- si_by_area_2021_2023_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>%
-  tabyl(ratio_binned_less, group) 
-
-assumptions18 <- melbourne_2021_SA1_comparison_very_high_needs$expected
-
-melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest Inner, Inner Sth SA4s") %>% 
-  tabyl(ratio_binned_less, group) %>%
-  na.omit() %>% 
-  fisher.test()
+Social needs for transport
+were higher than the Melbourne average 
+for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
+of the Stonnington population, a greater share than 
+for rest of the Inner and Inner South SA4s (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[4:6,3] %>% sum())`)^[Differences
+were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).]
+or elsewhere in Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences
+were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
 
 
-melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
-  tabyl(ratio_binned_less, group) %>%
-  na.omit() %>% 
-chisq.test()
-
-assumptions19 <- si_by_area_2021_2023_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
-  tabyl(ratio_binned_less, group)
-
-assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
-
-melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
-             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  st_drop_geometry() %>% 
-  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
-  tabyl(ratio_binned_less, group) %>%
-  na.omit() %>% 
-fisher.test()
 
 
-pcol <- si_by_area_2021_2023_wider_holding %>%
+```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
+
+
+#Set boundings box
+bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
+
+lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + .75*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+
+Poly_Coord_df = data.frame(lon, lat)
+
+poly <- Poly_Coord_df %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>% 
+  st_bbox() %>% 
+  st_as_sfc()
+
+pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   filter(group == "City of Stonnington") %>% 
   st_drop_geometry() %>%
-   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
- na.omit() %>%
-  aggregate(population ~ ratio_binned_less, sum) %>%
-  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
-  arrange(ratio_binned_less) %>%
+  aggregate(population ~ transit_supply, sum) %>%
+  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  arrange(transit_supply) %>%
   mutate(perc=population/sum(population)) %>% 
+  na.omit() %>%
   ggplot() + 
-  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1.5)) +
-  scale_x_discrete(drop=FALSE) +
+  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned_less, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
- scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#F9D785", "#EFA15C", "#852128")) +
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5531,35 +5081,32 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
   theme(
     panel.grid = element_blank(),
     plot.title = element_text(size = 7),
-    axis.text.y = element_text(size = 6, hjust=1),
+    axis.text.y = element_text(size = 6, hjust = 1),
     axis.text.x = element_blank()
   ) 
 
 
-
-
-pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest Inner, Inner Sth SA4s") %>% 
+pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
+  filter(group == "Rest Inner and Inner South") %>% 
   st_drop_geometry() %>%
-   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
- na.omit() %>%
-  aggregate(population ~ ratio_binned_less, sum) %>%
-  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
-  arrange(ratio_binned_less) %>%
+  aggregate(population ~ transit_supply, sum) %>%
+  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  arrange(transit_supply) %>%
   mutate(perc=population/sum(population)) %>% 
+  na.omit() %>%
   ggplot() + 
-  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1.5)) +
-  scale_x_discrete(drop=FALSE) +
+  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned_less, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-  scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#F9D785", "#EFA15C", "#852128")) +
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner, Inner Sth SA4s",
+    title = "Rest Inner and Inner South",
     x = NULL,
     y = NULL
   ) +
@@ -5572,23 +5119,26 @@ pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
   ) 
 
 
-pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
+
+
+pcol_rest_melbourne <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   filter(group == "Rest of Greater Melbourne") %>% 
   st_drop_geometry() %>%
-   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
-  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  na.omit() %>%
-  aggregate(population ~ ratio_binned_less, sum) %>%
-  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() %>% fct_drop())) %>%
-  arrange(ratio_binned_less) %>%
+  st_drop_geometry() %>%
+  aggregate(population ~ transit_supply, sum) %>%
+  right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  arrange(transit_supply) %>%
   mutate(perc=population/sum(population)) %>% 
+  na.omit() %>%
   ggplot() + 
-  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
-  scale_y_continuous(limits = c(0,1.5)) +
+  geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(ratio_binned_less, 1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#F9D785", "#EFA15C", "#852128")) +
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5606,36 +5156,602 @@ scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#F9D785", "#EFA15C", "#85212
 
 
 
+ggplot()+ 
+  geom_sf(data=melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
+  filter(group == "City of Stonnington") %>% na.omit(),
+          aes(fill = transit_supply), colour=NA) +
+  theme(axis.text.x=element_blank(), #remove x axis labels
+        axis.ticks.x=element_blank(), #remove x axis ticks
+        axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), #remove y axis ticks
+        legend.position="none",
+#        legend.text = element_text(size = 4), 
+#        legend.title = element_text(size = 5), 
+#        legend.key.size = unit(0.08, 'cm')
+        ) + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
+#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
+#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
+#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
+  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
+  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+    coord_sf(xlim = c(lon[1],lon[2]), 
+           ylim = c(lat[1], lat[2])) +
+ # ggspatial::annotation_scale(location = 'bl') +
+  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm")) + 
+  inset_element(pcol, left = 0.3, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.5, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.5, bottom = 0.0, right = 1.0, top = 0.33) 
+
+
+
+
+
+pcol_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+  filter(group == "City of Stonnington") %>% 
+  st_drop_geometry() %>%
+  tabyl(transit_supply) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  untabyl() %>% 
+  as_tibble () %>% 
+  ggplot() + 
+  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(transit_supply, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+   coord_flip() + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "City of Stonnington",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_text(size = 6, hjust = 1),
+    axis.text.x = element_blank()
+  ) 
+
+
+pcol_rest_SA4_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+  filter(group == "Rest Inner and Inner South") %>% 
+  st_drop_geometry() %>%
+  tabyl(transit_supply) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  untabyl() %>% 
+  as_tibble () %>% 
+  na.omit() %>%
+  ggplot() + 
+  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+   coord_flip() + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest Inner and Inner South",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+pcol_rest_melbourne_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+  filter(group == "Rest of Greater Melbourne") %>% 
+  st_drop_geometry() %>%
+  tabyl(transit_supply) %>%
+  mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
+  untabyl() %>% 
+  as_tibble () %>% 
+  na.omit() %>%
+  ggplot() + 
+  geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
+  scale_y_continuous(limits = c(0,1.4)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+   coord_flip() + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "Rest of GCCSA",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 7),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+
+ggplot()+ 
+  geom_sf(data=melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
+  filter(group == "City of Stonnington") %>% na.omit(),
+          aes(fill = transit_supply), colour=NA) +
+  theme(axis.text.x=element_blank(), #remove x axis labels
+        axis.ticks.x=element_blank(), #remove x axis ticks
+        axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), #remove y axis ticks
+        legend.position="none",
+#        legend.text = element_text(size = 4), 
+#        legend.title = element_text(size = 5), 
+#        legend.key.size = unit(0.08, 'cm')
+        ) + 
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+#  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
+#  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
+#  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
+#  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
+  geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
+  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+    coord_sf(xlim = c(lon[1],lon[2]), 
+           ylim = c(lat[1], lat[2])) +
+  ggspatial::annotation_scale(location = 'bl') +
+ # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
+inset_element(pcol_2, left = 0.3, bottom = 0.66, right = 1.0, top =1.0) +
+ inset_element(pcol_rest_SA4_2, left = 0.5, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne_2, left = 0.5, bottom = 0.0, right = 1.0, top = 0.33) 
+
+
+
+```
+
+Figure 2 shows the distribution of transit service in 2021 and 2023. Transit service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
+of Stonnington residents in 2021, which is less than for
+the rest of the Inner and Inner South SA4s
+(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
+were statistically significant
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).]
+or the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+were statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
+The distribution of transit supply,
+categorised with respect to the Melbourne average,
+appears similar in 2023 (Figure 2, right).
+Figure 3 directly compares 2021 and 2023 transit service levels. 
+
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
+
+
+
+lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+
+Poly_Coord_df = data.frame(lon, lat)
+
+poly <- Poly_Coord_df %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>% 
+  st_bbox() %>% 
+  st_as_sfc()
+
+
+si_by_area_2021_2023_wider_holding <- left_join(si_by_area_2021_2023_wider_holding, population_sa1_greater_melbourne_2021)
+
+si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_shift(1)
+
+si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)")
+)
+
+
+si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Increased 30%+ or new" = c("Increased 30% or more", "New service")
+)
+
+
+
+
+pcol_1 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "City of Stonnington") %>% 
+  st_drop_geometry() %>%
+  na.omit() %>% 
+  aggregate(population ~ ratio_binned, FUN = sum) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  arrange(ratio_binned) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
+  scale_x_discrete(drop=FALSE) +
+  scale_y_continuous(limits = c(0,1.2)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.5) +
+   coord_flip() +
+    scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+ title = "All Stonnington SA1s",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+      plot.title = element_text(size = 4.5),
+    axis.text.y = element_text(size = 4, hjust = 1),
+    axis.text.x = element_blank())
+ 
+
+pcol_rest_SA4_2 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest Inner and Inner South") %>% 
+  st_drop_geometry() %>%
+  na.omit() %>% 
+  aggregate(population ~ ratio_binned, FUN = sum) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  arrange(ratio_binned) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.2)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned,  0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.5) +
+   coord_flip() +
+     scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+ title = "Rest Inner and Inner South",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 4.5),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank())
+ 
+
+pcol_rest_melbourne_3 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest of Greater Melbourne") %>% 
+  st_drop_geometry() %>%
+  na.omit() %>% 
+  aggregate(population ~ ratio_binned, FUN = sum) %>%
+  right_join(tibble(ratio_binned = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  replace_na(list(population = 0)) %>%
+  mutate(ratio_binned=factor(ratio_binned, levels = si_by_area_2021_2023_wider_holding$ratio_binned %>% levels())) %>%
+  arrange(ratio_binned) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+   geom_col(aes(ratio_binned, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.2)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned,  .9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.5) +
+   coord_flip() +
+     scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+ title = "Rest of GCCSA",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+        plot.title = element_text(size = 4.5),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank())
+ 
+
+si_by_area_2021_2023_wider_holding <- left_join(
+  absmapsdata::sa12021, si_by_area_2021_2023_wider_holding
+)
+
+
+    
+
+melbourne_2023_SA1_comparison <- si_by_area_2021_2023_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group) %>% 
+  chisq.test()
+
+assumptions9 <- si_by_area_2021_2023_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group)
+
+assumptions10 <- melbourne_2023_SA1_comparison$expected
+
+si_by_area_2021_2023_wider_holding$sa4_group <- 
+  if_else(si_by_area_2021_2023_wider_holding$group == "Rest of Greater Melbourne", "Rest of Greater Melbourne", "South East")
+
+melbourne_2023_SA4_comparison <- si_by_area_2021_2023_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group) %>% 
+  chisq.test()
+
+assumptions11 <- si_by_area_2021_2023_wider_holding %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
+  mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
+  tabyl(ratio_binned, group) 
+
+assumptions12 <- melbourne_2023_SA4_comparison$expected
+
+
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)")
+)
+
+
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Increased 30%+ or new" = c("Increased 30% or more", "New service")
+)
+
+
+
+melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>% 
+  tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
+  na.omit() %>% 
+  chisq.test()
+
+assumptions17 <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>%
+  tabyl(ratio_binned_less, group, show_missing_levels = FALSE) 
+
+assumptions18 <- melbourne_2021_SA1_comparison_very_high_needs$expected
+
+melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
+  tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
+  na.omit() %>% 
+chisq.test()
+
+assumptions19 <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
+  tabyl(ratio_binned_less, group)
+
+assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
+melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest Inner and Inner South") %>% 
+  tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
+  na.omit() %>% 
+  fisher.test()
+
+
+
+melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
+             filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  st_drop_geometry() %>% 
+  filter(group == "City of Stonnington" | group == "Rest of Greater Melbourne") %>%
+  tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
+  na.omit() %>% 
+fisher.test()
+
+
+
+pcol <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "City of Stonnington") %>% 
+  st_drop_geometry() %>%
+   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+ na.omit() %>%
+  aggregate(population ~ ratio_binned_less, sum) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels()  
+                             # %>% fct_drop()
+                             )) %>%
+  arrange(ratio_binned_less) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.2)) +
+  scale_x_discrete(drop=FALSE) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.5) +
+   coord_flip() + 
+     scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = "High need, low supply SA1s",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 4.5),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+
+
+pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest Inner and Inner South") %>% 
+  st_drop_geometry() %>%
+   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+ na.omit() %>%
+  aggregate(population ~ ratio_binned_less, sum) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() 
+                            # %>%   fct_drop()
+                             )) %>%
+  arrange(ratio_binned_less) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.2)) +
+  scale_x_discrete(drop=FALSE) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.5) +
+   coord_flip() + 
+    scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = " ",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+     plot.title = element_text(size = 4.5),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
+  filter(group == "Rest of Greater Melbourne") %>% 
+  st_drop_geometry() %>%
+   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+  na.omit() %>%
+  aggregate(population ~ ratio_binned_less, sum) %>%
+  mutate(ratio_binned=factor(ratio_binned_less, levels = si_by_area_2021_2023_wider_holding$ratio_binned_less %>% levels() 
+                            # %>% fct_drop()
+                            )) %>%
+  arrange(ratio_binned_less) %>%
+  mutate(perc=population/sum(population)) %>% 
+  ggplot() + 
+  geom_col(aes(ratio_binned_less, perc, fill = ratio_binned), colour="black") +
+  scale_y_continuous(limits = c(0,1.2)) +
+  geom_hline(yintercept = 0)  + 
+  geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.5) +
+   coord_flip() + 
+    scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+  scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
+  guides(fill = "none", color = "none") +
+  labs(
+    title = " ",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 4.5),
+    axis.text.y = element_blank(),
+    axis.text.x = element_blank()
+  ) 
+
+
+
 ggplot() + 
-  geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
+geom_sf(data=si_by_area_2021_2023_wider_holding %>%
+            filter(group == "City of Stonnington"),
+          aes(fill = ratio_binned), colour=NA) +  
+   scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))   +
+  theme(axis.text.x=element_blank(), #remove x axis labels
+        axis.ticks.x=element_blank(), #remove x axis ticks
+        axis.text.y=element_blank(),  #remove y axis labels
+        axis.ticks.y=element_blank(), #remove y axis ticks
+        legend.position="none",
+#        legend.text = element_text(size = 4), 
+#        legend.title = element_text(size = 5), 
+#        legend.key.size = unit(0.08, 'cm')
+        ) +
+  geom_sf_pattern(data=si_by_area_2021_2023_wider_holding %>% 
   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   filter(group == "City of Stonnington") %>% na.omit(),
-          aes(fill = ratio_binned_less), colour=NA) +  
- scale_fill_manual(values = c("#6D9DC4", "#A6CFE1", "#F9D785", "#EFA15C", "#852128")) +
+  aes(fill = ratio_binned), colour=NA) +  
+     scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+  theme_minimal(base_size = 20, base_family = 'IBM Plex Mono')  +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
         axis.text.y=element_blank(),  #remove y axis labels
         axis.ticks.y=element_blank(), #remove y axis ticks
         plot.title = element_blank(),
         legend.position="none") +
+  geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
+  filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
+  filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
+            filter(group == "City of Stonnington"),
+          fill = NA, colour="black", linewidth = 0.25) + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = .5) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
-  #ggspatial::annotation_scale(location = 'tl') +
-  ggspatial::annotation_north_arrow(location = 'br', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.35, bottom = 0.66, right = 1.0, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.0, bottom = 0.0, right = 0.4, top = 0.45) 
+  ggspatial::annotation_scale(location = 'br', height = unit(0.1, "cm")) +
+  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.5, "cm"), width = unit(0.5, "cm")) + 
+  inset_element(pcol_1, left = 0.23, bottom = 0.6, right = 0.6, top =1.05) +
+ inset_element(pcol_rest_SA4_2, left = 0.6, bottom = 0.6, right = 0.8, top =1.05) +
+ inset_element(pcol_rest_melbourne_3, left = 0.8, bottom = 0.6, right = 1.0, top = 1.05) +
+inset_element(pcol, left = 0.4, bottom = 0.1, right = 0.6, top =0.5) +
+ inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.1, right = 0.8, top =0.5) +
+ inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.1, right = 1.0, top = 0.5) 
+
 
 ```
 
+Transit levels increased by 1% or more for `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of Stonnington residents
+between 2021 and 2023. 
+compared to `r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())` of those in the rest of 
+the Inner and Inner South SA4s^[Differences 
+were statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).]
+and `r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())` of those in the rest of 
+Melbourne^[Differences 
+were statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
+`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Stonnington") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Stonnington") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Stonnington population lived in SA1s with
+*needs above, but supply below*
+the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
+`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner South") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner South") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner and Inner South SA4s residents and 
+`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+elsewhere in Melbourne.].
+However, for `r label_percent(accuracy=0.1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increase 1% or more, a higher proportion than
+for the similar cohorts in the rest of the Inner and Inner South SA4s
+(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[2:6,4] %>% sum())`)^[Differences
+were statistically significant
+(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_very_high_needs)`).],
+and elsewhere
+(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:6,4] %>% sum())`)^[Differences
+were statistically significant
+(`r melbourne_2021_SA4_comparison_needs`).].
 
-
-Social needs for transport in the City of Stonnington in 2021 (Figure 3, left) were Very High or High for 46% of the population. This is similar to those of the rest of the Inner and Inner South SA4s, but higher than elsewhere in Greater Melbourne^[Differences with the rest of the Inner and Inner South SA4s were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`). Differences with the rest of Greater Melbourne were statistically significant  (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. Figure 3, right, shows how transit service levels changed between 2021 and 2023 for those who were living in SA1s with needs above, but supply below, the Greater Melbourne average^[There are significant differences between the City of Stonnington and the rest of the Inner and Inner South SA4s (p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits=3)`) and the Rest of the GCCSA (p = `r melbourne_2021_SA4_comparison_very_high_needs$p.value %>% format(digits = 3)`).]. Those in the City of Stonnington in 2021 were more likely to have had more transit in 2023 than those elsewhere. 
-
-Overall, residents of the City of Stonnington appear less likely than those elsewhere in Greater Melbourne to have transit service levels that are below the average. They are also  less likely to have above average needs, but supply below average, than those in the rest of the Inner and Inner South SA4s or other parts of Greater Melbourne^[`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Stonnington") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Stonnington") %>% st_drop_geometry() %>% select(population) %>% sum())` of City of Stonnington residents had above average social needs for transport but below average transit supply, compared with `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner, Inner Sth SA4s") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner, Inner Sth SA4s") %>% st_drop_geometry() %>% select(population) %>% sum())` in the rest of the Inner and Inner South SA4s and `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` across the rest of Melbourne.], and if they did appear to be more likely to have seen service levels increase by 2023 than those in a similar situation elsewhere. 
+Overall, Stonnington residents appear
+less likely
+to have had transit service levels
+below Melbourne's average,
+and more likely to have seen increases, 
+including for those with larger needs-gaps. 
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 1
@@ -5652,7 +5768,7 @@ assumptions4
 assumptions5
 6
 assumptions6
-#2 of 14 <5, assumption met.
+#2 of 14 <5, assumption met
 7
 assumptions7
 8
@@ -5662,12 +5778,12 @@ assumptions8
 assumptions9
 10
 assumptions10
-#2 of 18 <5, assumption met.
+#3 of 20 <5, assumption met.
 11
 assumptions11
 12
 assumptions12
-#1 of 20 <5, assumption met.
+all over 20, assumption met.
 13
 assumptions13
 14
@@ -5680,10 +5796,10 @@ assumptions16
 #All over 5, assumption met.
 assumptions17
 assumptions18
-#4 of 10, not met
+#Not met, try fisher
 assumptions19
 assumptions20
-#4 of 10, not met.
+#Not met, try fisher
 
 ```
 
