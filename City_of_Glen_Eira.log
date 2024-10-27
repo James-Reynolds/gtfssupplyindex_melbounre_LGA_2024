@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  26 OCT 2024 21:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  26 OCT 2024 21:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**City_of_Monash.tex
-(./City_of_Monash.tex
+**City_of_Glen_Eira.tex
+(./City_of_Glen_Eira.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2022/texmf-dist/tex/latex
 /tufte-latex/tufte-handout.cls
@@ -294,7 +294,7 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/natbib/bibentry.sty
 Package: bibentry 2007/10/30 1.5 (PWD)
 )
-No file City_of_Monash.bbl.
+No file City_of_Glen_Eira.bbl.
 \c@@tufte@num@bibkeys=\count281
 (/usr/local/texlive/2022/texmf-dist/tex/latex/sauerj/optparams.sty
 Package: optparams 2004/08/14 v0.9 multiple optional parameters in macros
@@ -650,8 +650,8 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count325
 \l__pdf_internal_box=\box120
-) (./City_of_Monash.aux)
-\openout1 = `City_of_Monash.aux'.
+) (./City_of_Glen_Eira.aux)
+\openout1 = `City_of_Glen_Eira.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
@@ -686,9 +686,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 86.
 LaTeX Info: Redefining \pageref on input line 86.
 LaTeX Info: Redefining \nameref on input line 86.
-(./City_of_Monash.out) (./City_of_Monash.out)
+(./City_of_Glen_Eira.out) (./City_of_Glen_Eira.out)
 \@outlinefile=\write3
-\openout3 = `City_of_Monash.out'.
+\openout3 = `City_of_Glen_Eira.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -828,14 +828,14 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Monash_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 115.431
-24pt>
-File: City_of_Monash_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
-
-<use City_of_Monash_files/figure-latex/Needs_map-1.pdf>
-Package pdftex.def Info: City_of_Monash_files/figure-latex/Needs_map-1.pdf  use
-d on input line 131.
-(pdftex.def)             Requested size: 312.02722pt x 135.40802pt.
+<City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 119.
+44624pt>
+File: City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf Graphic file (type p
+df)
+<use City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf>
+Package pdftex.def Info: City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf  
+used on input line 131.
+(pdftex.def)             Requested size: 312.02722pt x 140.11786pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 131--132
 
@@ -850,20 +850,22 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Monash_files/figure-latex/SI_map-1.pdf, id=7, 265.99374pt x 154.5775pt
->
-File: City_of_Monash_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
-<use City_of_Monash_files/figure-latex/SI_map-1.pdf>
-Package pdftex.def Info: City_of_Monash_files/figure-latex/SI_map-1.pdf  used o
-n input line 143.
-(pdftex.def)             Requested size: 240.00502pt x 139.4746pt.
-<City_of_Monash_files/figure-latex/SI_map-2.pdf, id=8, 265.99374pt x 154.5775pt
->
-File: City_of_Monash_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
-<use City_of_Monash_files/figure-latex/SI_map-2.pdf>
-Package pdftex.def Info: City_of_Monash_files/figure-latex/SI_map-2.pdf  used o
-n input line 143.
-(pdftex.def)             Requested size: 240.00502pt x 139.4746pt.
+<City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf, id=7, 265.99374pt x 149.558
+75pt>
+File: City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
+
+<use City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf>
+Package pdftex.def Info: City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf  use
+d on input line 143.
+(pdftex.def)             Requested size: 240.00502pt x 134.94621pt.
+<City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf, id=8, 265.99374pt x 149.558
+75pt>
+File: City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
+
+<use City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf>
+Package pdftex.def Info: City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf  use
+d on input line 143.
+(pdftex.def)             Requested size: 240.00502pt x 134.94621pt.
 
 Overfull \hbox (2.92004pt too wide) in paragraph at lines 143--144
 [][] []
@@ -877,7 +879,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--144
 [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./City_
-of_Monash_files/figure-latex/Needs_map-1.pdf>]
+of_Glen_Eira_files/figure-latex/Needs_map-1.pdf>]
 
 LaTeX Warning: Marginpar on page 2 moved.
 
@@ -887,14 +889,14 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Monash_files/figure-latex/SI_change_map-1.pdf, id=32, 253.94875pt x 99
-.37125pt>
-File: City_of_Monash_files/figure-latex/SI_change_map-1.pdf Graphic file (type 
-pdf)
-<use City_of_Monash_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: City_of_Monash_files/figure-latex/SI_change_map-1.pdf 
- used on input line 158.
-(pdftex.def)             Requested size: 480.01991pt x 187.83388pt.
+<City_of_Glen_Eira_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x
+ 115.43124pt>
+File: City_of_Glen_Eira_files/figure-latex/SI_change_map-1.pdf Graphic file (ty
+pe pdf)
+<use City_of_Glen_Eira_files/figure-latex/SI_change_map-1.pdf>
+Package pdftex.def Info: City_of_Glen_Eira_files/figure-latex/SI_change_map-1.p
+df  used on input line 158.
+(pdftex.def)             Requested size: 480.01991pt x 218.19084pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 158--159
 
@@ -927,25 +929,26 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
+[2 <./City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf> <./City_of_Glen_Eira_f
+iles/figure-latex/SI_map-2.pdf> <./City_of_Glen_Eira_files/figure-latex/SI_chan
+ge_map-1.pdf>]
 
 Package bibentry Warning: You have used \nobibliography* 
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
 
-[2 <./City_of_Monash_files/figure-latex/SI_map-1.pdf> <./City_of_Monash_files/f
-igure-latex/SI_map-2.pdf> <./City_of_Monash_files/figure-latex/SI_change_map-1.
-pdf>] (./City_of_Monash.aux)
-Package rerunfilecheck Info: File `City_of_Monash.out' has not changed.
+[3] (./City_of_Glen_Eira.aux)
+Package rerunfilecheck Info: File `City_of_Glen_Eira.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15568 strings out of 478268
- 249973 string characters out of 5846347
- 576314 words of memory out of 5000000
+ 15569 strings out of 478268
+ 250135 string characters out of 5846347
+ 575365 words of memory out of 5000000
  33395 multiletter control sequences out of 15000+600000
  517572 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,11n,94p,413b,419s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,11n,94p,425b,419s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
@@ -955,10 +958,10 @@ mf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/texlive/2022/texmf-dist
 /fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/ur
 w/palatino/uplri8a.pfb>
-Output written on City_of_Monash.pdf (2 pages, 437567 bytes).
+Output written on City_of_Glen_Eira.pdf (3 pages, 376440 bytes).
 PDF statistics:
- 438 PDF objects out of 1000 (max. 8388607)
- 234 compressed objects within 3 object streams
- 6 named destinations out of 1000 (max. 500000)
+ 277 PDF objects out of 1000 (max. 8388607)
+ 156 compressed objects within 2 object streams
+ 7 named destinations out of 1000 (max. 500000)
  1045 words of extra memory for PDF output out of 10000 (max. 10000000)
 
