@@ -4795,7 +4795,7 @@ by population are shown in Figure 1.
 bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 2.25*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 3.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5083,7 +5083,7 @@ were not statistically significant with either the rest of the Inner South and S
 bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.6*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 2.25*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5373,7 +5373,7 @@ Figure 3 compares 2021 and 2023 service.
 
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 3.72*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 2.75*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5687,17 +5687,18 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   inset_element(pcol_1, left = 0.275, bottom = 0.6, right = 0.6, top =1.05) +
  inset_element(pcol_rest_SA4_2, left = 0.6, bottom = 0.6, right = 0.8, top =1.05) +
  inset_element(pcol_rest_melbourne_3, left = 0.8, bottom = 0.60, right = 1.0, top = 1.05) +
-inset_element(pcol, left = 0.4, bottom = 0.15, right = 0.6, top =0.65) +
- inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.15, right = 0.8, top =0.65) +
- inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.15, right = 1.0, top = 0.65) 
+inset_element(pcol, left = 0.4, bottom = 0.15, right = 0.6, top =0.60) +
+ inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.15, right = 0.8, top =0.60) +
+ inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.15, right = 1.0, top = 0.60) 
 
 
 ```
 
-Transit levels increased by 1% or more for `r label_percent(accuracy=0.1)(pcol_1$data[1:7,3] %>% sum())` of Kingston residents
-between 2021 and 2023^[Differences between Kingston and the rest of the Inner South and South in how transit levels changed between 2021 and 2023 were not statistically significant 
-(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`), nor were differences between Kingston and the rest of the Greater Melbourne
-(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
+Transit levels increased by 1% or more for `r label_percent(accuracy=0.1)(pcol_1$data[1:6,3] %>% sum())` of Kingston residents
+between 2021 and 2023,
+which is a lower proportion than for the rest of the Inner South and South East SA4s (`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:6,3] %>% sum())`)^[Differences were statistically significant 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).], but slightly higher than for the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:6,3] %>% sum())`)^[Differences were statistically significant
+(`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Kingston") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Kingston") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Kingston population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
@@ -5707,10 +5708,12 @@ elsewhere in Melbourne.].
 For `r label_percent(accuracy=0.1)(pcol$data[1:6,4] %>% sum())` of this cohort service levels increased 1% or more by 2023, a lower proportion than
 for the similar cohort in the rest of the Inner South and South East SA4s
 (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:7,4] %>% sum())`)^[Differences
-were statistically significant between Kingston and the rest of the Inner South and South East SA4s 
-(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_very_high_needs)`), but not statistically significant between Kingston and the rest of Greater Melbourne (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
+were statistically significant 
+(`r prmisc::print_chi2(melbourne_2021_SA1_comparison_very_high_needs)`)] 
+or the rest of Melbourne
+(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:7,4] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_very_high_needs)`).].
 
-Overall, Kingston residents had less transit than others in the Inner South and South East SA4s, but more than those elsewhere. Change between 2021 and 2023 was similar in Kingston to Melbourne overall, but those with greater needs-gaps in Kingston saw less improvement than others in the rest of the Inner South and South East SA4s. 
+Overall, Kingston residents had less transit than others in the Inner South and South East SA4s, but more than those elsewhere. Those with greater needs-gaps in Kingston in 2021 were less likely to have seen transit increase by 2023 than those elsewhere. 
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 1

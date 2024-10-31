@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  27 OCT 2024 12:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  30 OCT 2024 14:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -828,14 +828,14 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Kingston_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 137.5
-1375pt>
+<City_of_Kingston_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 99.37
+125pt>
 File: City_of_Kingston_files/figure-latex/Needs_map-1.pdf Graphic file (type pd
 f)
 <use City_of_Kingston_files/figure-latex/Needs_map-1.pdf>
 Package pdftex.def Info: City_of_Kingston_files/figure-latex/Needs_map-1.pdf  u
 sed on input line 131.
-(pdftex.def)             Requested size: 312.02722pt x 161.3122pt.
+(pdftex.def)             Requested size: 312.02722pt x 116.56865pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 131--132
 
@@ -844,27 +844,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 131--132
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Kingston_files/figure-latex/SI_map-1.pdf, id=7, 242.9075pt x 157.58875
-pt>
+<City_of_Kingston_files/figure-latex/SI_map-1.pdf, id=7, 265.99374pt x 137.5137
+5pt>
 File: City_of_Kingston_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
 <use City_of_Kingston_files/figure-latex/SI_map-1.pdf>
 Package pdftex.def Info: City_of_Kingston_files/figure-latex/SI_map-1.pdf  used
  on input line 142.
-(pdftex.def)             Requested size: 239.99731pt x 155.70073pt.
-<City_of_Kingston_files/figure-latex/SI_map-2.pdf, id=8, 242.9075pt x 157.58875
-pt>
+(pdftex.def)             Requested size: 240.00502pt x 124.07806pt.
+<City_of_Kingston_files/figure-latex/SI_map-2.pdf, id=8, 265.99374pt x 137.5137
+5pt>
 File: City_of_Kingston_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
 <use City_of_Kingston_files/figure-latex/SI_map-2.pdf>
 Package pdftex.def Info: City_of_Kingston_files/figure-latex/SI_map-2.pdf  used
  on input line 142.
-(pdftex.def)             Requested size: 239.99731pt x 155.70073pt.
+(pdftex.def)             Requested size: 240.00502pt x 124.07806pt.
 
-Overfull \hbox (2.90463pt too wide) in paragraph at lines 142--143
+Overfull \hbox (2.92004pt too wide) in paragraph at lines 142--143
 [][] []
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 142--143
+
+ []
+
+
+LaTeX Warning: Marginpar on page 1 moved.
+
+
+LaTeX Warning: Marginpar on page 1 moved.
+
+
+LaTeX Warning: Marginpar on page 1 moved.
+
+
+LaTeX Warning: Marginpar on page 1 moved.
+
+<City_of_Kingston_files/figure-latex/SI_change_map-1.pdf, id=9, 253.94875pt x 1
+14.4275pt>
+File: City_of_Kingston_files/figure-latex/SI_change_map-1.pdf Graphic file (typ
+e pdf)
+<use City_of_Kingston_files/figure-latex/SI_change_map-1.pdf>
+Package pdftex.def Info: City_of_Kingston_files/figure-latex/SI_change_map-1.pd
+f  used on input line 157.
+(pdftex.def)             Requested size: 480.01991pt x 216.29355pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
  []
 
@@ -881,18 +906,8 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Kingston_files/figure-latex/SI_change_map-1.pdf, id=32, 253.94875pt x 
-91.34125pt>
-File: City_of_Kingston_files/figure-latex/SI_change_map-1.pdf Graphic file (typ
-e pdf)
-<use City_of_Kingston_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: City_of_Kingston_files/figure-latex/SI_change_map-1.pd
-f  used on input line 157.
-(pdftex.def)             Requested size: 480.01991pt x 172.65536pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--158
-
- []
+LaTeX Warning: Marginpar on page 2 moved.
 
 
 LaTeX Warning: Marginpar on page 2 moved.
@@ -923,7 +938,7 @@ Package rerunfilecheck Info: File `City_of_Kingston.out' has not changed.
 Here is how much of TeX's memory you used:
  15568 strings out of 478268
  250077 string characters out of 5846347
- 574346 words of memory out of 5000000
+ 578346 words of memory out of 5000000
  33395 multiletter control sequences out of 15000+600000
  517572 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -937,7 +952,7 @@ mf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/texlive/2022/texmf-dist
 /fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/ur
 w/palatino/uplri8a.pfb>
-Output written on City_of_Kingston.pdf (2 pages, 405359 bytes).
+Output written on City_of_Kingston.pdf (2 pages, 402496 bytes).
 PDF statistics:
  390 PDF objects out of 1000 (max. 8388607)
  210 compressed objects within 3 object streams

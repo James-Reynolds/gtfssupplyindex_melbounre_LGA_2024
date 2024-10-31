@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  26 OCT 2024 21:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  30 OCT 2024 09:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -887,14 +887,14 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Monash_files/figure-latex/SI_change_map-1.pdf, id=32, 253.94875pt x 99
-.37125pt>
+<City_of_Monash_files/figure-latex/SI_change_map-1.pdf, id=32, 253.94875pt x 91
+.34125pt>
 File: City_of_Monash_files/figure-latex/SI_change_map-1.pdf Graphic file (type 
 pdf)
 <use City_of_Monash_files/figure-latex/SI_change_map-1.pdf>
 Package pdftex.def Info: City_of_Monash_files/figure-latex/SI_change_map-1.pdf 
  used on input line 158.
-(pdftex.def)             Requested size: 480.01991pt x 187.83388pt.
+(pdftex.def)             Requested size: 480.01991pt x 172.65536pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 158--159
 
@@ -955,7 +955,7 @@ mf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/texlive/2022/texmf-dist
 /fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/ur
 w/palatino/uplri8a.pfb>
-Output written on City_of_Monash.pdf (2 pages, 437567 bytes).
+Output written on City_of_Monash.pdf (2 pages, 437202 bytes).
 PDF statistics:
  438 PDF objects out of 1000 (max. 8388607)
  234 compressed objects within 3 object streams
