@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.25)  1 NOV 2024 14:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.25)  1 NOV 2024 16:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**City_of_Brimbank.tex
-(./City_of_Brimbank.tex
+**City_of_Moonee_Valley.tex
+(./City_of_Moonee_Valley.tex
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-10-09>
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/tufte-latex/tufte-handout.cls
@@ -280,7 +280,7 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/natbib/bibentry.sty
 Package: bibentry 2007/10/30 1.5 (PWD)
 )
-No file City_of_Brimbank.bbl.
+No file City_of_Moonee_Valley.bbl.
 \c@@tufte@num@bibkeys=\count292
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/sauerj/optparams.sty
 Package: optparams 2004/08/14 v0.9 multiple optional parameters in macros
@@ -643,8 +643,8 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count337
 \l__pdf_internal_box=\box123
-) (./City_of_Brimbank.aux)
-\openout1 = `City_of_Brimbank.aux'.
+) (./City_of_Moonee_Valley.aux)
+\openout1 = `City_of_Moonee_Valley.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
@@ -665,9 +665,9 @@ LaTeX Font Info:    ... okay on input line 86.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
 Package hyperref Info: Link coloring OFF on input line 86.
-(./City_of_Brimbank.out) (./City_of_Brimbank.out)
+(./City_of_Moonee_Valley.out) (./City_of_Moonee_Valley.out)
 \@outlinefile=\write3
-\openout3 = `City_of_Brimbank.out'.
+\openout3 = `City_of_Moonee_Valley.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -781,16 +781,10 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-<City_of_Brimbank_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 110.4125pt>
-File: City_of_Brimbank_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
-<use City_of_Brimbank_files/figure-latex/Needs_map-1.pdf>
-Package pdftex.def Info: City_of_Brimbank_files/figure-latex/Needs_map-1.pdf  used on input line 132.
+<City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 110.4125pt>
+File: City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
+<use City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf>
+Package pdftex.def Info: City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf  used on input line 132.
 (pdftex.def)             Requested size: 312.02722pt x 129.52072pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 132--133
@@ -806,15 +800,15 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Brimbank_files/figure-latex/SI_map-1.pdf, id=7, 265.99374pt x 124.465pt>
-File: City_of_Brimbank_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
-<use City_of_Brimbank_files/figure-latex/SI_map-1.pdf>
-Package pdftex.def Info: City_of_Brimbank_files/figure-latex/SI_map-1.pdf  used on input line 143.
+<City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf, id=7, 265.99374pt x 124.465pt>
+File: City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
+<use City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf>
+Package pdftex.def Info: City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf  used on input line 143.
 (pdftex.def)             Requested size: 240.00502pt x 112.30423pt.
-<City_of_Brimbank_files/figure-latex/SI_map-2.pdf, id=8, 265.99374pt x 124.465pt>
-File: City_of_Brimbank_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
-<use City_of_Brimbank_files/figure-latex/SI_map-2.pdf>
-Package pdftex.def Info: City_of_Brimbank_files/figure-latex/SI_map-2.pdf  used on input line 143.
+<City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf, id=8, 265.99374pt x 124.465pt>
+File: City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
+<use City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf>
+Package pdftex.def Info: City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf  used on input line 143.
 (pdftex.def)             Requested size: 240.00502pt x 112.30423pt.
 
 Overfull \hbox (2.92004pt too wide) in paragraph at lines 143--144
@@ -830,7 +824,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
 [1
 
-{/Users/jreynold/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/jreynold/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./City_of_Brimbank_files/figure-latex/Needs_map-1.pdf>]
+{/Users/jreynold/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/jreynold/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf>]
 
 LaTeX Warning: Marginpar on page 2 moved.
 
@@ -840,11 +834,11 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Brimbank_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x 89.33376pt>
-File: City_of_Brimbank_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
-<use City_of_Brimbank_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: City_of_Brimbank_files/figure-latex/SI_change_map-1.pdf  used on input line 158.
-(pdftex.def)             Requested size: 480.01991pt x 168.86075pt.
+<City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x 85.31876pt>
+File: City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
+<use City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf>
+Package pdftex.def Info: City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf  used on input line 158.
+(pdftex.def)             Requested size: 480.01991pt x 161.27148pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 158--159
 
@@ -872,6 +866,676 @@ LaTeX Warning: Marginpar on page 2 moved.
 LaTeX Warning: Marginpar on page 2 moved.
 
 
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 186.
+
+[2 <./City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf> <./City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf> <./City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf>]
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 227--227
+[]\T1/cmtt/m/n/10 ##  transit_supply City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 227--227
+[]\T1/cmtt/m/n/10 ##     Zero Supply                     3                       481[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 227--227
+[]\T1/cmtt/m/n/10 ##        Very Low                   112                      2398[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 227--227
+[]\T1/cmtt/m/n/10 ##             Low                   199                      2061[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 227--227
+[]\T1/cmtt/m/n/10 ##   Below average                   160                      1595[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 227--227
+[]\T1/cmtt/m/n/10 ##   Above average                    30                       414[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 227--227
+[]\T1/cmtt/m/n/10 ##            High                    17                       262[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 227--227
+[]\T1/cmtt/m/n/10 ##       Very High                     7                        90[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 242--242
+[]\T1/cmtt/m/n/10 ##  transit_supply City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 242--242
+[]\T1/cmtt/m/n/10 ##     Zero Supply             32.641717                 451.35828[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 242--242
+[]\T1/cmtt/m/n/10 ##        Very Low            169.278324                2340.72168[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 242--242
+[]\T1/cmtt/m/n/10 ##             Low            152.417933                2107.58207[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 242--242
+[]\T1/cmtt/m/n/10 ##   Below average            118.359944                1636.64006[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 242--242
+[]\T1/cmtt/m/n/10 ##   Above average             29.944054                 414.05595[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 242--242
+[]\T1/cmtt/m/n/10 ##            High             18.816196                 260.18380[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 242--242
+[]\T1/cmtt/m/n/10 ##       Very High              6.541832                  90.45817[] 
+ []
+
+
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 257.
+
+[3]
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 287--287
+[]\T1/cmtt/m/n/10 ##  transit_supply City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 287--287
+[]\T1/cmtt/m/n/10 ##     Zero Supply                     3                       468[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 287--287
+[]\T1/cmtt/m/n/10 ##        Very Low                   125                      2372[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 287--287
+[]\T1/cmtt/m/n/10 ##             Low                   191                      2060[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 287--287
+[]\T1/cmtt/m/n/10 ##   Below average                   155                      1605[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 287--287
+[]\T1/cmtt/m/n/10 ##   Above average                    30                       427[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 287--287
+[]\T1/cmtt/m/n/10 ##            High                    17                       276[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 287--287
+[]\T1/cmtt/m/n/10 ##       Very High                     7                        93[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 302--302
+[]\T1/cmtt/m/n/10 ##  transit_supply City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 302--302
+[]\T1/cmtt/m/n/10 ##     Zero Supply             31.764976                 439.23502[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 302--302
+[]\T1/cmtt/m/n/10 ##        Very Low            168.401584                2328.59842[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 302--302
+[]\T1/cmtt/m/n/10 ##             Low            151.810959                2099.18904[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 302--302
+[]\T1/cmtt/m/n/10 ##   Below average            118.697152                1641.30285[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 302--302
+[]\T1/cmtt/m/n/10 ##   Above average             30.820794                 426.17921[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 302--302
+[]\T1/cmtt/m/n/10 ##            High             19.760378                 273.23962[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 302--302
+[]\T1/cmtt/m/n/10 ##       Very High              6.744156                  93.25584[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##           ratio_binned City of Moonee Valley Similar LGAs[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##  Increased 30%+ or new                     1           14[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%                     2           41[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%                    12          156[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%                    34          170[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%                    64          501[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##              Within 1%                   279         1591[] 
+ []
+
+
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 320.
+
+[4]
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%                    41          175[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%                    72          198[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more                    20           70[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 320--320
+[]\T1/cmtt/m/n/10 ##     Not served in 2023                     3            5[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##           ratio_binned City of Moonee Valley Similar LGAs[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##  Increased 30%+ or new              2.296318    12.703682[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%              6.582778    36.417222[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%             25.718759   142.281241[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%             31.229922   172.770078[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%             86.494636   478.505364[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##              Within 1%            286.274282  1583.725718[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%             33.066976   182.933024[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%             41.333720   228.666280[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more             13.777907    76.222093[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 338--338
+[]\T1/cmtt/m/n/10 ##     Not served in 2023              1.224703     6.775297[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##           ratio_binned City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##  Increased 30%+ or new                     1                       388[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%                     2                       465[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%                    12                       323[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%                    34                       392[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%                    64                       979[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##              Within 1%                   279                      3121[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%                    41                       414[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%                    72                       467[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more                    20                       284[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 356--356
+[]\T1/cmtt/m/n/10 ##     Not served in 2023                     3                       468[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##           ratio_binned City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##  Increased 30%+ or new              26.23477                  362.7652[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%              31.49521                  435.5048[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%              22.59292                  312.4071[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%              28.73011                  397.2699[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%              70.34155                  972.6584[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##              Within 1%             229.30132                 3170.6987[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%              30.68591                  424.3141[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%              36.35100                  502.6490[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more              20.50224                  283.4978[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 374--374
+[]\T1/cmtt/m/n/10 ##     Not served in 2023              31.76498                  439.2350[] 
+ []
+
+
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 374.
+
+[5]
+Overfull \hbox (39.66412pt too wide) in paragraph at lines 418--418
+[]\T1/cmtt/m/n/10 ##  composite_needs City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (39.66412pt too wide) in paragraph at lines 418--418
+[]\T1/cmtt/m/n/10 ##         Very Low                   143                      1429[] 
+ []
+
+
+Overfull \hbox (39.66412pt too wide) in paragraph at lines 418--418
+[]\T1/cmtt/m/n/10 ##              Low                   114                      1315[] 
+ []
+
+
+Overfull \hbox (39.66412pt too wide) in paragraph at lines 418--418
+[]\T1/cmtt/m/n/10 ##    Below average                    86                      1300[] 
+ []
+
+
+Overfull \hbox (39.66412pt too wide) in paragraph at lines 418--418
+[]\T1/cmtt/m/n/10 ##    Above average                    60                      1046[] 
+ []
+
+
+Overfull \hbox (39.66412pt too wide) in paragraph at lines 418--418
+[]\T1/cmtt/m/n/10 ##             High                    58                       997[] 
+ []
+
+
+Overfull \hbox (39.66412pt too wide) in paragraph at lines 418--418
+[]\T1/cmtt/m/n/10 ##        Very High                    40                       994[] 
+ []
+
+
+Overfull \hbox (39.66412pt too wide) in paragraph at lines 418--418
+[]\T1/cmtt/m/n/10 ##               NA                    27                       220[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##      ratio_binned_less City of Moonee Valley Similar LGAs[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##     Not served in 2023                     0            1[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##  Increased 30%+ or new                     1            3[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%                     0            9[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%                     5           49[] 
+ []
+
+
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 446.
+
+[6]
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%                     8           46[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%                    13          119[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##              Within 1%                    79          425[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%                     9           26[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%                    18           56[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 446--446
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more                    10            6[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##      ratio_binned_less City of Moonee Valley Similar LGAs[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##     Not served in 2023             0.1619479    0.8380521[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##  Increased 30%+ or new             0.6477916    3.3522084[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%             1.4575311    7.5424689[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%             8.7451869   45.2548131[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%             8.7451869   45.2548131[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%            21.3771234  110.6228766[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##              Within 1%            81.6217441  422.3782559[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%             5.6681767   29.3318233[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%            11.9841450   62.0158550[] 
+ []
+
+
+Overfull \hbox (2.9231pt too wide) in paragraph at lines 460--460
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more             2.5911665   13.4088335[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##      ratio_binned_less City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##     Not served in 2023                     0                       152[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##  Increased 30%+ or new                     1                       183[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%                     0                       192[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%                     5                       115[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%                     8                       160[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%                    13                       333[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##              Within 1%                    79                      1126[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%                     9                       156[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%                    18                       168[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 474--474
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more                    10                       111[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##      ratio_binned_less City of Moonee Valley Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##     Not served in 2023              7.656217                  144.3438[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##  Increased 30%+ or new              9.268052                  174.7319[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%              9.671011                  182.3290[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%              6.044382                  113.9556[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%              8.462135                  159.5379[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%             17.427968                  328.5720[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##              Within 1%             60.695667                 1144.3043[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%              8.311025                  156.6890[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%              9.368792                  176.6312[] 
+ []
+
+
+Overfull \hbox (71.15643pt too wide) in paragraph at lines 488--488
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more              6.094752                  114.9052[] 
+ []
+
+
 Package bibentry Warning: You have used \nobibliography* 
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
@@ -880,29 +1544,29 @@ Package bibentry Warning: You have used \nobibliography*
 
 
 Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 186.
+This message occurred on input line 492.
 
-[2 <./City_of_Brimbank_files/figure-latex/SI_map-1.pdf> <./City_of_Brimbank_files/figure-latex/SI_map-2.pdf> <./City_of_Brimbank_files/figure-latex/SI_change_map-1.pdf>] (./City_of_Brimbank.aux)
+[7] (./City_of_Moonee_Valley.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-10-09>
  ***********
-Package rerunfilecheck Info: File `City_of_Brimbank.out' has not changed.
+Package rerunfilecheck Info: File `City_of_Moonee_Valley.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15369 strings out of 475537
- 243714 string characters out of 5776454
- 679764 words of memory out of 5000000
- 37665 multiletter control sequences out of 15000+600000
- 601510 words of font info for 109 fonts, out of 8000000 for 9000
+ 15378 strings out of 475537
+ 244111 string characters out of 5776454
+ 689817 words of memory out of 5000000
+ 37668 multiletter control sequences out of 15000+600000
+ 601823 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 96i,11n,97p,421b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on City_of_Brimbank.pdf (2 pages, 430686 bytes).
+ 96i,11n,97p,441b,602s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on City_of_Moonee_Valley.pdf (7 pages, 449687 bytes).
 PDF statistics:
- 418 PDF objects out of 1000 (max. 8388607)
- 209 compressed objects within 3 object streams
- 6 named destinations out of 1000 (max. 500000)
+ 498 PDF objects out of 1000 (max. 8388607)
+ 232 compressed objects within 3 object streams
+ 11 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
