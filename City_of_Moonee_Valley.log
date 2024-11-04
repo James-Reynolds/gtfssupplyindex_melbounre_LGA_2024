@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.25)  1 NOV 2024 16:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.25)  4 NOV 2024 14:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -710,50 +710,55 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 100.
+LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 95.
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
-LaTeX Font Info:    Trying to load font information for OML+zplm on input line 100.
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line 95.
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 100.
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 95.
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 100.
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 95.
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 100.
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 95.
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 100.
+(Font)              scaled to size 10.42007pt on input line 95.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 100.
+(Font)              scaled to size 7.91925pt on input line 95.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 100.
+(Font)              scaled to size 6.25204pt on input line 95.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 100.
+(Font)              scaled to size 10.42007pt on input line 95.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 100.
+(Font)              scaled to size 7.91925pt on input line 95.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 100.
+(Font)              scaled to size 6.25204pt on input line 95.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 100.
+(Font)              scaled to size 8.33606pt on input line 95.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 100.
+(Font)              scaled to size 5.21004pt on input line 95.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 100.
+(Font)              scaled to size 8.33606pt on input line 95.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 5.21004pt on input line 100.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 107.
+(Font)              scaled to size 5.21004pt on input line 95.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 95.
 (/Users/jreynold/Library/TinyTeX/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
+<4rctaxfc-400.png, id=5, 321.2pt x 321.2pt>
+File: 4rctaxfc-400.png Graphic file (type png)
+<use 4rctaxfc-400.png>
+Package pdftex.def Info: 4rctaxfc-400.png  used on input line 95.
+(pdftex.def)             Requested size: 71.12982pt x 71.12982pt.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
@@ -781,7 +786,10 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 110.4125pt>
+
+LaTeX Warning: Marginpar on page 1 moved.
+
+<City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf, id=8, 265.99374pt x 110.4125pt>
 File: City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
 <use City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf>
 Package pdftex.def Info: City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf  used on input line 132.
@@ -800,12 +808,12 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf, id=7, 265.99374pt x 124.465pt>
+<City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf, id=9, 265.99374pt x 124.465pt>
 File: City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
 <use City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf>
 Package pdftex.def Info: City_of_Moonee_Valley_files/figure-latex/SI_map-1.pdf  used on input line 143.
 (pdftex.def)             Requested size: 240.00502pt x 112.30423pt.
-<City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf, id=8, 265.99374pt x 124.465pt>
+<City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf, id=10, 265.99374pt x 124.465pt>
 File: City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
 <use City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf>
 Package pdftex.def Info: City_of_Moonee_Valley_files/figure-latex/SI_map-2.pdf  used on input line 143.
@@ -824,7 +832,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
 [1
 
-{/Users/jreynold/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/jreynold/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf>]
+{/Users/jreynold/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/jreynold/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./4rctaxfc-400.png> <./City_of_Moonee_Valley_files/figure-latex/Needs_map-1.pdf>]
 
 LaTeX Warning: Marginpar on page 2 moved.
 
@@ -834,7 +842,7 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x 85.31876pt>
+<City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf, id=34, 253.94875pt x 85.31876pt>
 File: City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
 <use City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf>
 Package pdftex.def Info: City_of_Moonee_Valley_files/figure-latex/SI_change_map-1.pdf  used on input line 158.
@@ -1555,18 +1563,18 @@ Package rerunfilecheck Info: File `City_of_Moonee_Valley.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15378 strings out of 475537
- 244111 string characters out of 5776454
+ 15385 strings out of 475537
+ 244271 string characters out of 5776454
  689817 words of memory out of 5000000
- 37668 multiletter control sequences out of 15000+600000
+ 37675 multiletter control sequences out of 15000+600000
  601823 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  96i,11n,97p,441b,602s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </Users/jreynold/Library/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></Users/jreynold/Library/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on City_of_Moonee_Valley.pdf (7 pages, 449687 bytes).
+Output written on City_of_Moonee_Valley.pdf (7 pages, 450357 bytes).
 PDF statistics:
- 498 PDF objects out of 1000 (max. 8388607)
- 232 compressed objects within 3 object streams
+ 493 PDF objects out of 1000 (max. 8388607)
+ 231 compressed objects within 3 object streams
  11 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

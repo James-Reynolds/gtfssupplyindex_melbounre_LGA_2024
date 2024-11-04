@@ -68,29 +68,24 @@ lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Hobson
 
 ```
 
-This note explores social needs for transport,
-and transit provision
-in the City of Hobsons Bay,
-using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
-In Victoria,
-public transport is managed
-by the state government,
-although Local Government Authorities (LGAs)
-may have influence
-through planning processes,
-advocacy
-etc.
+This note is part of a series
+examining transit social needs-gaps in Greater Melbourne^[See
+https://tinyurl.com/4rctaxfc ![QR code](4rctaxfc-400.png){width=2.5cm}
+]. In Victoria,
+public transport is the responsibility of state government,
+although Local Government Authorities (LGAs) may have some influence
+through planning processes and advocacy. 
 However, it is unclear
 how much transit is supplied
-or how well social needs
+or how well social needs for transport
 are met for each LGA.
-This note examines
-the City of Hobsons Bay
+This note explores social needs for transport,
+and transit provision
 in 2021 and 2023,
-and is part of a series
-on LGAs in Greater Melbourne^[See
-https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024
-but lookout, I misspelled "Melbourne" ]. 
+in the City of Hobson Bay
+using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
+
+
 
 
 \newthought{Methods:}

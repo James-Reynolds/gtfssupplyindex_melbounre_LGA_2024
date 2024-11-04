@@ -68,26 +68,24 @@ sed_of_interest_2021 <- absmapsdata::sed2021 %>% filter(sed_name_2021 == "Melbou
 
 ```
 
-This note explores social needs for transport,
-and transit provision
-in the Melbourne (Northern Metropolitan) State Electoral Division,
-using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
-In Victoria,
-public transport is managed
-by the state government, 
-formed from amongst Members of Parliament
+This note is part of a series
+examining transit social needs-gaps in Greater Melbourne^[See
+https://tinyurl.com/4rctaxfc ![QR code](4rctaxfc-400.png){width=2.5cm}
+]. In Victoria,
+public transport is the responsibility
+of the state government, which is
+formed from among Members of Parliament
 elected to represent individual State Electoral Divisions (seats).
 However, it is unclear
 how much transit is supplied
 or how well social needs for transport
 are met within each seat.
-This note examines
-the Melbourne (Northern Metropolitan) State Electoral Division
+This note explores social needs for transport,
+and transit provision
 in 2021 and 2023,
-and is part of a series
-examining transit social needs-gaps in Greater Melbourne^[See
-https://github.com/James-Reynolds/gtfssupplyindex_melbounre_LGA_2024
-but lookout, I misspelled "Melbourne" ]. 
+in the Melbourne (Northern Metropolitan) State Electoral Division,
+using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
+
 
 
 \newthought{Methods:}
