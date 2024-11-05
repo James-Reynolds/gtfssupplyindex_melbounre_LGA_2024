@@ -1,6 +1,6 @@
 ---
-title: "City of Yarra: social needs, gaps in transit"
-runningheader: "City of Yarra:needs-gaps" # only for pdf output
+title: "Williamstown (Western Metropolitan) State Electoral Division: social needs, gaps in transit"
+runningheader: "Williamstown (Western Metropolitan) State Electoral Division:needs-gaps" # only for pdf output
 author: "Dr James Reynolds"
 date: "`r Sys.Date()`"
 bibliography: References.bib
@@ -61,31 +61,30 @@ library(tidytransit)
 library(patchwork)
 library(ggpattern)
 
-lga_of_interest_2016 <- absmapsdata::lga2016 %>% filter(lga_name_2016 == "Yarra (C)")
+lga_of_interest_2016 <- absmapsdata::lga2016 %>% filter(lga_name_2016 == "Melbourne (C)")
 
-lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Yarra")
+sed_of_interest_2021 <- absmapsdata::sed2021 %>% filter(sed_name_2021 == "Williamstown (Western Metropolitan)")
 
 
 ```
 
 This note is part of a series
 examining transit social needs-gaps in Greater Melbourne^[See
-https://tinyurl.com/4rctaxfc ![QR code](4rctaxfc-400.png){width=1.5cm}
+https://tinyurl.com/4rctaxfc ![QR code](4rctaxfc-400.png){width=2.5cm}
 ]. In Victoria,
-public transport is the responsibility of state government,
-although Local Government Authorities (LGAs) may have some influence
-through planning processes and advocacy. 
+public transport is the responsibility
+of the state government, which is
+formed from among Members of Parliament
+elected to represent individual State Electoral Divisions (seats).
 However, it is unclear
 how much transit is supplied
 or how well social needs for transport
-are met for each LGA.
-Using
-the Currie and Sendbergs (2007)[@Currie2007Identifying; @currie2010identifying] 
-methodology,
-this note explores needs for transport,
+are met within each seat.
+This note explores social needs for transport,
 and transit provision
 in 2021 and 2023,
-in the City of Yarra.
+in the Williamstown (Western Metropolitan) State Electoral Division,
+using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
 
 
 
@@ -93,10 +92,11 @@ in the City of Yarra.
 Scores for transit supply
 and transport needs
 were calculated
-based on Australian Bureau of Statistics (ABS) data and
+based on
 the Victorian GTFS feed^[Results are based on GTFS feeds
 for August 2021 and 2023,
 so may not match services run.]
+and Australian Bureau of Statistics (ABS) data 
 using the *gtfssupplyindex* R package^[See
 https://github.com/James-Reynolds/gtfssupplyindex]
 as per Reynolds, Currie and Qu (in drafting)[@Reynolds0000gtfsmainpaper].
@@ -923,11 +923,11 @@ vic_lga07aust_region <- st_read("data/1259030001lga07 aust/", quiet = TRUE) %>%
 # Set boundaries between around middle suburbs       
 middle_lga07aust_region <- vic_lga07aust_region[
   vic_lga07aust_region$LGANAME07 %in% 
-    c("Banyule (C)", "Yarra (C)", "Boroondara (C)", "Brimbank (C)", 
+    c("Banyule (C)", "Williamstown (Western Metropolitan) State Electoral Division (C)", "Boroondara (C)", "Brimbank (C)", 
       "Darebin (C)", "Glen Eira (C)", "Greater Dandenong (C)", 
       "Hobsons Bay (C)", "Kingston (C)", "Manningham (C)", 
-      "Maribyrnong (C)", "Yarra (C)", "Moonee Valley (C)", 
-      "Moreland (C)", "Yarra (C)","Whitehorse (C)"), ] 
+      "Maribyrnong (C)", "Williamstown (Western Metropolitan) State Electoral Division (C)", "Moonee Valley (C)", 
+      "Moreland (C)", "Williamstown (Western Metropolitan) State Electoral Division (C)","Whitehorse (C)"), ] 
 middle_lga07aust_region <- st_union(middle_lga07aust_region)
 
 
@@ -1981,7 +1981,7 @@ pcol_inner_east <- melbourne_2021_population_transit_supply_by_SA4 %>%
 
 
 pcol_inner_south <- melbourne_2021_population_transit_supply_by_SA4 %>% 
-  filter(sa4_name_2021 == "Inner East") %>%
+  filter(sa4_name_2021 == "Inner South") %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
    geom_col(aes(transit_supply, perc, fill = transit_supply)) +
@@ -1994,7 +1994,7 @@ pcol_inner_south <- melbourne_2021_population_transit_supply_by_SA4 %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Inner East",
+    title = "Inner South",
     x = NULL,
     y = NULL
   ) +
@@ -2786,7 +2786,7 @@ pcol_inner_east <-left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_
 
 pcol_inner_south <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_2023_wider$ratio_binned)),
   si_by_area_2021_2023_wider %>%   st_drop_geometry() %>% 
-  filter(sa4_name_2021 == "Inner East") %>% 
+  filter(sa4_name_2021 == "Inner South") %>% 
   aggregate(population ~ ratio_binned, sum)) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%   mutate(ratio_binned = factor(ratio_binned,     levels = c("New service",               "Increased 30% or more",               "Increased 10 to 30%",               "Increased 5 to 10%",               "Increased 3 to 5%",               "Increased 1 to 3%",               "Within 1%",               "Reduced 1 to 3%",               "Reduced 3 to 10%",               "Reduced 10% or more",               "Service withdrawn (magenta)",               "Never served (black)"    ))) %>%
   mutate(perc=population/sum(population)) %>% 
@@ -2801,7 +2801,7 @@ pcol_inner_south <- left_join(data.frame(ratio_binned=levels(si_by_area_2021_202
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Inner East",
+    title = "Inner South",
     x = NULL,
     y = NULL
   ) +
@@ -3276,7 +3276,7 @@ pcol_inner_east <- combined_needs_index_2021_sa1_greater_melbourne_sa4 %>%
 
 
 pcol_inner_south <- combined_needs_index_2021_sa1_greater_melbourne_sa4 %>% 
-  filter(sa4_name_2021 == "Inner East") %>%
+  filter(sa4_name_2021 == "Inner South") %>%
   aggregate(population ~ composite_needs, sum) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
@@ -3290,7 +3290,7 @@ pcol_inner_south <- combined_needs_index_2021_sa1_greater_melbourne_sa4 %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Inner East",
+    title = "Inner South",
     x = NULL,
     y = NULL
   ) +
@@ -4383,7 +4383,7 @@ pcol_inner_east <- melbourne_needs_gap_sa1_2021 %>% st_drop_geometry() %>%
 
 pcol_inner_south <- melbourne_needs_gap_sa1_2021 %>% st_drop_geometry() %>% 
   filter(composite_needs == "Very High") %>% 
-  filter(sa4_name_2021 == "Inner East") %>%
+  filter(sa4_name_2021 == "Inner South") %>%
   aggregate(population ~ transit_supply, sum) %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
@@ -4397,7 +4397,7 @@ pcol_inner_south <- melbourne_needs_gap_sa1_2021 %>% st_drop_geometry() %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Inner East",
+    title = "Inner South",
     x = NULL,
     y = NULL
   ) +
@@ -4662,35 +4662,82 @@ ptv_160804_gtfs <- tidytransit::get_route_geometry(ptv_160804_gtfs)
 
 #sort SA1s into LGA of interest, Rest of SA4, Rest of Melbourne
 sa1s_in_lga_of_interest <- sa12021 %>% select(sa1_code_2021) %>%
-  st_filter(lga_of_interest_2021, .predicate =  st_intersects)
-sa1s_in_lga_of_interest$group <- "City of Yarra"
+  st_filter(sed_of_interest_2021, .predicate =  st_intersects)
+sa1s_in_lga_of_interest$group <- "Williamstown (W Metro)"
 
-sa1s_in_sa4_of_interest <- sa12021 %>% 
-  st_drop_geometry()  %>%
-  filter(sa4_name_2021 == "Melbourne - Inner" | sa4_name_2021 == "Melbourne - Inner East") %>%
-  select(sa1_code_2021)
-sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
-  left_join(sa1s_in_lga_of_interest %>% 
-              st_drop_geometry())
-sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
-  replace_na(list(group = "Rest Inner and Inner East"))
+sa1s_in_other_lgas <- sed2021 %>% 
+   filter(sed_name_2021 == "Altona (Western Metropolitan)" | 
+            sed_name_2021 == "Footscray (Western Metropolitan)" | 
+             sed_name_2021 == "St Albans (Western Metropolitan)" |
+             sed_name_2021 == "Niddrie (Western Metropolitan)" | 
+             sed_name_2021 == "Essendon (Western Metropolitan)" | 
+             sed_name_2021 == "Brunswick (Northern Metropolitan)" | 
+             sed_name_2021 == "Pascoe Vale (Northern Metropolitan)" | 
+             sed_name_2021 == "Northcote (Northern Metropolitan)" | 
+             sed_name_2021 == "Broadmeadows (Northern Metropolitan)" | 
+             sed_name_2021 == "Bundoora (Northern Metropolitan)" | 
+             sed_name_2021 == "Preston (Northern Metropolitan)" | 
+             sed_name_2021 == "Ivanhoe (Eastern Metropolitan)" | 
+             sed_name_2021 == "Kew (Southern Metropolitan)" | 
+             sed_name_2021 == "Bulleen (Eastern Metropolitan)" | 
+             sed_name_2021 == "Forest Hill (Eastern Metropolitan)" | 
+             sed_name_2021 == "Ringwood (Eastern Metropolitan)" |
+             sed_name_2021 == "Box Hill (Eastern Metropolitan)" |
+             sed_name_2021 == "Burwood (Southern Metropolitan)" |
+             sed_name_2021 == "Hawthorn (Southern Metropolitan)" | 
+             sed_name_2021 == "Mount Waverley (Eastern Metropolitan)" | 
+             sed_name_2021 == "Oakleigh (Southern Metropolitan)" | 
+             sed_name_2021 == "Mulgrave (South-Eastern Metropolitan)" | 
+             sed_name_2021 == "Dandenong (South-Eastern Metropolitan)" | 
+             sed_name_2021 == "Keysborough (South-Eastern Metropolitan)" | 
+             sed_name_2021 == "Clarinda (South-Eastern Metropolitan)" | 
+             sed_name_2021 == "Bentleigh (Southern Metropolitan)" | 
+             sed_name_2021 == "Malvern (Southern Metropolitan)" | 
+             sed_name_2021 == "Caulfield (Southern Metropolitan)" | 
+             sed_name_2021 == "Brighton (Southern Metropolitan)" | 
+             sed_name_2021 == "Sandringham (Southern Metropolitan)" | 
+             sed_name_2021 == "Keysborough (South-Eastern Metropolitan)") 
+
+sa1s_in_other_lgas <- st_union(sa1s_in_other_lgas)
+plot(sa1s_in_other_lgas)
+
+sa1s_in_other_lgas <- sa12021 %>% select(sa1_code_2021) %>%
+  st_filter(sa1s_in_other_lgas, .predicate =  st_intersects)
+sa1s_in_other_lgas$group <- "Similar seats"
+
+sa1s_in_lga_of_interest_and_other_lgas <- sa1s_in_lga_of_interest %>%  
+  add_row(sa1s_in_other_lgas[sa1s_in_other_lgas$sa1_code_2021 %nin% sa1s_in_lga_of_interest$sa1_code_2021,])
+
+#plot(sa1s_in_lga_of_interest_and_other_lgas)
+
+sa1s_rest_of_greater_melbourne <- sa12021 %>% 
+  select(sa1_code_2021, gcc_name_2021) %>%
+  filter(gcc_name_2021 == "Greater Melbourne")
+
+sa1s_rest_of_greater_melbourne$group <- "Rest of Greater Melbourne"
+sa1s_in_lga_of_interest_and_other_lgas <- sa1s_in_lga_of_interest_and_other_lgas %>%
+  select(sa1_code_2021, group) %>%  
+  add_row(sa1s_rest_of_greater_melbourne[sa1s_rest_of_greater_melbourne$sa1_code_2021 %nin% sa1s_in_lga_of_interest_and_other_lgas$sa1_code_2021,] %>% 
+            select(sa1_code_2021, group) )
+#plot(sa1s_in_lga_of_interest_and_other_lgas)
+
 
 melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>% 
-  left_join(sa1s_in_sa4_of_interest, 
+  left_join(sa1s_in_lga_of_interest_and_other_lgas %>% st_drop_geometry(), 
             by =(join_by(area_id == sa1_code_2021)))
 melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
 melbourne_2021_SA1_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions1 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4699,35 +4746,35 @@ assumptions2 <- melbourne_2021_SA1_comparison$expected
 
 melbourne_2021_SA4_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions3 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
 assumptions4 <- melbourne_2021_SA4_comparison$expected
 
 melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>% 
-  left_join(sa1s_in_sa4_of_interest, 
+  left_join(sa1s_in_lga_of_interest_and_other_lgas, 
             by =(join_by(area_id == sa1_code_2021)))
 melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
 melbourne_2023_SA1_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions5 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) 
 
@@ -4737,27 +4784,27 @@ assumptions6 <- melbourne_2023_SA1_comparison$expected
 
 melbourne_2023_SA4_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions7 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
 assumptions8 <- melbourne_2023_SA4_comparison$expected
 
 si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
-left_join(sa1s_in_sa4_of_interest, 
+left_join(sa1s_in_lga_of_interest_and_other_lgas, 
             by =(join_by(sa1_code_2021 == sa1_code_2021)))
 si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
 
-combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>% left_join(sa1s_in_sa4_of_interest, 
+combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>% left_join(sa1s_in_lga_of_interest_and_other_lgas, 
             by =(join_by(sa1_code_2021 == sa1_code_2021)))
 combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
@@ -4768,20 +4815,20 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 ```
 
-\newthought{Results:} 
-Figure 1 compares social needs for transport in the Rest of the Inner and Inner East SA4s^[LGAs:
-City of Melbourne, Port Phillip, Boorondara, and parts of Moonee Valley, Merri-Bek, Darebin, Stonnington, Whitehorse and Manningham.]
-and for the rest of Greater Melbourne with
-those for the City of Yarra.
+\newthought{Results:} Figure 1 compares social needs for the Rest of the Inner SA4 
+and the rest of Greater Melbourne with
+those for the Williamstown (Western Metropolitan) State Electoral Division.
 
 
-```{r Needs_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 1, out.width = "100%", fig.cap="Needs in 2021 by population"}
+```{r Needs_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 1, out.width = "100%", fig.cap="Needs in 2021 by population, with suburban railways shown in grey"}
 
 #Set boundings box
-bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
+bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.75*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 2.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+
+
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -4792,7 +4839,7 @@ poly <- Poly_Coord_df %>%
   st_as_sfc()
 
 pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "City of Yarra") %>% 
+  filter(group == "Williamstown (W Metro)") %>% 
   st_drop_geometry() %>%
   na.omit() %>%
   aggregate(population ~ composite_needs, sum) %>%
@@ -4803,15 +4850,15 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
-  scale_y_continuous(limits = c(0,0.6)) +
+  scale_y_continuous(limits = c(0,0.8)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(composite_needs,  0.4, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
+  geom_text(aes(composite_needs,  0.45, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "City of Yarra",
+    title = "Williamstown (W Metro)",
     x = NULL,
     y = NULL
   ) +
@@ -4825,7 +4872,7 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
 
 
 pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "Rest Inner and Inner East") %>% 
+  filter(group == "Similar seats") %>% 
  st_drop_geometry() %>%
   na.omit() %>%
   aggregate(population ~ composite_needs, sum) %>%
@@ -4837,15 +4884,15 @@ pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
-  scale_y_continuous(limits = c(0,0.6)) +
+  scale_y_continuous(limits = c(0,0.8)) +
   geom_hline(yintercept = 0)  +
-  geom_text(aes(composite_needs,  0.4, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
+  geom_text(aes(composite_needs,  0.45, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner and Inner East",
+    title = "Similar seats",
     x = NULL,
     y = NULL
   ) +
@@ -4872,9 +4919,9 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
   mutate(perc=population/sum(population)) %>% 
   ggplot() + 
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
-  scale_y_continuous(limits = c(0,0.6)) +
+  scale_y_continuous(limits = c(0,0.8)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(composite_needs,  0.4, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
+  geom_text(aes(composite_needs,  0.45, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -4896,7 +4943,7 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
 
 ggplot()+ 
   geom_sf(data=combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "City of Yarra") %>% na.omit(),
+  filter(group == "Williamstown (W Metro)") %>% na.omit(),
           aes(fill = composite_needs), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -4911,22 +4958,22 @@ ggplot()+
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner East") %>% select(geometry), fill=NA, colour = "grey") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
 #  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+  geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'br') +
-  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.5, bottom = 0.1, right = 1.05, top =0.4) +
- inset_element(pcol_rest_SA4, left = 0.63, bottom = 0.4, right = 1.05, top =0.7) +
- inset_element(pcol_rest_melbourne, left = 0.63, bottom = 0.7, right = 1.05, top = 1.0 ) 
+  ggspatial::annotation_north_arrow(location = 'tr', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
+inset_element(pcol, left = 0.24, bottom = 0.6, right = 0.85, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.24, bottom = 0.2, right = 0.72, top =0.6) +
+ inset_element(pcol_rest_melbourne, left = 0.62, bottom = 0.2, right = 1.1, top = 0.6) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -4937,7 +4984,7 @@ melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[2:3] 
 
 assumptions13 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -4946,7 +4993,7 @@ assumptions14 <- melbourne_2021_SA1_comparison_needs$expected
 
 melbourne_2021_SA4_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -4957,7 +5004,7 @@ melbourne_2021_SA4_comparison_needs <- melbourne_2021_SA4_comparison_needs[2:3] 
 
 assumptions15 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -5005,7 +5052,7 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 
 
 si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>% 
-  left_join(sa1s_in_sa4_of_interest)
+  left_join(sa1s_in_lga_of_interest_and_other_lgas)
 si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
@@ -5013,7 +5060,9 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 
 Needs were higher than the Melbourne average 
 for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
-of the Yarra population, more than elsewhere in Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences between Yarra and the rest of the Inner and Inner East SA4s were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`). Differences with the rest of Greater Melbourne were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
+of the Williamstown (Western Metropolitan) State Electoral Division's population. 
+This share was higher than among the parts of Greater Melbourne that are beyond the Inner SA4 (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences with parts of Melbourne that are beyond the Inner SA4
+were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`). There was no statistically significant difference between the Richmond Division and the rest of the Inner SA4 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).].
 
 
 
@@ -5022,10 +5071,10 @@ of the Yarra population, more than elsewhere in Melbourne (`r label_percent(accu
 
 
 #Set boundings box
-bbox_list <- lapply(st_geometry(lga_of_interest_2016), st_bbox)
+bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + .45*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5036,7 +5085,7 @@ poly <- Poly_Coord_df %>%
   st_as_sfc()
 
 pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Yarra") %>% 
+  filter(group == "Williamstown (W Metro)") %>% 
   st_drop_geometry() %>%
   aggregate(population ~ transit_supply, sum) %>%
   right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -5055,7 +5104,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "City of Yarra",
+    title = "Williamstown (W Metro)",
     x = NULL,
     y = NULL
   ) +
@@ -5069,7 +5118,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 
 pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest Inner and Inner East") %>% 
+  filter(group == "Similar seats") %>% 
   st_drop_geometry() %>%
   aggregate(population ~ transit_supply, sum) %>%
   right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -5088,7 +5137,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner and Inner East",
+    title = "Similar seats",
     x = NULL,
     y = NULL
   ) +
@@ -5140,7 +5189,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 ggplot()+ 
   geom_sf(data=melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Yarra") %>% na.omit(),
+  filter(group == "Williamstown (W Metro)") %>% na.omit(),
           aes(fill = transit_supply), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -5151,28 +5200,28 @@ ggplot()+
 #        legend.title = element_text(size = 5), 
 #        legend.key.size = unit(0.08, 'cm')
         ) + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner East") %>% select(geometry), fill=NA, colour = "grey") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
 #  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+  geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
  # ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm")) + 
-  inset_element(pcol, left = 0.5, bottom = 0.0, right = 1.0, top =0.33) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.66, right = 1.0, top = 1.0) 
+  inset_element(pcol, left = 0.35, bottom = 0.66, right = 1.05, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.5, bottom = 0.33, right = 1.05, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.5, bottom = 0.0, right = 1.05, top = 0.33) 
 
 
 
 
 
 pcol_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Yarra") %>% 
+  filter(group == "Williamstown (W Metro)") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
   mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -5188,7 +5237,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "City of Yarra",
+    title = "Williamstown (W Metro)",
     x = NULL,
     y = NULL
   ) +
@@ -5202,7 +5251,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 
 pcol_rest_SA4_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest Inner and Inner East") %>% 
+  filter(group == "Similar seats") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
   mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -5219,7 +5268,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner and Inner East",
+    title = "Similar seats",
     x = NULL,
     y = NULL
   ) +
@@ -5265,7 +5314,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 ggplot()+ 
   geom_sf(data=melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "City of Yarra") %>% na.omit(),
+  filter(group == "Williamstown (W Metro)") %>% na.omit(),
           aes(fill = transit_supply), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -5276,29 +5325,29 @@ ggplot()+
 #        legend.title = element_text(size = 5), 
 #        legend.key.size = unit(0.08, 'cm')
         ) + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
- # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner East") %>% select(geometry), fill=NA, colour = "grey") +
+ # geom_sf(data=absmapsdata::sa12021 %>% filter(sa4_name_2021 == "Melbourne - Inner South") %>% select(geometry), fill=NA, colour = "grey") +
 #  geom_sf(data=ptv_210804_gtfs, colour="purple") + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
+  geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol_2, left = 0.5, bottom = 0.0, right = 1.0, top =0.33) +
- inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.66, right = 1.0, top = 1.0) 
+inset_element(pcol_2, left = 0.35, bottom = 0.66, right = 1.05, top =1.0) +
+ inset_element(pcol_rest_SA4_2, left = 0.5, bottom = 0.33, right = 1.05, top =0.66) +
+ inset_element(pcol_rest_melbourne_2, left = 0.5, bottom = 0.0, right = 1.05, top = 0.33) 
 
 
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Transit service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
-of Yarra residents in 2021, which is less than for
-the rest of the Inner and Inner East SA4s
+Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
+of Williamstown (W Metro) residents in 2021, which is less than for
+the rest of the Inner SA4
 (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).]
@@ -5308,14 +5357,14 @@ were statistically significant
 The distribution of transit supply,
 categorised with respect to the Melbourne average,
 appears similar in 2023 (Figure 2, right).
-Figure 3 directly compares 2021 and 2023 transit service levels. 
+Figure 3 directly compares 2021 and 2023 service levels. 
 
 ```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
 
 
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.9*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 2.55*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5341,7 +5390,7 @@ si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_ho
 
 
 pcol_1 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "City of Yarra") %>% 
+  filter(group == "Williamstown (W Metro)") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
@@ -5361,7 +5410,7 @@ pcol_1 <- si_by_area_2021_2023_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "All Yarra SA1s",
+ title = "All Williamstown (W Metro)",
     x = NULL,
     y = NULL
   ) +
@@ -5374,7 +5423,7 @@ pcol_1 <- si_by_area_2021_2023_wider_holding %>%
  
 
 pcol_rest_SA4_2 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest Inner and Inner East") %>% 
+  filter(group == "Similar seats") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
@@ -5393,7 +5442,7 @@ pcol_rest_SA4_2 <- si_by_area_2021_2023_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "Rest Inner and Inner East",
+ title = "Similar seats",
     x = NULL,
     y = NULL
   ) +
@@ -5446,14 +5495,14 @@ si_by_area_2021_2023_wider_holding <- left_join(
 
 melbourne_2023_SA1_comparison <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
 assumptions9 <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group)
 
@@ -5464,14 +5513,14 @@ si_by_area_2021_2023_wider_holding$sa4_group <-
 
 melbourne_2023_SA4_comparison <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
 assumptions11 <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) 
 
@@ -5491,7 +5540,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>% 
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>% 
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
   chisq.test()
@@ -5500,7 +5549,7 @@ assumptions17 <- si_by_area_2021_2023_wider_holding %>%
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>%
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) 
 
 assumptions18 <- melbourne_2021_SA1_comparison_very_high_needs$expected
@@ -5509,7 +5558,7 @@ melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
 chisq.test()
@@ -5518,7 +5567,7 @@ assumptions19 <- si_by_area_2021_2023_wider_holding %>%
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   tabyl(ratio_binned_less, group)
 
 assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
@@ -5528,7 +5577,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest Inner and Inner East") %>% 
+  filter(group == "Williamstown (W Metro)" | group == "Similar seats") %>% 
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
   fisher.test(simulate.p.value = TRUE)
@@ -5537,7 +5586,7 @@ melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "City of Yarra" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Williamstown (W Metro)" | group == "Rest of Greater Melbourne") %>%
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
 fisher.test(simulate.p.value = TRUE)
@@ -5545,7 +5594,7 @@ fisher.test(simulate.p.value = TRUE)
 
 
 pcol <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "City of Yarra") %>% 
+  filter(group == "Williamstown (W Metro)") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
@@ -5583,7 +5632,7 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
 
 
 pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest Inner and Inner East") %>% 
+  filter(group == "Similar seats") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
@@ -5656,7 +5705,7 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
 
 ggplot() + 
 geom_sf(data=si_by_area_2021_2023_wider_holding %>%
-            filter(group == "City of Yarra"),
+            filter(group == "Williamstown (W Metro)"),
           aes(fill = ratio_binned), colour=NA) +  
    scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))   +
   theme(axis.text.x=element_blank(), #remove x axis labels
@@ -5671,7 +5720,7 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   geom_sf_pattern(data=si_by_area_2021_2023_wider_holding %>% 
   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  filter(group == "City of Yarra") %>% na.omit(),
+  filter(group == "Williamstown (W Metro)") %>% na.omit(),
   aes(fill = ratio_binned), colour=NA) +  
      scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   theme_minimal(base_size = 20, base_family = 'IBM Plex Mono')  +
@@ -5684,51 +5733,60 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-            filter(group == "City of Yarra"),
+            filter(group == "Williamstown (W Metro)"),
           fill = NA, colour="black", linewidth = 0.25) + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
-  geom_sf(data=lga_of_interest_2021, fill=NA, colour = "purple", linewidth = .5) + 
+  geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = .5) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'br', height = unit(0.1, "cm")) +
   #ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.5, "cm"), width = unit(0.5, "cm")) + 
-  inset_element(pcol_1, left = 0.272, bottom = 0.15, right = 0.6, top =0.65) +
- inset_element(pcol_rest_SA4_2, left = 0.6, bottom = 0.15, right = 0.8, top =0.65) +
- inset_element(pcol_rest_melbourne_3, left = 0.8, bottom = 0.15, right = 1.0, top = 0.65) +
-inset_element(pcol, left = 0.4, bottom = 0.64, right = 0.6, top =1.05) +
- inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.64, right = 0.8, top =1.05) +
- inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.64, right = 1.0, top = 1.05) 
+  inset_element(pcol_1, left = 0.272, bottom = 0.55, right = 0.6, top =1.05) +
+ inset_element(pcol_rest_SA4_2, left = 0.6, bottom = 0.55, right = 0.8, top =1.05) +
+ inset_element(pcol_rest_melbourne_3, left = 0.8, bottom = 0.55, right = 1.0, top = 1.05) +
+inset_element(pcol, left = 0.4, bottom = 0.15, right = 0.6, top =0.60) +
+ inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.15, right = 0.8, top =0.60) +
+ inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.15, right = 1.0, top = 0.60) 
 
 
 ```
 
-Transit levels increased by 1% or more between 2021 and 2023
-for `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of Yarra residents, which is a great proportion than in the rest of Inner and Inner East SA4s (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of Williamstown (W Metro) residents in
+2021, which is a larger share than for the rest of Inner SA4
+(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).], and the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Yarra population lived in SA1s with
+Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Williamstown (W Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Williamstown (W Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Williamstown (W Metro) population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner East") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner East") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner and Inner East SA4s residents and 
+`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner SA4 residents and 
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:4,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
-for the similar cohort in Greater Melbourne living *outside* the Inner and Inner East SA4 
+However, for `r label_percent(accuracy=0.1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
+for the similar cohort living in Melbourne outside the Inner SA1
 (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:6,4] %>% sum())`)^[Differences
-with 'the rest of the GCCSA' were statistically significant
-(Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`), 
-but not with 'the rest of Inner and Inner East SA4s' (Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`).].
+were statistically significant between the Williamstown (W Metro) seat and parts of Greater Melbourne outside of the Inner SA1
+(Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`). However, there
+were no statistically significant differences betwee the Williamstown (W Metro) seat and the rest of the Inner SA4
+(Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`).].
 
-Overall, Yarra residents appear
+Overall, Williamstown (W Metro) residents appear
 less likely
 to have had transit service levels
-below Melbourne's average,
-and more likely to have seen increases, 
-including for those with larger needs-gaps. 
+below Melbourne's average and also more likely to have seen increases in service between 2021 and 2023. 
 
-```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = TRUE, warning=FALSE, message=FALSE, cache=FALSE}
+
+pcol_1$data
+pcol_rest_SA4_2$data
+pcol_rest_melbourne_3$data
+
+pcol$data
+pcol_rest_SA4$data
+pcol_rest_melbourne$data
+
 1
 assumptions1
 2
@@ -5758,7 +5816,7 @@ assumptions10
 assumptions11
 12
 assumptions12
-#all over 5, assumption met.
+#all over 20, assumption met.
 13
 assumptions13
 14
