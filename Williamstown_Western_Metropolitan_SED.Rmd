@@ -70,7 +70,7 @@ sed_of_interest_2021 <- absmapsdata::sed2021 %>% filter(sed_name_2021 == "Willia
 
 This note is part of a series
 examining transit social needs-gaps in Greater Melbourne^[See
-https://tinyurl.com/4rctaxfc ![QR code](4rctaxfc-400.png){width=2.5cm}
+https://tinyurl.com/4rctaxfc ![QR code](4rctaxfc-400.png){width=1.5cm}
 ]. In Victoria,
 public transport is the responsibility
 of the state government, which is
@@ -80,11 +80,10 @@ However, it is unclear
 how much transit is supplied
 or how well social needs for transport
 are met within each seat.
-This note explores social needs for transport,
+Using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying], this note explores social needs for transport,
 and transit provision
 in 2021 and 2023,
 in the Williamstown (Western Metropolitan) State Electoral Division,
-using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
 
 
 
@@ -4674,32 +4673,32 @@ sa1s_in_other_lgas <- sed2021 %>%
              sed_name_2021 == "Brunswick (Northern Metropolitan)" | 
              sed_name_2021 == "Pascoe Vale (Northern Metropolitan)" | 
              sed_name_2021 == "Northcote (Northern Metropolitan)" | 
-             sed_name_2021 == "Broadmeadows (Northern Metropolitan)" | 
-             sed_name_2021 == "Bundoora (Northern Metropolitan)" | 
-             sed_name_2021 == "Preston (Northern Metropolitan)" | 
-             sed_name_2021 == "Ivanhoe (Eastern Metropolitan)" | 
-             sed_name_2021 == "Kew (Southern Metropolitan)" | 
-             sed_name_2021 == "Bulleen (Eastern Metropolitan)" | 
-             sed_name_2021 == "Forest Hill (Eastern Metropolitan)" | 
-             sed_name_2021 == "Ringwood (Eastern Metropolitan)" |
-             sed_name_2021 == "Box Hill (Eastern Metropolitan)" |
-             sed_name_2021 == "Burwood (Southern Metropolitan)" |
-             sed_name_2021 == "Hawthorn (Southern Metropolitan)" | 
-             sed_name_2021 == "Mount Waverley (Eastern Metropolitan)" | 
-             sed_name_2021 == "Oakleigh (Southern Metropolitan)" | 
-             sed_name_2021 == "Mulgrave (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Dandenong (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Keysborough (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Clarinda (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Bentleigh (Southern Metropolitan)" | 
-             sed_name_2021 == "Malvern (Southern Metropolitan)" | 
-             sed_name_2021 == "Caulfield (Southern Metropolitan)" | 
-             sed_name_2021 == "Brighton (Southern Metropolitan)" | 
-             sed_name_2021 == "Sandringham (Southern Metropolitan)" | 
-             sed_name_2021 == "Keysborough (South-Eastern Metropolitan)") 
+             sed_name_2021 == "Broadmeadows (Northern Metropolitan)") 
+#             sed_name_2021 == "Bundoora (Northern Metropolitan)" | 
+#             sed_name_2021 == "Preston (Northern Metropolitan)" | 
+#             sed_name_2021 == "Ivanhoe (Eastern Metropolitan)" | 
+#             sed_name_2021 == "Kew (Southern Metropolitan)" | 
+#             sed_name_2021 == "Bulleen (Eastern Metropolitan)" | 
+#             sed_name_2021 == "Forest Hill (Eastern Metropolitan)" | 
+#             sed_name_2021 == "Ringwood (Eastern Metropolitan)" |
+#             sed_name_2021 == "Box Hill (Eastern Metropolitan)" |
+#             sed_name_2021 == "Burwood (Southern Metropolitan)" |
+#             sed_name_2021 == "Hawthorn (Southern Metropolitan)" | 
+#             sed_name_2021 == "Mount Waverley (Eastern Metropolitan)" | 
+#             sed_name_2021 == "Oakleigh (Southern Metropolitan)" | 
+ #            sed_name_2021 == "Mulgrave (South-Eastern Metropolitan)" | 
+#             sed_name_2021 == "Dandenong (South-Eastern Metropolitan)" | 
+#             sed_name_2021 == "Keysborough (South-Eastern Metropolitan)" | 
+##             sed_name_2021 == "Clarinda (South-Eastern Metropolitan)" | 
+##             sed_name_2021 == "Bentleigh (Southern Metropolitan)" | 
+#             sed_name_2021 == "Malvern (Southern Metropolitan)" | 
+#             sed_name_2021 == "Caulfield (Southern Metropolitan)" | 
+#             sed_name_2021 == "Brighton (Southern Metropolitan)" | 
+#             sed_name_2021 == "Sandringham (Southern Metropolitan)" | 
+#             sed_name_2021 == "Keysborough (South-Eastern Metropolitan)") 
 
 sa1s_in_other_lgas <- st_union(sa1s_in_other_lgas)
-plot(sa1s_in_other_lgas)
+#plot(sa1s_in_other_lgas)
 
 sa1s_in_other_lgas <- sa12021 %>% select(sa1_code_2021) %>%
   st_filter(sa1s_in_other_lgas, .predicate =  st_intersects)
@@ -4760,7 +4759,7 @@ assumptions3 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
 assumptions4 <- melbourne_2021_SA4_comparison$expected
 
 melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>% 
-  left_join(sa1s_in_lga_of_interest_and_other_lgas, 
+  left_join(sa1s_in_lga_of_interest_and_other_lgas %>% st_drop_geometry(), 
             by =(join_by(area_id == sa1_code_2021)))
 melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
@@ -4798,13 +4797,13 @@ assumptions7 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
 assumptions8 <- melbourne_2023_SA4_comparison$expected
 
 si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
-left_join(sa1s_in_lga_of_interest_and_other_lgas, 
+left_join(sa1s_in_lga_of_interest_and_other_lgas %>% st_drop_geometry(), 
             by =(join_by(sa1_code_2021 == sa1_code_2021)))
 si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
 
 
-combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>% left_join(sa1s_in_lga_of_interest_and_other_lgas, 
+combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>% left_join(sa1s_in_lga_of_interest_and_other_lgas %>% st_drop_geometry(), 
             by =(join_by(sa1_code_2021 == sa1_code_2021)))
 combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>% 
   replace_na(list(group = "Rest of Greater Melbourne"))
@@ -4815,8 +4814,8 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 ```
 
-\newthought{Results:} Figure 1 compares social needs for the Rest of the Inner SA4 
-and the rest of Greater Melbourne with
+\newthought{Results:} Figure 1 compares social needs for similarly located seats^[Altona, Footscray, St Albans, Niddrie, Essendon, Brunswick, Pascoe Vale and Broadmeadows],
+and for the rest of Greater Melbourne with
 those for the Williamstown (Western Metropolitan) State Electoral Division.
 
 
@@ -4826,7 +4825,7 @@ those for the Williamstown (Western Metropolitan) State Electoral Division.
 bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 2.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.2*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 
 
@@ -4852,7 +4851,7 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
   scale_y_continuous(limits = c(0,0.8)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(composite_needs,  0.45, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
+  geom_text(aes(composite_needs,  0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -4886,7 +4885,7 @@ pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
   scale_y_continuous(limits = c(0,0.8)) +
   geom_hline(yintercept = 0)  +
-  geom_text(aes(composite_needs,  0.45, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
+  geom_text(aes(composite_needs,  0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -4921,7 +4920,7 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
   geom_col(aes(composite_needs, perc, fill = composite_needs), colour="black") +
   scale_y_continuous(limits = c(0,0.8)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(composite_needs,  0.45, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
+  geom_text(aes(composite_needs,  0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.8) +
    coord_flip() + 
   scale_fill_manual(values = c("#FFFB07", "#CEE102", "#A3CF07", "#61AE09", "#2EA105", "#0A7B01")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -4964,11 +4963,11 @@ ggplot()+
   geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'br') +
-  ggspatial::annotation_north_arrow(location = 'tr', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.24, bottom = 0.6, right = 0.85, top =1.05) +
- inset_element(pcol_rest_SA4, left = 0.24, bottom = 0.2, right = 0.72, top =0.6) +
- inset_element(pcol_rest_melbourne, left = 0.62, bottom = 0.2, right = 1.1, top = 0.6) 
+  ggspatial::annotation_scale(location = 'bl') +
+  ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
+inset_element(pcol, left = 0.45, bottom = 0.66, right = 1.1, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.33, right = 1.1, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.6, bottom = 0.0, right = 1.1, top = 0.33) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
@@ -5061,8 +5060,10 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 Needs were higher than the Melbourne average 
 for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
 of the Williamstown (Western Metropolitan) State Electoral Division's population. 
-This share was higher than among the parts of Greater Melbourne that are beyond the Inner SA4 (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences with parts of Melbourne that are beyond the Inner SA4
-were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`). There was no statistically significant difference between the Richmond Division and the rest of the Inner SA4 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).].
+This share was higher than among similarly located seats 
+(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[4:6,3] %>% sum())`)^[Differences 
+were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`)]
+and the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. 
 
 
 
@@ -5074,7 +5075,7 @@ were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_compari
 bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.8*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5096,9 +5097,9 @@ pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   na.omit() %>%
   ggplot() + 
   geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
+  scale_y_continuous(limits = c(0,1)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(transit_supply,  0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
 scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5129,9 +5130,9 @@ pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   na.omit() %>%
   ggplot() + 
   geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
+  scale_y_continuous(limits = c(0,1)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(transit_supply, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
 scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5165,9 +5166,9 @@ pcol_rest_melbourne <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area
   na.omit() %>%
   ggplot() + 
   geom_col(aes(transit_supply, perc, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
+  scale_y_continuous(limits = c(0,1)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
+  geom_text(aes(transit_supply,  0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
 scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5200,7 +5201,7 @@ ggplot()+
 #        legend.title = element_text(size = 5), 
 #        legend.key.size = unit(0.08, 'cm')
         ) + 
-scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
@@ -5212,9 +5213,9 @@ scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53
            ylim = c(lat[1], lat[2])) +
  # ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm")) + 
-  inset_element(pcol, left = 0.35, bottom = 0.66, right = 1.05, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.5, bottom = 0.33, right = 1.05, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.5, bottom = 0.0, right = 1.05, top = 0.33) 
+  inset_element(pcol, left = 0.5, bottom = 0.66, right = 1.05, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.05, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.0, right = 1.05, top = 0.33) 
 
 
 
@@ -5229,9 +5230,9 @@ pcol_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   as_tibble () %>% 
   ggplot() + 
   geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
+  scale_y_continuous(limits = c(0,1)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+  geom_text(aes(transit_supply, 0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
 scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5260,9 +5261,9 @@ pcol_rest_SA4_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   na.omit() %>%
   ggplot() + 
   geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
+  scale_y_continuous(limits = c(0,1)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+  geom_text(aes(transit_supply,0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
 scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5290,9 +5291,9 @@ pcol_rest_melbourne_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_ar
   na.omit() %>%
   ggplot() + 
   geom_col(aes(transit_supply, percent, fill = transit_supply), colour="black") +
-  scale_y_continuous(limits = c(0,1.4)) +
+  scale_y_continuous(limits = c(0,1)) +
   geom_hline(yintercept = 0)  + 
-  geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
+  geom_text(aes(transit_supply,0.7, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
 scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
@@ -5325,7 +5326,7 @@ ggplot()+
 #        legend.title = element_text(size = 5), 
 #        legend.key.size = unit(0.08, 'cm')
         ) + 
-scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
@@ -5337,9 +5338,9 @@ scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol_2, left = 0.35, bottom = 0.66, right = 1.05, top =1.0) +
- inset_element(pcol_rest_SA4_2, left = 0.5, bottom = 0.33, right = 1.05, top =0.66) +
- inset_element(pcol_rest_melbourne_2, left = 0.5, bottom = 0.0, right = 1.05, top = 0.33) 
+inset_element(pcol_2, left = 0.5, bottom = 0.66, right = 1.05, top =1.0) +
+ inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.33, right = 1.05, top =0.66) +
+ inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.0, right = 1.05, top = 0.33) 
 
 
 
@@ -5347,7 +5348,7 @@ inset_element(pcol_2, left = 0.35, bottom = 0.66, right = 1.05, top =1.0) +
 
 Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
 of Williamstown (W Metro) residents in 2021, which is less than for
-the rest of the Inner SA4
+similarly located seats
 (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).]
@@ -5383,7 +5384,7 @@ si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_ho
 )
 
 
-si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Increased 30%+ or new" = c("Increased 30% or more", "New service")
+si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_holding$ratio_binned %>% fct_collapse("Increased 5%+ or new" = c("Increased 30% or more", "New service", "Increased 10 to 30%", "Increased 5 to 10%")
 )
 
 
@@ -5406,7 +5407,7 @@ pcol_1 <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() +
-    scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+    scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5438,7 +5439,7 @@ pcol_rest_SA4_2 <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned,  0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() +
-     scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+     scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5470,7 +5471,7 @@ pcol_rest_melbourne_3 <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned,  .9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() +
-     scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+     scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5531,7 +5532,7 @@ si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wid
 )
 
 
-si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Increased 30%+ or new" = c("Increased 30% or more", "New service")
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Increased 5%+ or new" = c("Increased 30% or more", "New service", "Increased 10 to 30%", "Increased 5 to 10%")
 )
 
 
@@ -5612,7 +5613,7 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() + 
-     scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+     scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5650,7 +5651,7 @@ pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() + 
-    scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+    scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5685,7 +5686,7 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() + 
-    scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+    scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5707,7 +5708,7 @@ ggplot() +
 geom_sf(data=si_by_area_2021_2023_wider_holding %>%
             filter(group == "Williamstown (W Metro)"),
           aes(fill = ratio_binned), colour=NA) +  
-   scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))   +
+   scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))   +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
         axis.text.y=element_blank(),  #remove y axis labels
@@ -5722,7 +5723,7 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   filter(group == "Williamstown (W Metro)") %>% na.omit(),
   aes(fill = ratio_binned), colour=NA) +  
-     scale_fill_manual(values = c("Increased 30%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+     scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   theme_minimal(base_size = 20, base_family = 'IBM Plex Mono')  +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -5741,7 +5742,7 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'br', height = unit(0.1, "cm")) +
   #ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.5, "cm"), width = unit(0.5, "cm")) + 
-  inset_element(pcol_1, left = 0.272, bottom = 0.55, right = 0.6, top =1.05) +
+  inset_element(pcol_1, left = 0.28, bottom = 0.55, right = 0.6, top =1.05) +
  inset_element(pcol_rest_SA4_2, left = 0.6, bottom = 0.55, right = 0.8, top =1.05) +
  inset_element(pcol_rest_melbourne_3, left = 0.8, bottom = 0.55, right = 1.0, top = 1.05) +
 inset_element(pcol, left = 0.4, bottom = 0.15, right = 0.6, top =0.60) +
@@ -5751,33 +5752,34 @@ inset_element(pcol, left = 0.4, bottom = 0.15, right = 0.6, top =0.60) +
 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of Williamstown (W Metro) residents in
-2021, which is a larger share than for the rest of Inner SA4
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:3,3] %>% sum())` of Williamstown (W Metro) residents in
+2021, which is a larger share than for similarly located seats
+(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:3,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:3,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Williamstown (W Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Williamstown (W Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Williamstown (W Metro) population lived in SA1s with
+`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Williamstown (W Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Williamstown (W Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Williamstown (W Metro) population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner SA4 residents and 
+`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
 However, for `r label_percent(accuracy=0.1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
-for the similar cohort living in Melbourne outside the Inner SA1
-(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:6,4] %>% sum())`)^[Differences
-were statistically significant between the Williamstown (W Metro) seat and parts of Greater Melbourne outside of the Inner SA1
-(Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`). However, there
-were no statistically significant differences betwee the Williamstown (W Metro) seat and the rest of the Inner SA4
-(Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`).].
+for the similar cohort living in similarly located seats (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[2:4,4] %>% sum())`)^[Differences
+were statistically significant
+(Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`)]
+or the rest of Greater Melbourne
+(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:4,4] %>% sum())`)^[Differences
+were statistically significant
+(Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 
 Overall, Williamstown (W Metro) residents appear
 less likely
 to have had transit service levels
 below Melbourne's average and also more likely to have seen increases in service between 2021 and 2023. 
 
-```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = TRUE, warning=FALSE, message=FALSE, cache=FALSE}
+```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 
 pcol_1$data
 pcol_rest_SA4_2$data
@@ -5791,7 +5793,7 @@ pcol_rest_melbourne$data
 assumptions1
 2
 assumptions2
-#2 of 14 <5, assumption met.
+#1  of 14 <5, assumption met.
 3
 assumptions3
 4
@@ -5801,7 +5803,7 @@ assumptions4
 assumptions5
 6
 assumptions6
-#2 of 14 <5, assumption met
+#1 of 14 <5, assumption met
 7
 assumptions7
 8
@@ -5811,7 +5813,7 @@ assumptions8
 assumptions9
 10
 assumptions10
-#3 of 20 <5, assumption met.
+#2 of 16 <5, assumption met.
 11
 assumptions11
 12
