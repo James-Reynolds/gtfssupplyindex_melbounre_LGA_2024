@@ -71,17 +71,18 @@ lga_of_interest_2021 <- absmapsdata::lga2021 %>% filter(lga_name_2021 == "Monash
 
 This note is part of a series
 examining transit social needs-gaps in Greater Melbourne^[See
-https://tinyurl.com/4rctaxfc ![QR code](4rctaxfc-400.png){width=2.5cm}
+https://tinyurl.com/4rctaxfc ![QR code](4rctaxfc-400.png){width=1.5cm}
 ]. In Victoria,
-transit is the responsibility of state government,
+transit is a state government responsibility,
 although Local Government Authorities (LGAs) may have some influence
 through planning processes and advocacy. 
 However, it is unclear
 how much transit is supplied
 or how well social needs for transport
 are met for each LGA.
-This note uses the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying] 
-to explore needs for transport,
+The Currie and Sendbergs (2007)[@Currie2007Identifying; @currie2010identifying] 
+methodology is used this note 
+explores needs for transport,
 and transit provision in 2021 and 2023,
 in the City of Monash.
 
@@ -91,10 +92,8 @@ Scores for transit supply
 and transport needs
 were calculated
 based on Australian Bureau of Statistics (ABS) data and
-the Victorian GTFS feed^[Note
-that results are based on the GTFS feeds
-for August 2021 and 2023,
-so may not match services run.]
+the Victorian GTFS feed^[August 2021 and 2023 data is used,
+but may not match services run.]
 using the *gtfssupplyindex* R package^[See
 https://github.com/James-Reynolds/gtfssupplyindex]
 as per Reynolds, Currie and Qu (in drafting)[@Reynolds0000gtfsmainpaper].
