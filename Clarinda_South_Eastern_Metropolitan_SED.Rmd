@@ -4967,8 +4967,8 @@ ggplot()+
   ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
 inset_element(pcol, left = 0.45, bottom = 0.66, right = 1.1, top =1.05) +
- inset_element(pcol_rest_SA4, left = 0.55, bottom = 0.33, right = 1.1, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.55, bottom = 0.0, right = 1.1, top = 0.33) 
+ inset_element(pcol_rest_SA4, left = 0.60, bottom = 0.33, right = 1.1, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.60, bottom = 0.0, right = 1.1, top = 0.33) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
@@ -5060,7 +5060,7 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 
 Needs were higher than the Melbourne average 
 for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
-of the seat of Clarinda's population^[Differences between the seat of Clarinda and similarly located seats, or with the rest of Greater Melbourne were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`)(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)]. 
+of the seat of Clarinda's population^[Differences between the seat of Clarinda and similarly located seats, or with the rest of Greater Melbourne were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`)(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`)]. 
 
 
 
