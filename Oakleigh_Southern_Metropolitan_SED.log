@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  7 NOV 2024 22:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  9 NOV 2024 18:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -835,13 +835,13 @@ LaTeX Warning: Marginpar on page 1 moved.
 LaTeX Warning: Marginpar on page 1 moved.
 
 <Oakleigh_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf, id=8, 2
-65.99374pt x 99.37125pt>
+65.99374pt x 106.3975pt>
 File: Oakleigh_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf Gra
 phic file (type pdf)
 <use Oakleigh_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf>
 Package pdftex.def Info: Oakleigh_Southern_Metropolitan_SED_files/figure-latex/
 Needs_map-1.pdf  used on input line 133.
-(pdftex.def)             Requested size: 312.02722pt x 116.56865pt.
+(pdftex.def)             Requested size: 312.02722pt x 124.81088pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 133--134
 
@@ -850,24 +850,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 133--134
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf, id=9, 266.
-9975pt x 99.37125pt>
+<Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf, id=9, 265.
+99374pt x 147.55125pt>
 File: Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf Graphi
 c file (type pdf)
 <use Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf>
 Package pdftex.def Info: Oakleigh_Southern_Metropolitan_SED_files/figure-latex/
 SI_map-1.pdf  used on input line 143.
-(pdftex.def)             Requested size: 240.01033pt x 89.32715pt.
+(pdftex.def)             Requested size: 240.00502pt x 133.13484pt.
 <Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf, id=10, 265
-.99374pt x 99.37125pt>
+.99374pt x 147.55125pt>
 File: Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf Graphi
 c file (type pdf)
 <use Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf>
 Package pdftex.def Info: Oakleigh_Southern_Metropolitan_SED_files/figure-latex/
 SI_map-2.pdf  used on input line 143.
-(pdftex.def)             Requested size: 240.00502pt x 89.66225pt.
+(pdftex.def)             Requested size: 240.00502pt x 133.13484pt.
 
-Overfull \hbox (2.92535pt too wide) in paragraph at lines 143--144
+Overfull \hbox (2.92004pt too wide) in paragraph at lines 143--144
 [][] []
  []
 
@@ -887,15 +887,18 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
+
+LaTeX Warning: Marginpar on page 2 moved.
+
 <Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf, id=
-33, 253.94875pt x 47.17625pt>
+33, 253.94875pt x 141.52875pt>
 File: Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf
  Graphic file (type pdf)
 <use Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>
 
 Package pdftex.def Info: Oakleigh_Southern_Metropolitan_SED_files/figure-latex/
 SI_change_map-1.pdf  used on input line 158.
-(pdftex.def)             Requested size: 480.01991pt x 89.17363pt.
+(pdftex.def)             Requested size: 480.01991pt x 267.52097pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 158--159
 
@@ -910,754 +913,36 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-
-LaTeX Warning: Marginpar on page 2 moved.
-
-
-LaTeX Warning: Marginpar on page 2 moved.
-
-
-LaTeX Warning: Marginpar on page 2 moved.
-
-
-LaTeX Warning: Marginpar on page 2 moved.
-
-LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 8.50006pt on input line 184.
 [2 <./Oakleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf> <./Oa
 kleigh_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf> <./Oakleigh_S
 outhern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>]
-Overfull \hbox (25.7243pt too wide) in paragraph at lines 237--237
-[]\T1/fvm/m/n/10 ##     ratio_binned_less population        ratio_binned       
-perc[] 
- []
 
+LaTeX Warning: Marginpar on page 3 moved.
 
-Overfull \hbox (25.7243pt too wide) in paragraph at lines 237--237
-[]\T1/fvm/m/n/10 ## 1 Increased 10 to 30%       1691 Increased 10 to 30% 0.0666
-6141[] 
- []
 
+LaTeX Warning: Marginpar on page 3 moved.
 
-Overfull \hbox (25.7243pt too wide) in paragraph at lines 237--237
-[]\T1/fvm/m/n/10 ## 2  Increased 5 to 10%       4328  Increased 5 to 10% 0.1706
-1537[] 
- []
 
-
-Overfull \hbox (25.7243pt too wide) in paragraph at lines 237--237
-[]\T1/fvm/m/n/10 ## 3   Increased 3 to 5%       4121   Increased 3 to 5% 0.1624
-5516[] 
- []
-
-
-Overfull \hbox (25.7243pt too wide) in paragraph at lines 237--237
-[]\T1/fvm/m/n/10 ## 4   Increased 1 to 3%       3631   Increased 1 to 3% 0.1431
-3872[] 
- []
-
-
-Overfull \hbox (25.7243pt too wide) in paragraph at lines 237--237
-[]\T1/fvm/m/n/10 ## 5           Within 1%       9840           Within 1% 0.3879
-0555[] 
- []
-
-
-Overfull \hbox (25.7243pt too wide) in paragraph at lines 237--237
-[]\T1/fvm/m/n/10 ## 6     Reduced 1 to 3%       1756     Reduced 1 to 3% 0.0692
-2379[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ##        ratio_binned_less population          ratio_binned  
-      perc[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 1     Not served in 2023       2793    Not served in 2023 0
-.013528503[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 2            New service        880           New service 0
-.004262471[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 3  Increased 30% or more      15869 Increased 30% or more 0
-.076864952[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 4    Increased 10 to 30%      24626   Increased 10 to 30% 0
-.119281386[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 5     Increased 5 to 10%      26896    Increased 5 to 10% 0
-.130276625[] 
- []
-
-[3]
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 6      Increased 3 to 5%      20683     Increased 3 to 5% 0
-.100182608[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 7      Increased 1 to 3%      33166     Increased 1 to 3% 0
-.160646733[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 8              Within 1%      66451             Within 1% 0
-.321869869[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 9        Reduced 1 to 3%       5925       Reduced 1 to 3% 0
-.028699026[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 10      Reduced 3 to 10%       6830      Reduced 3 to 10% 0
-.033082590[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 252--252
-[]\T1/fvm/m/n/10 ## 11   Reduced 10% or more       2334   Reduced 10% or more 0
-.011305237[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ##        ratio_binned_less population          ratio_binned  
-      perc[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 1     Not served in 2023      84147    Not served in 2023 0
-.046559560[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 2            New service      16465           New service 0
-.009110285[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 3  Increased 30% or more      80322 Increased 30% or more 0
-.044443141[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 4    Increased 10 to 30%      91374   Increased 10 to 30% 0
-.050558347[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 5     Increased 5 to 10%      63618    Increased 5 to 10% 0
-.035200614[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 6      Increased 3 to 5%      96271     Increased 3 to 5% 0
-.053267917[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 7      Increased 1 to 3%     228317     Increased 1 to 3% 0
-.126330577[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 8              Within 1%     848133             Within 1% 0
-.469282321[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 9        Reduced 1 to 3%     100847       Reduced 1 to 3% 0
-.055799874[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 10      Reduced 3 to 10%     128415      Reduced 3 to 10% 0
-.071053584[] 
- []
-
-
-Overfull \hbox (56.42651pt too wide) in paragraph at lines 267--267
-[]\T1/fvm/m/n/10 ## 11   Reduced 10% or more      69389   Reduced 10% or more 0
-.038393779[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 312--312
-[]\T1/fvm/m/n/10 ##  transit_supply Oakleigh (S Metro) Rest of Greater Melbourn
-e[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 312--312
-[]\T1/fvm/m/n/10 ##     Zero Supply                  4                       47
-6[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 312--312
-[]\T1/fvm/m/n/10 ##        Very Low                  9                      257
-4[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 312--312
-[]\T1/fvm/m/n/10 ##             Low                 19                      243
-3[] 
- []
-
-[4]
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 312--312
-[]\T1/fvm/m/n/10 ##   Below average                 63                      223
-3[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 312--312
-[]\T1/fvm/m/n/10 ##   Above average                 54                       73
-8[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 312--312
-[]\T1/fvm/m/n/10 ##            High                 63                       75
-3[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 312--312
-[]\T1/fvm/m/n/10 ##       Very High                 18                       86
-9[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 327--327
-[]\T1/fvm/m/n/10 ##  transit_supply Oakleigh (S Metro) Rest of Greater Melbourn
-e[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 327--327
-[]\T1/fvm/m/n/10 ##     Zero Supply           10.71221                  469.287
-8[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 327--327
-[]\T1/fvm/m/n/10 ##        Very Low           57.64506                 2525.354
-9[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 327--327
-[]\T1/fvm/m/n/10 ##             Low           54.72152                 2397.278
-5[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 327--327
-[]\T1/fvm/m/n/10 ##   Below average           51.24005                 2244.759
-9[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 327--327
-[]\T1/fvm/m/n/10 ##   Above average           17.67514                  774.324
-9[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 327--327
-[]\T1/fvm/m/n/10 ##            High           18.21075                  797.789
-2[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 327--327
-[]\T1/fvm/m/n/10 ##       Very High           19.79526                  867.204
-7[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 372--372
-[]\T1/fvm/m/n/10 ##  transit_supply Oakleigh (S Metro) Rest of Greater Melbourn
-e[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 372--372
-[]\T1/fvm/m/n/10 ##     Zero Supply                  4                       46
-4[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 372--372
-[]\T1/fvm/m/n/10 ##        Very Low                  8                      256
-9[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 372--372
-[]\T1/fvm/m/n/10 ##             Low                 18                      242
-7[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 372--372
-[]\T1/fvm/m/n/10 ##   Below average                 57                      224
-1[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 372--372
-[]\T1/fvm/m/n/10 ##   Above average                 59                       73
-0[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 372--372
-[]\T1/fvm/m/n/10 ##            High                 66                       76
-5[] 
- []
-
-[5]
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 372--372
-[]\T1/fvm/m/n/10 ##       Very High                 18                       88
-0[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 387--387
-[]\T1/fvm/m/n/10 ##  transit_supply Oakleigh (S Metro) Rest of Greater Melbourn
-e[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 387--387
-[]\T1/fvm/m/n/10 ##     Zero Supply           10.44440                  457.555
-6[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 387--387
-[]\T1/fvm/m/n/10 ##        Very Low           57.51116                 2519.488
-8[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 387--387
-[]\T1/fvm/m/n/10 ##             Low           54.56530                 2390.434
-7[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 387--387
-[]\T1/fvm/m/n/10 ##   Below average           51.28469                 2246.715
-3[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 387--387
-[]\T1/fvm/m/n/10 ##   Above average           17.60819                  771.391
-8[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 387--387
-[]\T1/fvm/m/n/10 ##            High           18.54551                  812.454
-5[] 
- []
-
-
-Overfull \hbox (10.3732pt too wide) in paragraph at lines 387--387
-[]\T1/fvm/m/n/10 ##       Very High           20.04075                  877.959
-2[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##           ratio_binned Oakleigh (S Metro) Rest of Greater M
-elbourne[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##            New service                  0                  
-      58[] 
- []
-
-[6]
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##  Increased 30% or more                  7                  
-     302[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##    Increased 10 to 30%                 10                  
-     426[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##     Increased 5 to 10%                 30                  
-     372[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##      Increased 3 to 5%                 32                  
-     498[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##      Increased 1 to 3%                 50                  
-    1429[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##              Within 1%                 77                  
-    4769[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##        Reduced 1 to 3%                 15                  
-     580[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##       Reduced 3 to 10%                  5                  
-     745[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##    Reduced 10% or more                  0                  
-     433[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 444--444
-[]\T1/fvm/m/n/10 ##     Not served in 2023                  4                  
-     464[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##           ratio_binned Oakleigh (S Metro) Rest of Greater M
-elbourne[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##            New service           1.294392                  
-56.70561[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##  Increased 30% or more           6.895983                 3
-02.10402[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##    Increased 10 to 30%           9.730254                 4
-26.26975[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##     Increased 5 to 10%           8.971473                 3
-93.02853[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##      Increased 3 to 5%          11.828061                 5
-18.17194[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##      Increased 1 to 3%          33.006986                14
-45.99301[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##              Within 1%         108.148651                47
-37.85135[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##        Reduced 1 to 3%          13.278673                 5
-81.72133[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##       Reduced 3 to 10%          16.737823                 7
-33.26218[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##    Reduced 10% or more           9.663303                 4
-23.33670[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 463--463
-[]\T1/fvm/m/n/10 ##     Not served in 2023          10.444401                 4
-57.55560[] 
- []
-
-[7]
-Overfull \hbox (15.49023pt too wide) in paragraph at lines 507--507
-[]\T1/fvm/m/n/10 ##  composite_needs Oakleigh (S Metro) Rest of Greater Melbour
-ne[] 
- []
-
-
-Overfull \hbox (15.49023pt too wide) in paragraph at lines 507--507
-[]\T1/fvm/m/n/10 ##         Very Low                 29                      18
-51[] 
- []
-
-
-Overfull \hbox (15.49023pt too wide) in paragraph at lines 507--507
-[]\T1/fvm/m/n/10 ##              Low                 36                      18
-16[] 
- []
-
-
-Overfull \hbox (15.49023pt too wide) in paragraph at lines 507--507
-[]\T1/fvm/m/n/10 ##    Below average                 45                      17
-68[] 
- []
-
-
-Overfull \hbox (15.49023pt too wide) in paragraph at lines 507--507
-[]\T1/fvm/m/n/10 ##    Above average                 36                      14
-40[] 
- []
-
-
-Overfull \hbox (15.49023pt too wide) in paragraph at lines 507--507
-[]\T1/fvm/m/n/10 ##             High                 33                      14
-48[] 
- []
-
-
-Overfull \hbox (15.49023pt too wide) in paragraph at lines 507--507
-[]\T1/fvm/m/n/10 ##        Very High                 36                      14
-41[] 
- []
-
-
-Overfull \hbox (15.49023pt too wide) in paragraph at lines 507--507
-[]\T1/fvm/m/n/10 ##               NA                 15                       3
-12[] 
- []
-
-[8]
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##      ratio_binned_less Oakleigh (S Metro) Rest of Greater M
-elbourne[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##     Not served in 2023                  0                  
-     148[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##            New service                  0                  
-      29[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##  Increased 30% or more                  0                  
-     131[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##    Increased 10 to 30%                  3                  
-     157[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##     Increased 5 to 10%                  8                  
-     111[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##      Increased 3 to 5%                  8                  
-     170[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##      Increased 1 to 3%                  5                  
-     403[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##              Within 1%                 18                  
-    1501[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##        Reduced 1 to 3%                  3                  
-     177[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##       Reduced 3 to 10%                  0                  
-     229[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 566--566
-[]\T1/fvm/m/n/10 ##    Reduced 10% or more                  0                  
-     123[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##      ratio_binned_less Oakleigh (S Metro) Rest of Greater M
-elbourne[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##     Not served in 2023          2.0657568                 1
-45.93424[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##            New service          0.4047767                  
-28.59522[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##  Increased 30% or more          1.8284739                 1
-29.17153[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##    Increased 10 to 30%          2.2332506                 1
-57.76675[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##     Increased 5 to 10%          1.6609801                 1
-17.33902[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##      Increased 3 to 5%          2.4844913                 1
-75.51551[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##      Increased 1 to 3%          5.6947891                 4
-02.30521[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##              Within 1%         21.2019231                14
-97.79808[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##        Reduced 1 to 3%          2.5124069                 1
-77.48759[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##       Reduced 3 to 10%          3.1963400                 2
-25.80366[] 
- []
-
-
-Overfull \hbox (46.19244pt too wide) in paragraph at lines 581--581
-[]\T1/fvm/m/n/10 ##    Reduced 10% or more          1.7168114                 1
-21.28319[] 
- []
+LaTeX Warning: Marginpar on page 3 moved.
 
 
 Package bibentry Warning: You have used \nobibliography* 
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
 
-[9] (./Oakleigh_Southern_Metropolitan_SED.aux)
+[3] (./Oakleigh_Southern_Metropolitan_SED.aux)
 Package rerunfilecheck Info: File `Oakleigh_Southern_Metropolitan_SED.out' has 
 not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15585 strings out of 478268
- 251221 string characters out of 5846347
- 581833 words of memory out of 5000000
- 33402 multiletter control sequences out of 15000+600000
- 518192 words of font info for 106 fonts, out of 8000000 for 9000
+ 15577 strings out of 478268
+ 251166 string characters out of 5846347
+ 574833 words of memory out of 5000000
+ 33401 multiletter control sequences out of 15000+600000
+ 517572 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,11n,94p,493b,489s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,11n,94p,493b,419s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
@@ -1667,11 +952,11 @@ mf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/texlive/2022/texmf-dist
 /fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/ur
 w/palatino/uplri8a.pfb>
-Output written on Oakleigh_Southern_Metropolitan_SED.pdf (9 pages, 357235 bytes
+Output written on Oakleigh_Southern_Metropolitan_SED.pdf (3 pages, 354803 bytes
 ).
 PDF statistics:
- 223 PDF objects out of 1000 (max. 8388607)
- 135 compressed objects within 2 object streams
- 13 named destinations out of 1000 (max. 500000)
+ 196 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
+ 7 named destinations out of 1000 (max. 500000)
  1050 words of extra memory for PDF output out of 10000 (max. 10000000)
 
