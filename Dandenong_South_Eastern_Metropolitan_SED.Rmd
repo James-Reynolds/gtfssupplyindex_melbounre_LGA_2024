@@ -4665,16 +4665,18 @@ sa1s_in_lga_of_interest <- sa12021 %>% select(sa1_code_2021) %>%
 sa1s_in_lga_of_interest$group <- "Dandenong (SE Metro)"
 
 sa1s_in_other_lgas <- sed2021 %>% 
-   filter(sed_name_2021 == "Mulgrave (South-Eastern Metropolitan)" | 
-            sed_name_2021 == "Rowville (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Keysborough (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Narre Warren North (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Narre Warren South (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Cranbourne (South-Eastern Metropolitan)" | 
-            sed_name_2021 == "Carrum (South-Eastern Metropolitan)")
+   filter(     sed_name_2021 == "Mulgrave (South-Eastern Metropolitan)" | 
+     sed_name_2021 == "Rowville (South-Eastern Metropolitan)" | 
+     sed_name_2021 == "Narre Warren North (South-Eastern Metropolitan)" | 
+               sed_name_2021 == "Narre Warren South (South-Eastern Metropolitan)" | 
+               sed_name_2021 == "Cranbourne (South-Eastern Metropolitan)" | 
+             sed_name_2021 == "Carrum (South-Eastern Metropolitan)" |
+            sed_name_2021 == "Mordialloc (South-Eastern Metropolitan)" |
+             sed_name_2021 == "Keysborough (South-Eastern Metropolitan)"
+) 
 
 sa1s_in_other_lgas <- st_union(sa1s_in_other_lgas)
-#plot(sa1s_in_other_lgas)
+plot(sa1s_in_other_lgas)
 
 sa1s_in_other_lgas <- sa12021 %>% select(sa1_code_2021) %>%
   st_filter(sa1s_in_other_lgas, .predicate =  st_intersects)
@@ -4790,7 +4792,7 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 ```
 
-\newthought{Results:} Figure 1 compares social needs for similarly located seats^[Burwood, Mount Waverley, Clarinda, Mulgrave, Keysborough, Bentleigh, Malvern and Caulfield],
+\newthought{Results:} Figure 1 compares social needs for similarly located seats^[Mulgrave, Rowville, Narre Warren North, Narre Warren South, Cranbourne, Carrum and Keysborough],
 and for the rest of Greater Melbourne with
 those for the Dandenong (South-Eastern Metropolitan) State Electoral Division.
 
@@ -4801,7 +4803,7 @@ those for the Dandenong (South-Eastern Metropolitan) State Electoral Division.
 bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.4*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 
 
@@ -4941,9 +4943,9 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.65, bottom = 0.66, right = 1.0, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.8, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.33, right = 1.0, top = 0.33) 
+inset_element(pcol, left = 0.7, bottom = 0.66, right = 1.0, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.85, bottom = 0.33, right = 1.0, top =0.68) +
+ inset_element(pcol_rest_melbourne, left = 0.85, bottom = 0.0, right = 1.0, top = 0.35) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
@@ -5047,7 +5049,7 @@ of the seat of Oakleigh's population^[Differences between the seat of Oakleigh a
 bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5183,11 +5185,11 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
- # ggspatial::annotation_scale(location = 'tr') +
-  ggspatial::annotation_north_arrow(location = 'tr', height = unit(0.75, "cm")) + 
-  inset_element(pcol, left = 0.0, bottom = 0.0, right = 0.4, top =0.35) +
- inset_element(pcol_rest_SA4, left = 0.4, bottom = 0.0, right = .7, top =0.35) +
- inset_element(pcol_rest_melbourne, left = 0.7, bottom = 0.0, right = 1.0, top = 0.35) 
+ # ggspatial::annotation_scale(location = 'bl') +
+  ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm")) + 
+  inset_element(pcol, left = 0.0, bottom = 0.0, right = 0.55, top =0.45) +
+ inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.1, right = 1.05, top =0.6) +
+ inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.6, right = 1.05, top = 1.0) 
 
 
 
@@ -5308,18 +5310,20 @@ scale_fill_manual(values = c("white","#F9D8B1", "#F7C387", "#F29C33", "lightgree
   geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'tr') +
+  ggspatial::annotation_scale(location = 'br') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
- inset_element(pcol_2, left = 0.0, bottom = 0.0, right = 0.4, top =0.35) +
- inset_element(pcol_rest_SA4_2, left = 0.4, bottom = 0.0, right = .7, top =0.35) +
- inset_element(pcol_rest_melbourne_2, left = 0.7, bottom = 0.0, right = 1.0, top = 0.35) 
+inset_element(pcol_2, left = 0.0, bottom = 0.0, right = 0.55, top =0.45) +
+ inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.1, right = 1.05, top =0.6) +
+ inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.6, right = 1.05, top = 1.0) 
+
 
 
 ```
 
 Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
-of Dandenong (SE Metro) residents in 2021, which is a lower proportion than for 
-similarly located seats (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Difference were statistically significant (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`)] for the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+of Dandenong (SE Metro) residents in 2021, which is lower than for surrounding seats
+(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`]
+or for the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
 The distribution of transit supply,
@@ -5327,12 +5331,12 @@ categorised with respect to the Melbourne average,
 appears similar in 2023 (Figure 2, right).
 Figure 3 directly compares 2021 and 2023 service levels. 
 
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
 
 
 
-lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric() + 0.5 * bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.2*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5687,7 +5691,7 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   filter(group == "Dandenong (SE Metro)") %>% na.omit(),
   aes(fill = ratio_binned), colour=NA) +  
-     scale_fill_manual(values = c("New service" = "dark blue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+     scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   theme_minimal(base_size = 20, base_family = 'IBM Plex Mono')  +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -5704,14 +5708,14 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = .5) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'br', height = unit(0.1, "cm")) 
+  ggspatial::annotation_scale(location = 'bl', height = unit(0.1, "cm")) +
   #ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.5, "cm"), width = unit(0.5, "cm")) + 
-#  inset_element(pcol_1, left = 0.0, bottom = 0.28, right = 0.3, top =0.58) +
-# inset_element(pcol_rest_SA4_2, left = 0.3, bottom = 0.28, right = 0.5, top =0.58) +
-# inset_element(pcol_rest_melbourne_3, left = 0.5, bottom = 0.28, right = 0.7, top = 0.58) +
-#inset_element(pcol, left = 0.13, bottom = 0.0, right = 0.3, top =0.3) +
-# inset_element(pcol_rest_SA4, left = 0.3, bottom = 0.0, right = 0.5, top =0.3) +
-# inset_element(pcol_rest_melbourne, left = 0.5, bottom = 0.0, right = 0.7, top = 0.30) 
+  inset_element(pcol_1, left = 0.35, bottom = 0.50, right = 0.67, top =1.05) +
+ inset_element(pcol_rest_SA4_2, left = 0.67, bottom = 0.50, right = 0.83, top =1.05) +
+ inset_element(pcol_rest_melbourne_3, left = 0.83, bottom = 0.50, right = 1.0, top = 1.05) +
+inset_element(pcol, left = 0.5, bottom = 0.0, right = 0.67, top =0.55) +
+ inset_element(pcol_rest_SA4, left = 0.67, bottom = 0.0, right = 0.8, top =0.55) +
+ inset_element(pcol_rest_melbourne, left = 0.83, bottom = 0.0, right = 1.0, top = 0.55) 
 
 
 ```
@@ -5730,12 +5734,12 @@ the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
 However, for `r label_percent(accuracy=0.1)(pcol$data[1:4,4] %>% sum())` of this cohort service levels increased 1% or more^[Differences
-were not statistically significant with the similar cohorts in similarly located seats
-(Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`) or the rest of Greater Melbourne (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
+were no statistically significant with similarly located seats
+(Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`). or rest of Greater Melbourne were not statistically significant
+(Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 
 Overall, Dandenong (SE Metro) residents appear
-to higher transit service levels than those in similarly located seats or the rest of Melbourne.
-They were also more likely to have seen service increases between 2021 and 2023.
+to have been less likely to have less transit supply than Melbourne's average than those in surrounding seats or the rest of Melbourne, and more likely to have seen service increases between 2021 and 2023.
 
 ```{r Check_assumptions, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 
@@ -5751,7 +5755,7 @@ pcol_rest_melbourne$data
 assumptions1
 2
 assumptions2
-#1  of 14 <5, assumption met.
+#3  of 14 <5, assumption met.
 3
 assumptions3
 4
