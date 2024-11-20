@@ -4826,7 +4826,7 @@ those for the Oakleigh (Southern Metropolitan) State Electoral Division.
 bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.4*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 
 
@@ -4966,9 +4966,9 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.7, bottom = 0.66, right = 1.0, top =1.05) +
- inset_element(pcol_rest_SA4, left = 0.85, bottom = 0.33, right = 1.0, top =0.68) +
- inset_element(pcol_rest_melbourne, left = 0.85, bottom = 0.0, right = 1.0, top = 0.35) 
+inset_element(pcol, left = 0.6, bottom = 0.66, right = 1.0, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.725, bottom = 0.33, right = 1.0, top =0.68) +
+ inset_element(pcol_rest_melbourne, left = 0.725, bottom = 0.0, right = 1.0, top = 0.35) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
@@ -5072,7 +5072,7 @@ of the seat of Oakleigh's population^[Differences between the seat of Oakleigh a
 bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.4*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5211,8 +5211,8 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
  # ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm")) + 
   inset_element(pcol, left = 0.0, bottom = 0.0, right = 0.55, top =0.45) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.1, right = 1.05, top =0.6) +
- inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.6, right = 1.05, top = 1.0) 
+ inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.0, right = 1.05, top =0.5) +
+ inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.5, right = 1.05, top = 1.0) 
 
 
 
@@ -5335,9 +5335,9 @@ scale_fill_manual(values = c("white","#F9D8B1", "#F7C387", "#F29C33", "lightgree
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'br') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol_2, left = 0.0, bottom = 0.0, right = 0.55, top =0.45) +
- inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.1, right = 1.05, top =0.6) +
- inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.6, right = 1.05, top = 1.0) 
+inset_element(pcol_2, left = 0.0, bottom = 0.0, right = 0.55, top =0.55) +
+ inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.15, right = 1.05, top =0.6) +
+ inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.55, right = 1.05, top = 1.05) 
 
 
 
@@ -5359,7 +5359,7 @@ Figure 3 directly compares 2021 and 2023 service levels.
 
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.2*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.22*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5404,7 +5404,7 @@ pcol_1 <- si_by_area_2021_2023_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "All Oakleigh (S Metro)",
+ title = "All Oakleigh",
     x = NULL,
     y = NULL
   ) +
@@ -5584,6 +5584,8 @@ melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
 fisher.test(simulate.p.value = TRUE)
 
 
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_shift(+1)
+
 
 pcol <- si_by_area_2021_2023_wider_holding %>%
   filter(group == "Oakleigh (S Metro)") %>% 
@@ -5604,7 +5606,7 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() + 
-     scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+     scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5642,7 +5644,7 @@ pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() + 
-    scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+     scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5677,11 +5679,11 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(ratio_binned_less, 0.9, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 1.2) +
    coord_flip() + 
-    scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+         scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = " ",
+    title = "Rest of GCCSA",
     x = NULL,
     y = NULL
   ) +
@@ -5699,7 +5701,7 @@ ggplot() +
 geom_sf(data=si_by_area_2021_2023_wider_holding %>%
             filter(group == "Oakleigh (S Metro)"),
           aes(fill = ratio_binned), colour=NA) +  
-   scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))   +
+        scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
         axis.text.y=element_blank(),  #remove y axis labels
@@ -5714,7 +5716,7 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   filter(group == "Oakleigh (S Metro)") %>% na.omit(),
   aes(fill = ratio_binned), colour=NA) +  
-     scale_fill_manual(values = c("Increased 5%+ or new" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
+          scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   theme_minimal(base_size = 20, base_family = 'IBM Plex Mono')  +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -5731,16 +5733,14 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = .5) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'bl', height = unit(0.1, "cm")) +
+  ggspatial::annotation_scale(location = 'br', height = unit(0.1, "cm")) +
   #ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.5, "cm"), width = unit(0.5, "cm")) + 
-  inset_element(pcol_1, left = 0.35, bottom = 0.50, right = 0.67, top =1.05) +
- inset_element(pcol_rest_SA4_2, left = 0.67, bottom = 0.50, right = 0.83, top =1.05) +
- inset_element(pcol_rest_melbourne_3, left = 0.83, bottom = 0.50, right = 1.0, top = 1.05) +
-inset_element(pcol, left = 0.5, bottom = 0.0, right = 0.67, top =0.55) +
- inset_element(pcol_rest_SA4, left = 0.67, bottom = 0.0, right = 0.8, top =0.55) +
- inset_element(pcol_rest_melbourne, left = 0.83, bottom = 0.0, right = 1.0, top = 0.55) 
-
-
+  inset_element(pcol_1, left = 0.0, bottom = 0.0, right = 0.28, top =0.45) +
+ inset_element(pcol_rest_SA4_2, left = 0.30, bottom = 0.0, right = 0.45, top =0.45) +
+ inset_element(pcol_rest_melbourne_3, left = 0.45, bottom = 0.0, right = 0.6, top = 0.45) +
+inset_element(pcol, left = 0.7, bottom = 0.6, right = 0.85, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.85, bottom = 0.6, right = 1.0, top =1.05) +
+ inset_element(pcol_rest_melbourne, left = 0.85, bottom = 0.2, right = 1.0, top = 0.6) 
 ```
 
 Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:6,3] %>% sum())` of Oakleigh (S Metro) residents in
@@ -5757,7 +5757,7 @@ the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
 However, for `r label_percent(accuracy=0.1)(pcol$data[1:4,4] %>% sum())` of this cohort service levels increased 1% or more^[Differences
-were no statistically significant with similarly located seats
+were not statistically significant with similarly located seats
 (Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`). or rest of Greater Melbourne were not statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 

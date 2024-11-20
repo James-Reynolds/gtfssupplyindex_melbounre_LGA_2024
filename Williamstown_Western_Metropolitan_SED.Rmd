@@ -5592,7 +5592,7 @@ melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
   na.omit() %>% 
 fisher.test(simulate.p.value = TRUE)
 
-
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_shift(+1)
 
 pcol <- si_by_area_2021_2023_wider_holding %>%
   filter(group == "Williamstown (W Metro)") %>% 
@@ -5701,7 +5701,6 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
     axis.text.y = element_blank(),
     axis.text.x = element_blank()
   ) 
-
 
 
 ggplot() + 
