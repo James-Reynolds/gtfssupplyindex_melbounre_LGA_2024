@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.8)  22 NOV 2024 14:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.8)  22 NOV 2024 13:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**City_of_Melbourne.tex
-(./City_of_Melbourne.tex
+**City_of_Glen_Eira.tex
+(./City_of_Glen_Eira.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tufte-latex/tufte-handout.cls
@@ -280,7 +280,7 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/bibentry.sty
 Package: bibentry 2007/10/30 1.5 (PWD)
 )
-No file City_of_Melbourne.bbl.
+No file City_of_Glen_Eira.bbl.
 \c@@tufte@num@bibkeys=\count286
 (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/sauerj/optparams.sty
 Package: optparams 2004/08/14 v0.9 multiple optional parameters in macros
@@ -643,8 +643,8 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count331
 \l__pdf_internal_box=\box122
-) (./City_of_Melbourne.aux)
-\openout1 = `City_of_Melbourne.aux'.
+) (./City_of_Glen_Eira.aux)
+\openout1 = `City_of_Glen_Eira.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
@@ -665,9 +665,9 @@ LaTeX Font Info:    ... okay on input line 86.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
 Package hyperref Info: Link coloring OFF on input line 86.
-(./City_of_Melbourne.out) (./City_of_Melbourne.out)
+(./City_of_Glen_Eira.out) (./City_of_Glen_Eira.out)
 \@outlinefile=\write3
-\openout3 = `City_of_Melbourne.out'.
+\openout3 = `City_of_Glen_Eira.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -787,48 +787,42 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Melbourne_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 134.5025pt>
-File: City_of_Melbourne_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
-<use City_of_Melbourne_files/figure-latex/Needs_map-1.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/Needs_map-1.pdf  used on input line 131.
-(pdftex.def)             Requested size: 312.02722pt x 157.77979pt.
+<City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf, id=6, 265.99374pt x 149.55875pt>
+File: City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
+<use City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf>
+Package pdftex.def Info: City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf  used on input line 130.
+(pdftex.def)             Requested size: 312.02722pt x 175.44173pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--132
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 
  []
 
 
 LaTeX Warning: Marginpar on page 1 moved.
 
+<City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf, id=7, 265.99374pt x 149.55875pt>
+File: City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
+<use City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf>
+Package pdftex.def Info: City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf  used on input line 143.
+(pdftex.def)             Requested size: 240.00502pt x 134.94621pt.
+<City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf, id=8, 265.99374pt x 149.55875pt>
+File: City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
+<use City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf>
+Package pdftex.def Info: City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf  used on input line 143.
+(pdftex.def)             Requested size: 240.00502pt x 134.94621pt.
 
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-<City_of_Melbourne_files/figure-latex/SI_map-1.pdf, id=7, 265.99374pt x 153.57375pt>
-File: City_of_Melbourne_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
-<use City_of_Melbourne_files/figure-latex/SI_map-1.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/SI_map-1.pdf  used on input line 142.
-(pdftex.def)             Requested size: 240.00502pt x 138.56892pt.
-<City_of_Melbourne_files/figure-latex/SI_map-2.pdf, id=8, 265.99374pt x 153.57375pt>
-File: City_of_Melbourne_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
-<use City_of_Melbourne_files/figure-latex/SI_map-2.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/SI_map-2.pdf  used on input line 142.
-(pdftex.def)             Requested size: 240.00502pt x 138.56892pt.
-
-Overfull \hbox (2.92004pt too wide) in paragraph at lines 142--143
+Overfull \hbox (2.92004pt too wide) in paragraph at lines 143--144
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
 
 [1
 
-{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./City_of_Melbourne_files/figure-latex/Needs_map-1.pdf>]
+{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./City_of_Glen_Eira_files/figure-latex/Needs_map-1.pdf>]
 
 LaTeX Warning: Marginpar on page 2 moved.
 
@@ -838,13 +832,13 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x 73.27374pt>
-File: City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
-<use City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf  used on input line 157.
-(pdftex.def)             Requested size: 480.01991pt x 138.50372pt.
+<City_of_Glen_Eira_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x 77.28876pt>
+File: City_of_Glen_Eira_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
+<use City_of_Glen_Eira_files/figure-latex/SI_change_map-1.pdf>
+Package pdftex.def Info: City_of_Glen_Eira_files/figure-latex/SI_change_map-1.pdf  used on input line 158.
+(pdftex.def)             Requested size: 480.01991pt x 146.09302pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--158
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
 
  []
 
@@ -882,29 +876,29 @@ Package bibentry Warning: You have used \nobibliography*
 
 
 Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 182.
+This message occurred on input line 183.
 
-[2 <./City_of_Melbourne_files/figure-latex/SI_map-1.pdf> <./City_of_Melbourne_files/figure-latex/SI_map-2.pdf> <./City_of_Melbourne_files/figure-latex/SI_change_map-1.pdf>] (./City_of_Melbourne.aux)
+[2 <./City_of_Glen_Eira_files/figure-latex/SI_map-1.pdf> <./City_of_Glen_Eira_files/figure-latex/SI_map-2.pdf> <./City_of_Glen_Eira_files/figure-latex/SI_change_map-1.pdf>] (./City_of_Glen_Eira.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-Package rerunfilecheck Info: File `City_of_Melbourne.out' has not changed.
+Package rerunfilecheck Info: File `City_of_Glen_Eira.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
  15232 strings out of 476081
  244075 string characters out of 5791510
- 1955190 words of memory out of 5000000
+ 1954190 words of memory out of 5000000
  36991 multiletter control sequences out of 15000+600000
  601510 words of font info for 109 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  96i,11n,96p,425b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on City_of_Melbourne.pdf (2 pages, 347252 bytes).
+Output written on City_of_Glen_Eira.pdf (2 pages, 372801 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
+ 301 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
  6 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
