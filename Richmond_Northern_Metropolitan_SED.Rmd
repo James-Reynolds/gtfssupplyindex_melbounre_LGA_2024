@@ -4667,7 +4667,7 @@ sa1s_in_lga_of_interest$group <- "Richmond (Nth Metro)"
 
 sa1s_in_sa4_of_interest <- sa12021 %>% 
   st_drop_geometry()  %>%
-  filter(sa4_name_2021 == "Melbourne - Inner" | sa4_name_2021 == "Melbourne - Inner South") %>%
+  filter(sa4_name_2021 == "Melbourne - Inner") %>%
   select(sa1_code_2021)
 sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
   left_join(sa1s_in_lga_of_interest %>% 
@@ -5012,9 +5012,9 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 ```
 
 Needs were higher than the Melbourne average 
-for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
+for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
 of the Richmond (Northern Metropolitan) State Electoral Division's population. 
-This share was higher than among the parts of Greater Melbourne that are beyond the Inner SA4 (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences with parts of Melbourne that are beyond the Inner SA4
+This share was higher than among the parts of Greater Melbourne that are beyond the Inner SA4 (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences with parts of Melbourne that are beyond the Inner SA4
 were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`). There was no statistically significant difference between the Richmond Division and the rest of the Inner SA4 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).].
 
 
@@ -5298,13 +5298,13 @@ inset_element(pcol_2, left = 0.35, bottom = 0.66, right = 1.05, top =1.0) +
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
+Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
 of Richmond (Nth Metro) residents in 2021, which is less than for
 the rest of the Inner SA4
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
+(`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).]
-or the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+or the rest of Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
 The distribution of transit supply,
@@ -5704,25 +5704,25 @@ inset_element(pcol, left = 0.4, bottom = 0.15, right = 0.6, top =0.60) +
 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of Richmond (Nth Metro) residents in
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:5,3] %>% sum())` of Richmond (Nth Metro) residents in
 2021, which is a larger share than for the rest of Inner SA4
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
+(`r label_percent(accuracy=1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Richmond (Nth Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Richmond (Nth Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Richmond (Nth Metro) population lived in SA1s with
+Only `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Richmond (Nth Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Richmond (Nth Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Richmond (Nth Metro) population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner SA4 residents and 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner SA4 residents and 
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
+However, for `r label_percent(accuracy=1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
 for the similar cohort living in Melbourne outside the Inner SA1
-(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:6,4] %>% sum())`)^[Differences
+(`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:5,4] %>% sum())`)^[Differences
 were statistically significant between the Richmond (Nth Metro) seat and parts of Greater Melbourne outside of the Inner SA1
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`). However, there
-were no statistically significant differences betwee the Richmond (Nth Metro) seat and the rest of the Inner SA4
+were no statistically significant differences between the Richmond (Nth Metro) seat and the rest of the Inner SA4
 (Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`).].
 
 Overall, Richmond (Nth Metro) residents appear
@@ -5744,7 +5744,7 @@ pcol_rest_melbourne$data
 assumptions1
 2
 assumptions2
-#2 of 14 <5, assumption met.
+#1 of 14 <5, assumption met.
 3
 assumptions3
 4
@@ -5754,7 +5754,7 @@ assumptions4
 assumptions5
 6
 assumptions6
-#2 of 14 <5, assumption met
+#1 of 14 <5, assumption met
 7
 assumptions7
 8
@@ -5764,7 +5764,7 @@ assumptions8
 assumptions9
 10
 assumptions10
-#3 of 20 <5, assumption met.
+#1 of 19 <5, assumption met.
 11
 assumptions11
 12
