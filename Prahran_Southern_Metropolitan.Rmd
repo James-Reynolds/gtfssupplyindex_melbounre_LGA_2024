@@ -4675,7 +4675,7 @@ sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
   left_join(sa1s_in_lga_of_interest %>% 
               st_drop_geometry())
 sa1s_in_sa4_of_interest <- sa1s_in_sa4_of_interest %>%
-  replace_na(list(group = "Rest Inner"))
+  replace_na(list(group = "Rest Inner and Inner S"))
 
 melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>% 
   left_join(sa1s_in_sa4_of_interest, 
@@ -4685,14 +4685,14 @@ melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2021_SA1_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions1 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4722,14 +4722,14 @@ melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2023_SA1_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions5 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) 
 
@@ -4770,9 +4770,8 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 ```
 
-\newthought{Results:} Figure 1 compares social needs for the Rest of the Inner SA4 
-and the rest of Greater Melbourne with
-those for the Prahran (Southern Metropolitan) State Electoral Division.
+\newthought{Results:} Figure 1 compares social needs for the Prahran (Southern Metropolitan) State Electoral Division with the Inner South and the rest of the Inner SA4s (together),
+and the rest of Greater Melbourne.
 
 
 ```{r Needs_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 1, out.width = "100%", fig.cap="Needs in 2021 by population, with suburban railways shown in grey"}
@@ -4827,7 +4826,7 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
 
 
 pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "Rest Inner") %>% 
+  filter(group == "Rest Inner and Inner S") %>% 
  st_drop_geometry() %>%
   na.omit() %>%
   aggregate(population ~ composite_needs, sum) %>%
@@ -4847,7 +4846,7 @@ pcol_rest_SA4 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner",
+    title = "Rest Inner and Inner S",
     x = NULL,
     y = NULL
   ) +
@@ -4928,7 +4927,7 @@ inset_element(pcol, left = 0.375, bottom = 0.6, right = 0.75, top =1.05) +
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -4939,7 +4938,7 @@ melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[2:3] 
 
 assumptions13 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -5014,8 +5013,8 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 ```
 
 Needs were higher than the Melbourne average 
-for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
-of the Prahran (Sth Metro) State Electoral Division's population^[Differences were not statistically significant between Prahran and rest of the Inner SA4 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`) or between Prahran and elsewhere in Greater Melbourne (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
+for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
+of the Prahran (Sth Metro) State Electoral Division's population^[Differences were not statistically significant between Prahran and rest of the Inner and Inner South SA4s (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`) or between Prahran and elsewhere in Greater Melbourne (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
 
 
 ```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
@@ -5069,7 +5068,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 
 pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest Inner") %>% 
+  filter(group == "Rest Inner and Inner S") %>% 
   st_drop_geometry() %>%
   aggregate(population ~ transit_supply, sum) %>%
   right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -5088,7 +5087,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner",
+    title = "Rest Inner and Inner S",
     x = NULL,
     y = NULL
   ) +
@@ -5202,7 +5201,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
 
 
 pcol_rest_SA4_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "Rest Inner") %>% 
+  filter(group == "Rest Inner and Inner S") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
   mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -5219,7 +5218,7 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Rest Inner",
+    title = "Rest Inner and Inner S",
     x = NULL,
     y = NULL
   ) +
@@ -5296,22 +5295,22 @@ inset_element(pcol_2, left = 0.3, bottom = 0.66, right = 1.0, top =1.03) +
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
+Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
 of Prahran (Sth Metro) residents in 2021, which is less than for
-the rest of the Inner SA4 (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`)]
-or elsewhere in Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences were statistically significant 
+the rest of the Inner and Inner South SA4s (`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`)]
+or elsewhere in Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences were statistically significant 
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).]. 
 The distribution of transit supply,
 categorised with respect to the Melbourne average,
 appears similar in 2023 (Figure 2, right).
 Figure 3 directly compares 2021 and 2023 service levels. 
 
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023, by population. SA1s with needs above, but supply below, average highlighted in black."}
 
 
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 2.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 2.4*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5370,7 +5369,7 @@ pcol_1 <- si_by_area_2021_2023_wider_holding %>%
  
 
 pcol_rest_SA4_2 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest Inner") %>% 
+  filter(group == "Rest Inner and Inner S") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
@@ -5389,7 +5388,7 @@ pcol_rest_SA4_2 <- si_by_area_2021_2023_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "Rest Inner",
+ title = "Rest Inner and Inner S",
     x = NULL,
     y = NULL
   ) +
@@ -5442,14 +5441,14 @@ si_by_area_2021_2023_wider_holding <- left_join(
 
 melbourne_2023_SA1_comparison <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
 assumptions9 <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group)
 
@@ -5487,7 +5486,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>% 
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>% 
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
   chisq.test()
@@ -5496,7 +5495,7 @@ assumptions17 <- si_by_area_2021_2023_wider_holding %>%
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>%
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>%
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) 
 
 assumptions18 <- melbourne_2021_SA1_comparison_very_high_needs$expected
@@ -5524,7 +5523,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner") %>% 
+  filter(group == "Prahran (Sth Metro)" | group == "Rest Inner and Inner S") %>% 
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
   fisher.test(simulate.p.value = TRUE)
@@ -5581,7 +5580,7 @@ pcol <- si_by_area_2021_2023_wider_holding %>%
 
 
 pcol_rest_SA4 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Rest Inner") %>% 
+  filter(group == "Rest Inner and Inner S") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
@@ -5700,29 +5699,29 @@ inset_element(pcol, left = 0.5, bottom = 0.15, right = 0.666, top =0.60) +
 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of Prahran (Sth Metro) residents in
-2021, which is a lower share than for the rest of Inner SA4
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:5,3] %>% sum())` of Prahran (Sth Metro) residents in
+2021, which is a lower share than for the rest of Inner or Inner South SA4s
+(`r label_percent(accuracy=1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Prahran (Sth Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Prahran (Sth Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Prahran (Sth Metro) population lived in SA1s with
+Only `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Prahran (Sth Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Prahran (Sth Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Prahran (Sth Metro) population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% select(population) %>% sum())` of those elsewhere in the Inner SA4 and 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner S") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner S") %>% st_drop_geometry() %>% select(population) %>% sum())` of those elsewhere in the Inner and Inner South SA4s and 
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:2,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
-for the similar cohort living the rest of the Inner SA1
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[2:6,4] %>% sum())`)^[Differences between the Prahran (Sth Metro) seat and the rest of the Inner SA4 were statistically significant
+However, for `r label_percent(accuracy=1)(pcol$data[1:2,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
+for the similar cohort living the rest of the Inner and Inner South SA1s
+(`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:5,4] %>% sum())`)^[Differences between the Prahran (Sth Metro) seat and the rest of the Inner SA4 and the Inner South SA4 were statistically significant
 (Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`), but differences
-between the Prahran (Sth Metro) seat and parts of Greater Melbourne outside of the Inner SA1 were not (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
+between the Prahran (Sth Metro) seat and parts of Greater Melbourne outside of the Inner and Inner South SA1s were not (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 
 Overall, Prahran (Sth Metro) residents appear
 less likely
 to have had transit service levels
-below Melbourne's average and also less likely to have seen increases in service between 2021 and 2023^[Although, the relatively small number of residents  with needs above, but supply below the Melbourne average in the Prahran seat were more likely to hav seen increases in transit service of at least 1% than those in the similar cohort elsewhere in the inner SA4]. 
+below Melbourne's average and also less likely to have seen increases in service between 2021 and 2023^[Although, the relatively small number of residents  with needs above, but supply below the Melbourne average in Prahran were more likely to have seen change in transit service of at least 1% than those in the similar cohort elsewhere in the Inner and Inner South SA4s]. 
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 

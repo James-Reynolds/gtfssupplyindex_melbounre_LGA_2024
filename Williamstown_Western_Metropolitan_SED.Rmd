@@ -4966,8 +4966,8 @@ ggplot()+
   ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
 inset_element(pcol, left = 0.45, bottom = 0.66, right = 1.1, top =1.05) +
- inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.33, right = 1.1, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.6, bottom = 0.0, right = 1.1, top = 0.33) 
+ inset_element(pcol_rest_SA4, left = 0.575, bottom = 0.33, right = 1.1, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.575, bottom = 0.0, right = 1.1, top = 0.33) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
@@ -5058,12 +5058,12 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 ```
 
 Needs were higher than the Melbourne average 
-for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
+for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
 of the Williamstown (Western Metropolitan) State Electoral Division's population. 
 This share was higher than among similarly located seats 
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[4:6,3] %>% sum())`)^[Differences 
+(`r label_percent(accuracy=1)(pcol_rest_SA4$data[4:6,3] %>% sum())`)^[Differences 
 were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`)]
-and the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. 
+and the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. 
 
 
 
@@ -5346,13 +5346,13 @@ inset_element(pcol_2, left = 0.5, bottom = 0.66, right = 1.05, top =1.0) +
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
+Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
 of Williamstown (W Metro) residents in 2021, which is less than for
 similarly located seats
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
+(`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).]
-or the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+or the rest of Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
 The distribution of transit supply,
@@ -5751,11 +5751,11 @@ inset_element(pcol, left = 0.4, bottom = 0.15, right = 0.6, top =0.60) +
 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:3,3] %>% sum())` of Williamstown (W Metro) residents in
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:3,3] %>% sum())` of Williamstown (W Metro) residents in
 2021, which is a larger share than for similarly located seats
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:3,3] %>% sum())`)^[Differences 
+(`r label_percent(accuracy=1)(pcol_rest_SA4_2$data[1:3,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:3,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne_3$data[1:3,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Williamstown (W Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Williamstown (W Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Williamstown (W Metro) population lived in SA1s with
@@ -5764,12 +5764,12 @@ the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
-for the similar cohort living in similarly located seats (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[2:4,4] %>% sum())`)^[Differences
+However, for `r label_percent(accuracy=1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
+for the similar cohort living in similarly located seats (`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:3,4] %>% sum())`)^[Differences
 were statistically significant
 (Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`)]
 or the rest of Greater Melbourne
-(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:4,4] %>% sum())`)^[Differences
+(`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:3,4] %>% sum())`)^[Differences
 were statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 

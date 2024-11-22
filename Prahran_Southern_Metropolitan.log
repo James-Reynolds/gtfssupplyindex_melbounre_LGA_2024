@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  19 NOV 2024 11:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.19)  22 NOV 2024 17:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -833,10 +833,10 @@ File: Prahran_Southern_Metropolitan_files/figure-latex/Needs_map-1.pdf Graphic
 file (type pdf)
 <use Prahran_Southern_Metropolitan_files/figure-latex/Needs_map-1.pdf>
 Package pdftex.def Info: Prahran_Southern_Metropolitan_files/figure-latex/Needs
-_map-1.pdf  used on input line 131.
+_map-1.pdf  used on input line 132.
 (pdftex.def)             Requested size: 312.02722pt x 123.6334pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--132
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
@@ -849,7 +849,7 @@ File: Prahran_Southern_Metropolitan_files/figure-latex/SI_map-1.pdf Graphic fil
 e (type pdf)
 <use Prahran_Southern_Metropolitan_files/figure-latex/SI_map-1.pdf>
 Package pdftex.def Info: Prahran_Southern_Metropolitan_files/figure-latex/SI_ma
-p-1.pdf  used on input line 141.
+p-1.pdf  used on input line 143.
 (pdftex.def)             Requested size: 240.00502pt x 120.45532pt.
 <Prahran_Southern_Metropolitan_files/figure-latex/SI_map-2.pdf, id=10, 265.9937
 4pt x 133.49875pt>
@@ -857,15 +857,15 @@ File: Prahran_Southern_Metropolitan_files/figure-latex/SI_map-2.pdf Graphic fil
 e (type pdf)
 <use Prahran_Southern_Metropolitan_files/figure-latex/SI_map-2.pdf>
 Package pdftex.def Info: Prahran_Southern_Metropolitan_files/figure-latex/SI_ma
-p-2.pdf  used on input line 141.
+p-2.pdf  used on input line 143.
 (pdftex.def)             Requested size: 240.00502pt x 120.45532pt.
 
-Overfull \hbox (2.92004pt too wide) in paragraph at lines 141--142
+Overfull \hbox (2.92004pt too wide) in paragraph at lines 143--144
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--142
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
 
@@ -884,15 +884,15 @@ LaTeX Warning: Marginpar on page 2 moved.
 LaTeX Warning: Marginpar on page 2 moved.
 
 <Prahran_Southern_Metropolitan_files/figure-latex/SI_change_map-1.pdf, id=33, 2
-53.94875pt x 101.37875pt>
+53.94875pt x 103.38625pt>
 File: Prahran_Southern_Metropolitan_files/figure-latex/SI_change_map-1.pdf Grap
 hic file (type pdf)
 <use Prahran_Southern_Metropolitan_files/figure-latex/SI_change_map-1.pdf>
 Package pdftex.def Info: Prahran_Southern_Metropolitan_files/figure-latex/SI_ch
-ange_map-1.pdf  used on input line 156.
-(pdftex.def)             Requested size: 480.01991pt x 191.6285pt.
+ange_map-1.pdf  used on input line 158.
+(pdftex.def)             Requested size: 480.01991pt x 195.42311pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
 
  []
 
@@ -953,7 +953,7 @@ mf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/texlive/2022/texmf-dist
 /fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
 ype1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/ur
 w/palatino/uplri8a.pfb>
-Output written on Prahran_Southern_Metropolitan.pdf (2 pages, 324100 bytes).
+Output written on Prahran_Southern_Metropolitan.pdf (2 pages, 325702 bytes).
 PDF statistics:
  113 PDF objects out of 1000 (max. 8388607)
  71 compressed objects within 1 object stream
