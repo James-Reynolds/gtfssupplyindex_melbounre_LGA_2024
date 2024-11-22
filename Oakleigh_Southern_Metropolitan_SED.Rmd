@@ -5059,7 +5059,7 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 ```
 
 Needs were higher than the Melbourne average 
-for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
+for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
 of the seat of Oakleigh's population^[Differences between the seat of Oakleigh and similarly located seats, or with the rest of Greater Melbourne were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`)(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`)]. 
 
 
@@ -5343,10 +5343,10 @@ inset_element(pcol_2, left = 0.0, bottom = 0.0, right = 0.55, top =0.55) +
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
+Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
 of Oakleigh (S Metro) residents in 2021, which is lower than for surrounding seats
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`]
-or for the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+(`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`]
+or for the rest of Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
 The distribution of transit supply,
@@ -5354,7 +5354,7 @@ categorised with respect to the Melbourne average,
 appears similar in 2023 (Figure 2, right).
 Figure 3 directly compares 2021 and 2023 service levels. 
 
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023, by population. SA1s with needs above, but supply below, average highlighted in black."}
 
 
 
@@ -5743,20 +5743,20 @@ inset_element(pcol, left = 0.7, bottom = 0.6, right = 0.85, top =1.05) +
  inset_element(pcol_rest_melbourne, left = 0.85, bottom = 0.2, right = 1.0, top = 0.6) 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:6,3] %>% sum())` of Oakleigh (S Metro) residents in
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:6,3] %>% sum())` of Oakleigh (S Metro) residents in
 2021, which is a larger share than for similarly located seats
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:6,3] %>% sum())`)^[Differences 
+(`r label_percent(accuracy=1)(pcol_rest_SA4_2$data[1:6,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:6,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne_3$data[1:6,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Oakleigh (S Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Oakleigh (S Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Oakleigh (S Metro) population lived in SA1s with
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Oakleigh (S Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Oakleigh (S Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Oakleigh (S Metro) population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:4,4] %>% sum())` of this cohort service levels increased 1% or more^[Differences
+However, for `r label_percent(accuracy=1)(pcol$data[1:4,4] %>% sum())` of this cohort service levels increased 1% or more^[Differences
 were not statistically significant with similarly located seats
 (Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`). or rest of Greater Melbourne were not statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
