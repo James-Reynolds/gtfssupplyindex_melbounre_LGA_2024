@@ -83,7 +83,7 @@ are met within each seat.
 Using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying], this note explores social needs for transport,
 and transit provision
 in 2021 and 2023,
-in the Narre Warren North (SE Metro) State Electoral Division,
+in the Narre Warren North (SE Metro) State Electoral Division.
 
 
 
@@ -4790,7 +4790,7 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 ```
 
-\newthought{Results:} Figure 1 compares social needs for similarly located seats^[Ferntree Gully, Rowville, Dandenong, Narre Warren South, Cranbourne and Carrum],
+\newthought{Results:} Figure 1 compares social needs for similarly located seats^[Ferntree Gully, Rowville, Dandenong, Narre Warren South, Cranbourne and Carrum.],
 and for the rest of Greater Melbourne with
 those for the Narre Warren North (South-Eastern Metropolitan) State Electoral Division.
 
@@ -5036,7 +5036,7 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 Needs were higher than Melbourne's average 
 for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
 of Narre Warren North's residents,
-which is lower than for similarly located seats
+which is a lower share than for similarly located seats
 (`r label_percent(accuracy=1)(pcol_rest_SA4$data[4:6,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`)]
 or for the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`)]. 
 
@@ -5327,7 +5327,7 @@ were statistically significant
 The distribution of transit supply
 categorised with respect to the Melbourne average
 appears similar in 2023 (Figure 2, right).
-Figure 3 directly compares 2021 and 2023. 
+Figure 3 compares 2021 and 2023 service levels. 
 
 ```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023, by population. SA1s with needs above, but supply below, average highlighted in black."}
 
@@ -5379,7 +5379,7 @@ pcol_1 <- si_by_area_2021_2023_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "All Narre Warren Nth",
+ title = "    All Narre Warren Nth",
     x = NULL,
     y = NULL
   ) +
@@ -5727,7 +5727,7 @@ were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
 `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Narre Warren North (SE Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Narre Warren North (SE Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of Narre Warren North's population lived in SA1s with
 *needs above, but supply below*
-the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
+the Melbourne averages in 2021^[Shown with black outline and cross hatching in Figure 3. This compares to 
 `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
 `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
