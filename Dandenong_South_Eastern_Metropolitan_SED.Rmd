@@ -83,7 +83,7 @@ are met within each seat.
 Using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying], this note explores social needs for transport,
 and transit provision
 in 2021 and 2023,
-in the Dandenong (South-Eastern Metropolitan) State Electoral Division,
+in the Dandenong (South-Eastern Metropolitan) State Electoral Division.
 
 
 
@@ -5323,7 +5323,7 @@ scale_fill_manual(values = c("white","#F9D8B1", "#F7C387", "#F29C33", "lightgree
 Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
 of Dandenong residents in 2021, which is lower than for surrounding seats
 (`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`]
-but higher than for elsewhere (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+but higher than for elsewhere in Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
 The distribution of transit supply^[
@@ -5331,7 +5331,7 @@ categorised with respect to the Melbourne average]
 appears similar in 2023 (Figure 2, right).
 Figure 3 directly compares 2021 and 2023 service levels. 
 
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023, by population. SA1s with needs above, but supply below, average highlighted in black."}
 
 
 
@@ -5499,6 +5499,10 @@ assumptions12 <- melbourne_2023_SA4_comparison$expected
 
 
 si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)"))
+
+
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_shift(1)
+
 
 
 #si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Increased 5%+ or new" = c("Increased 30% or more", "New service", "Increased 10 to 30%", "Increased 5 to 10%"))
@@ -5733,12 +5737,12 @@ the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
 `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more by 2023^[Differences
+However, for `r label_percent(accuracy=1)(pcol$data[1:2,4] %>% sum())` of this cohort service levels increased 1% or more by 2023^[Differences
 were not statistically significant with similarly located seats
 (Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`). or rest of Greater Melbourne were not statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 
-Overall, Dandenong residents appear less likely to have less transit supply than Melbourne's average than those in surrounding seats, but more likely that those elsewhere. They were less likely than those elsewhere to have seen transit supply increase by 1% or more between 2021 and 2023. 
+Overall, Dandenong residents appear less likely to have less transit supply than Melbourne's average than those in surrounding seats, but more likely that those elsewhere in Greater Melbourne. They were less likely than those elsewhere to have seen transit supply increase by 1% or more between 2021 and 2023. 
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 

@@ -5012,8 +5012,8 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 ```
 
 Needs were higher than the Melbourne average 
-for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
-of the Yarra population, more than elsewhere in Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences between Yarra and the rest of the Inner and Inner East SA4s were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`). Differences with the rest of Greater Melbourne were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
+for `r label_percent(accuracy = 1)(pcol$data[4:6,3] %>% sum())`
+of the Yarra population, more than elsewhere in Melbourne (`r label_percent(accuracy = 1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences between Yarra and the rest of the Inner and Inner East SA4s were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`). Differences with the rest of Greater Melbourne were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
 
 
 
@@ -5164,8 +5164,8 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
  # ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm")) + 
   inset_element(pcol, left = 0.5, bottom = 0.0, right = 1.0, top =0.33) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.66, right = 1.0, top = 1.0) 
+ inset_element(pcol_rest_SA4, left = 0.66, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.66, bottom = 0.66, right = 1.0, top = 1.0) 
 
 
 
@@ -5289,20 +5289,20 @@ scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgre
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
 inset_element(pcol_2, left = 0.5, bottom = 0.0, right = 1.0, top =0.33) +
- inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.33, right = 1.0, top =0.66) +
- inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.66, right = 1.0, top = 1.0) 
+ inset_element(pcol_rest_SA4_2, left = 0.66, bottom = 0.33, right = 1.0, top =0.66) +
+ inset_element(pcol_rest_melbourne_2, left = 0.66, bottom = 0.66, right = 1.0, top = 1.0) 
 
 
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Transit service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
+Figure 2 shows the distribution of transit service in 2021 and 2023. Transit service levels were below the Melbourne average for `r label_percent(accuracy = 1)(pcol$data[1:4,3] %>% sum())`
 of Yarra residents in 2021, which is less than for
 the rest of the Inner and Inner East SA4s
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
+(`r label_percent(accuracy = 1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).]
-or the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+or the rest of Melbourne (`r label_percent(accuracy = 1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
 The distribution of transit supply,
@@ -5480,6 +5480,10 @@ assumptions12 <- melbourne_2023_SA4_comparison$expected
 
 si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)")
 )
+
+
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_shift(1)
+
 
 
 si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Increased 30%+ or new" = c("Increased 30% or more", "New service")
@@ -5703,20 +5707,20 @@ inset_element(pcol, left = 0.4, bottom = 0.64, right = 0.6, top =1.05) +
 ```
 
 Transit levels increased by 1% or more between 2021 and 2023
-for `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of Yarra residents, which is a great proportion than in the rest of Inner and Inner East SA4s (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+for `r label_percent(accuracy = 1)(pcol_1$data[1:5,3] %>% sum())` of Yarra residents, which is a great proportion than in the rest of Inner and Inner East SA4s (`r label_percent(accuracy = 1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).], and the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).], and the rest of Melbourne (`r label_percent(accuracy = 1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Yarra population lived in SA1s with
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Yarra") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Yarra population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner East") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner East") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner and Inner East SA4s residents and 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner East") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner and Inner East") %>% st_drop_geometry() %>% select(population) %>% sum())` of Inner and Inner East SA4s residents and 
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:4,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
+However, for `r label_percent(accuracy = 1)(pcol$data[1:4,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
 for the similar cohort in Greater Melbourne living *outside* the Inner and Inner East SA4 
-(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:6,4] %>% sum())`)^[Differences
+(`r label_percent(accuracy = 1)(pcol_rest_melbourne$data[2:6,4] %>% sum())`)^[Differences
 with 'the rest of the GCCSA' were statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`), 
 but not with 'the rest of Inner and Inner East SA4s' (Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`).].
@@ -5728,7 +5732,18 @@ below Melbourne's average,
 and more likely to have seen increases, 
 including for those with larger needs-gaps. 
 
-```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+```{r Check_assumptions, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+
+pcol_1$data
+pcol_rest_SA4_2$data
+pcol_rest_melbourne_3$data
+
+pcol$data
+pcol_rest_SA4$data
+pcol_rest_melbourne$data
+
+
+
 1
 assumptions1
 2

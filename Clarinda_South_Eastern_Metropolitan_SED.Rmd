@@ -83,7 +83,7 @@ are met within each seat.
 Using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying], this note explores social needs for transport,
 and transit provision
 in 2021 and 2023,
-in the Clarinda (South-Eastern Metropolitan) State Electoral Division,
+in the Clarinda (South-Eastern Metropolitan) State Electoral Division.
 
 
 
@@ -4817,7 +4817,8 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 \newthought{Results:} Figure 1 compares social needs for similarly located seats^[Mount Waverley, Oakleigh, Mulgrave, Keysborough, Bentleigh, Sandringham and Mordialloc],
 and for the rest of Greater Melbourne with
-those for the Clarinda (South-Eastern Metropolitan) State Electoral Division.
+those for the Clarinda (South-Eastern Metropolitan) State Electoral Division. 
+Clarinda itself includes areas around Clayton station, extending east to Springvale station and south to the northern boundary of Moorabin Airport. .  
 
 
 ```{r Needs_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 1, out.width = "100%", fig.cap="Needs in 2021 by population, with suburban railways shown in grey"}
@@ -4966,9 +4967,9 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.45, bottom = 0.66, right = 1.1, top =1.05) +
- inset_element(pcol_rest_SA4, left = 0.60, bottom = 0.33, right = 1.1, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.60, bottom = 0.0, right = 1.1, top = 0.33) 
+inset_element(pcol, left = 0.44, bottom = 0.66, right = 1.1, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.57, bottom = 0.33, right = 1.1, top =0.69) +
+ inset_element(pcol_rest_melbourne, left = 0.57, bottom = 0.0, right = 1.1, top = 0.36) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
@@ -5059,8 +5060,8 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 ```
 
 Needs were higher than the Melbourne average 
-for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
-of the seat of Clarinda's population^[Differences between the seat of Clarinda and similarly located seats, or with the rest of Greater Melbourne were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`)(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`)]. 
+for `r label_percent(accuracy = 1)(pcol$data[4:6,3] %>% sum())`
+of the seat of Clarinda's population, which is a lower proportion than for the surrounding similarly located seats (`r label_percent(accuracy = 1)(pcol_rest_SA4$data[4:6,3] %>% sum())`)^[Differences between the seat of Clarinda and similarly located seats were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`). Differences with the rest of Greater Melbourne were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`)]. 
 
 
 
@@ -5072,7 +5073,7 @@ of the seat of Clarinda's population^[Differences between the seat of Clarinda a
 bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.8*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.75*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5210,9 +5211,9 @@ scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53
            ylim = c(lat[1], lat[2])) +
  # ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm")) + 
-  inset_element(pcol, left = 0.5, bottom = 0.66, right = 1.05, top =1.0) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.05, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.0, right = 1.05, top = 0.33) 
+  inset_element(pcol, left = 0.5, bottom = 0.66, right = 1.05, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.05, top =0.69) +
+ inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.0, right = 1.05, top = 0.36) 
 
 
 
@@ -5335,20 +5336,20 @@ scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol_2, left = 0.5, bottom = 0.66, right = 1.05, top =1.0) +
- inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.33, right = 1.05, top =0.66) +
- inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.0, right = 1.05, top = 0.33) 
+inset_element(pcol_2, left = 0.5, bottom = 0.66, right = 1.05, top =1.05) +
+ inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.33, right = 1.05, top =0.69) +
+ inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.0, right = 1.05, top = 0.36) 
 
 
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
-of Clarinda (SE Metro) residents in 2021.
-There was no statistically significant difference between the shares of supply 
-in Clarinda and surrounding seats^[`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`] but the share was less than that for the rest of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy = 1)(pcol$data[1:4,3] %>% sum())`
+of Clarinda (SE Metro) residents in 2021, which is
+a lower share than for parts of Melbourne beyond the similarly located seats (`r label_percent(accuracy = 1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
+(`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`). There was no statistically significant difference between the shares of supply 
+in Clarinda and the similarly located seats (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`)] 
 The distribution of transit supply,
 categorised with respect to the Melbourne average,
 appears similar in 2023 (Figure 2, right).
@@ -5359,7 +5360,7 @@ Figure 3 directly compares 2021 and 2023 service levels.
 
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.6*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.45*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5404,7 +5405,7 @@ pcol_1 <- si_by_area_2021_2023_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "All Clarinda (SE Metro)",
+ title = "All Clarinda",
     x = NULL,
     y = NULL
   ) +
@@ -5733,41 +5734,40 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'br', height = unit(0.1, "cm")) +
   #ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.5, "cm"), width = unit(0.5, "cm")) + 
-  inset_element(pcol_1, left = 0.28, bottom = 0.55, right = 0.6, top =1.05) +
- inset_element(pcol_rest_SA4_2, left = 0.6, bottom = 0.55, right = 0.8, top =1.05) +
- inset_element(pcol_rest_melbourne_3, left = 0.8, bottom = 0.55, right = 1.0, top = 1.05) +
-inset_element(pcol, left = 0.4, bottom = 0.15, right = 0.6, top =0.60) +
- inset_element(pcol_rest_SA4, left = 0.6, bottom = 0.15, right = 0.8, top =0.60) +
- inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.15, right = 1.0, top = 0.60) 
+  inset_element(pcol_1, left = 0.43, bottom = 0.55, right = 0.7, top =1.05) +
+ inset_element(pcol_rest_SA4_2, left = 0.7, bottom = 0.55, right = 0.85, top =1.05) +
+ inset_element(pcol_rest_melbourne_3, left = 0.85, bottom = 0.55, right = 1.0, top = 1.05) +
+inset_element(pcol, left = 0.55, bottom = 0.15, right = 0.7, top =0.60) +
+ inset_element(pcol_rest_SA4, left = 0.7, bottom = 0.15, right = 0.85, top =0.60) +
+ inset_element(pcol_rest_melbourne, left = 0.85, bottom = 0.15, right = 1.0, top = 0.60) 
 
 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:6,3] %>% sum())` of Clarinda (SE Metro) residents in
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy = 1)(pcol_1$data[1:6,3] %>% sum())` of Clarinda (SE Metro) residents in
 2021, which is a larger share than for similarly located seats
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:6,3] %>% sum())`)^[Differences 
+(`r label_percent(accuracy = 1)(pcol_rest_SA4_2$data[1:6,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:6,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy = 1)(pcol_rest_melbourne_3$data[1:6,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Clarinda (SE Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Clarinda (SE Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Clarinda (SE Metro) population lived in SA1s with
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Clarinda (SE Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Clarinda (SE Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Clarinda (SE Metro) population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
-elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:4,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
-for the similar cohort living in similarly located seats (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[2:7,4] %>% sum())`)^[Differences
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+elsewhere in Melbourne.
+However, for `r label_percent(accuracy = 1)(pcol$data[1:4,4] %>% sum())` of this cohort in Clarinda service levels increased 1% or more, a higher proportion than
+for the similar cohort living in similarly located seats (`r label_percent(accuracy = 1)(pcol_rest_SA4$data[2:7,4] %>% sum())`, differences
 were statistically significant
 (Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`). Differences
 with the rest of Greater Melbourne were not statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 
-Overall, Clarinda (SE Metro) residents appear
+Overall, Clarinda residents appear
 to have had similar transit service levels to those in similarly located seats,
-but were less likely to have less than Melbourne's average than the rest of Melbourne.
-They were  also more likely to have seen service increases between 2021 and 2023
-than those in nearby seats or the rest of Melbourne.
+but more than those elsewhere of Melbourne.
+They were also more likely to have seen service increases between 2021 and 2023.
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 
