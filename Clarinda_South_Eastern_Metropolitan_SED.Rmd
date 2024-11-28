@@ -5525,6 +5525,10 @@ assumptions12 <- melbourne_2023_SA4_comparison$expected
 si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Not served in 2023" = c("Never served (black)", "Service withdrawn (magenta)"))
 
 
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_shift(1)
+
+
+
 #si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_collapse("Increased 5%+ or new" = c("Increased 30% or more", "New service", "Increased 10 to 30%", "Increased 5 to 10%"))
 
 
@@ -5758,9 +5762,9 @@ the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to
 `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.
 However, for `r label_percent(accuracy = 1)(pcol$data[1:4,4] %>% sum())` of this cohort in Clarinda service levels increased 1% or more, a higher proportion than
-for the similar cohort living in similarly located seats (`r label_percent(accuracy = 1)(pcol_rest_SA4$data[2:7,4] %>% sum())`, differences
-were statistically significant
-(Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`). Differences
+for the similar cohort living in similarly located seats (`r label_percent(accuracy = 1)(pcol_rest_SA4$data[1:6,4] %>% sum())`, differences
+were statistically significant:
+Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`). Differences
 with the rest of Greater Melbourne were not statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 

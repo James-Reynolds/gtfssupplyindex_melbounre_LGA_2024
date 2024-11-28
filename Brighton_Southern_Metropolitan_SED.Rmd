@@ -5079,7 +5079,7 @@ pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,  0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5112,7 +5112,8 @@ pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply, 0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
+
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5148,7 +5149,8 @@ pcol_rest_melbourne <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,  0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
+
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5179,7 +5181,8 @@ ggplot()+
 #        legend.title = element_text(size = 5), 
 #        legend.key.size = unit(0.08, 'cm')
         ) + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
+
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
@@ -5212,7 +5215,7 @@ pcol_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply, 0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5243,7 +5246,7 @@ pcol_rest_SA4_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5273,7 +5276,7 @@ pcol_rest_melbourne_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_ar
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,0.5, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5304,7 +5307,7 @@ ggplot()+
 #        legend.title = element_text(size = 5), 
 #        legend.key.size = unit(0.08, 'cm')
         ) + 
-scale_fill_manual(values = c("white","#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
@@ -5334,7 +5337,7 @@ categorised with respect to the Melbourne average,
 appears similar in 2023 (Figure 2, right).
 Figure 3 directly compares 2021 and 2023 service levels. 
 
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, fig.cap="Transit service change 2021 to 2023 by population. SA1s with needs above, but supply below, average highlighted in black."}
 
 
 
@@ -5742,7 +5745,7 @@ were not statistically significant with similarly located seats
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 2)`), with `r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:6,4] %>% sum())` of the above average needs, below average supply cohort having seen services increase by at least 1% between 2021 and 2023.].
 
 Overall, residents of the seat of Brighton appear
-to have been more likely to have less transit supply than Melbourne's average than those in surrounding seats or the rest of Melbourne, and less likely to have seen service increases between 2021 and 2023.
+to have been more likely to have less transit supply than Melbourne's average than those in surrounding seats but more likely than those across the rest of Melbourne. Brighton residents were less likely to have seen service increases between 2021 and 2023 than those in surrounding seats or the rest of Melbourne.
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 

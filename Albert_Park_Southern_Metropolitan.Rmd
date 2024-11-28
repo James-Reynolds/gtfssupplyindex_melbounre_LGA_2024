@@ -1,6 +1,6 @@
 ---
-title: "Albert Park (Southern Metropolitan)State Electoral Division: social needs, gaps in transit"
-runningheader: "Albert Park (Southern Metropolitan)State Electoral Division:needs-gaps" # only for pdf output
+title: "Albert Park (Southern Metropolitan) State Electoral Division: social needs, gaps in transit"
+runningheader: "Albert Park (Southern Metropolitan) State Electoral Division:needs-gaps" # only for pdf output
 author: "Dr James Reynolds"
 date: "`r Sys.Date()`"
 bibliography: References.bib
@@ -83,7 +83,7 @@ are met within each seat.
 This note explores social needs for transport,
 and transit provision
 in 2021 and 2023,
-in the Albert Park (Southern Metropolitan)State Electoral Division,
+in the Albert Park (Southern Metropolitan) State Electoral Division,
 using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
 
 
@@ -4772,7 +4772,7 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 \newthought{Results:} Figure 1 compares social needs for the Rest of the Inner SA4 
 and the rest of Greater Melbourne with
-those for the Albert Park (Southern Metropolitan)State Electoral Division.
+those for the Albert Park (Southern Metropolitan) State Electoral Division.
 
 
 ```{r Needs_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = FALSE, ncol = 1, out.width = "100%", fig.cap="Needs in 2021 by population, with suburban railways shown in grey"}
@@ -4919,11 +4919,11 @@ ggplot()+
   geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = 2) + 
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
-  ggspatial::annotation_scale(location = 'br') +
+  ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'tr', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.375, bottom = 0.6, right = 0.75, top =1.05) +
- inset_element(pcol_rest_SA4, left = 0.5, bottom = 0.15, right = 0.75, top =0.6) +
- inset_element(pcol_rest_melbourne, left = 0.75, bottom = 0.15, right = 1.0, top = 0.6) 
+inset_element(pcol, left = 0.375, bottom = 0.5, right = 0.75, top =1.05) +
+ inset_element(pcol_rest_SA4, left = 0.5, bottom = 0.0, right = 0.75, top =0.55) +
+ inset_element(pcol_rest_melbourne, left = 0.75, bottom = 0.0, right = 1.0, top = 0.55) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
@@ -5014,7 +5014,7 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 ```
 
 Needs were higher than the Melbourne average 
-for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
+for `r label_percent(accuracy = 1)(pcol$data[4:6,3] %>% sum())`
 of the Albert Park (Sth Metro) State Electoral Division's population^[Differences were not statistically significant between the Albert Park seat and rest of the Inner SA4 (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`) or between Albert Park and elsewhere in Greater Melbourne (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
 
 
@@ -5025,7 +5025,7 @@ of the Albert Park (Sth Metro) State Electoral Division's population^[Difference
 bbox_list <- lapply(st_geometry(sed_of_interest_2021), st_bbox)
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 0.3*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5051,7 +5051,7 @@ pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5084,7 +5084,7 @@ pcol_rest_SA4 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5120,7 +5120,7 @@ pcol_rest_melbourne <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,  1.0, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(population)} ({label_percent(accuracy = 1)(perc)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5151,7 +5151,7 @@ ggplot()+
 #        legend.title = element_text(size = 5), 
 #        legend.key.size = unit(0.08, 'cm')
         ) + 
-scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
@@ -5162,10 +5162,10 @@ scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53
     coord_sf(xlim = c(lon[1],lon[2]), 
            ylim = c(lat[1], lat[2])) +
  # ggspatial::annotation_scale(location = 'bl') +
-  ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm")) + 
-  inset_element(pcol, left = 0.5, bottom = 0.66, right = 1.0, top =1.03) +
- inset_element(pcol_rest_SA4, left = 0.65, bottom = 0.33, right = 1.0, top =0.69) +
- inset_element(pcol_rest_melbourne, left = 0.65, bottom = 0.0, right = 1.0, top = 0.36) 
+  ggspatial::annotation_north_arrow(location = 'tr', height = unit(0.75, "cm")) + 
+  inset_element(pcol, left = 0.0, bottom = 0.15, right = 0.4, top =0.48) +
+ inset_element(pcol_rest_SA4, left = 0.76, bottom = 0.33, right = 1.0, top =0.69) +
+ inset_element(pcol_rest_melbourne, left = 0.76, bottom = 0.0, right = 1.0, top = 0.36) 
 
 
 
@@ -5184,7 +5184,7 @@ pcol_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply, 1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5215,7 +5215,7 @@ pcol_rest_SA4_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5245,7 +5245,7 @@ pcol_rest_melbourne_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_ar
   geom_hline(yintercept = 0)  + 
   geom_text(aes(transit_supply,1.1, label = glue::glue("{label_comma(accuracy = 1, big.mark = ",")(n)} ({label_percent(accuracy = 1)(percent)})")), size = 2) +
    coord_flip() + 
-scale_fill_manual(values = c("white", "#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
@@ -5276,7 +5276,7 @@ ggplot()+
 #        legend.title = element_text(size = 5), 
 #        legend.key.size = unit(0.08, 'cm')
         ) + 
-scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53A212", "darkgreen")) +
+scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "Low" = "#F7C387",  "Below average" = "#F29C33", "Above average" = "lightgreen", "High" = "#53A212", "Very High" = "darkgreen")) +
 #  geom_sf(data=melbourne_sd07aust_region, fill = NA, linewidth = 0.5) +
 #  geom_sf(data=middle_lga07aust_region, fill = NA, linewidth = 0.4) +
 #  geom_sf(data=sa4_boundaries, fill = NA, colour="blue") +
@@ -5288,30 +5288,30 @@ scale_fill_manual(values = c("#F9D8B1", "#F7C387", "#F29C33", "lightgreen", "#53
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
  # ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol_2, left = 0.5, bottom = 0.66, right = 1.0, top =1.03) +
- inset_element(pcol_rest_SA4_2, left = 0.65, bottom = 0.33, right = 1.0, top =0.69) +
- inset_element(pcol_rest_melbourne_2, left = 0.65, bottom = 0.0, right = 1.0, top = 0.36) 
+inset_element(pcol_2, left = 0.0, bottom = 0.15, right = 0.4, top =0.48) +
+ inset_element(pcol_rest_SA4_2, left = 0.76, bottom = 0.33, right = 1.0, top =0.69) +
+ inset_element(pcol_rest_melbourne_2, left = 0.76, bottom = 0.0, right = 1.0, top = 0.36) 
 
 
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
-of Albert Park (Sth Metro) residents in 2021, which is less than for
-the rest of the Inner SA4 (`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`)]
-or elsewhere in Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences were statistically significant 
+Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy = 1)(pcol$data[1:4,3] %>% sum())`
+of Albert Park (Sth Metro) residents in 2021, which is a lower proportion than for
+the rest of the Inner SA4 (`r label_percent(accuracy = 1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison)`)]
+or elsewhere in Melbourne (`r label_percent(accuracy = 1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences were statistically significant 
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).]. 
 The distribution of transit supply,
 categorised with respect to the Melbourne average,
 appears similar in 2023 (Figure 2, right).
 Figure 3 directly compares 2021 and 2023 service levels. 
 
-```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023. SA1s with needs above, but supply below, average highlighted in black."}
+```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023, by population. SA1s with needs above, but supply below, average highlighted in black."}
 
 
 
 lat = c(bbox_list[[1]]["ymin"] %>% as.numeric(), bbox_list[[1]]["ymax"] %>% as.numeric())
-lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.5*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
+lon = c(bbox_list[[1]]["xmin"] %>% as.numeric(), bbox_list[[1]]["xmax"] %>% as.numeric() + 1.1*(bbox_list[[1]]["xmax"] %>% as.numeric() - bbox_list[[1]]["xmin"] %>% as.numeric()))
 
 Poly_Coord_df = data.frame(lon, lat)
 
@@ -5520,6 +5520,10 @@ assumptions19 <- si_by_area_2021_2023_wider_holding %>%
 assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
 
 
+si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wider_holding$ratio_binned_less %>% fct_shift(+1)
+
+
+
 melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_holding %>% 
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
@@ -5698,29 +5702,27 @@ inset_element(pcol, left = 0.5, bottom = 0.15, right = 0.666, top =0.60) +
 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of Albert Park (Sth Metro) residents in
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy = 1)(pcol_1$data[1:5,3] %>% sum())` of Albert Park (Sth Metro) residents in
 2021, which is a larger share than for the rest of Inner SA4
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
+(`r label_percent(accuracy = 1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Greater Melbourne (`r label_percent(accuracy = 1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-Only `r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Albert Park (Sth Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Albert Park (Sth Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Albert Park (Sth Metro) population lived in SA1s with
+Only `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Albert Park (Sth Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Albert Park (Sth Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Albert Park (Sth Metro) population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% select(population) %>% sum())` of those elsewhere in the Inner SA4 and 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest Inner") %>% st_drop_geometry() %>% select(population) %>% sum())` of those elsewhere in the Inner SA4 and 
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
-for the similar cohort living the rest of the Inner SA1
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[2:6,4] %>% sum())`)^[Differences between the Albert Park (Sth Metro) seat and the rest of the Inner SA4 were statistically significant
-(Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`), but differences
-between the Albert Park (Sth Metro) seat and parts of Greater Melbourne outside of the Inner SA1 were not (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
+However, for `r label_percent(accuracy = 1)(pcol$data[1:3,4] %>% sum())` of this cohort service levels increased 1% or more^[Differences between the Albert Park (Sth Metro) seat and the rest of the Inner SA4 were not statistically significant
+(Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`), nor were differences
+between the Albert Park (Sth Metro) seat and parts of Greater Melbourne outside of the Inner SA (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`).].
 
 Overall, Albert Park (Sth Metro) residents appear
 less likely
 to have had transit service levels
-below Melbourne's average, and also more likely to have seen increases in service between 2021 and 2023^[Although, the relatively small number of residents  with needs above, but supply below the Melbourne average in the Albert Park seat were less likely to have seen increases in transit service of at least 1% than those in the similar cohort elsewhere in the inner SA4]. 
+below Melbourne's average, and also more likely to have seen increases in service between 2021 and 2023. 
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 

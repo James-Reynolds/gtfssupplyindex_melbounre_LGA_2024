@@ -79,13 +79,12 @@ However, it is unclear
 how much transit is supplied
 or how well social needs for transport
 are met for each LGA.
-This note explores social needs for transport,
+This note uses
+the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
+to explore social transport need,
 and transit provision
-in 2021 and 2023,
-in the City of Hobson Bay
-using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying].
-
-
+in 2021 and 2023
+in the City of Hobsons Bay
 
 
 \newthought{Methods:}
@@ -4937,9 +4936,9 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'bl') +
   ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.59, bottom = 0.64, right = 1.05, top =0.98) +
- inset_element(pcol_rest_SA4, left = 0.72, bottom = 0.32, right = 1.05, top =0.66) +
- inset_element(pcol_rest_melbourne, left = 0.72, bottom = 0.0, right = 1.05, top = 0.34) 
+inset_element(pcol, left = 0.59, bottom = 0.64, right = 1.04, top =1.0) +
+ inset_element(pcol_rest_SA4, left = 0.72, bottom = 0.32, right = 1.04, top =0.66) +
+ inset_element(pcol_rest_melbourne, left = 0.72, bottom = 0.0, right = 1.04, top = 0.34) 
 
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
@@ -5025,7 +5024,7 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 ```
 
 Needs were higher than the Melbourne average 
-for `r label_percent(accuracy=0.1)(pcol$data[4:6,3] %>% sum())`
+for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
 of the City of Hobsons Bay's population, and appear similar to other middle LGAs and the outer parts of Melbourne^[Differences between Hobsons Bay and either group were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`)(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
 
 ```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
@@ -5305,13 +5304,13 @@ inset_element(pcol_2, left = 0.35, bottom = 0.0, right = 0.75, top =0.45) +
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Transit service levels were below the Melbourne average for `r label_percent(accuracy=0.1)(pcol$data[1:4,3] %>% sum())`
+Figure 2 shows the distribution of transit service in 2021 and 2023. Transit service levels were below the Melbourne average for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
 of City of Hobsons Bay residents in 2021, which is more than for
 the other middle suburb LGAs
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
+(`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).], but less than for
-outer parts of Melbourne (`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+outer parts of Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
 Distribution of transit supply,
@@ -5705,25 +5704,25 @@ inset_element(pcol, left = 0.55, bottom = 0.0, right = 0.7, top =0.55) +
 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=0.1)(pcol_1$data[1:5,3] %>% sum())` of City of Hobsons Bay residents in
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:5,3] %>% sum())` of City of Hobsons Bay residents in
 2021, which is a higher proportion than for those in the similar middle surburb LGAs
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
+(`r label_percent(accuracy=1)(pcol_rest_SA4_2$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the or more outer parts of Greater Melbourne  (`r label_percent(accuracy=0.1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the or more outer parts of Greater Melbourne  (`r label_percent(accuracy=1)(pcol_rest_melbourne_3$data[1:5,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Hobsons Bay") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Hobsons Bay") %>% st_drop_geometry() %>% select(population) %>% sum())` of the City of Hobsons Bay population lived in SA1s with
+`r label_percent(accuracy=1)(si_by_area_2021_2023_wider_holding %>% filter(group == "City of Hobsons Bay") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "City of Hobsons Bay") %>% st_drop_geometry() %>% select(population) %>% sum())` of the City of Hobsons Bay population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar LGAs") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar LGAs") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents in the rest of the middle suburban LGAs and 
-`r label_percent(accuracy = 0.1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
+`r label_percent(accuracy=1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar LGAs") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar LGAs") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents in the rest of the middle suburban LGAs and 
+`r label_percent(accuracy=1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 in more outer parts of Melbourne.].
-However, for `r label_percent(accuracy=0.1)(pcol$data[1:5,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
+However, for `r label_percent(accuracy=1)(pcol$data[1:5,4] %>% sum())` of this cohort service levels increased 1% or more, a higher proportion than
 for the similar cohorts in the rest of the middle suburban LGAs
-(`r label_percent(accuracy=0.1)(pcol_rest_SA4$data[2:5,4] %>% sum())`)^[Differences
+(`r label_percent(accuracy=1)(pcol_rest_SA4$data[2:5,4] %>% sum())`)^[Differences
 were statistically significant
 (Fisher test p = `r melbourne_2021_SA1_comparison_very_high_needs$p.value %>% format(digits = 3)`).] or 
-(`r label_percent(accuracy=0.1)(pcol_rest_melbourne$data[2:5,4] %>% sum())`)^[Differences with the outer parts of Greater Melbourne were also statistically significant
+(`r label_percent(accuracy=1)(pcol_rest_melbourne$data[2:5,4] %>% sum())`)^[Differences with the outer parts of Greater Melbourne were also statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_very_high_needs$p.value %>% format(digits = 3)`).].
 
 Overall, City of Hobsons Bay residents appear
