@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.8)  29 NOV 2024 16:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.8)  2 DEC 2024 10:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**City_of_Hobsons_Bay.tex
-(./City_of_Hobsons_Bay.tex
+**City_of_Yarra.tex
+(./City_of_Yarra.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tufte-latex/tufte-handout.cls
@@ -280,7 +280,7 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/bibentry.sty
 Package: bibentry 2007/10/30 1.5 (PWD)
 )
-No file City_of_Hobsons_Bay.bbl.
+No file City_of_Yarra.bbl.
 \c@@tufte@num@bibkeys=\count286
 (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/sauerj/optparams.sty
 Package: optparams 2004/08/14 v0.9 multiple optional parameters in macros
@@ -643,8 +643,8 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count331
 \l__pdf_internal_box=\box122
-) (./City_of_Hobsons_Bay.aux)
-\openout1 = `City_of_Hobsons_Bay.aux'.
+) (./City_of_Yarra.aux)
+\openout1 = `City_of_Yarra.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
@@ -665,9 +665,9 @@ LaTeX Font Info:    ... okay on input line 86.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
 Package hyperref Info: Link coloring OFF on input line 86.
-(./City_of_Hobsons_Bay.out) (./City_of_Hobsons_Bay.out)
+(./City_of_Yarra.out) (./City_of_Yarra.out)
 \@outlinefile=\write3
-\openout3 = `City_of_Hobsons_Bay.out'.
+\openout3 = `City_of_Yarra.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -792,37 +792,34 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<City_of_Hobsons_Bay_files/figure-latex/Needs_map-1.pdf, id=8, 269.005pt x 118.4425pt>
-File: City_of_Hobsons_Bay_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
-<use City_of_Hobsons_Bay_files/figure-latex/Needs_map-1.pdf>
-Package pdftex.def Info: City_of_Hobsons_Bay_files/figure-latex/Needs_map-1.pdf  used on input line 130.
-(pdftex.def)             Requested size: 312.00496pt x 137.3753pt.
+<City_of_Yarra_files/figure-latex/Needs_map-1.pdf, id=8, 261.97874pt x 159.59625pt>
+File: City_of_Yarra_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
+<use City_of_Yarra_files/figure-latex/Needs_map-1.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/Needs_map-1.pdf  used on input line 130.
+(pdftex.def)             Requested size: 312.0104pt x 190.07529pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 130--131
 
  []
 
+[1
 
-LaTeX Warning: Marginpar on page 1 moved.
+{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./4rctaxfc-400.png> <./City_of_Yarra_files/figure-latex/Needs_map-1.pdf>]
 
+LaTeX Warning: Marginpar on page 2 moved.
 
-LaTeX Warning: Marginpar on page 1 moved.
+<City_of_Yarra_files/figure-latex/SI_map-1.pdf, id=29, 232.87pt x 159.59625pt>
+File: City_of_Yarra_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
+<use City_of_Yarra_files/figure-latex/SI_map-1.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/SI_map-1.pdf  used on input line 142.
+(pdftex.def)             Requested size: 240.008pt x 164.48824pt.
+<City_of_Yarra_files/figure-latex/SI_map-2.pdf, id=30, 232.87pt x 159.59625pt>
+File: City_of_Yarra_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
+<use City_of_Yarra_files/figure-latex/SI_map-2.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/SI_map-2.pdf  used on input line 142.
+(pdftex.def)             Requested size: 240.008pt x 164.48824pt.
 
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-<City_of_Hobsons_Bay_files/figure-latex/SI_map-1.pdf, id=9, 265.99374pt x 133.49875pt>
-File: City_of_Hobsons_Bay_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
-<use City_of_Hobsons_Bay_files/figure-latex/SI_map-1.pdf>
-Package pdftex.def Info: City_of_Hobsons_Bay_files/figure-latex/SI_map-1.pdf  used on input line 142.
-(pdftex.def)             Requested size: 240.00502pt x 120.45532pt.
-<City_of_Hobsons_Bay_files/figure-latex/SI_map-2.pdf, id=10, 265.99374pt x 133.49875pt>
-File: City_of_Hobsons_Bay_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
-<use City_of_Hobsons_Bay_files/figure-latex/SI_map-2.pdf>
-Package pdftex.def Info: City_of_Hobsons_Bay_files/figure-latex/SI_map-2.pdf  used on input line 142.
-(pdftex.def)             Requested size: 240.00502pt x 120.45532pt.
-
-Overfull \hbox (2.92004pt too wide) in paragraph at lines 142--143
+Overfull \hbox (2.926pt too wide) in paragraph at lines 142--143
 [][] []
  []
 
@@ -831,9 +828,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 142--143
 
  []
 
-[1
-
-{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./4rctaxfc-400.png> <./City_of_Hobsons_Bay_files/figure-latex/Needs_map-1.pdf>]
 
 LaTeX Warning: Marginpar on page 2 moved.
 
@@ -843,11 +837,11 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<City_of_Hobsons_Bay_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x 69.25874pt>
-File: City_of_Hobsons_Bay_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
-<use City_of_Hobsons_Bay_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: City_of_Hobsons_Bay_files/figure-latex/SI_change_map-1.pdf  used on input line 157.
-(pdftex.def)             Requested size: 480.01991pt x 130.91447pt.
+<City_of_Yarra_files/figure-latex/SI_change_map-1.pdf, id=31, 253.94875pt x 91.34125pt>
+File: City_of_Yarra_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
+<use City_of_Yarra_files/figure-latex/SI_change_map-1.pdf>
+Package pdftex.def Info: City_of_Yarra_files/figure-latex/SI_change_map-1.pdf  used on input line 157.
+(pdftex.def)             Requested size: 480.01991pt x 172.65536pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
@@ -857,28 +851,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 157--158
 LaTeX Warning: Marginpar on page 2 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 177.
+
+[2 <./City_of_Yarra_files/figure-latex/SI_map-1.pdf> <./City_of_Yarra_files/figure-latex/SI_map-2.pdf> <./City_of_Yarra_files/figure-latex/SI_change_map-1.pdf>]
+
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
-
-
-LaTeX Warning: Marginpar on page 2 moved.
-
-
-LaTeX Warning: Marginpar on page 2 moved.
+LaTeX Warning: Marginpar on page 3 moved.
 
 
 Package bibentry Warning: You have used \nobibliography* 
@@ -889,27 +882,27 @@ Package bibentry Warning: You have used \nobibliography*
 Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
 This message occurred on input line 185.
 
-[2 <./City_of_Hobsons_Bay_files/figure-latex/SI_map-1.pdf> <./City_of_Hobsons_Bay_files/figure-latex/SI_map-2.pdf> <./City_of_Hobsons_Bay_files/figure-latex/SI_change_map-1.pdf>] (./City_of_Hobsons_Bay.aux)
+[3] (./City_of_Yarra.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-Package rerunfilecheck Info: File `City_of_Hobsons_Bay.out' has not changed.
+Package rerunfilecheck Info: File `City_of_Yarra.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15239 strings out of 476081
- 244349 string characters out of 5791510
- 1955190 words of memory out of 5000000
- 36998 multiletter control sequences out of 15000+600000
- 601510 words of font info for 109 fonts, out of 8000000 for 9000
+ 15245 strings out of 476081
+ 244048 string characters out of 5791510
+ 1948190 words of memory out of 5000000
+ 36999 multiletter control sequences out of 15000+600000
+ 603085 words of font info for 113 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 96i,11n,96p,433b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 96i,11n,96p,409b,446s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on City_of_Hobsons_Bay.pdf (2 pages, 356989 bytes).
+Output written on City_of_Yarra.pdf (3 pages, 338941 bytes).
 PDF statistics:
- 270 PDF objects out of 1000 (max. 8388607)
- 137 compressed objects within 2 object streams
- 6 named destinations out of 1000 (max. 500000)
+ 161 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
