@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.8)  9 DEC 2024 16:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.8)  9 DEC 2024 17:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Brighton_Southern_Metropolitan_SED.tex
-(./Brighton_Southern_Metropolitan_SED.tex
+**Caulfield_Southern_Metropolitan_SED.tex
+(./Caulfield_Southern_Metropolitan_SED.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tufte-latex/tufte-handout.cls
@@ -280,7 +280,7 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/bibentry.sty
 Package: bibentry 2007/10/30 1.5 (PWD)
 )
-No file Brighton_Southern_Metropolitan_SED.bbl.
+No file Caulfield_Southern_Metropolitan_SED.bbl.
 \c@@tufte@num@bibkeys=\count286
 (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/sauerj/optparams.sty
 Package: optparams 2004/08/14 v0.9 multiple optional parameters in macros
@@ -643,8 +643,8 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count331
 \l__pdf_internal_box=\box122
-) (./Brighton_Southern_Metropolitan_SED.aux)
-\openout1 = `Brighton_Southern_Metropolitan_SED.aux'.
+) (./Caulfield_Southern_Metropolitan_SED.aux)
+\openout1 = `Caulfield_Southern_Metropolitan_SED.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
 LaTeX Font Info:    ... okay on input line 87.
@@ -665,9 +665,9 @@ LaTeX Font Info:    ... okay on input line 87.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 87.
 LaTeX Font Info:    ... okay on input line 87.
 Package hyperref Info: Link coloring OFF on input line 87.
-(./Brighton_Southern_Metropolitan_SED.out) (./Brighton_Southern_Metropolitan_SED.out)
+(./Caulfield_Southern_Metropolitan_SED.out) (./Caulfield_Southern_Metropolitan_SED.out)
 \@outlinefile=\write3
-\openout3 = `Brighton_Southern_Metropolitan_SED.out'.
+\openout3 = `Caulfield_Southern_Metropolitan_SED.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -783,92 +783,104 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
+<Caulfield_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf, id=8, 43.16125pt x 46.1725pt>
+File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf Graphic file (type pdf)
+<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf>
+Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf  used on input line 126.
+(pdftex.def)             Requested size: 312.03503pt x 333.80484pt.
 
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-<Brighton_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf, id=8, 265.99374pt x 130.4875pt>
-File: Brighton_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
-<use Brighton_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf>
-Package pdftex.def Info: Brighton_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf  used on input line 133.
-(pdftex.def)             Requested size: 312.02722pt x 153.06995pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-
- []
-
-
-Overfull \hbox (10.06976pt too wide) in paragraph at lines 136--144
-[]\T1/pplj/m/n/10 Needs were higher than the Mel-bourne av-er-age for 66% of Brighton's 
- []
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-<Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf, id=9, 265.99374pt x 151.56625pt>
-File: Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
-<use Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf>
-Package pdftex.def Info: Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf  used on input line 146.
-(pdftex.def)             Requested size: 240.00502pt x 136.75757pt.
-<Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf, id=10, 265.99374pt x 151.56625pt>
-File: Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
-<use Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf>
-Package pdftex.def Info: Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf  used on input line 146.
-(pdftex.def)             Requested size: 240.00502pt x 136.75757pt.
-
-Overfull \hbox (2.92004pt too wide) in paragraph at lines 146--147
-[][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 146--147
-
+Overfull \hbox (12.03503pt too wide) in paragraph at lines 126--127
+[][]  
  []
 
 [1
 
-{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./4rctaxfc-400.png> <./Brighton_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf>]
+{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./4rctaxfc-400.png>]
 
 LaTeX Warning: Marginpar on page 2 moved.
 
+<Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf, id=21, 271.0125pt x 117.43875pt>
+File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
+<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf>
+Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf  used on input line 135.
+(pdftex.def)             Requested size: 312.01344pt x 135.20581pt.
 
-LaTeX Warning: Marginpar on page 2 moved.
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
+
+ []
 
 
-LaTeX Warning: Marginpar on page 2 moved.
-
-<Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x 101.37875pt>
-File: Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
-<use Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf  used on input line 161.
-(pdftex.def)             Requested size: 312.01022pt x 124.55743pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
-
+Overfull \hbox (12.06976pt too wide) in paragraph at lines 138--145
+[]\T1/pplj/m/n/10 Needs were higher than the Mel-bourne av-er-age for 60% of Caulfield's 
  []
 
 
 LaTeX Warning: Marginpar on page 2 moved.
 
+<Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf, id=22, 265.99374pt x 133.49875pt>
+File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
+<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf>
+Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf  used on input line 147.
+(pdftex.def)             Requested size: 240.00502pt x 120.45532pt.
+<Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf, id=23, 265.99374pt x 133.49875pt>
+File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
+<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf>
+Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf  used on input line 147.
+(pdftex.def)             Requested size: 240.00502pt x 120.45532pt.
 
-LaTeX Warning: Marginpar on page 2 moved.
+Overfull \hbox (2.92004pt too wide) in paragraph at lines 147--148
+[][] []
+ []
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+Underfull \hbox (badness 10000) in paragraph at lines 147--148
+
+ []
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 160.
+
+[2 <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf> <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf>]
+
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+LaTeX Warning: Marginpar on page 3 moved.
+
+<Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf, id=43, 253.94875pt x 75.28125pt>
+File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
+<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>
+Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf  used on input line 162.
+(pdftex.def)             Requested size: 312.01022pt x 92.49313pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
+
+ []
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+LaTeX Warning: Marginpar on page 3 moved.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
 
 
 Package bibentry Warning: You have used \nobibliography* 
@@ -877,29 +889,29 @@ Package bibentry Warning: You have used \nobibliography*
 
 
 Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 190.
+This message occurred on input line 187.
 
-[2 <./Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf> <./Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf> <./Brighton_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>] (./Brighton_Southern_Metropolitan_SED.aux)
+[3 <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf> <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf> <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>] (./Caulfield_Southern_Metropolitan_SED.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-Package rerunfilecheck Info: File `Brighton_Southern_Metropolitan_SED.out' has not changed.
+Package rerunfilecheck Info: File `Caulfield_Southern_Metropolitan_SED.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15239 strings out of 476081
- 245204 string characters out of 5791510
- 1954190 words of memory out of 5000000
- 36998 multiletter control sequences out of 15000+600000
+ 15249 strings out of 476081
+ 246009 string characters out of 5791510
+ 1945190 words of memory out of 5000000
+ 37007 multiletter control sequences out of 15000+600000
  601510 words of font info for 109 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 96i,11n,96p,493b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 96i,11n,96p,497b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Brighton_Southern_Metropolitan_SED.pdf (2 pages, 340747 bytes).
+Output written on Caulfield_Southern_Metropolitan_SED.pdf (3 pages, 338328 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
- 119 compressed objects within 2 object streams
- 6 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 177 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
