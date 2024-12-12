@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.8)  12 DEC 2024 09:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.3.8)  12 DEC 2024 09:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Caulfield_Southern_Metropolitan_SED.tex
-(./Caulfield_Southern_Metropolitan_SED.tex
+**Malvern_Southern_Metropolitan_SED.tex
+(./Malvern_Southern_Metropolitan_SED.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tufte-latex/tufte-handout.cls
@@ -280,7 +280,7 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/bibentry.sty
 Package: bibentry 2007/10/30 1.5 (PWD)
 )
-No file Caulfield_Southern_Metropolitan_SED.bbl.
+No file Malvern_Southern_Metropolitan_SED.bbl.
 \c@@tufte@num@bibkeys=\count286
 (c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/sauerj/optparams.sty
 Package: optparams 2004/08/14 v0.9 multiple optional parameters in macros
@@ -643,8 +643,8 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count331
 \l__pdf_internal_box=\box122
-) (./Caulfield_Southern_Metropolitan_SED.aux)
-\openout1 = `Caulfield_Southern_Metropolitan_SED.aux'.
+) (./Malvern_Southern_Metropolitan_SED.aux)
+\openout1 = `Malvern_Southern_Metropolitan_SED.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
 LaTeX Font Info:    ... okay on input line 87.
@@ -665,9 +665,9 @@ LaTeX Font Info:    ... okay on input line 87.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 87.
 LaTeX Font Info:    ... okay on input line 87.
 Package hyperref Info: Link coloring OFF on input line 87.
-(./Caulfield_Southern_Metropolitan_SED.out) (./Caulfield_Southern_Metropolitan_SED.out)
+(./Malvern_Southern_Metropolitan_SED.out) (./Malvern_Southern_Metropolitan_SED.out)
 \@outlinefile=\write3
-\openout3 = `Caulfield_Southern_Metropolitan_SED.out'.
+\openout3 = `Malvern_Southern_Metropolitan_SED.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -783,53 +783,59 @@ LaTeX Warning: Marginpar on page 1 moved.
 
 LaTeX Warning: Marginpar on page 1 moved.
 
+<Malvern_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf, id=8, 57.21375pt x 46.1725pt>
+File: Malvern_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf Graphic file (type pdf)
+<use Malvern_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf>
+Package pdftex.def Info: Malvern_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf  used on input line 126.
+(pdftex.def)             Requested size: 312.14215pt x 251.90413pt.
 
-LaTeX Warning: Marginpar on page 1 moved.
-
-
-LaTeX Warning: Marginpar on page 1 moved.
-
-<Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf, id=8, 265.99374pt x 129.48375pt>
-File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
-<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf>
-Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf  used on input line 133.
-(pdftex.def)             Requested size: 312.02722pt x 151.89247pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-
- []
-
-
-Overfull \hbox (12.06976pt too wide) in paragraph at lines 136--143
-[]\T1/pplj/m/n/10 Needs were higher than the Mel-bourne av-er-age for 60% of Caulfield's 
+Overfull \hbox (12.14215pt too wide) in paragraph at lines 126--127
+[][]  
  []
 
 
 LaTeX Warning: Marginpar on page 1 moved.
 
-<Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf, id=9, 265.99374pt x 141.52875pt>
-File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
-<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf>
-Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf  used on input line 145.
-(pdftex.def)             Requested size: 240.00502pt x 127.70078pt.
-<Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf, id=10, 265.99374pt x 141.52875pt>
-File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
-<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf>
-Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf  used on input line 145.
-(pdftex.def)             Requested size: 240.00502pt x 127.70078pt.
+<Malvern_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf, id=9, 265.99374pt x 141.52875pt>
+File: Malvern_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf Graphic file (type pdf)
+<use Malvern_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf>
+Package pdftex.def Info: Malvern_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf  used on input line 135.
+(pdftex.def)             Requested size: 312.02722pt x 166.02203pt.
 
-Overfull \hbox (2.92004pt too wide) in paragraph at lines 145--146
-[][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
 
  []
 
 [1
 
-{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./4rctaxfc-400.png> <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf>]
+{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./4rctaxfc-400.png> <./Malvern_Southern_Metropolitan_SED_files/figure-latex/add_groupings-1.pdf>]
+Overfull \hbox (8.50977pt too wide) in paragraph at lines 138--145
+[]\T1/pplj/m/n/10 Needs were higher than the Mel-bourne av-er-age for 60% of Malvern's 
+ []
+
+
+LaTeX Warning: Marginpar on page 2 moved.
+
+<Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf, id=27, 265.99374pt x 153.57375pt>
+File: Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf Graphic file (type pdf)
+<use Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf>
+Package pdftex.def Info: Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf  used on input line 147.
+(pdftex.def)             Requested size: 240.00502pt x 138.56892pt.
+<Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf, id=28, 265.99374pt x 153.57375pt>
+File: Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf Graphic file (type pdf)
+<use Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf>
+Package pdftex.def Info: Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf  used on input line 147.
+(pdftex.def)             Requested size: 240.00502pt x 138.56892pt.
+
+Overfull \hbox (2.92004pt too wide) in paragraph at lines 147--148
+[][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--148
+
+ []
+
 
 LaTeX Warning: Marginpar on page 2 moved.
 
@@ -839,13 +845,13 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf, id=33, 253.94875pt x 75.28125pt>
-File: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
-<use Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>
-Package pdftex.def Info: Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf  used on input line 160.
-(pdftex.def)             Requested size: 480.01991pt x 142.29837pt.
+<Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf, id=29, 253.94875pt x 81.30376pt>
+File: Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf Graphic file (type pdf)
+<use Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>
+Package pdftex.def Info: Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf  used on input line 162.
+(pdftex.def)             Requested size: 480.01991pt x 153.68225pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--161
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
 
@@ -865,10 +871,635 @@ LaTeX Warning: Marginpar on page 2 moved.
 LaTeX Warning: Marginpar on page 2 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 179.
+
+[2 <./Malvern_Southern_Metropolitan_SED_files/figure-latex/Needs_map-1.pdf> <./Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf> <./Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf>]
+
+LaTeX Warning: Marginpar on page 3 moved.
 
 
-LaTeX Warning: Marginpar on page 2 moved.
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 228.
+
+[3 <./Malvern_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>]
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 239--239
+[]\T1/cmtt/m/n/10 ##     ratio_binned_less population        ratio_binned       perc[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 239--239
+[]\T1/cmtt/m/n/10 ## 1 Increased 10 to 30%        906 Increased 10 to 30% 0.06225093[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 239--239
+[]\T1/cmtt/m/n/10 ## 2  Increased 5 to 10%       7071  Increased 5 to 10% 0.48584582[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 239--239
+[]\T1/cmtt/m/n/10 ## 3   Increased 3 to 5%       1361   Increased 3 to 5% 0.09351381[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 239--239
+[]\T1/cmtt/m/n/10 ## 4   Increased 1 to 3%        476   Increased 1 to 3% 0.03270579[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 239--239
+[]\T1/cmtt/m/n/10 ## 5           Within 1%       3190           Within 1% 0.21918373[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 239--239
+[]\T1/cmtt/m/n/10 ## 6     Reduced 1 to 3%       1099     Reduced 1 to 3% 0.07551189[] 
+ []
+
+
+Overfull \hbox (34.4154pt too wide) in paragraph at lines 239--239
+[]\T1/cmtt/m/n/10 ## 7    Reduced 3 to 10%        451    Reduced 3 to 10% 0.03098804[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ##        ratio_binned_less population          ratio_binned        perc[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 1  Increased 30% or more       4897 Increased 30% or more 0.025120550[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 2    Increased 10 to 30%      18909   Increased 10 to 30% 0.096999077[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 3     Increased 5 to 10%      20125    Increased 5 to 10% 0.103236893[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 4      Increased 3 to 5%      20519     Increased 3 to 5% 0.105258028[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 5      Increased 1 to 3%      36510     Increased 1 to 3% 0.187288396[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 6              Within 1%      77851             Within 1% 0.399358777[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 7        Reduced 1 to 3%       6511       Reduced 1 to 3% 0.033400021[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 8       Reduced 3 to 10%       5501      Reduced 3 to 10% 0.028218939[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 9    Reduced 10% or more       1815   Reduced 10% or more 0.009310557[] 
+ []
+
+
+Overfull \hbox (65.90771pt too wide) in paragraph at lines 253--253
+[]\T1/cmtt/m/n/10 ## 10    Not served in 2023       2302    Not served in 2023 0.011808762[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ##        ratio_binned_less population          ratio_binned       perc[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 1            New service      17345           New service 0.00948009[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 2  Increased 30% or more      91294 Increased 30% or more 0.04989768[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 3    Increased 10 to 30%      97876   Increased 10 to 30% 0.05349514[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 4     Increased 5 to 10%      67646    Increased 5 to 10% 0.03697262[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 5      Increased 3 to 5%      99195     Increased 3 to 5% 0.05421606[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 6      Increased 1 to 3%     228128     Increased 1 to 3% 0.12468573[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 7              Within 1%     843383             Within 1% 0.46095974[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 8        Reduced 1 to 3%     100918       Reduced 1 to 3% 0.05515778[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 9       Reduced 3 to 10%     129293      Reduced 3 to 10% 0.07066643[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 10   Reduced 10% or more      69908   Reduced 10% or more 0.03820894[] 
+ []
+
+
+Overfull \hbox (60.659pt too wide) in paragraph at lines 268--268
+[]\T1/cmtt/m/n/10 ## 11    Not served in 2023      84638    Not served in 2023 0.04625978[] 
+ []
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 272.
+
+[4]
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 313--313
+[]\T1/cmtt/m/n/10 ##  transit_supply Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 313--313
+[]\T1/cmtt/m/n/10 ##     Zero Supply                  0                       479[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 313--313
+[]\T1/cmtt/m/n/10 ##        Very Low                  2                      2608[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 313--313
+[]\T1/cmtt/m/n/10 ##             Low                 15                      2470[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 313--313
+[]\T1/cmtt/m/n/10 ##   Below average                 40                      2205[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 313--313
+[]\T1/cmtt/m/n/10 ##   Above average                 37                       662[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 313--313
+[]\T1/cmtt/m/n/10 ##            High                 61                       604[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 313--313
+[]\T1/cmtt/m/n/10 ##       Very High                 45                       511[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 328--328
+[]\T1/cmtt/m/n/10 ##  transit_supply Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 328--328
+[]\T1/cmtt/m/n/10 ##     Zero Supply           9.836739                  469.1633[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 328--328
+[]\T1/cmtt/m/n/10 ##        Very Low          53.598932                 2556.4011[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 328--328
+[]\T1/cmtt/m/n/10 ##             Low          51.031933                 2433.9681[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 328--328
+[]\T1/cmtt/m/n/10 ##   Below average          46.103296                 2198.8967[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 328--328
+[]\T1/cmtt/m/n/10 ##   Above average          14.354657                  684.6453[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 328--328
+[]\T1/cmtt/m/n/10 ##            High          13.656433                  651.3436[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 328--328
+[]\T1/cmtt/m/n/10 ##       Very High          11.418010                  544.5820[] 
+ []
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 343.
+
+[5]
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 373--373
+[]\T1/cmtt/m/n/10 ##  transit_supply Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 373--373
+[]\T1/cmtt/m/n/10 ##     Zero Supply                  0                       466[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 373--373
+[]\T1/cmtt/m/n/10 ##        Very Low                  2                      2601[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 373--373
+[]\T1/cmtt/m/n/10 ##             Low                 16                      2468[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 373--373
+[]\T1/cmtt/m/n/10 ##   Below average                 36                      2213[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 373--373
+[]\T1/cmtt/m/n/10 ##   Above average                 41                       660[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 373--373
+[]\T1/cmtt/m/n/10 ##            High                 60                       617[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 373--373
+[]\T1/cmtt/m/n/10 ##       Very High                 45                       514[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 388--388
+[]\T1/cmtt/m/n/10 ##  transit_supply Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 388--388
+[]\T1/cmtt/m/n/10 ##     Zero Supply           9.569771                  456.4302[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 388--388
+[]\T1/cmtt/m/n/10 ##        Very Low          53.455180                 2549.5448[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 388--388
+[]\T1/cmtt/m/n/10 ##             Low          51.011397                 2432.9886[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 388--388
+[]\T1/cmtt/m/n/10 ##   Below average          46.185440                 2202.8146[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 388--388
+[]\T1/cmtt/m/n/10 ##   Above average          14.395729                  686.6043[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 388--388
+[]\T1/cmtt/m/n/10 ##            High          13.902865                  663.0971[] 
+ []
+
+
+Overfull \hbox (18.66925pt too wide) in paragraph at lines 388--388
+[]\T1/cmtt/m/n/10 ##       Very High          11.479618                  547.5204[] 
+ []
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 406.
+
+[6]
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##           ratio_binned Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##            New service                  0                        59[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##  Increased 30% or more                  1                       320[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%                  8                       434[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%                 45                       346[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%                 21                       439[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%                 35                      1290[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##              Within 1%                 45                      4532[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%                 27                       543[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%                 15                       695[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more                  3                       415[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 443--443
+[]\T1/cmtt/m/n/10 ##     Not served in 2023                  0                       466[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##           ratio_binned Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##            New service           1.211623                  57.78838[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##  Increased 30% or more           6.592053                 314.40795[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%           9.076907                 432.92309[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%           8.029572                 382.97043[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%           9.446555                 450.55344[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%          27.210186                1297.78981[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##              Within 1%          93.993223                4483.00678[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%          11.705514                 558.29449[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%          14.580552                 695.41945[] 
+ []
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 462.
+
+[7]
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more           8.584044                 409.41596[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 462--462
+[]\T1/cmtt/m/n/10 ##     Not served in 2023           9.569771                 456.43023[] 
+ []
+
+
+Overfull \hbox (23.91797pt too wide) in paragraph at lines 506--506
+[]\T1/cmtt/m/n/10 ##  composite_needs Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (23.91797pt too wide) in paragraph at lines 506--506
+[]\T1/cmtt/m/n/10 ##         Very Low                 22                      1771[] 
+ []
+
+
+Overfull \hbox (23.91797pt too wide) in paragraph at lines 506--506
+[]\T1/cmtt/m/n/10 ##              Low                 38                      1732[] 
+ []
+
+
+Overfull \hbox (23.91797pt too wide) in paragraph at lines 506--506
+[]\T1/cmtt/m/n/10 ##    Below average                 41                      1682[] 
+ []
+
+
+Overfull \hbox (23.91797pt too wide) in paragraph at lines 506--506
+[]\T1/cmtt/m/n/10 ##    Above average                 28                      1358[] 
+ []
+
+
+Overfull \hbox (23.91797pt too wide) in paragraph at lines 506--506
+[]\T1/cmtt/m/n/10 ##             High                 38                      1348[] 
+ []
+
+
+Overfull \hbox (23.91797pt too wide) in paragraph at lines 506--506
+[]\T1/cmtt/m/n/10 ##        Very High                 30                      1351[] 
+ []
+
+
+Overfull \hbox (23.91797pt too wide) in paragraph at lines 506--506
+[]\T1/cmtt/m/n/10 ##               NA                  3                       297[] 
+ []
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 534.
+
+[8]
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##      ratio_binned_less Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##     Not served in 2023                  0                       149[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##            New service                  0                        30[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##  Increased 30% or more                  0                       149[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%                  2                       168[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%                 14                       118[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%                  3                       174[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%                  1                       403[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##              Within 1%                  6                      1487[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%                  2                       176[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%                  1                       230[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 563--563
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more                  0                       124[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##      ratio_binned_less Malvern  (S Metro) Rest of Greater Melbourne[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##     Not served in 2023          1.3348780                 147.66512[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##            New service          0.2687674                  29.73123[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##  Increased 30% or more          1.3348780                 147.66512[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##    Increased 10 to 30%          1.5230151                 168.47698[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##     Increased 5 to 10%          1.1825765                 130.81742[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##      Increased 3 to 5%          1.5857275                 175.41427[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##      Increased 1 to 3%          3.6194007                 400.38060[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##              Within 1%         13.3756565                1479.62434[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##        Reduced 1 to 3%          1.5946864                 176.40531[] 
+ []
+
+
+Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
+This message occurred on input line 578.
+
+[9]
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##       Reduced 3 to 10%          2.0695088                 228.93049[] 
+ []
+
+
+Overfull \hbox (55.41028pt too wide) in paragraph at lines 578--578
+[]\T1/cmtt/m/n/10 ##    Reduced 10% or more          1.1109052                 122.88909[] 
+ []
 
 
 Package bibentry Warning: You have used \nobibliography* 
@@ -877,29 +1508,29 @@ Package bibentry Warning: You have used \nobibliography*
 
 
 Class tufte-handout Warning: Proper spacing of small-caps letters has not been set up.
-This message occurred on input line 185.
+This message occurred on input line 582.
 
-[2 <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-1.pdf> <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_map-2.pdf> <./Caulfield_Southern_Metropolitan_SED_files/figure-latex/SI_change_map-1.pdf>] (./Caulfield_Southern_Metropolitan_SED.aux)
+[10] (./Malvern_Southern_Metropolitan_SED.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-Package rerunfilecheck Info: File `Caulfield_Southern_Metropolitan_SED.out' has not changed.
+Package rerunfilecheck Info: File `Malvern_Southern_Metropolitan_SED.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15239 strings out of 476081
- 245261 string characters out of 5791510
- 1953190 words of memory out of 5000000
- 36998 multiletter control sequences out of 15000+600000
- 601510 words of font info for 109 fonts, out of 8000000 for 9000
+ 15260 strings out of 476081
+ 246002 string characters out of 5791510
+ 1963190 words of memory out of 5000000
+ 37010 multiletter control sequences out of 15000+600000
+ 601823 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 96i,11n,96p,497b,450s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Caulfield_Southern_Metropolitan_SED.pdf (2 pages, 332060 bytes).
+ 96i,11n,96p,489b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> <c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.600pk><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><c:/Users/rjulian/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on Malvern_Southern_Metropolitan_SED.pdf (10 pages, 366787 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 283 PDF objects out of 1000 (max. 8388607)
+ 130 compressed objects within 2 object streams
+ 14 named destinations out of 1000 (max. 500000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

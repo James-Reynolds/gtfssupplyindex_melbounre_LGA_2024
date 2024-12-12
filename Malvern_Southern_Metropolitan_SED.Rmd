@@ -1,6 +1,6 @@
 ---
-title: "Caulfield (Southern Metropolitan) State Electoral Division: social needs, gaps in transit"
-runningheader: "Caulfield (Southern Metropolitan) State Electoral Division:needs-gaps" # only for pdf output
+title: "Malvern (Southern Metropolitan) State Electoral Division: social needs, gaps in transit"
+runningheader: "Malvern (Southern Metropolitan) State Electoral Division:needs-gaps" # only for pdf output
 author: "Dr James Reynolds"
 date: "`r Sys.Date()`"
 bibliography: References.bib
@@ -63,7 +63,7 @@ library(ggpattern)
 
 lga_of_interest_2016 <- absmapsdata::lga2016 %>% filter(lga_name_2016 == "Melbourne (C)")
 
-sed_of_interest_2021 <- absmapsdata::sed2021 %>% filter(sed_name_2021 == "Caulfield (Southern Metropolitan)")
+sed_of_interest_2021 <- absmapsdata::sed2021 %>% filter(sed_name_2021 == "Malvern (Southern Metropolitan)")
 
 
 ```
@@ -83,7 +83,7 @@ are met within each seat.
 Using the Currie and Sendbergs (2007) methodology[@Currie2007Identifying; @currie2010identifying], this note explores social needs for transport,
 and transit provision
 in 2021 and 2023,
-in the Caulfield (Southern Metropolitan) State Electoral Division.
+in the Malvern (Southern Metropolitan) State Electoral Division.
 
 
 
@@ -922,11 +922,11 @@ vic_lga07aust_region <- st_read("data/1259030001lga07 aust/", quiet = TRUE) %>%
 # Set boundaries between around middle suburbs       
 middle_lga07aust_region <- vic_lga07aust_region[
   vic_lga07aust_region$LGANAME07 %in% 
-    c("Banyule (C)", "Caulfield (Southern Metropolitan) State Electoral Division (C)", "Boroondara (C)", "Brimbank (C)", 
+    c("Banyule (C)", "Malvern (Southern Metropolitan) State Electoral Division (C)", "Boroondara (C)", "Brimbank (C)", 
       "Darebin (C)", "Glen Eira (C)", "Greater Dandenong (C)", 
       "Hobsons Bay (C)", "Kingston (C)", "Manningham (C)", 
-      "Maribyrnong (C)", "Caulfield (Southern Metropolitan) State Electoral Division (C)", "Moonee Valley (C)", 
-      "Moreland (C)", "Caulfield (Southern Metropolitan) State Electoral Division (C)","Whitehorse (C)"), ] 
+      "Maribyrnong (C)", "Malvern (Southern Metropolitan) State Electoral Division (C)", "Moonee Valley (C)", 
+      "Moreland (C)", "Malvern (Southern Metropolitan) State Electoral Division (C)","Whitehorse (C)"), ] 
 middle_lga07aust_region <- st_union(middle_lga07aust_region)
 
 
@@ -4662,22 +4662,23 @@ ptv_160804_gtfs <- tidytransit::get_route_geometry(ptv_160804_gtfs)
 #sort SA1s into LGA of interest, Rest of SA4, Rest of Melbourne
 sa1s_in_lga_of_interest <- sa12021 %>% select(sa1_code_2021) %>%
   st_filter(sed_of_interest_2021, .predicate =  st_intersects)
-sa1s_in_lga_of_interest$group <- "Caulfield  (S Metro)"
+sa1s_in_lga_of_interest$group <- "Malvern  (S Metro)"
 
 sa1s_in_other_lgas <- sed2021 %>% 
-   filter(
+   filter(sed_name_2021 == "Richmond (Northern Metropolitan)" |
+             sed_name_2021 == "Burwood (Southern Metropolitan)" |
+             sed_name_2021 == "Mount Waverley (Eastern Metropolitan)" |
              sed_name_2021 == "Prahran (Southern Metropolitan)" |
              sed_name_2021 == "Albert Park (Southern Metropolitan)" |
              sed_name_2021 == "Brighton (Southern Metropolitan)" | 
-             sed_name_2021 == "Malvern (Southern Metropolitan)" | 
+             sed_name_2021 == "Caulfield (Southern Metropolitan)" | 
              sed_name_2021 == "Oakleigh (Southern Metropolitan)" | 
              sed_name_2021 == "Bentleigh (Southern Metropolitan)" | 
-             sed_name_2021 == "Clarinda (South-Eastern Metropolitan)" | 
-             sed_name_2021 == "Sandringham (Southern Metropolitan)" | 
-            sed_name_2021 == "Mordialloc (South-Eastern Metropolitan)"  ) 
+             sed_name_2021 == "Clarinda (South-Eastern Metropolitan)"
+              ) 
 
 sa1s_in_other_lgas <- st_union(sa1s_in_other_lgas)
-#plot(sa1s_in_other_lgas)
+plot(sa1s_in_other_lgas)
 
 sa1s_in_other_lgas <- sa12021 %>% select(sa1_code_2021) %>%
   st_filter(sa1s_in_other_lgas, .predicate =  st_intersects)
@@ -4708,14 +4709,14 @@ melbourne_si_SA12021_21_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2021_SA1_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions1 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4724,14 +4725,14 @@ assumptions2 <- melbourne_2021_SA1_comparison$expected
 
 melbourne_2021_SA4_comparison <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions3 <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4745,14 +4746,14 @@ melbourne_si_SA12021_23_census_week_aggregated$si_by_area <- melbourne_si_SA1202
 
 melbourne_2023_SA1_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions5 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) 
 
@@ -4762,14 +4763,14 @@ assumptions6 <- melbourne_2023_SA1_comparison$expected
 
 melbourne_2023_SA4_comparison <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group) %>% 
   chisq.test()
 
 assumptions7 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(transit_supply = fct_drop(transit_supply)) %>% 
   tabyl(transit_supply, group)
 
@@ -4795,7 +4796,7 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 \newthought{Results:} Figure 1 compares social needs for similarly located seats^[Prahran, Albert Park, Brighton, Malvern, Oakleigh, Bentleigh, Clarinda, Sandringham and Mordialloc],
 and for the rest of Greater Melbourne with
-those for the Caulfield (Southern Metropolitan) State Electoral Division.
+those for the Malvern (Southern Metropolitan) State Electoral Division.
 
 
 
@@ -4818,7 +4819,7 @@ poly <- Poly_Coord_df %>%
   st_as_sfc()
 
 pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "Caulfield  (S Metro)") %>% 
+  filter(group == "Malvern  (S Metro)") %>% 
   st_drop_geometry() %>%
   na.omit() %>%
   aggregate(population ~ composite_needs, sum) %>%
@@ -4837,7 +4838,7 @@ pcol <- combined_needs_index_2021_sa1_greater_melbourne %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Caulfield  (S Metro)",
+    title = "Malvern  (S Metro)",
     x = NULL,
     y = NULL
   ) +
@@ -4922,7 +4923,7 @@ pcol_rest_melbourne <- combined_needs_index_2021_sa1_greater_melbourne %>%
 
 ggplot()+ 
   geom_sf(data=combined_needs_index_2021_sa1_greater_melbourne %>%
-  filter(group == "Caulfield  (S Metro)") %>% na.omit(),
+  filter(group == "Malvern  (S Metro)") %>% na.omit(),
           aes(fill = composite_needs), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -4952,7 +4953,7 @@ inset_element(pcol, left = 0.4, bottom = 0.66, right = 1.1, top =1.05) +
  
 melbourne_2021_SA1_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -4963,7 +4964,7 @@ melbourne_2021_SA1_comparison_needs <- melbourne_2021_SA1_comparison_needs[2:3] 
 
 assumptions13 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -4972,7 +4973,7 @@ assumptions14 <- melbourne_2021_SA1_comparison_needs$expected
 
 melbourne_2021_SA4_comparison_needs <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group) %>% 
   untabyl()
@@ -4983,7 +4984,7 @@ melbourne_2021_SA4_comparison_needs <- melbourne_2021_SA4_comparison_needs[2:3] 
 
 assumptions15 <- combined_needs_index_2021_sa1_greater_melbourne %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(composite_needs= fct_drop(composite_needs)) %>% 
   tabyl(composite_needs, group)
 
@@ -5039,9 +5040,9 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 
 Needs were higher than the Melbourne average 
 for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
-of Caulfield's population in 2021,
+of Malvern's population in 2021,
 which is a higher proportion than for 
-elsewhere in Melbourne, beyond the similarly located seats (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences between Caulfield and the surrounding seats were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`), nor were differences between Caulfield and other parts of Greater Melbourne (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. 
+elsewhere in Melbourne, beyond the similarly located seats (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences between Malvern and the surrounding seats were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`), nor were differences between Malvern and other parts of Greater Melbourne (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).]. 
 
 
 
@@ -5064,7 +5065,7 @@ poly <- Poly_Coord_df %>%
   st_as_sfc()
 
 pcol <- melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Caulfield  (S Metro)") %>% 
+  filter(group == "Malvern  (S Metro)") %>% 
   st_drop_geometry() %>%
   aggregate(population ~ transit_supply, sum) %>%
   right_join(tibble(transit_supply = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -5083,7 +5084,7 @@ scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "L
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Caulfield  (S Metro)",
+    title = "Malvern  (S Metro)",
     x = NULL,
     y = NULL
   ) +
@@ -5170,7 +5171,7 @@ scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "L
 
 ggplot()+ 
   geom_sf(data=melbourne_si_SA12021_21_census_week_aggregated$si_by_area %>%
-  filter(group == "Caulfield  (S Metro)") %>% na.omit(),
+  filter(group == "Malvern  (S Metro)") %>% na.omit(),
           aes(fill = transit_supply), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -5203,7 +5204,7 @@ scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "L
 
 
 pcol_2 <- melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "Caulfield  (S Metro)") %>% 
+  filter(group == "Malvern  (S Metro)") %>% 
   st_drop_geometry() %>%
   tabyl(transit_supply) %>%
   mutate(transit_supply=factor(transit_supply, levels = melbourne_si_SA12021_21_census_week_aggregated$si_by_area$transit_supply %>% levels())) %>%
@@ -5219,7 +5220,7 @@ scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "L
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
-    title = "Caulfield  (S Metro)",
+    title = "Malvern  (S Metro)",
     x = NULL,
     y = NULL
   ) +
@@ -5296,7 +5297,7 @@ scale_fill_manual(values = c("Zero Supply" = "white", "Very Low" = "#F9D8B1", "L
 
 ggplot()+ 
   geom_sf(data=melbourne_si_SA12021_23_census_week_aggregated$si_by_area %>%
-  filter(group == "Caulfield  (S Metro)") %>% na.omit(),
+  filter(group == "Malvern  (S Metro)") %>% na.omit(),
           aes(fill = transit_supply), colour=NA) +
   theme(axis.text.x=element_blank(), #remove x axis labels
         axis.ticks.x=element_blank(), #remove x axis ticks
@@ -5328,7 +5329,7 @@ inset_element(pcol_2, left = 0.5, bottom = 0.66, right = 1, top = 1.0) +
 ```
 
 Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
-of Caulfield  (S Metro) residents in 2021,
+of Malvern  (S Metro) residents in 2021,
 which is a lower proportion than for the surrounding seats
 (`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`] or than for the rest of Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
@@ -5368,7 +5369,7 @@ si_by_area_2021_2023_wider_holding$ratio_binned <- si_by_area_2021_2023_wider_ho
 
 
 pcol_1 <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Caulfield  (S Metro)") %>% 
+  filter(group == "Malvern  (S Metro)") %>% 
   st_drop_geometry() %>%
   na.omit() %>% 
   aggregate(population ~ ratio_binned, FUN = sum) %>%
@@ -5388,7 +5389,7 @@ pcol_1 <- si_by_area_2021_2023_wider_holding %>%
   scale_color_manual(values = c(rep("black", 5), rep("white", 2), "black")) +
   guides(fill = "none", color = "none") +
   labs(
- title = "All Caulfield ",
+ title = "All Malvern ",
     x = NULL,
     y = NULL
   ) +
@@ -5473,14 +5474,14 @@ si_by_area_2021_2023_wider_holding <- left_join(
 
 melbourne_2023_SA1_comparison <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
 assumptions9 <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group)
 
@@ -5491,14 +5492,14 @@ si_by_area_2021_2023_wider_holding$sa4_group <-
 
 melbourne_2023_SA4_comparison <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) %>% 
   chisq.test()
 
 assumptions11 <- si_by_area_2021_2023_wider_holding %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   mutate(ratio_binned = fct_drop(ratio_binned)) %>% 
   tabyl(ratio_binned, group) 
 
@@ -5516,7 +5517,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>% 
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>% 
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
   chisq.test()
@@ -5525,7 +5526,7 @@ assumptions17 <- si_by_area_2021_2023_wider_holding %>%
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>%
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) 
 
 assumptions18 <- melbourne_2021_SA1_comparison_very_high_needs$expected
@@ -5534,7 +5535,7 @@ melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
 chisq.test()
@@ -5543,7 +5544,7 @@ assumptions19 <- si_by_area_2021_2023_wider_holding %>%
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   tabyl(ratio_binned_less, group)
 
 assumptions20 <- melbourne_2021_SA4_comparison_very_high_needs$expected 
@@ -5553,7 +5554,7 @@ melbourne_2021_SA1_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Similar seats") %>% 
+  filter(group == "Malvern  (S Metro)" | group == "Similar seats") %>% 
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
   fisher.test(simulate.p.value = TRUE)
@@ -5562,7 +5563,7 @@ melbourne_2021_SA4_comparison_very_high_needs <- si_by_area_2021_2023_wider_hold
              filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
   st_drop_geometry() %>% 
-  filter(group == "Caulfield  (S Metro)" | group == "Rest of Greater Melbourne") %>%
+  filter(group == "Malvern  (S Metro)" | group == "Rest of Greater Melbourne") %>%
   tabyl(ratio_binned_less, group, show_missing_levels = FALSE) %>%
   na.omit() %>% 
 fisher.test(simulate.p.value = TRUE)
@@ -5572,7 +5573,7 @@ si_by_area_2021_2023_wider_holding$ratio_binned_less <- si_by_area_2021_2023_wid
 
 
 pcol <- si_by_area_2021_2023_wider_holding %>%
-  filter(group == "Caulfield  (S Metro)") %>% 
+  filter(group == "Malvern  (S Metro)") %>% 
   st_drop_geometry() %>%
    filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
@@ -5683,7 +5684,7 @@ pcol_rest_melbourne <- si_by_area_2021_2023_wider_holding %>%
 
 ggplot() + 
 geom_sf(data=si_by_area_2021_2023_wider_holding %>%
-            filter(group == "Caulfield  (S Metro)"),
+            filter(group == "Malvern  (S Metro)"),
           aes(fill = ratio_binned), colour=NA) +  
         scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   theme(axis.text.x=element_blank(), #remove x axis labels
@@ -5698,7 +5699,7 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   geom_sf_pattern(data=si_by_area_2021_2023_wider_holding %>% 
   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-  filter(group == "Caulfield  (S Metro)") %>% na.omit(),
+  filter(group == "Malvern  (S Metro)") %>% na.omit(),
   aes(fill = ratio_binned), colour=NA) +  
           scale_fill_manual(values = c("New service" = "darkblue", "Increased 30% or more" = "#3A65A3", "Increased 10 to 30%" = "#6D9DC4", "Increased 5 to 10%" = "#DDEFF5",  "Increased 3 to 5%" = "#FFFBB5",  "Increased 1 to 3%" = "#F9D785",  "Within 1%" = "#EFA15C", "Reduced 1 to 3%" = "#DC6446", "Reduced 3 to 10%" = "#BA3832", "Reduced 10% or more" = "#852128", "Not served in 2023" = "black", drop=FALSE))  +
   theme_minimal(base_size = 20, base_family = 'IBM Plex Mono')  +
@@ -5711,7 +5712,7 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
   geom_sf(data=si_by_area_2021_2023_wider_holding %>% 
   filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>%
   filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>%
-            filter(group == "Caulfield  (S Metro)"),
+            filter(group == "Malvern  (S Metro)"),
           fill = NA, colour="black", linewidth = 0.25) + 
   geom_sf(data=melbourne_railway_trips_shape_2021, linetype = "twodash", size = 0.1, colour = "darkgrey") +
   geom_sf(data=sed_of_interest_2021, fill=NA, colour = "purple", linewidth = .5) + 
@@ -5727,14 +5728,14 @@ inset_element(pcol, left = 0.4, bottom = 0.0, right = 0.6, top =0.55) +
  inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.0, right = 1.0, top = 0.55) 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:6,3] %>% sum())` of Caulfield residents in
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:6,3] %>% sum())` of Malvern residents in
 2021, which is a lower share than for similarly located seats
 (`r label_percent(accuracy=1)(pcol_rest_SA4_2$data[1:6,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] or the rest of Melbourne (`r label_percent(accuracy=)(pcol_rest_melbourne_3$data[1:6,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Caulfield  (S Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Caulfield  (S Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Caulfield population lived in SA1s with
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Malvern  (S Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Malvern  (S Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Malvern population lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
 `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
@@ -5745,10 +5746,10 @@ were not statistically significant with the similar cohorts across similarly loc
 (Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 2)`) or the rest of Greater Melbourne
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 2)`).].
 
-Overall, residents of the seat of Caulfield appear
+Overall, residents of the seat of Malvern appear
 to have been less likely to have less transit supply than Melbourne's average than elsewhere, but also less likely to have seen service increases between 2021 and 2023.
 
-```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+```{r Check_assumptions, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 
 pcol_1$data
 pcol_rest_SA4_2$data
