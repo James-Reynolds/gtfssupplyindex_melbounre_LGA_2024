@@ -5710,7 +5710,7 @@ geom_sf(data=si_by_area_2021_2023_wider_holding %>%
            ylim = c(lat[1], lat[2])) +
 #  ggspatial::annotation_scale(location = 'bl', height = unit(0.1, "cm")) +
   ggspatial::annotation_north_arrow(location = 'bl', height = unit(0.5, "cm"), width = unit(0.5, "cm")) + 
-  inset_element(pcol_1, left = 0.42, bottom = 0.5, right = 0.7, top =1.05) +
+  inset_element(pcol_1, left = 0.425, bottom = 0.5, right = 0.7, top =1.05) +
  inset_element(pcol_rest_SA4_2, left = 0.70, bottom = 0.5, right = 0.85, top =1.05) +
  inset_element(pcol_rest_melbourne_3, left = 0.85, bottom = 0.5, right = 1.0, top = 1.05) +
 inset_element(pcol, left = 0.55, bottom = 0.0, right = 0.7, top =0.55) +
