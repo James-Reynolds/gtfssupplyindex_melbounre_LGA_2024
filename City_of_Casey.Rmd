@@ -5021,9 +5021,6 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 
 ```
 
-Needs were higher than average 
-for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
-of Casey's population^[Differences between the CIty of Casey and the nearby LGAs were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`), nor were differences with the rest of Greater Melbourne (`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`).].
 
 ```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
 
