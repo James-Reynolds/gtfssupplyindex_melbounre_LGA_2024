@@ -87,8 +87,7 @@ in the Ivanhoe (Eastern Metropolitan) State Electoral Division.
 
 
 
-\newthought{Methods:}
-Scores for transit supply
+\newthought{Methods:} scores for transit supply
 and transport needs
 were calculated
 based on
@@ -4815,7 +4814,7 @@ combined_needs_index_2021_sa1_greater_melbourne <- combined_needs_index_2021_sa1
 
 ```
 
-\newthought{Results:} Figure 1 show social needs for the Ivanhoe (Eastern Metropolitan) State Electoral Division, with comparisons to those of similarly located seats^[Northcote, Bundoora, Preston, Kew and Bulleen], 
+\newthought{Results:} Figure 1 show social needs for the Ivanhoe (Eastern Metropolitan) State Electoral Division, with comparisons to those of similarly located seats^[Northcote, Bundoora, Preston, Kew and Bulleen.], 
 and elsewhere in Greater Melbourne.
 
 
@@ -4965,7 +4964,7 @@ ggplot()+
            ylim = c(lat[1], lat[2])) +
   ggspatial::annotation_scale(location = 'br') +
   ggspatial::annotation_north_arrow(location = 'tl', height = unit(0.75, "cm"), width = unit(0.75, "cm")) + 
-inset_element(pcol, left = 0.38, bottom = 0.15, right = 1.1, top =0.45) +
+inset_element(pcol, left = 0.37, bottom = 0.15, right = 1.1, top =0.45) +
  inset_element(pcol_rest_SA4, left = 0.5, bottom = 0.45, right = 1.1, top =0.75) +
  inset_element(pcol_rest_melbourne, left = 0.5, bottom = 0.75, right = 1.1, top = 1.05) 
 
@@ -5026,13 +5025,13 @@ si_by_area_2021_2023_wider_holding <- si_by_area_2021_2023_wider_holding %>%
 
 ```
 
-Needs were higher than the Melbourne average 
+Needs were higher than the Melbourne average in 
+SA1s that were home to 
 for `r label_percent(accuracy=1)(pcol$data[4:6,3] %>% sum())`
-of the seat of Ivanhoe's population. 
-This was similar to the similarly located seats (`r label_percent(accuracy=1)(pcol_rest_SA4$data[4:6,3] %>% sum())`), 
-but higher than for the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences between the seat of Ivanhoe (E Metro) and similarly located seats  were not statistically significant (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`. Differences with the rest of Greater Melbourne were statistically significant(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`)]. 
+of people living in the seat of Ivanhoe. This was  
+a higher share than for the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[4:6,3] %>% sum())`)^[Differences betwen the seat of Ivanhoe and other parts of Greater Melbourne (beyond Ivanhoe and the similarly located seats) were statistically significant(`r prmisc::print_chi2(melbourne_2021_SA4_comparison_needs)`), but differences between Ivanhoe and the similarly seats were not (`r prmisc::print_chi2(melbourne_2021_SA1_comparison_needs)`).]. 
 
-
+Figure 2 shows the distribution of transit service in 2021 and 2023. 
 
 
 ```{r SI_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, ncol = 2, out.width="50%", fig.height = 2.5, fig.cap="Transport Supply 2021 (left, by population) and 2023 (right, by SA1)"}
@@ -5312,15 +5311,17 @@ scale_fill_manual(values = c("white","#F9D8B1", "#F7C387", "#F29C33", "lightgree
 
 ```
 
-Figure 2 shows the distribution of transit service in 2021 and 2023. Service levels were below the Melbourne average for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
-of Ivanhoe (E Metro) (S Metro) residents in 2021. This share was higher than for those living within the surrounding seats
+Service levels were below the Melbourne average for SA1s where `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())`
+of Ivanhoe's residents lived in 2021, which is a higher share than for the surrounding seats
 (`r label_percent(accuracy=1)(pcol_rest_SA4$data[1:4,3] %>% sum())`)^[Differences were statistically significant (`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`]
-but less than for those living elsewhere in Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
+but lower than that across the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`)^[Differences
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2021_SA4_comparison)`).].
+There where no SA1s in Ivanhoe that had `Very High' levels of transit service. 
 The distribution of transit supply in 2023 (Figure 2, right) 
 appears largely similar to that in 2021.
-Figure 3 compares 2021 and 2023 service levels. 
+
+Figure 3 compares the 2021 and 2023 service levels directly. 
 
 ```{r SI_change_map, fig.show="hold", eval = TRUE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, fig.fullwidth = TRUE, fig.cap="Transit service change 2021 to 2023, by population. SA1s with needs above, but supply below, average highlighted in black."}
 
@@ -5713,29 +5714,34 @@ inset_element(pcol, left = 0.4, bottom = 0.6, right = 0.6, top =1.05) +
  inset_element(pcol_rest_melbourne, left = 0.8, bottom = 0.6, right = 1.0, top = 1.05) 
 ```
 
-Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:6,3] %>% sum())` of Ivanhoe's residents in
-2021, which is a similar share as for the nearby seats
-(`r label_percent(accuracy=1)(pcol_rest_SA4_2$data[1:6,3] %>% sum())`)^[Differences 
+Transit levels increased by 1% or more by 2023 in SA1s that were home to `r label_percent(accuracy=1)(pcol_1$data[1:4,3] %>% sum())` of Ivanhoe's residents in
+2021, which a higher share than for the nearby seats
+(`r label_percent(accuracy=1)(pcol_rest_SA4_2$data[1:4,3] %>% sum())`)^[Differences 
 were statistically significant
-(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).], but a higher share than for the rest of Greater Melbourne (`r label_percent(accuracy=1)(pcol_rest_melbourne_3$data[1:6,3] %>% sum())`)^[Differences 
+(`r prmisc::print_chi2(melbourne_2023_SA1_comparison)`).] 
+or elsewhere (`r label_percent(accuracy=1)(pcol_rest_melbourne_3$data[1:4,3] %>% sum())`)^[Differences 
 were statistically significant
 (`r prmisc::print_chi2(melbourne_2023_SA4_comparison)`).].
-`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Ivanhoe (E Metro) (S Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Ivanhoe (E Metro) (S Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Ivanhoe population lived in SA1s with
+
+`r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Ivanhoe (E Metro) (S Metro)") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Ivanhoe (E Metro) (S Metro)") %>% st_drop_geometry() %>% select(population) %>% sum())` of the Ivanhoe residents lived in SA1s with
 *needs above, but supply below*
 the Melbourne averages in 2021^[Shown with black in Figure 3. This compares to 
 `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Similar seats") %>% st_drop_geometry() %>% select(population) %>% sum())` of residents of similarly located seats and 
 `r label_percent(accuracy = 1)(si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% filter(composite_needs == "Very High" | composite_needs == "High" | composite_needs == "Above average") %>% filter(transit_supply_2021 == "Below average" | transit_supply_2021 == "Low" | transit_supply_2021 == "Very Low" | transit_supply_2021 == "Zero Supply") %>% na.omit() %>% select(population) %>% sum() / si_by_area_2021_2023_wider_holding %>% filter(group == "Rest of Greater Melbourne") %>% st_drop_geometry() %>% select(population) %>% na.omit() %>% sum())` of those
 elsewhere in Melbourne.], 
-but for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())` of this cohort service levels increased 1% or more by 2023^[This is a higher share than for parts of Greater Melbourne beyond Ivanhoe and the similar surrounding seats  (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`, differences
+but for `r label_percent(accuracy=1)(pcol$data[1:4,3] %>% sum())` of this cohort service levels increased at least 1% by 2023^[This is a higher share than for parts of Greater Melbourne beyond Ivanhoe and the similar surrounding seats  (`r label_percent(accuracy=1)(pcol_rest_melbourne$data[1:4,3] %>% sum())`, differences
 were statistically significant
 (Fisher test p = `r melbourne_2021_SA4_comparison_needs$p.value %>% format(digits = 3)`), 
 but not for the 
 similarly located seats (Fisher test p = `r melbourne_2021_SA1_comparison_needs$p.value %>% format(digits = 3)`))].
 
-Overall, Ivanhoe resident appears
-to have less transit than those nearby, 
-but more likely to have seen service increases between 2021 and 2023 
-than those living elsewhere in Melbourne.
+Overall, a larger share of residents 
+have below average transit supply 
+in Ivanhoe than in nearby seats.
+No SA1s in Ivahoe have `Very High' service levels. 
+However, Ivanhoe residents appear
+more likely to have seen service increase between 2021 and 2023 
+than others.
 
 ```{r Check_assumptions, fig.show="hold", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 
